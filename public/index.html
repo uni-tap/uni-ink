@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+  <title>Socket.IO whiteboard</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="http://uni-tap.com/uc/style.css">
+  <link href="http://uni-tap.com/uc/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="http://uni-tap.com/uc/css/styles.css" rel="stylesheet" type="text/css">
+  <script src="http://uni-tap.com/js/jquery-1.11.2.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font: 13px Helvetica, Arial; }
+  form { background:whitesmoke; padding: 3px; position: fixed; right:0px; bottom: 0; width: 300px; }
+  form input { border: 0; padding: 10px; width: 85%; margin-right: .5%; }
+  form button { width: 42px; background: rgb(130, 224, 255); border: none; padding: 10px; text-align:cenetr; }
+  #chat { list-style-type: none; margin-top: 30px; padding: 0; }
+  #chat li { padding: 5px 10px; box-shadow:0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);background-color:white; width:300px;margin-left:calc(100% - 300px);}
+  #chat li:nth-child(odd) { background: #eee; box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);}
+  #chat { margin-bottom: 40px }
+  #userbox{z-index:4012;;overflow:auto;background:#eaeaea;height:200px;width:300px;padding:10px;box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);margin-left:calc(100% - 300px);margin-top:0px;}
+  .userlist{text-align:center;vertical-align:middle;height:30px;padding:5px;margin-left:25px;background-color:##e8e8e8;border-radius:2px;list-style-type: none;box-shadow: 0 1px 1px 0 rgba(0,0,0,0.14), 0 1px 1px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);width:80%;color:#ff5722; }
+  .userlist:nth-child(odd){background-color:#fff;color:#4CAF50;}
+  @media(max-width:640px){
+    #controls1{
+      top:4px;
+      height: 25.5px;
+      width: 32.75px;
+    }
+    #controls{
+      top: 41px !important;
+      left:15px !important;
+      height: 302px !important;
+      width: 260px !important;
+      padding-left: none !important;
+    }
+    .side{
+      height:20px;
+      width:20px;
+      left:1px;
+    }
+    #comunicationarea{
+      width:100px !important;
+      margin-left:calc(100% - 100px) !important;
+    }
+    #userbox{
+      width:100px;
+      margin-left:calc(100% - 100px);
+      height:100px;
+      margin-top:100px;
+    }
+    #users{
+      width:100px;
+      margin-left:-10px;
+    }
+    .userlist{
+      width:100%;
+      margin-left:0px;
+    }
+    form{
+      width:100px;
+    }
+    form input{
+      width: 98%;
+    }
+    form button{
+      display:none !important;
+    }
+    #chat li{
+      width:100px;
+      margin-left:calc(100% - 100px);
+    }
+    #tip{
+    top: 4px !important;
+    left: 79% !important;
+    height: 30px !important;
+    width: 30px !important;
+    border-radius: 0px !important;
+    }
+  }
+  #tip:hover{
+    transform: rotatex(-60deg) !important;
+  }
+  #imgcanvas {
+    width:2000px;
+    height:2000px;
+    border: 10px solid transparent;
+}
+  .rectangle {
+    border:2px dashed #1bb6fc;
+    position: absolute;
+}
+#remotesVideos{
+  margin-left:0px;
+  margin-top:-7px;
+  position: absolute;
+  top:10px;
+}
+#remotesVideos video{height:50px;width:100px;margin-left: 0px;margin-right: -33px;}
+#localVideo{
+  margin-top: 49px;
+  margin-left: 239px;
+}
+  </style>
+</head>
+<body>
+
+  <canvas id="canvas" class="whiteboard" oncontextmenu="document.getElementById('Eraser').click();get('#tip', 'block');return false;"></canvas>
+  <canvas id="page1" class="storeboard"></canvas>
+  <!-- <div id="imgcanvas"></div> -->
+  <div id="controls1">
+  <button class="side glyphicon glyphicon-edit" onmouseover="this.innerHTML += ' tools';this.style.color = '#e8ca2c';" onmouseleave="this.innerHTML = ''; this.style.color = 'black';" style="border: none; box-shadow: none; background-repeat: no-repeat; background-size: contain; z-index: 5000; color: black;" onclick="get('#controls','block');"></button>
+  <button class="side glyphicon glyphicon-file" onmouseover="this.innerHTML += ' New';this.style.color = '#04dff7';" onmouseleave="this.innerHTML = '';this.style.color = 'black';" accesskey="n" style="border: none; box-shadow: none; color: black;" id="NewPage"></button>
+  <button class="side glyphicon glyphicon-chevron-left" onmouseover="this.innerHTML += 'Previous';this.style.color = '#e83b92';" onmouseleave="this.innerHTML = '';this.style.color = 'black';" accesskey="<" style="border: none; box-shadow: none; color: black;" id="Leftbt"></button>
+  <p id="textbox" name="PageNo"></p>
+  <button class="side glyphicon glyphicon-chevron-right" accesskey=">" onmouseover="this.innerHTML += ' Next';this.style.color = '#f1772d';" onmouseleave="this.innerHTML = '';this.style.color = 'black';" style="border:none;box-shadow:none;" id="Rightbt"></button>
+  <button class="side  graph glyphicon glyphicon-th" accesskey="g" onmouseover="this.innerHTML += ' Graph';this.style.color = '#49d631';" onmouseleave="this.innerHTML = '';this.style.color = 'black';" style="border:none;box-shadow:none;background-repeat:no-repeat;" id="graph"></button>
+  <button id="clear" class="side glyphicon glyphicon-trash" accesskey="clr" onmouseover="this.innerHTML += ' Clear';this.style.color = '#ef4747';" onmouseleave="this.innerHTML = '';this.style.color = 'black';" style="border:none;box-shadow:none;background-repeat:no-repeat;background-size:contain;" id="clr"></button>
+  <button class="side fa fa-calculator" accesskey="calc" onmouseover="this.innerHTML += 'Calculator';this.style.color = '#ca5cec';this.style.font = 'normal normal normal 14px/1 FontAwesome ,Comic Sans MS, cursive, sans-serif ';" onmouseleave="this.innerHTML = '';this.style.color = 'black';" style="background-repeat: no-repeat; border: none; box-shadow: none; background-size: contain; color: black; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 14px; line-height: 1; font-family: FontAwesome, &quot;Comic Sans MS&quot;, cursive, sans-serif;" onclick="document.getElementById('calc').style.display = 'block';"></button>
+   </div>
+   <div id="controls" class="ut-card-2 ut-blue" style="display:none;">
+     <div style="display:none;">
+      Size:
+      Color:
+      <select id="color">
+        <option value="#FFFFFF">#FFFFFF</option>
+        <option value="#AAAAAA">#AAAAAA</option>
+        <option value="#999999">#999999</option>
+        <option value="#000000">#000000</option>
+        <option value="#9BA16C">#9BA16C</option>
+        <option value="#CC8F2B">#CC8F2B</option>
+        <option value="#63631D">#63631D</option>
+        <option value="#00FF00">#00FF00</option>
+      </select>
+       <select id="tool">
+    <option value="pen">Pen</option>
+    <option value="newpage">NewPage</option>
+    <option value="line">Line</option>
+    <option value="rect">Rectangle</option>
+       <option value="circ">Circle</option>
+   <option value="triangle">Triangle</option>
+   <option value="righttriangle">RightTriangle</option>
+   <option value="ellipse">Ellipse</option>
+   <option value="frect">FilledRectangle</option>
+   <option value="fcirc">FilledCircle</option>
+   <option value="ftriangle">FilledTriangle</option>
+   <option value="frighttriangle">FilledRightTriangle</option>
+   <option value="fellipse">FilledEllipse</option>
+      </select>
+  </div>
+<ul class="add-panel-category-list">
+<li class="category">
+<button class="tlsbtn Pen tlbtn"id="Pen"  style="background-image:url('http://uni-tap.com/uc/icons/pnl.png');background-repeat: no-repeat;"></button>
+</li><li class="category">
+<button class="tlsbtn Eraser tlbtn"id="Eraser" onclick="get('#tip', 'block');" style="background-image:url('http://uni-tap.com/uc/icons/esr.png');background-repeat: no-repeat;"></button>
+</li><li class="category">
+<button class="tlsbtn Text tlbtn"id="Text"style="background-image:url('http://uni-tap.com/uc/icons/txt.png');background-repeat: no-repeat;" ></button>
+</li><li class="category">
+<button   class="tlsbtn Line tlbtn"id="Line"style="background-image:url('http://uni-tap.com/uc/icons/line.png');background-repeat: no-repeat;"></button>
+</li><li class="category">
+<button   class="tlsbtn Rectangle tlbtn"id="Rectangle"style="background-image:url('http://uni-tap.com/uc/icons/sqr.png');background-repeat: no-repeat;"></button>
+</li><li class="category">
+<button  class="tlsbtn Circle tlbtn"id="Circle" style="background-image:url('http://uni-tap.com/uc/icons/circ.png');background-repeat: no-repeat;"></button>
+</li><li class="category">
+<button class="tlsbtn right_triangle tlbtn"id="RightTriangle" style="background-image:url('http://uni-tap.com/uc/icons/right-tri.png');background-repeat: no-repeat;"></button>
+</li><li class="category">
+<button class="tlsbtn Triangle tlbtn"id="Triangle" style="background-image:url('http://uni-tap.com/uc/icons/tri.png');background-repeat: no-repeat;"></button>
+</li><li class="category">
+<button class="tlsbtn img tlbtn" accesskey="f" id="imageLoader" name="imageLoader" value="Image"/>
+</li>
+</ul>
+<div class="preview-settings">
+  <button style="position:absolute;top:10px;right:10px;height:20px;width:20px;border-radius:100%;border:none;color:white;background-color: rgba(5, 167, 241, 0.52);" onclick="get('#controls', 'none');">x</button>
+  <div id="size-area" style="height:60px;width:100%;margin-bottom:15px;">
+    <h4><strong>Pen Size:</strong></h4>
+    <select id="thickness" class="fixed">
+      <option value="1" style="color:back;background-image:url(http://uni-tap.com/uc/icons/1px.png);">1</option>
+      <option value="2" style="color:back;" selected>2</option>
+      <option value="3" style="color:back;">3</option>
+      <option value="4"  style="color:back;">4</option>
+      <option value="5"  style="color:back;">5</option>
+      <option value="10" style="color:back;">10</option>
+      <option value="20" style="color:back;">20</option>
+      <option value="30" style="color:back;">30</option>
+      <option value="40" style="color:back;">40</option>
+      <option value="50" style="color:back;">50</option>
+    </select></div>
+  Colours:
+  <button style="margin-left:5px;" id="pen">Pen</button><button style="margin-left:5px;" id="bg">Board</button><button style="margin-left:5px;" id="fill">Fill</button>
+  <div class="clr-box" id="clrbox">
+  <button class="color black" style="background-color: black;"></button>
+  <button class="color silver" style="background-color: silver;"></button>
+  <button class="color darkgray" style="background-color: darkgray;"></button>
+  <button class="color gray" style="background-color: gray;" ></button>
+  <button class="color #757575" style="background-color: #757575;"></button>
+  <button class="color magenta" style="background-color: magenta;"></button>
+  <button class="color red" style="background-color: red;"></button>
+  <button class="color #ff5722" style="background-color: #ff5722;"></button>
+  <button class="color orange" style="background-color: orange;"></button>
+  <button class="color gold" style="background-color: gold;"></button>
+  <button class="color yellow" style="background-color: yellow;"></button>
+  <button class="color #8bc34a" style="background-color: #8bc34a;"></button>
+  <button class="color lightgreen" style="background-color: lightgreen;"></button>
+  <button class="color darkgreen" style="background-color: darkgreen;"></button>
+  <button class="color teal" style="background-color: teal;"></button>
+  <button class="color #82e0ff" style="background-color: #82e0ff;"></button>
+  <button class="color indigo" style="background-color: indigo;"></button>
+  <button class="color violet" style="background-color: violet;"></button>
+  <button class="color purple" style="background-color: purple;"></button>
+  <button class="color lightyellow" style="background-color: lightyellow;"></button>
+  <button class="color #795548" style="background-color: #795548;"></button>
+  <button class="color brown" style="background-color: brown;"></button>
+  <button class="color pink" style="background-color: pink;"></button>
+  <button class="color transparent" style="background-color: white;border:0.1px solid black"></button><br />
+   </div>
+</div>
+</div>
+<div id="top_panel" style="">
+  <button style="margin-top:0px;border:none;background-color:transparent;width:75px;height:100%;border-right:1px solid whitesmoke;" id="undo" class="fa fa-undo"></button>
+  <button style="margin-top:0px;border:none;background-color:transparent;width:75px;height:100%;border-right:1px solid whitesmoke;text-align:center;" onclick="end_class()" id="counter">1</button>
+  <button style="margin-top:0px;border:none;background-color:transparent;width:75px;height:100%;border-right:1px solid whitesmoke;" id="redo" class="glyphicon glyphicon-repeat"></button>
+  <button style="margin-top:0px;border:none;background-color:transparent;width:75px;height:100%;position:absolute;right:0px;color:#e91e63;" onclick="end_class()"><b>End Class</b></button>
+</div>
+<div id="comunicationarea" style="overflow-y:auto;width:300px;height:100%;margin-left:calc(100% - 300px);z-index:1100;position:fixed;background-color:#f9f9f9;box-shadow:0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);">
+        <div id="remotesVideos"></div>
+        <video height="50" width="50" id="localVideo"></video>
+ <div id="userbox">
+  <ul id="users"></ul>
+</div><div style="overflow-y:auto;">
+ <ul id="chat"></ul>
+ </div>
+ <form action="" id="messageForm">
+   <input id="message" autocomplete="off" placeholder="Type here..." /><button class="glyphicon glyphicon-send"></button>
+ </form>
+</div>
+<div class="calc draggable ut-card-2" style="display:none;z-index:4012;" id="calc" ondblclick="this.style.display='none';">
+  <button style="position:absolute;top:8px;right:10px;height:20px;width:20px;border-radius:100%;border:none;color:white;background-color: rgba(5, 167, 241, 0.52);" onclick="get('#calc', 'none');">x</button>
+  <iframe style="height:330px;width:330px;overflow:none;" src="http://localhost/uc/calc.html"></iframe>
+</div>
+<div id="tip" onclick="document.getElementById('Pen').click();this.style.display = 'none';" style="display:none;position:fixed;top:70px;left:45%;z-index:5000;height:50px;width:50px;background-image:url('http://uni-tap.com/uc/icons/pnl.png');background-repeat:no-repeat;background-size:contain;background-position-x: center;border-radius:20px;background-color:#4aaee8;box-shadow:0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19) !important;transform-style: preserve-3d;
+  transition: all 1s ease-in-out;">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="main.js"></script>
+  <script src="http://uni-tap.com/interact.js"></script>
+  <script src="http://uni-tap.com/uc/element.js"></script>
+  <script src="http://uni-tap.com/webrtc.js"></script>
+  <script>
+  var socket = io();
+  var api = find('api');
+  var room_id = 'uni-tap_live_classes: Live_Class_Id: '+ api;/*
+  socket.on('connect', function() {
+   // Connected, let's sign-up for to receive messages for this room
+   socket.emit('room', room_id);
+   alert(room_id);
+});*/
+  window.onload = function(){history.pushState({}, null, '');}
+ // OTHER IMPORTANT FUNCTIONS
+  function get(id, condition){
+    document.querySelector(id).style.display = condition;
+}
+  function find(name){
+    var url = window.location.search;
+    var num = url.search(name);
+    var namel = name.length;
+    var frontlength = namel+num+1; //length of everything before the value
+    var front = url.substring(0, frontlength);
+    url = url.replace(front, "");
+    num = url.search("&");
+
+   if(num>=0) return url.substr(0,num);
+   if(num<0)  return url;
+ }/*
+  var room_id = find('api');
+  socket.emit('create', room_id);*/
+  </script>
+  <script>
+  $(function(){
+  var socket = io.connect();
+  var $messageForm = $('#messageForm');
+  var $message = $('#message');
+  var $chat = $('#chat');
+  var $users = $('#users');
+  var name = find('user');
+  name = name.replace(/%20/g, " ");
+  var post = '('+find('post')+')';
+  var username = name +" "+ post;
+  socket.emit('new user', username, function(data){
+    //alert('hi' + username);
+  });
+
+  $messageForm.submit(function(e){
+    e.preventDefault();
+    socket.emit('send message', $message.val());
+    $message.val('');
+  });
+
+  socket.on('new message', function(data){
+    $chat.append('<li><strong>'+data.user+':</strong> '+data.msg+'</li>')
+  });
+
+  socket.on('get users', function(data){
+    var html = '';
+    for(i = 0;i < data.length;i++){
+      html += '<li class="userlist"><strong>'+data[i]+'</strong></li>';
+    }
+    $users.html(html);
+  });
+  socket.on('reload', function(){
+    setTimeout(2000, window.reload(true));
+  });
+});
+window.addEventListener('reload', function(){
+  socket.emit('reload');
+});
+
+//VIDEO AND AUDIO CHATTING AREA
+
+var unirtc = new SimplewebRTC({
+  // the id/element dom element that will hold "our" video
+  localVideoEl: 'localVideo',
+  // the id/element dom element that will hold remote videos
+  remoteVideosEl: 'remotesVideos',
+  // immediately ask for camera access
+  autoRequestMedia: true
+});
+
+// we have to wait until it's ready
+unirtc.on('readyToCall', function () {
+  // you can name it anything
+  //alert(rtc_room_id);
+  unirtc.joinRoom(room_id);
+  //alert(rtc_room_id);
+});
+
+//ENDING CLASS
+
+socket.on('end_class', onEnd_class);
+
+var e_api = find('api');
+var host = find('hostedby');
+var user = find('user');
+function end_class(){
+  window.onbeforeunload =  function() {
+            return "Do you really want to end the class?";
+  }
+  socket.emit('end_class', 'end');
+  alert('This Class is now over');
+  window.location.replace('http://localhost/end_class.php?api=' +e_api+'&host='+host+'&user='+user);
+}
+function onEnd_class(data){
+  alert('This Class is now over');
+  window.location.replace('http://localhost/end_class.php?api=' +e_api+'&host='+host+'&user='+user);
+}
+  </script>
+</body>
+</html>
