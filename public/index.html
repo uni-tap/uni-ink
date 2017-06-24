@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
   <title>Socket.IO whiteboard</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="http://uni-tap.com/uc/style.css">
-  <link href="http://uni-tap.com/uc/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-  <link href="http://uni-tap.com/uc/css/styles.css" rel="stylesheet" type="text/css">
-  <script src="http://uni-tap.com/js/jquery-1.11.2.min.js"></script>
+  <link rel="stylesheet" href="https://uni-tap.github.io/uc/style.css">
+  <link href="https://uni-tap.github.io/uc/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="https://uni-tap.github.io/uc/css/styles.css" rel="stylesheet" type="text/css">
+  <script src="https://uni-tap.github.io/js/jquery-1.11.2.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -152,21 +152,21 @@
   </div>
 <ul class="add-panel-category-list">
 <li class="category">
-<button class="tlsbtn Pen tlbtn"id="Pen"  style="background-image:url('http://uni-tap.com/uc/icons/pnl.png');background-repeat: no-repeat;"></button>
+<button class="tlsbtn Pen tlbtn"id="Pen"  style="background-image:url('https://uni-tap.github.io/uc/icons/pnl.png');background-repeat: no-repeat;"></button>
 </li><li class="category">
-<button class="tlsbtn Eraser tlbtn"id="Eraser" onclick="get('#tip', 'block');" style="background-image:url('http://uni-tap.com/uc/icons/esr.png');background-repeat: no-repeat;"></button>
+<button class="tlsbtn Eraser tlbtn"id="Eraser" onclick="get('#tip', 'block');" style="background-image:url('https://uni-tap.github.io/uc/icons/esr.png');background-repeat: no-repeat;"></button>
 </li><li class="category">
-<button class="tlsbtn Text tlbtn"id="Text"style="background-image:url('http://uni-tap.com/uc/icons/txt.png');background-repeat: no-repeat;" ></button>
+<button class="tlsbtn Text tlbtn"id="Text"style="background-image:url('https://uni-tap.github.io/uc/icons/txt.png');background-repeat: no-repeat;" ></button>
 </li><li class="category">
-<button   class="tlsbtn Line tlbtn"id="Line"style="background-image:url('http://uni-tap.com/uc/icons/line.png');background-repeat: no-repeat;"></button>
+<button   class="tlsbtn Line tlbtn"id="Line"style="background-image:url('https://uni-tap.github.io/uc/icons/line.png');background-repeat: no-repeat;"></button>
 </li><li class="category">
-<button   class="tlsbtn Rectangle tlbtn"id="Rectangle"style="background-image:url('http://uni-tap.com/uc/icons/sqr.png');background-repeat: no-repeat;"></button>
+<button   class="tlsbtn Rectangle tlbtn"id="Rectangle"style="background-image:url('https://uni-tap.github.io/uc/icons/sqr.png');background-repeat: no-repeat;"></button>
 </li><li class="category">
-<button  class="tlsbtn Circle tlbtn"id="Circle" style="background-image:url('http://uni-tap.com/uc/icons/circ.png');background-repeat: no-repeat;"></button>
+<button  class="tlsbtn Circle tlbtn"id="Circle" style="background-image:url('https://uni-tap.github.io/uc/icons/circ.png');background-repeat: no-repeat;"></button>
 </li><li class="category">
-<button class="tlsbtn right_triangle tlbtn"id="RightTriangle" style="background-image:url('http://uni-tap.com/uc/icons/right-tri.png');background-repeat: no-repeat;"></button>
+<button class="tlsbtn right_triangle tlbtn"id="RightTriangle" style="background-image:url('https://uni-tap.github.io/uc/icons/right-tri.png');background-repeat: no-repeat;"></button>
 </li><li class="category">
-<button class="tlsbtn Triangle tlbtn"id="Triangle" style="background-image:url('http://uni-tap.com/uc/icons/tri.png');background-repeat: no-repeat;"></button>
+<button class="tlsbtn Triangle tlbtn"id="Triangle" style="background-image:url('https://uni-tap.github.io/uc/icons/tri.png');background-repeat: no-repeat;"></button>
 </li><li class="category">
 <button class="tlsbtn img tlbtn" accesskey="f" id="imageLoader" name="imageLoader" value="Image"/>
 </li>
@@ -176,7 +176,7 @@
   <div id="size-area" style="height:60px;width:100%;margin-bottom:15px;">
     <h4><strong>Pen Size:</strong></h4>
     <select id="thickness" class="fixed">
-      <option value="1" style="color:back;background-image:url(http://uni-tap.com/uc/icons/1px.png);">1</option>
+      <option value="1" style="color:back;background-image:url(https://uni-tap.github.io/uc/icons/1px.png);">1</option>
       <option value="2" style="color:back;" selected>2</option>
       <option value="3" style="color:back;">3</option>
       <option value="4"  style="color:back;">4</option>
@@ -239,14 +239,14 @@
   <button style="position:absolute;top:8px;right:10px;height:20px;width:20px;border-radius:100%;border:none;color:white;background-color: rgba(5, 167, 241, 0.52);" onclick="get('#calc', 'none');">x</button>
   <iframe style="height:330px;width:330px;overflow:none;" src="http://localhost/uc/calc.html"></iframe>
 </div>
-<div id="tip" onclick="document.getElementById('Pen').click();this.style.display = 'none';" style="display:none;position:fixed;top:70px;left:45%;z-index:5000;height:50px;width:50px;background-image:url('http://uni-tap.com/uc/icons/pnl.png');background-repeat:no-repeat;background-size:contain;background-position-x: center;border-radius:20px;background-color:#4aaee8;box-shadow:0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19) !important;transform-style: preserve-3d;
+<div id="tip" onclick="document.getElementById('Pen').click();this.style.display = 'none';" style="display:none;position:fixed;top:70px;left:45%;z-index:5000;height:50px;width:50px;background-image:url('https://uni-tap.github.io/uc/icons/pnl.png');background-repeat:no-repeat;background-size:contain;background-position-x: center;border-radius:20px;background-color:#4aaee8;box-shadow:0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19) !important;transform-style: preserve-3d;
   transition: all 1s ease-in-out;">
   <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
   <script src="/socket.io/socket.io.js"></script>
   <script src="main.js"></script>
-  <script src="http://uni-tap.com/interact.js"></script>
-  <script src="http://uni-tap.com/uc/element.js"></script>
-  <script src="http://uni-tap.com/webrtc.js"></script>
+  <script src="https://uni-tap.github.io/interact.js"></script>
+  <script src="https://uni-tap.github.io/uc/element.js"></script>
+  <script src="https://uni-tap.github.io/webrtc.js"></script>
   <script>
   var socket = io();
   var api = find('api');
