@@ -1,7 +1,7 @@
 {
   "name": "UNI-INK board",
   "description": "A space for teaching and learning anything online",
-  "repository": "https://github.com/heroku/node-js-getting-started",
+  "repository": "https://github.com/uni-tap/uni-ink",
   "logo": "https://cdn.rawgit.com/heroku/node-js-getting-started/master/public/node.svg",
   "keywords": ["node", "express", "heroku"],
   "image": "heroku/nodejs"
