@@ -246,7 +246,7 @@
   <script src="main.js"></script>
   <script src="https://uni-tap.github.io/uc/interact.js"></script>
   <script src="https://uni-tap.github.io/uc/element.js"></script>
-  <script src="https://uni-tap.github.io/uc/webrtc.js"></script>
+  <script src="https://simplewebrtc.com/latest-v2.js"></script>
   <script>
   var socket = io();
   var api = find('api');
@@ -318,7 +318,7 @@ window.addEventListener('reload', function(){
 
 //VIDEO AND AUDIO CHATTING AREA
 
-var unirtc = new SimplewebRTC({
+var webrtc = new SimpleWebRTC({
   // the id/element dom element that will hold "our" video
   localVideoEl: 'localVideo',
   // the id/element dom element that will hold remote videos
@@ -328,11 +328,10 @@ var unirtc = new SimplewebRTC({
 });
 
 // we have to wait until it's ready
-unirtc.on('readyToCall', function () {
+// we have to wait until it's ready
+webrtc.on('readyToCall', function () {
   // you can name it anything
-  //alert(rtc_room_id);
-  unirtc.joinRoom(room_id);
-  //alert(rtc_room_id);
+  webrtc.joinRoom('your awesome room name');
 });
 
 //ENDING CLASS
