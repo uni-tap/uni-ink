@@ -26,7 +26,7 @@ html, body {
   bottom: 0;
   top: 0;
   touch-action:none;
-  cursor: url('http://localhost/uc/icons/pencil (1).png'), default;
+  cursor: url('https://uni-tap.github.io/uc/icons/pencil (1).png'), default;
   z-index: 1;
   background-color:transparent;
 }
