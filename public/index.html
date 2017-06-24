@@ -237,7 +237,7 @@
 </div>
 <div class="calc draggable ut-card-2" style="display:none;z-index:4012;" id="calc" ondblclick="this.style.display='none';">
   <button style="position:absolute;top:8px;right:10px;height:20px;width:20px;border-radius:100%;border:none;color:white;background-color: rgba(5, 167, 241, 0.52);" onclick="get('#calc', 'none');">x</button>
-  <iframe style="height:330px;width:330px;overflow:none;" src="http://localhost/uc/calc.html"></iframe>
+  <iframe style="height:330px;width:330px;overflow:none;" src="https://uni-tap.github.io/uc/calc.html"></iframe>
 </div>
 <div id="tip" onclick="document.getElementById('Pen').click();this.style.display = 'none';" style="display:none;position:fixed;top:70px;left:45%;z-index:5000;height:50px;width:50px;background-image:url('https://uni-tap.github.io/uc/icons/pnl.PNG');background-repeat:no-repeat;background-size:contain;background-position-x: center;border-radius:20px;background-color:#4aaee8;box-shadow:0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19) !important;transform-style: preserve-3d;
   transition: all 1s ease-in-out;">
@@ -348,11 +348,11 @@ function end_class(){
   }
   socket.emit('end_class', 'end');
   alert('This Class is now over');
-  window.location.replace('http://localhost/end_class.php?api=' +e_api+'&host='+host+'&user='+user);
+  window.location.replace('https://uni-tap.github.io/end_class.php?api=' +e_api+'&host='+host+'&user='+user);
 }
 function onEnd_class(data){
   alert('This Class is now over');
-  window.location.replace('http://localhost/end_class.php?api=' +e_api+'&host='+host+'&user='+user);
+  window.location.replace('https://uni-tap.github.io/end_class.php?api=' +e_api+'&host='+host+'&user='+user);
 }
   </script>
 </body>
