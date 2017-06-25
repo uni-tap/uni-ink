@@ -353,6 +353,21 @@ function onEnd_class(data){
   alert('This Class is now over');
   window.location.replace('https://uni-tap.github.io/end_class.php?api=' +e_api+'&host='+host+'&user='+user);
 }
+     function toggleFullScreen() {
+  document.getElementById('popups').style.display = "none";
+  var doc = window.document;
+  var docEl = doc.documentElement;
+
+  var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
+  var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
+
+  if(!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
+    requestFullScreen.call(docEl);
+  }
+  else {
+    cancelFullScreen.call(doc);
+  }
+}
   </script>
 </body>
 </html>
