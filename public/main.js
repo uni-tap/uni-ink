@@ -707,6 +707,7 @@ function move_right(){
     scanvas.width = window.innerWidth;
     scanvas.height  = window.innerHeight;
     current.tool = "Pen";
+    document.body.requestFullscreen();
     }
     undo.addEventListener('click', function() {
      history.undo(canvas, context, true);
