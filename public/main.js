@@ -707,7 +707,7 @@ function move_right(){
     scanvas.width = window.innerWidth;
     scanvas.height  = window.innerHeight;
     current.tool = "Pen";
-    document.body.requestFullscreen();
+    toggleFullScreen();
     }
 	function toggleFullScreen() {
   var doc = window.document;
