@@ -266,10 +266,10 @@ padding: 10px;
 }
 #top_panel{
   height:56px;
-  width:300px;
+  width:400px;
   background-color:#fdfdfd;;
   box-shadow: 0 2px 2px 0 rgba(0,0,0,0.3), 0 0 0 0px rgba(0,0,0,0.08) !important;
   z-index:4012;
-  margin-left:740px;
+  margin-left:calc(50% - 400px);
   position: absolute;
 }
