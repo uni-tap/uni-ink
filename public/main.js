@@ -826,24 +826,4 @@ if(!emit){return}
    src: ''
  });
 }*/
-//VOICE controllation
-if (annyang) {
-    //document.getElementById('nav').style.background = "green";
- // Let's define our first command. First the text we expect, and then the function it should call
-   var commands = {
-     'pen':function(){current.tool == 'Pen'},
-     'eraser':function(){current.tool == 'Eraser'},
-     'rectangle':function(){current.tool == 'Rectangle'},
-     'circle':function(){current.tool == 'Circle'},
-     'right triangle':function(){current.tool == 'right_triangle'},
-     'triangle':function(){current.tool == 'triangle'},
-     'line':function(){current.tool == 'Line'},
-     'graph':function(){current.tool == 'graph'}
-   };
-   // Add our commands to annyang
-   annyang.addCommands(commands);
-   // Start listening. You can call this here, or attach this call to an event, button, etc.
-   annyang.start();
-   console.log('voice commands activated');
-}
 })();
