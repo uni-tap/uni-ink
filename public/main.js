@@ -570,7 +570,6 @@ function move_left(){
     a_area.style.display = 'block';
     current.canvas = a_area;
     main_ctx = a_area.getContext('2d');
-    count = count - 1;
     socket.emit('left');
     }
 }
@@ -663,7 +662,6 @@ function move_right(){
     a_area.style.display = 'block';
     current.canvas = a_area;
     main_ctx = a_area.getContext('2d');
-    count = count - 1;
   }
   function onRightEvent(){
     var a_area = document.getElementById('page' + counter.innerHTML);
