@@ -565,8 +565,7 @@ function move_left(){
     if(counter.innerHTML == '1'){alert('No More Pages');return;}else{
     var d_area = document.getElementById('page' + counter.innerHTML);
     d_area.style.display = 'none';
-    counter.innerHTML = count - 1;
-    count = count - 1;
+    counter.innerHTML = counter.innerHTML - 1;
     var a_area = document.getElementById('page' + counter.innerHTML);
     a_area.style.display = 'block';
     current.canvas = a_area;
