@@ -12,7 +12,13 @@ html, body {
   margin: 0;
   padding: 0;
 }
+::-moz-selection { /* Code for Firefox */
+    background: transparent;
+}
 
+::selection {
+    background: transparent;
+}
 /**
  * Canvas
  */
