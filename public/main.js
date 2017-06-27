@@ -577,7 +577,7 @@ function move_right(){
     //if(counter.innerHTML = count){alert('No More Pages');return;}else{
     var a_area = document.getElementById('page' + counter.innerHTML);
     a_area.style.display = 'none';
-    count = counter.innerHTML;
+    counter.innerHTML = count + 1;
     count = count + 1;
     var d_area = document.getElementById('page' + count);
     d_area.style.display = 'block';
