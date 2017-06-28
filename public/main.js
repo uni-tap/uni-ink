@@ -85,7 +85,7 @@
   canvas.addEventListener('pointermove', throttle(onMouseMove, 10), false);
   canvas.addEventListener('touchstart', onMouseDown, false);
   canvas.addEventListener('touchend', onMouseUp, false);
-  canvas.addEventListener('touchmove', throttle(onMouseMove, 10), false);
+  canvas.addEventListener('touchmove', onMouseMove, false);
   // CHANGING PEN AND BOARD COLOURS WHEN  COLOR BUTTON IS CLICKED AND
   // CHANGING THE TOOL WHEN A TOOL BUTTON IS CLICKED
 
