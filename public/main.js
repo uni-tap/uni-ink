@@ -24,7 +24,11 @@
   var sizer = document.getElementById("thickness");
   var currentcount = 1;
   var count = currentcount;
-  var counter = document.getElementById("counter");
+  var counter = document.getElementById("counter") ;
+  var previouspagecount = 1 ;
+  var currentpagecount = 1;
+  var nextpagecount = 1 ;
+  var totalpagecount = 1;
 
   var current = {
     color: 'black',
@@ -83,9 +87,7 @@
   canvas.addEventListener('pointerdown', onMouseDown, false);
   canvas.addEventListener('pointerup', onMouseUp, false);
   canvas.addEventListener('pointermove', throttle(onMouseMove, 10), false);
-  canvas.addEventListener('touchstart', onMouseDown, false);
-  canvas.addEventListener('touchend', onMouseUp, false);
-  canvas.addEventListener('touchmove', throttle(onMouseMove, 1), false);
+
   // CHANGING PEN AND BOARD COLOURS WHEN  COLOR BUTTON IS CLICKED AND
   // CHANGING THE TOOL WHEN A TOOL BUTTON IS CLICKED
 
@@ -539,14 +541,15 @@
   function size_update(e){
     thickness = sizer.value;
   }
-var created = false;
+var created = false;/*
 function onNewPageUpdate(mcurrentcount){
     scanvas.style.display = 'block';
     var ncanvas = document.createElement('canvas');
     var ncontext = ncanvas.getContext('2d');
-    counter.innerHTML = currentcount +1;
+    counter.innerHTML = currentcount ; //+"\/" + totalpagecount;
     currentcount = currentcount + 1;
-    ncanvas.id = "page" + counter.innerHTML;
+    totalpagecount = totalpagecount + 1;//counter.innerHTML;
+    ncanvas.id = "page" + counter.innerHTML ;
     ncanvas.width = window.innerWidth;
     ncanvas.height = window.innerHeight;
     current.bgcolor = 'white';
@@ -574,17 +577,87 @@ function move_left(){
     }
 }
 function move_right(){
-    //if(counter.innerHTML = count){alert('No More Pages');return;}else{
+   if(counter.innerHTML == totalpagecount-1){alert('No More Pages');return;}else{
+    var d_area = document.getElementById('page' + counter.innerHTML);
+    d_area.style.display = 'none';
+    counter.innerHTML = counter.innerHTML - (-1);
+    var a_area = document.getElementById('page' + counter.innerHTML);
+    a_area.style.display = 'block';
+    current.canvas = a_area;
+    main_ctx = a_area.getContext('2d');
+
+    /*if(counter.innerHTML == totalpagecount){alert('No More Pages');return;}else{
     var a_area = document.getElementById('page' + counter.innerHTML);
     a_area.style.display = 'none';
-    counter.innerHTML = count + 1;
+    counter.innerHTML = count ;
     count = count + 1;
     var d_area = document.getElementById('page' + count);
     d_area.style.display = 'block';
     current.canvas = d_area;
     main_ctx = d_area.getContext('2d');
     socket.emit('right');
-  //}
+  }
+}*/
+
+    function onNewPageUpdate(mcurrentcount, emit){
+    scanvas.style.display = 'block';
+    var ncanvas = document.createElement('canvas');
+    var ncontext = ncanvas.getContext('2d');
+    counter.innerHTML =  currentpagecount + "\/" + totalpagecount ; //currentpagecount + 1;
+    //document.getElementById('message').value = currentpagecount +"\/" + totalpagecount;
+    //currentpagecount = currentpagecount + 1;
+    totalpagecount = totalpagecount + 1;//counter.innerHTML;
+    ncanvas.id = "page" + totalpagecount ; //counter.innerHTML;
+    ncanvas.width = window.innerWidth;
+    ncanvas.height = window.innerHeight;
+    current.bgcolor = 'white';
+    ncanvas.style.position= 'absolute';
+    ncanvas.style.top = 0;
+    ncanvas.style.left = 0;
+    ncanvas.style.backgroundColor = current.bgcolor;
+    ncanvas.style.zIndex = 0;
+    if(scanvas.style.display = 'none'){}else if(scanvas.style.display = 'block'){scanvas.style.display = 'none';}
+    if(current.canvas != canvas){
+    current.canvas.style.display = 'none';
+    }
+    currentpagecount = currentpagecount + 1;
+    document.body.appendChild(ncanvas);
+    current.canvas = ncanvas;
+    main_ctx = ncontext;
+    socket.emit('new_page', {color: current.bgcolor});
+}
+
+    function move_left(emit){
+    if(currentpagecount == '1'){
+      return;
+    }else if(currentpagecount != '1'){
+    var d_area = document.getElementById('page' + currentpagecount) ;
+    d_area.style.display = 'none';
+    counter.innerHTML = currentpagecount + "\/" + totalpagecount ;
+    currentpagecount = currentpagecount - 1 ;
+    var a_area = document.getElementById('page' + currentpagecount ) ;
+    a_area.style.display = 'block';
+    current.canvas = a_area;
+    main_ctx = a_area.getContext('2d');
+    if(!emit){return;}
+    socket.emit('left');
+  }
+}
+function move_right(emit){
+   if(currentpagecount == totalpagecount ){
+       return;
+     }else if(currentpagecount !== totalpagecount){
+    var d_area = document.getElementById('page' + currentpagecount ) ;
+    d_area.style.display = 'none';
+    counter.innerHTML =  currentpagecount + "\/" + totalpagecount ;
+    currentpagecount = currentpagecount + 1;
+    var a_area = document.getElementById('page' + currentpagecount) ;
+    a_area.style.display = 'block';
+    current.canvas = a_area;
+    main_ctx = a_area.getContext('2d');
+    if(!emit){return;}
+    socket.emit('right');
+  }
 }
   function update_data(acontext, gcontext, canvasname){
      gcontext.drawImage(canvasname, 0, 0);
@@ -655,23 +728,10 @@ function move_right(){
     main_ctx.clearRect(0, 0, canvas.width, canvas.height);
   }
   function onLeftEvent(){
-    var d_area = document.getElementById('page' + counter.innerHTML);
-    d_area.style.display = 'none';
-    counter.innerHTML = counter.innerHTML - 1;
-    var a_area = document.getElementById('page' + counter.innerHTML);
-    a_area.style.display = 'block';
-    current.canvas = a_area;
-    main_ctx = a_area.getContext('2d');
+    move_left();
   }
   function onRightEvent(){
-    var a_area = document.getElementById('page' + counter.innerHTML);
-    a_area.style.display = 'none';
-    counter.innerHTML = count + 1;
-    count = count + 1;
-    var d_area = document.getElementById('page' + count);
-    d_area.style.display = 'block';
-    current.canvas = d_area;
-    main_ctx = d_area.getContext('2d');
+    move_right();
   }
   function onUndoEvent(data){
     history.undo(scanvas, scontext, true);
@@ -688,17 +748,24 @@ function move_right(){
     scanvas.style.display = 'block';
     var ncanvas = document.createElement('canvas');
     var ncontext = ncanvas.getContext('2d');
-    counter.innerHTML = currentcount +1;
-    currentcount = currentcount + 1;
-    ncanvas.id = "page" + counter.innerHTML;
+    counter.innerHTML =  currentpagecount + "\/" + totalpagecount ; //currentpagecount + 1;
+    //document.getElementById('message').value = currentpagecount +"\/" + totalpagecount;
+    //currentpagecount = currentpagecount + 1;
+    totalpagecount = totalpagecount + 1;//counter.innerHTML;
+    ncanvas.id = "page" + totalpagecount ; //counter.innerHTML;
     ncanvas.width = window.innerWidth;
     ncanvas.height = window.innerHeight;
+    current.bgcolor = 'white';
     ncanvas.style.position= 'absolute';
     ncanvas.style.top = 0;
     ncanvas.style.left = 0;
-    ncanvas.style.backgroundColor = data.color;
+    ncanvas.style.backgroundColor = current.bgcolor;
     ncanvas.style.zIndex = 0;
     if(scanvas.style.display = 'none'){}else if(scanvas.style.display = 'block'){scanvas.style.display = 'none';}
+    if(current.canvas != canvas){
+    current.canvas.style.display = 'none';
+    }
+    currentpagecount = currentpagecount + 1;
     document.body.appendChild(ncanvas);
     current.canvas = ncanvas;
     main_ctx = ncontext;
@@ -759,73 +826,8 @@ function add_move(x0, y0, x1, y1, color, fill, emit){
        console.log("finsihed.");
        current.tool = 'Pen';
 }
-}/*
-function addImage(emit){
-var counter = document.getElementById('counter');
-initDraw(canvas);
+}
 
-function initDraw(mcanvas) {
-    function setMousePosition(e) {
-        var ev = e || window.event; //Moz || IE
-        if (ev.pageX) { //Moz
-            mouse.x = ev.pageX + window.pageXOffset;
-            mouse.y = ev.pageY + window.pageYOffset;
-        } else if (ev.clientX) { //IE
-            mouse.x = ev.clientX + document.body.scrollLeft;
-            mouse.y = ev.clientY + document.body.scrollTop;
-        }
-    };
+//alert('It is successfull.<br />Lorem ipsum cum sociss bonjur annayang siri cortana life like moto apple bannana.Lorem ipsum cum sociss bonjur annayang siri cortana life like moto apple bannana.Lorem ipsum cum sociss bonjur annayang siri cortana life like moto apple bannana', 'success');
 
-    var mouse = {
-        x: 0,
-        y: 0,
-        startX: 0,
-        startY: 0
-    };
-    var element = null;
-    var dcanvas = canvas;
-      console.log("begun.");
-      mouse.startX = mouse.x;
-      mouse.startY = mouse.y;
-      element = document.createElement('div');
-      element.style.backgroundImage ="url('http://hyperphysics.phy-astr.gsu.edu/hbase/geoopt/imggo/cvex1.gif')";
-      element.style.backgroundRepeat = 'no-repeat';
-      element.className = 'rectangle resize-drag'
-      element.style.left = mouse.x + 'px';
-      element.style.top = mouse.y + 'px';
-      element.style.zIndex = 1000;
-      document.body.appendChild(element);
-      dcanvas.style.cursor = "crosshair";
-    }
-    dcanvas.onmousemove = function (e) {
-        setMousePosition(e);
-        if (element !== null) {
-            element.style.width = Math.abs(mouse.x - mouse.startX) + 'px';
-            element.style.height = Math.abs(mouse.y - mouse.startY) + 'px';
-            element.style.left = (mouse.x - mouse.startX < 0) ? mouse.x + 'px' : mouse.startX + 'px';
-            element.style.top = (mouse.y - mouse.startY < 0) ? mouse.y + 'px' : mouse.startY + 'px';
-        }
-    }
-
-       dcanvas.onmouseup = function(e) {
-       if (element !== null) {
-            element = null;
-            dcanvas.style.cursor = "default";
-            console.log("finsihed.");
-            current.tool = 'Pen';
-     }
-   }
- }
-if(!emit){return}
- var cw  = canvas.width;
- var ch = canvas.height;
-
- socket.emit('image',{
-   x: mouse.x,
-   y: mouse.y,
-   startX: mouse.startX,
-   startY: mouse.startY,
-   src: ''
- });
-}*/
 })();
