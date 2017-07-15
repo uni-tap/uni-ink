@@ -603,7 +603,7 @@ function move_right(){
     scanvas.style.display = 'block';
     var ncanvas = document.createElement('canvas');
     var ncontext = ncanvas.getContext('2d');
-    counter.innerHTML =  currentpagecount + "\/" + totalpagecount ; //currentpagecount + 1;
+    //counter.innerHTML =  currentpagecount + "\/" + totalpagecount ; //currentpagecount + 1;
     //document.getElementById('message').value = currentpagecount +"\/" + totalpagecount;
     //currentpagecount = currentpagecount + 1;
     totalpagecount = totalpagecount + 1;//counter.innerHTML;
@@ -624,6 +624,7 @@ function move_right(){
     document.body.appendChild(ncanvas);
     current.canvas = ncanvas;
     main_ctx = ncontext;
+    counter.innerHTML = currentpagecount + "\/" + totalpagecount ;
     socket.emit('new_page', {color: current.bgcolor});
 }
 
@@ -633,8 +634,8 @@ function move_right(){
     }else if(currentpagecount != '1'){
     var d_area = document.getElementById('page' + currentpagecount) ;
     d_area.style.display = 'none';
-    counter.innerHTML = currentpagecount + "\/" + totalpagecount ;
     currentpagecount = currentpagecount - 1 ;
+    counter.innerHTML = currentpagecount + "\/" + totalpagecount ;
     var a_area = document.getElementById('page' + currentpagecount ) ;
     a_area.style.display = 'block';
     current.canvas = a_area;
@@ -649,8 +650,8 @@ function move_right(emit){
      }else if(currentpagecount !== totalpagecount){
     var d_area = document.getElementById('page' + currentpagecount ) ;
     d_area.style.display = 'none';
-    counter.innerHTML =  currentpagecount + "\/" + totalpagecount ;
     currentpagecount = currentpagecount + 1;
+    counter.innerHTML = currentpagecount + "\/" + totalpagecount ;
     var a_area = document.getElementById('page' + currentpagecount) ;
     a_area.style.display = 'block';
     current.canvas = a_area;
