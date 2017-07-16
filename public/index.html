@@ -337,7 +337,7 @@ window.addEventListener('reload', function(){
 
 //VIDEO AND AUDIO CHATTING AREA
 
-var unirtc = new SimplewebRTC({
+var webrtc = new SimplewebRTC({
   // the id/element dom element that will hold "our" video
   localVideoEl: 'localVideo',
   // the id/element dom element that will hold remote videos
@@ -347,10 +347,10 @@ var unirtc = new SimplewebRTC({
 });
 
 // we have to wait until it's ready
-unirtc.on('readyToCall', function () {
+webrtc.on('readyToCall', function () {
   // you can name it anything
   //toast(rtc_room_id);
-  unirtc.joinRoom(room_id);
+  webrtc.joinRoom(room_id);
   //toast(rtc_room_id);
 });
 
