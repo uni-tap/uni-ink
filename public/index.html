@@ -337,7 +337,7 @@ window.addEventListener('reload', function(){
 
 //VIDEO AND AUDIO CHATTING AREA
 
-var webrtc = new SimplewebRTC({
+var webrtc = new SimpleWebRTC({
   // the id/element dom element that will hold "our" video
   localVideoEl: 'localVideo',
   // the id/element dom element that will hold remote videos
@@ -349,9 +349,7 @@ var webrtc = new SimplewebRTC({
 // we have to wait until it's ready
 webrtc.on('readyToCall', function () {
   // you can name it anything
-  //toast(rtc_room_id);
   webrtc.joinRoom(room_id);
-  //toast(rtc_room_id);
 });
 
 //ENDING CLASS
