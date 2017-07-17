@@ -59,7 +59,7 @@ socket.on('disconnect', function(socket){
 
  //NEW USER
 
-   socket.on('new user', function(data, callback){
+   socket.on('new_user', function(data, callback){
        callback(true);
        socket.username = data;
        users.push(socket.username);
