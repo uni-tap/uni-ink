@@ -25,10 +25,16 @@
   var currentcount = 1;
   var count = currentcount;
   var counter = document.getElementById("counter") ;
-  var previouspagecount = 1 ;
-  var currentpagecount = 1;
-  var nextpagecount = 1 ;
+     
+ // var mPageNotextBox = document.getElementById('textbox');
+   //  mPageNotextBox.value = mCurrentPageNo +"\/" + mpageNo ;
+  var totalcurrentpagecount = 1;  
+   var mcurrentpagecount = 1; //totalcurrentpagecount;
+  var previouspagecount = 1 ; //mcurrentpagecount ;
+ 
+  var nextpagecount = 1 ; //totalcurrentpagecount;
   var totalpagecount = 1;
+  //counter.innerHTML = totalcurrentpagecount + "\/" + totalpagecount ;
 
   var current = {
     color: 'black',
@@ -134,7 +140,7 @@
   socket.on('left', onLeftEvent);
   socket.on('right', onRightEvent);
   socket.on('color', function(data){
-    current.canvas = document.getElementById('page'+counter.innerHTML);
+    current.canvas = document.getElementById('page'+previouspagecount);
     main_ctx = current.canvas.getContext('2d');
     current.canvas.style.backgroundColor = data.color;
   });
@@ -439,7 +445,7 @@
     }
   };
   function ClearCanvas(){
-      current.canvas = document.getElementById('page'+counter.innerHTML);
+      current.canvas = document.getElementById('page'+previouspagecount);
       main_ctx = current.canvas.getContext('2d');
       main_ctx.clearRect(0, 0, canvas.width, canvas.height);
       socket.emit('clear');
@@ -509,7 +515,7 @@
     if(current.type == 'Bg'){
       current.bgcolor = e.target.className.split(' ')[1];
       //alert(main_canvas.id);
-      current.canvas = document.getElementById('page'+counter.innerHTML);
+      current.canvas = document.getElementById('page'+previouspagecount);
       main_ctx = current.canvas.getContext('2d');
       current.canvas.style.backgroundColor = current.bgcolor;
       socket.emit('color', {color:current.bgcolor});
@@ -530,7 +536,7 @@
 
   function onBgcolorUpdate(e){
     current.bgcolor = e.target.className.split(' ')[1];
-    current.canvas = document.getElementById('page'+counter.innerHTML);
+    current.canvas = document.getElementById('page'+previouspagecount);
     main_ctx = current.canvas.getContext('2d');
     current.canvas.style.backgroundColor = current.bgcolor;
     socket.emit('color', {color:current.bgcolor});
@@ -599,7 +605,7 @@ function move_right(){
   }
 }*/
 
-    function onNewPageUpdate(mcurrentcount, emit){
+    function onNewPageUpdate(emit){
     scanvas.style.display = 'block';
     var ncanvas = document.createElement('canvas');
     var ncontext = ncanvas.getContext('2d');
@@ -620,21 +626,28 @@ function move_right(){
     if(current.canvas != canvas){
     current.canvas.style.display = 'none';
     }
-    currentpagecount = currentpagecount + 1;
+    totalcurrentpagecount = totalcurrentpagecount + 1;
+    previouspagecount = totalcurrentpagecount;
     document.body.appendChild(ncanvas);
     current.canvas = ncanvas;
     main_ctx = ncontext;
-    counter.innerHTML = currentpagecount + "\/" + totalpagecount ;
+    counter.innerHTML = totalcurrentpagecount + "\/" + totalpagecount ;
+    if(!emit){return;} 
     socket.emit('new_page', {color: current.bgcolor});
 }
 
     function move_left(emit){
+   var currentpagecount = previouspagecount ;
+        //alert(currentpagecount);
     if(currentpagecount == '1'){
       return;
     }else if(currentpagecount != '1'){
+      //currentpagecount = totalcurrentpagecount ;
     var d_area = document.getElementById('page' + currentpagecount) ;
     d_area.style.display = 'none';
     currentpagecount = currentpagecount - 1 ;
+    previouspagecount = currentpagecount ;
+    nextpagecount = previouspagecount ;    
     counter.innerHTML = currentpagecount + "\/" + totalpagecount ;
     var a_area = document.getElementById('page' + currentpagecount ) ;
     a_area.style.display = 'block';
@@ -645,12 +658,16 @@ function move_right(){
   }
 }
 function move_right(emit){
-   if(currentpagecount == totalpagecount ){
+     var currentpagecount = nextpagecount ;
+    if(currentpagecount == totalpagecount ){
        return;
      }else if(currentpagecount !== totalpagecount){
+      // currentpagecount = totalcurrentpagecount ;
     var d_area = document.getElementById('page' + currentpagecount ) ;
     d_area.style.display = 'none';
     currentpagecount = currentpagecount + 1;
+    nextpagecount = currentpagecount ;
+    previouspagecount = nextpagecount;     
     counter.innerHTML = currentpagecount + "\/" + totalpagecount ;
     var a_area = document.getElementById('page' + currentpagecount) ;
     a_area.style.display = 'block';
@@ -724,7 +741,7 @@ function move_right(emit){
     draw.line(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color);
   }
   function onClearEvent(data){
-    current.canvas = document.getElementById('page'+counter.innerHTML);
+    current.canvas = document.getElementById('page'+previouspagecount);
     main_ctx = current.canvas.getContext('2d');
     main_ctx.clearRect(0, 0, canvas.width, canvas.height);
   }
@@ -746,30 +763,7 @@ function move_right(emit){
     draw.graph(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color,data.thickness);
   }
   function onNewPageEvent(data){
-    scanvas.style.display = 'block';
-    var ncanvas = document.createElement('canvas');
-    var ncontext = ncanvas.getContext('2d');
-    counter.innerHTML =  currentpagecount + "\/" + totalpagecount ; //currentpagecount + 1;
-    //document.getElementById('message').value = currentpagecount +"\/" + totalpagecount;
-    //currentpagecount = currentpagecount + 1;
-    totalpagecount = totalpagecount + 1;//counter.innerHTML;
-    ncanvas.id = "page" + totalpagecount ; //counter.innerHTML;
-    ncanvas.width = window.innerWidth;
-    ncanvas.height = window.innerHeight;
-    current.bgcolor = 'white';
-    ncanvas.style.position= 'absolute';
-    ncanvas.style.top = 0;
-    ncanvas.style.left = 0;
-    ncanvas.style.backgroundColor = current.bgcolor;
-    ncanvas.style.zIndex = 0;
-    if(scanvas.style.display = 'none'){}else if(scanvas.style.display = 'block'){scanvas.style.display = 'none';}
-    if(current.canvas != canvas){
-    current.canvas.style.display = 'none';
-    }
-    currentpagecount = currentpagecount + 1;
-    document.body.appendChild(ncanvas);
-    current.canvas = ncanvas;
-    main_ctx = ncontext;
+     onNewPageUpdate();
   }
   function onResize() {
     canvas.width = window.innerWidth;
