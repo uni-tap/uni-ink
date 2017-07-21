@@ -1,7 +1,7 @@
 'use strict';
 
 (function() {
-  var thickness = 2;
+  var thickness = 5;
   var socket = io();
   var canvas = document.getElementsByClassName('whiteboard')[0];
   var scanvas = document.getElementsByClassName('storeboard')[0];
