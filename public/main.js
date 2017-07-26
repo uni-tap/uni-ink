@@ -1,7 +1,7 @@
 'use strict';
 
 (function() {
-  var thickness = 5;
+  var thickness = 2;
   var socket = io();
   var canvas = document.getElementsByClassName('whiteboard')[0];
   var scanvas = document.getElementsByClassName('storeboard')[0];
@@ -25,13 +25,13 @@
   var currentcount = 1;
   var count = currentcount;
   var counter = document.getElementById("counter") ;
-     
+
  // var mPageNotextBox = document.getElementById('textbox');
    //  mPageNotextBox.value = mCurrentPageNo +"\/" + mpageNo ;
-  var totalcurrentpagecount = 1;  
+  var totalcurrentpagecount = 1;
    var mcurrentpagecount = 1; //totalcurrentpagecount;
   var previouspagecount = 1 ; //mcurrentpagecount ;
- 
+
   var nextpagecount = 1 ; //totalcurrentpagecount;
   var totalpagecount = 1;
   //counter.innerHTML = totalcurrentpagecount + "\/" + totalpagecount ;
@@ -188,7 +188,7 @@
       },
       eraser: function(x0, y0, x1, y1, color, emit){
         main_ctx.beginPath();
-        main_ctx.lineCap="round";
+        main_ctx.lineCap = "round";
         main_ctx.moveTo(x0, y0);
         main_ctx.lineTo(x1, y1);
         main_ctx.strokeStyle = color;
@@ -312,6 +312,35 @@
          color: color
        });
      },
+     triangle: function(x0, y0, x1, y1, color, fill, emit){
+       context.clearRect(0, 0, scanvas.width, scanvas.height);
+       context.strokeStyle = color;
+       context.lineWidth   = thickness;
+       context.lineCap="round";
+       context.beginPath();
+       context.moveTo(x0, y0);
+       context.lineTo(x0 + (x1-x0) / 2, y0 + (y1-y0) / 2);
+       context.lineTo(x0 - (x1-x0) / 2, y0 + (y1-y0) / 2);
+       context.closePath();
+       if(fill == ''){fill = 'transparent';}else{
+       context.fillStyle = fill;
+       context.fill();
+       context.stroke();
+
+       if (!emit) { return; }
+       var cw = canvas.width;
+       var ch = canvas.height;
+
+       socket.emit('tri', {
+         x0: x0 / cw,
+         y0: y0 / ch,
+         x1: x1 / cw,
+         y1: y1 / ch,
+         color: color,
+         fill: fill
+       });
+     }
+   },
      right_triangle: function(x0, y0, x1, y1, color, fill, emit){
        context.clearRect(0, 0, scanvas.width, scanvas.height);
        context.strokeStyle = color;
@@ -547,68 +576,11 @@
   function size_update(e){
     thickness = sizer.value;
   }
-var created = false;/*
-function onNewPageUpdate(mcurrentcount){
-    scanvas.style.display = 'block';
-    var ncanvas = document.createElement('canvas');
-    var ncontext = ncanvas.getContext('2d');
-    counter.innerHTML = currentcount ; //+"\/" + totalpagecount;
-    currentcount = currentcount + 1;
-    totalpagecount = totalpagecount + 1;//counter.innerHTML;
-    ncanvas.id = "page" + counter.innerHTML ;
-    ncanvas.width = window.innerWidth;
-    ncanvas.height = window.innerHeight;
-    current.bgcolor = 'white';
-    ncanvas.style.position= 'absolute';
-    ncanvas.style.top = 0;
-    ncanvas.style.left = 0;
-    ncanvas.style.backgroundColor = current.bgcolor;
-    ncanvas.style.zIndex = 0;
-    if(scanvas.style.display = 'none'){}else if(scanvas.style.display = 'block'){scanvas.style.display = 'none';}
-    document.body.appendChild(ncanvas);
-    current.canvas = ncanvas;
-    main_ctx = ncontext;
-    socket.emit('new_page', {color: current.bgcolor});
-}
-function move_left(){
-    if(counter.innerHTML == '1'){alert('No More Pages');return;}else{
-    var d_area = document.getElementById('page' + counter.innerHTML);
-    d_area.style.display = 'none';
-    counter.innerHTML = counter.innerHTML - 1;
-    var a_area = document.getElementById('page' + counter.innerHTML);
-    a_area.style.display = 'block';
-    current.canvas = a_area;
-    main_ctx = a_area.getContext('2d');
-    socket.emit('left');
-    }
-}
-function move_right(){
-   if(counter.innerHTML == totalpagecount-1){alert('No More Pages');return;}else{
-    var d_area = document.getElementById('page' + counter.innerHTML);
-    d_area.style.display = 'none';
-    counter.innerHTML = counter.innerHTML - (-1);
-    var a_area = document.getElementById('page' + counter.innerHTML);
-    a_area.style.display = 'block';
-    current.canvas = a_area;
-    main_ctx = a_area.getContext('2d');
-
-    /*if(counter.innerHTML == totalpagecount){alert('No More Pages');return;}else{
-    var a_area = document.getElementById('page' + counter.innerHTML);
-    a_area.style.display = 'none';
-    counter.innerHTML = count ;
-    count = count + 1;
-    var d_area = document.getElementById('page' + count);
-    d_area.style.display = 'block';
-    current.canvas = d_area;
-    main_ctx = d_area.getContext('2d');
-    socket.emit('right');
-  }
-}*/
-
+var created = false;
     function onNewPageUpdate(emit){
     scanvas.style.display = 'block';
     var ncanvas = document.createElement('canvas');
-    var ncontext = ncanvas.getContext('2d');
+    var context = ncanvas.getContext('2d');
     //counter.innerHTML =  currentpagecount + "\/" + totalpagecount ; //currentpagecount + 1;
     //document.getElementById('message').value = currentpagecount +"\/" + totalpagecount;
     //currentpagecount = currentpagecount + 1;
@@ -630,9 +602,9 @@ function move_right(){
     previouspagecount = totalcurrentpagecount;
     document.body.appendChild(ncanvas);
     current.canvas = ncanvas;
-    main_ctx = ncontext;
+    main_ctx = context;
     counter.innerHTML = totalcurrentpagecount + "\/" + totalpagecount ;
-    if(!emit){return;} 
+    if(!emit){return;}
     socket.emit('new_page', {color: current.bgcolor});
 }
 
@@ -647,7 +619,7 @@ function move_right(){
     d_area.style.display = 'none';
     currentpagecount = currentpagecount - 1 ;
     previouspagecount = currentpagecount ;
-    nextpagecount = previouspagecount ;    
+    nextpagecount = previouspagecount ;
     counter.innerHTML = currentpagecount + "\/" + totalpagecount ;
     var a_area = document.getElementById('page' + currentpagecount ) ;
     a_area.style.display = 'block';
@@ -667,7 +639,7 @@ function move_right(emit){
     d_area.style.display = 'none';
     currentpagecount = currentpagecount + 1;
     nextpagecount = currentpagecount ;
-    previouspagecount = nextpagecount;     
+    previouspagecount = nextpagecount;
     counter.innerHTML = currentpagecount + "\/" + totalpagecount ;
     var a_area = document.getElementById('page' + currentpagecount) ;
     a_area.style.display = 'block';
@@ -734,6 +706,12 @@ function move_right(emit){
     var ch = scanvas.height;
     draw.right_triangle(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color, data.fill);
     draw.right_triangle(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color, data.fill);
+  }
+  function onTriEvent(data){
+    var cw = scanvas.width;
+    var ch = scanvas.height;
+    draw.triangle(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color, data.fill);
+    draw.triangle(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color, data.fill);
   }
   function onLineEvent(data){
     var cw = scanvas.width;
