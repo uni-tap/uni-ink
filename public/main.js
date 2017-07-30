@@ -7,7 +7,7 @@
   var scanvas = document.getElementsByClassName('storeboard')[0];
   var colors = document.getElementsByClassName('color');
   var bgcolors = document.getElementsByClassName('bgcolor');
-  var tools  = document.getElementsByClassName('tlsbtn');
+  var tools  = document.getElementsByClassName('tls_btn');
   var graph  = document.getElementById('graph');
   var new_page = document.getElementById('NewPage');
   var undo   = document.getElementById('undo');
