@@ -249,6 +249,23 @@
                 border-radius:40px;
             }
             .clr_box button{border:none;}
+            .chtmsg{
+                min-height:25px;
+                background: linear-gradient(60deg, #f79533, #f37055, #ef4e7b, #a166ab, #5073b8, #1098ad, #07b39b, #6fba82);
+                padding:2px;
+                border-radius:45px;
+                margin-top:5px;
+            }
+            .chtcnt{
+                position:absolute;
+                //top:2px;
+                background-color:white;
+                left:5px;
+                border-radius:20px;
+                min-width:calc(100% - 10px);
+                min-height:20px;
+                padding-left:2px;
+            }
         </style>
     </head>
     <body >
@@ -278,9 +295,9 @@
                 <button class="tls_btn right_triangle" style="background-image:url('https://uni-tap.github.io/uc/icons/right-tri.PNG');background-repeat: no-repeat;"></button>
             </div>
             <div class="main_tools">
-                <button class="tls_btn Pen" style="background-image:url('icons/pnl.PNG');background-repeat: no-repeat;background-size:contain;"></button>
+                <button class="tls_btn Pen" style="background-image:url('https://uni-tap.github.io/uc/icons/pnl.PNG');background-repeat: no-repeat;background-size:contain;"></button>
                 <button class="tls_btn Eraser"></button>
-                <button class="tls_btn hLight" style="background-image:url('icons/hlight.PNG');background-repeat: no-repeat;background-size:contain;"></button>
+                <button class="tls_btn hLight" style="background-image:url('https://uni-tap.github.io/uc/icons/hlight.PNG');background-repeat: no-repeat;background-size:contain;"></button>
                 <div class="clr_box">
             <center>
                 <select id="thickness" class="fixed">
@@ -422,7 +439,7 @@
            toast(data + ' has joined the class.');
          });
          socket.on('new message', function(data){
-           $chat.append('<li><strong>'+data.user+':</strong> '+data.msg+'</li>')
+           $chat.append('<div class="chtmsg"><li class="chtcnt"><strong>'+data.user+':</strong> '+data.msg+'</li></div>')
          });
 
          socket.on('get users', function(data){
