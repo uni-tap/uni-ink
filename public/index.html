@@ -1,10 +1,13 @@
-<!doctype html>
 <html>
     <head>
         <title>UNI-TAP LIVE CLASS</title>
         <script src="https://uni-tap.github.io/uc/js/jquery-1.11.2.min.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <style>
+            body{
+                overflow:none;
+            }
             .tools_desk{
                 height:180px;
                 width:60%;
@@ -65,9 +68,9 @@
             .tools_area{
                 position:absolute;
                 right:20px;
-                top:29px;
+                top:35px;
                 height:50%;
-                width:150px;
+                width:250px;
                 padding:10px;
                 padding-left:17px;
                 background-color: #201f1d;
@@ -79,11 +82,11 @@
                 top:35px;
                 left:60px;
                 height:100%;
-                width:calc(100% - 220px);
+                width:calc(100% - 320px);
             }
             .tls_btn{
-                height:20px;
-                width:20px;
+                height:40px;
+                width:40px;
                 background-color: transparent;
                 border:1px solid transparent;
                 color:white;
@@ -107,7 +110,9 @@
             .chat_msg{
                 position:absolute;
                 bottom:0px;
+                height:41px;
                 border:none;
+                padding:5px;
                 border-bottom-right-radius:20px;
                 border-top-right-radius: 20px;
                 width:calc(100% - 2px);
@@ -167,7 +172,7 @@
              border-radius: 2px;
              padding: 16px;
              position: fixed;
-             z-index: 1;
+             z-index: 10c;
              left: 50%;
              bottom: 150px;
              font-size: 17px;
@@ -259,18 +264,72 @@
             .chtcnt{
                 position:absolute;
                 //top:2px;
-                background-color:white;
+                background-color:transparent;
                 left:5px;
+                border:2px solid limegreen;
                 border-radius:20px;
                 min-width:calc(100% - 10px);
-                min-height:20px;
-                padding-left:2px;
+                min-height:50px;
+                padding:5px;
+                padding-top:10px;
+            }
+            .bookloader{
+                height:200%;
+                width:1000px;
+                z-index:2;
+                position: absolute;
+                top:0px;
+                right:0px;
+                border-radius:10px;
+                border-bottom-left-radius: none;
+                border-bottom-right-radius: none;
+                border:none;
+                box-shadow:0 2px 2px 0 rgba(0,0,0,0.3), 0 0 0 0px rgba(0,0,0,0.08) !important;
+                background-color:white;
+            }
+            .bookloader iframe{
+                height:100%;
+                width:100%;
+                border-radius:10px;
+                border-bottom-left-radius: none;
+                border-bottom-right-radius: none;
+                border:none;
+            }
+            .book_select{
+                height:500px;
+                width:1000px;
+                position: absolute;
+                top:5%;
+                left:calc(70% - 900px);
+                border-radius:10px;
+                z-index:10;
+                box-shadow:0 2px 2px 0 rgba(0,0,0,0.3), 0 0 0 0px rgba(0,0,0,0.08) !important; 
+                background: radial-gradient(at center center, rgb(255, 255, 255) 8%, rgb(51, 64, 77) 100%);
+            }
+            .bk{
+                position: absolute;
+                top:calc(50% - 100px);
+                height:200px;
+                width:100%;
+            }
+            .book_card{
+                position: relative;
+                top:calc(50% - 100px);
+                margin-left:50px;
+                height:200px;
+                border-radius:5px;
+                width:150px;
+                background-color:white;
+                float:left;
             }
         </style>
     </head>
     <body >
         <canvas id="canvas" class="whiteboard"  oncontextmenu="document.getElementById('Eraser').click();get('#tip', 'block');return false;"></canvas>
         <canvas id="page1" class="storeboard"></canvas>
+        <div>
+            <p id="counter"></p>
+        </div>
         <div class="tools_desk" id="tls_desk" onmouseout="hide()" onmouseover="show()">
             <div class="quick_tlbar">
                 <button style="height:30px !important;" class="quick_btn left glyphicon glyphicon-chevron-left" id="Leftbt"></button>
@@ -278,7 +337,9 @@
                     <button class="quick_btn glyphicon glyphicon-camera"></button>
                     <button class="quick_btn glyphicon glyphicon-file" id="NewPage"></button>
                     <button class="quick_btn glyphicon glyphicon-trash" id="clear"></button>
+                    <button class="quick_btn fa fa-book" id="book" onclick="toogle('.book_select');"></button>
                 </center>
+                <button style="border:none;background-color:transparent;color:#f25757;margin-right:22px;margin-top:5px;" onclick="end_class()" class="right"><b>END CLASS</b></button>
                 <button style="height:30px !important;" class="quick_btn right glyphicon glyphicon-chevron-right" id="Rightbt"></button>
             </div>
             <div class="cm_area">
@@ -295,9 +356,14 @@
                 <button class="tls_btn right_triangle" style="background-image:url('https://uni-tap.github.io/uc/icons/right-tri.PNG');background-repeat: no-repeat;"></button>
             </div>
             <div class="main_tools">
-                <button class="tls_btn Pen" style="background-image:url('https://uni-tap.github.io/uc/icons/pnl.PNG');background-repeat: no-repeat;background-size:contain;"></button>
-                <button class="tls_btn Eraser"></button>
-                <button class="tls_btn hLight" style="background-image:url('https://uni-tap.github.io/uc/icons/hlight.PNG');background-repeat: no-repeat;background-size:contain;"></button>
+                <button class="tls_btn Pen" style="background-image:url('icons/pnl.PNG');background-repeat: no-repeat;background-size:contain;"></button>
+                <button class="tls_btn Eraser" style="background-image:url('icons/eraser.PNG');background-repeat: no-repeat;background-size:contain;"></button>
+                <button class="tls_btn hLight" style="background-image:url('icons/hlight.PNG');background-repeat: no-repeat;background-size:contain;"></button>
+                <div style="position:absolute;top:0px;left:42%;">
+                    <button style="margin-bottom:5px;background-color:transparent;color:white;border:none" id="pen">Pen</button><br />
+                    <button style="margin-bottom:5px;background-color:transparent;color:white;border:none" id="bg">Board</button><br />
+                    <button style="margin-bottom:5px;background-color:transparent;color:white;border:none" id="fill">Fill</button><br />
+                </div>
                 <div class="clr_box">
             <center>
                 <select id="thickness" class="fixed">
@@ -312,7 +378,6 @@
                  <option value="40" style="color:back;">40</option>
                  <option value="50" style="color:back;">50</option>
                 </select>
-                <button style="margin-left:5px;" id="pen">Pen</button><button style="margin-left:5px;" id="bg">Board</button><button style="margin-left:5px;" id="fill">Fill</button>
             </center>
             <br />
             <button class="color black" style="background-color: black;"></button>
@@ -342,12 +407,15 @@
             </div>
             </div>
         </div>
+        <div style="display:none;" class="bookloader" id="bookloader">
+                <iframe id="book_area"></iframe>
+            </div>
         <div class="chat_area" id="chat">
          <div style="overflow-y:auto;">
          <ul id="chat"></ul>
          </div>
          <form action="" id="messageForm">
-            <textarea id="counter" class="chat_msg"></textarea>
+            <input type="text" id="message" class="chat_msg">
             <button class="chat_snd"></button>
          </form>
         </div>
@@ -359,8 +427,13 @@
           <div id="userbox">
              <ul id="users"></ul>
           </div>
+            <input type="file" id="filer">
         </div>
-        
+        <div style="display:none;" class="book_select" id="book_select">
+            <nav class="bk">
+              <div class="book_card" onclick="open_book('http://localhost/firebase/book.html?url=/firebase/Class%209%20%20%20books/Lakhmir%20Singh%20PDF%20Class%20IX/Biology%20PDF%20By%20Lakhmir%20Singh%20For%20Class%20IX/Chapter1-Improvements In Food Resources.pdf')" style="background-image:url('http://localhost/delete.PNG');background-repeat:no-repeat;"></div> <div class="book_card" onclick="open_book('http://localhost/firebase//')" style="background-image:url('http://localhost/delete.PNG');background-repeat:no-repeat;"></div>
+            </nav>
+        </div>
         <div id="snackbar">Some text some message..</div>
     </body>
     <script src="/socket.io/socket.io.js"></script>
@@ -368,7 +441,7 @@
     <script src="https://uni-tap.github.io/uc/interact.js"></script>
     <script src="https://uni-tap.github.io/uc/element.js"></script>
     <script src="https://simplewebrtc.com/latest-v2.js"></script>
-    <script>
+    <script>l
         var socket = io();
         var api = find('api');
         var room_id = 'uni-tap_live_classes: Live_Class_Id: '+ api;
@@ -415,10 +488,51 @@
                 element.style.display = 'none';
             }
         }
+        function get_elm(obj){
+            var elm = document.querySelector(obj);
+            return elm;
+        }
+        function do_essentials(){
+            //function only for book loader 
+            //get_elm('#tls_desk').style.height = '100%';
+            //get_elm('#tls_desk').onmouseover = '';
+            //get_elm('#tls_desk').onmouseout = '';
+            var input = document.getElementById("filer");
+            var file = input.value.split("\\");
+            var fileName = file[file.length-1];
+            //alert(file);
+            toogle('#video');
+            toogle('#chat');
+            toogle_pro('#bookloader');
+           // if(get_elm('#book_area').src == '' || !get_elm('#book_area').src ){
+            //  get_elm('#book_area').src = 'http://localhost/firebase/Chapter1-Matter In Our Surroundings.pdf';
+        //    }else{}
+        }
+        function toogle_pro(obj){
+            var element = document.querySelector(obj);
+            if(element.style.display == 'none'){
+                element.style.display = 'block';
+            }else {
+                element.style.display = 'block';
+            }
+        }
+        function open_book(url){
+            do_essentials();
+            get_elm('#book_area').src = url;
+            toogle('.book_select');
+        }
+        function back(){
+             //function only for book loader
+            var desk = get_elm('#tls_desk');
+            desk.style.height = '180px';
+            desk.addEventListener('mouseover', show);
+            desk.addEventListener('mouseout', hide);
+            get_elm('#bookloader').style.display = 'none';
+        }
         $(function(){
          var socket = io.connect();
          var $messageForm = $('#messageForm');
-         var $message = $('#counter');
+         var $message = $('#message');
          var $chat = $('#chat');
          var $users = $('#users');
          var name = find('user');
@@ -439,14 +553,14 @@
            toast(data + ' has joined the class.');
          });
          socket.on('new message', function(data){
-           $chat.append('<div class="chtmsg"><li class="chtcnt"><strong>'+data.user+':</strong> '+data.msg+'</li></div>')
+           $chat.append('<li class="chtcnt"><strong>'+data.user+':</strong> '+data.msg+'</li>')
          });
 
          socket.on('get users', function(data){
            var html = '';
            for(i = 0;i < data.length;i++){
              html += '<li class="userlist"><strong>'+data[i]+'</strong></li>';
-             toast(data + ' has joined the class.');
+             toast(data[i] + ' has joined the class.');
            }
            $users.html(html);
          });
