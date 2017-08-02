@@ -444,7 +444,7 @@
          color: color
        });
    },
-     'Text':function(x0, y0, x1, y1, color, emit){
+     Text:function(x0, y0, x1, y1, color, emit){
        created = false;
        var textmaker = document.createElement('textarea');
        var x = Math.min(x0,x1),
@@ -471,7 +471,31 @@
         textmaker.style.display = 'none';
         created = false;
       }
-    }
+    },
+      hlight:function(x0, y0, x1, y1, emit){
+        main_ctx.beginPath();
+        //main_ctx.lineCap="round";
+        main_ctx.moveTo(x0, y0);
+        main_ctx.lineTo(x1, y1);
+        main_ctx.strokeStyle = 'rgba(255, 235, 59, 0.58)';
+        main_ctx.lineWidth = '10';
+        main_ctx.stroke();
+        main_ctx.closePath();
+
+        //SENDING TO OTHER USERS
+/*
+        if (!emit) { return; }
+        var cw = canvas.width;
+        var ch = canvas.height;
+
+        socket.emit('drawing', {
+          x0: x0 / cw,
+          y0: y0 / ch,
+          x1: x1 / cw,
+          y1: y1 / ch,
+          color: color
+        });*/
+      }
   };
   function ClearCanvas(){
       current.canvas = document.getElementById('page'+previouspagecount);
@@ -531,6 +555,10 @@
     if (current.tool == 'graph'){ // IF TRIANGLE BUTTON IS CLICKED
         draw.graph(current.x, current.y, e.clientX,e.clientY,current.color,current.thickness, true);
     }
+    if (current.tool == 'hLight'){ // IF TRIANGLE BUTTON IS CLICKED
+        draw.hlight(current.x, current.y, e.clientX,e.clientY, true);
+	current.x = e.clientX;current.y = e.clientY;    
+    }  
     if (current.tool == 'img'){ // IF TRIANGLE BUTTON IS CLICKED
         add_move(current.x, current.y, e.clientX, e.clientY, current.color, current.fillcolor, true);
     }
