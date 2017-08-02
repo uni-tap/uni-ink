@@ -7,6 +7,7 @@
         <style>
             body{
                 overflow:none;
+                touch-action:none;
             }
             .tools_desk{
                 height:180px;
@@ -322,29 +323,55 @@
                 background-color:white;
                 float:left;
             }
+            #counter{
+               vertical-align: middle;
+               margin-top: 15px;
+               font-size: large;
+                transition:0.5s ease;
+            }
+            #calc{
+                height:350px;
+                width:276px;
+                z-index:10;
+                position:fixed;
+                top:calc(50% - 250px);
+                left:calc(50% - 176px);
+                overflow: hidden;
+                border:none;
+                background-color:white;
+                border-radius: 3px;
+                box-shadow:0 2px 2px 0 rgba(0,0,0,0.3), 0 0 0 0px rgba(0,0,0,0.08) !important; 
+            }
+            #calc iframe{
+                height:350px;
+                width:276px;
+                z-index:10;
+                overflow: hidden;
+                background-color:rgba(51, 51, 51, 0.55);
+                border:none;
+                border-radius: 3px;
+            }
         </style>
     </head>
     <body >
         <canvas id="canvas" class="whiteboard"  oncontextmenu="document.getElementById('Eraser').click();get('#tip', 'block');return false;"></canvas>
         <canvas id="page1" class="storeboard"></canvas>
-        <div>
-            <p id="counter"></p>
-        </div>
         <div class="tools_desk" id="tls_desk" onmouseout="hide()" onmouseover="show()">
             <div class="quick_tlbar">
                 <button style="height:30px !important;" class="quick_btn left glyphicon glyphicon-chevron-left" id="Leftbt"></button>
                 <center>
+                    <button class="quick_btn fa fa-calculator" onclick="toogle('#calc')"></button>
                     <button class="quick_btn glyphicon glyphicon-camera"></button>
                     <button class="quick_btn glyphicon glyphicon-file" id="NewPage"></button>
                     <button class="quick_btn glyphicon glyphicon-trash" id="clear"></button>
                     <button class="quick_btn fa fa-book" id="book" onclick="toogle('.book_select');"></button>
                 </center>
-                <button style="border:none;background-color:transparent;color:#f25757;margin-right:22px;margin-top:5px;" onclick="end_class()" class="right"><b>END CLASS</b></button>
+                <button style="border:none;background-color:transparent;color:#f25757;margin-right:25px;margin-top:5px;" onclick="end_class()" class="right"><b>END CLASS</b></button>
                 <button style="height:30px !important;" class="quick_btn right glyphicon glyphicon-chevron-right" id="Rightbt"></button>
             </div>
             <div class="cm_area">
                 <button class="cm_tls glyphicon glyphicon-comment" onclick="toogle('#chat')"></button>
-                <button class="cm_tls glyphicon glyphicon-user" onclick="toogle('#usr_box')"></button>
+                <button class="cm_tls fa fa-address-book-o" onclick="toogle('#usr_box')"></button>
                 <button class="cm_tls glyphicon glyphicon-facetime-video" onclick="toogle('#video')"></button>
             </div>
             <div class="tools_area">
@@ -359,10 +386,10 @@
                 <button class="tls_btn Pen" style="background-image:url('https://uni-tap.github.io/uc/icons/pnl.PNG');background-repeat: no-repeat;background-size:contain;"></button>
                 <button class="tls_btn Eraser" style="background-image:url('https://uni-tap.github.io/uc/icons/eraser.PNG');background-repeat: no-repeat;background-size:contain;"></button>
                 <button class="tls_btn hLight" style="background-image:url('https://uni-tap.github.io/uc/icons/hlight.PNG');background-repeat: no-repeat;background-size:contain;"></button>
-                <div style="position:absolute;top:0px;left:42%;">
-                    <button style="margin-bottom:5px;background-color:transparent;color:white;border:none" id="pen">Pen</button><br />
-                    <button style="margin-bottom:5px;background-color:transparent;color:white;border:none" id="bg">Board</button><br />
-                    <button style="margin-bottom:5px;background-color:transparent;color:white;border:none" id="fill">Fill</button><br />
+                <div style="position:absolute;top:0px;left:40%;">
+                    <button style="margin-bottom:5px;background-color:transparent;color:white;border:none" class="glyphicon glyphicon-edit" id="pen"></button><br />
+                    <button style="margin-bottom:5px;background-color:transparent;color:white;border:none" class="glyphicon glyphicon-unchecked" id="bg"></button><br />
+                    <button style="margin-bottom:5px;background-color:transparent;color:white;border:none" class="fa fa-paint-brush" id="fill"></button><br />
                 </div>
                 <div class="clr_box">
             <center>
@@ -380,12 +407,6 @@
                 </select>
             </center>
             <br />
-            <button class="color black" style="background-color: black;"></button>
-            <button class="color silver" style="background-color: silver;"></button>
-            <button class="color darkgray" style="background-color: darkgray;"></button>
-            <button class="color gray" style="background-color: gray;" ></button>
-            <button class="color #757575" style="background-color: #757575;"></button>
-            <button class="color magenta" style="background-color: magenta;"></button>
             <button class="color red" style="background-color: red;"></button>
             <button class="color #ff5722" style="background-color: #ff5722;"></button>
             <button class="color orange" style="background-color: orange;"></button>
@@ -396,6 +417,7 @@
             <button class="color darkgreen" style="background-color: darkgreen;"></button>
             <button class="color teal" style="background-color: teal;"></button>
             <button class="color #82e0ff" style="background-color: #82e0ff;"></button>
+            <button class="color magenta" style="background-color: magenta;"></button>
             <button class="color indigo" style="background-color: indigo;"></button>
             <button class="color violet" style="background-color: violet;"></button>
             <button class="color purple" style="background-color: purple;"></button>
@@ -403,7 +425,13 @@
             <button class="color #795548" style="background-color: #795548;"></button>
             <button class="color brown" style="background-color: brown;"></button>
             <button class="color pink" style="background-color: pink;"></button>
-            <button class="color white" style="background-color: white;border:0.1px solid black"></button><br />
+            <button class="color white" style="background-color: white;border:0.1px solid black"></button>
+            <button class="color black" style="background-color: black;"></button>
+            <button class="color silver" style="background-color: silver;"></button>
+            <button class="color darkgray" style="background-color: darkgray;"></button>
+            <button class="color gray" style="background-color: gray;" ></button>
+            <button class="color #757575" style="background-color: #757575;"></button>
+            <br />
             </div>
             </div>
         </div>
@@ -416,7 +444,7 @@
          </div>
          <form action="" id="messageForm">
             <input type="text" id="message" class="chat_msg">
-            <button class="chat_snd"></button>
+            <button class="chat_snd glyphicon glyphicon-send"></button>
          </form>
         </div>
         <div class="vid_box" id="video">
@@ -430,9 +458,12 @@
             <input type="file" id="filer">
         </div>
         <div style="display:none;" class="book_select" id="book_select">
-            <nav class="bk">
-              <div class="book_card" onclick="open_book('http://localhost/firebase/book.html?url=/firebase/Class%209%20%20%20books/Lakhmir%20Singh%20PDF%20Class%20IX/Biology%20PDF%20By%20Lakhmir%20Singh%20For%20Class%20IX/Chapter1-Improvements In Food Resources.pdf')" style="background-image:url('http://localhost/delete.PNG');background-repeat:no-repeat;"></div> <div class="book_card" onclick="open_book('http://localhost/firebase//')" style="background-image:url('http://localhost/delete.PNG');background-repeat:no-repeat;"></div>
-            </nav>
+            <iframe style="height:100%;width:100%;border:none;" src="http://localhost/load.php"></iframe>
+        </div>
+        <div style="position:fixed;top:-1px;left:calc(50% - 100px);width:100px;height:50px;background-color:rgba(51, 51, 51, 0.55);z-index:10;color:#fff;border-bottom-left-radius:5px;border-bottom-right-radius:5px;box-shadow:0 2px 2px 0 rgba(0,0,0,0.3), 0 0 0 0px rgba(0,0,0,0.08) !important;"><p onchange="animate()" align=middle id="counter">1/1</p></div>
+        <div id="calc" style="display:none;">
+            <button style="position:absolute;top:5px;right:10px;height:20px;width:20px;border-radius:20px;border:none;color:white;background-color:#f25757;text-align:center;" onclick="get('#calc', 'none');">x</button>
+            <iframe src="https://uni-tap.github.io/uc/calc.html"></iframe>
         </div>
         <div id="snackbar">Some text some message..</div>
     </body>
@@ -501,8 +532,8 @@
             var file = input.value.split("\\");
             var fileName = file[file.length-1];
             //alert(file);
-            toogle('#video');
-            toogle('#chat');
+            //toogle('#video');
+            //toogle('#chat');
             toogle_pro('#bookloader');
            // if(get_elm('#book_area').src == '' || !get_elm('#book_area').src ){
             //  get_elm('#book_area').src = 'http://localhost/firebase/Chapter1-Matter In Our Surroundings.pdf';
@@ -515,6 +546,12 @@
             }else {
                 element.style.display = 'block';
             }
+        }
+        function animate(){
+            this.style.fontSize = 'x-large';
+            setTimeout(1000, function(){
+                this.style.fontSize = 'large';
+            });
         }
         function open_book(url){
             do_essentials();
