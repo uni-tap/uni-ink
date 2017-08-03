@@ -1,0 +1,676 @@
+<html>
+    <head>
+        <title>UNI-TAP LIVE CLASS</title>
+        <script src="https://uni-tap.github.io/uc/js/jquery-1.11.2.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <style>
+            body{
+                overflow:none;
+                touch-action:none;
+            }
+            .tools_desk{
+                height:180px;
+                width:60%;
+                margin-left:20%;
+                padding:20px;
+                border-radius:10px;
+                background-color: #3f3c3b;
+                position:fixed;
+                bottom:-50px;
+                z-index:1000;
+               // background-image: url(icons/tool.jpg);
+                background-repeat: no-repeat;
+                transition: .5s cubic-bezier(0.7, 0.46, 0.22, 1.29);
+            }
+            .quick_tlbar{
+                height:30px;
+                width:calc(100% + 40px);
+                margin-top:-20px;
+                margin-left:-20px;
+                border-radius:10px;
+                background-color: transparent;
+            }
+            .quick_btn{
+                margin-top:0px !important;
+                padding:0px !important;
+                height:100%;
+                width:30px;
+                color:white;
+                background-color:transparent;
+                border:none;
+            }
+            center{
+                height:30px;
+            }
+            .left{
+                position:absolute;
+                left:20px;
+                top:0px;
+            }
+            .right{
+                position:absolute;
+                right:20px;
+                top:0px;
+            }
+            .cm_area{
+                height:100%;
+                width:60px;
+                background-color: transparent;
+            }
+            .cm_tls{
+                height:25px;
+                width:70%;
+                background-color: transparent;
+                border:none;
+                color:whitesmoke;
+                margin-top:5px !important;
+            }
+            .tools_area{
+                position:absolute;
+                right:20px;
+                top:35px;
+                height:50%;
+                width:250px;
+                padding:10px;
+                padding-left:17px;
+                background-color: #201f1d;
+                border-radius: 5px;
+                overflow:auto;
+            }
+            .main_tools{
+                position:absolute;
+                top:35px;
+                left:60px;
+                height:100%;
+                width:calc(100% - 320px);
+            }
+            .tls_btn{
+                height:40px;
+                width:40px;
+                border-radius:3px;
+                background-color: transparent;
+                border:1px solid transparent;
+                color:white;
+            }
+            .main_tools .tls_btn{
+                height:100%;
+                width:50px;
+            }
+            .chat_area{
+                height:40%;
+                width:19.5%;
+                position:fixed;
+                right:0px;
+                bottom:0px;
+                padding: 2px;
+                background-color: white;
+                border-top-left-radius: 5px;
+                box-shadow:0 2px 2px 0 rgba(0,0,0,0.3), 0 0 0 0px rgba(0,0,0,0.08) !important;
+                z-index:2;
+            }
+            .chat_msg{
+                position:absolute;
+                bottom:3px;
+                left:4px;
+                height:41px;
+                border:none;
+                padding:5px;
+                background-color: rgba(255, 255, 255, 0.66);
+                border-radius:3px;
+                width:calc(100% - 60px);
+            }
+            .chat_snd{
+                position:absolute;
+                right:7px;
+                top:337px;
+                height:40px;
+                width:40px;
+                border-radius:3px;
+                background-color: #3f3c3b;
+                color: white;
+                border:none;
+            }
+            .vid_box{
+                position:fixed;
+                bottom:0px;
+                left:0px;
+                height:40%;
+                width:19.5%;
+                background-color: white;
+                border-top-right-radius: 5px;
+                box-shadow:0 2px 2px 0 rgba(0,0,0,0.3), 0 0 0 0px rgba(0,0,0,0.08) !important;
+                z-index:2;
+            }
+            #remotesVideos{
+              margin-left:0px;
+              margin-top:-7px;
+              padding:20px;
+              position: absolute;
+              top:10px;
+            }
+            #remotesVideos video{height:100px;width:100px;margin-left: 2px;margin-top:30px;}
+            #localVideo{
+              border-top-left-radius:5px;
+              border-top-right-radius:5px;    
+              margin-top: -50px;
+              margin-left:calc(50% - 50px);
+            }
+            .user_box{
+                position:fixed;
+                top:35%;
+                left:calc(50% - 100px);
+                width:200px;
+                border-radius:3px;
+                min-height:100px;
+                background-color: white;
+                color:white !important;
+                box-shadow:0 2px 2px 0 rgba(0,0,0,0.3), 0 0 0 0px rgba(0,0,0,0.08) !important;
+                z-index:2;
+            }
+            #snackbar {
+             visibility: hidden;
+             min-width: 250px;
+             margin-left: -125px;
+             background-color: #333;
+             color: #fff;
+             text-align: center;
+             border-radius: 2px;
+             padding: 16px;
+             position: fixed;
+             z-index: 10c;
+             left: 50%;
+             bottom: 150px;
+             font-size: 17px;
+            }
+            #snackbar.show {
+              visibility: visible;
+              -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+              animation: fadein 0.5s, fadeout 0.5s 2.5s;
+            }
+
+          @-webkit-keyframes fadein {
+              from {bottom: 0; opacity: 0;}
+              to {bottom: 30px; opacity: 1;}
+            }
+
+          @keyframes fadein {
+              from {bottom: 0; opacity: 0;}
+              to {bottom: 30px; opacity: 1;}
+           }
+
+          @-webkit-keyframes fadeout {
+              from {bottom: 30px; opacity: 1;}
+              to {bottom: 0; opacity: 0;}
+           }
+
+          @keyframes fadeout {
+              from {bottom: 30px; opacity: 1;}
+              to {bottom: 0; opacity: 0;}
+           }
+            button{background-size:cover;}
+            button:focus{
+                outline:none;
+                box-shadow:inset 0 1px 1px 1px rgba(0,0,0,0.3), 0 0 0 0px rgba(0,0,0,0.08) !important;
+            }
+            .whiteboard {
+             height: 100%;
+             width: 100%;
+             position: absolute;
+             left: 0;
+             right: 0;
+             bottom: 0;
+             top: 0;
+             touch-action:none;
+             cursor: url('https://uni-tap.github.io/uc/icons/pencil (1).png'), default;
+             z-index: 1;
+             background-color:transparent;
+          }
+          .storeboard {
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            top: 0;
+            touch-action:none;
+            cursor: pointer;
+            z-index:0;
+          }
+            li{
+                list-style-type:none;
+            } 
+            .clr_box{
+                position:absolute;
+                right:20px;
+                top:0px;
+                height:50%;
+                width:50%;
+                padding:10px;
+                padding-left:17px;
+                background-color: #201f1d;
+                border-radius: 5px;
+                overflow:auto;
+            }
+            .color{
+                border:none;
+                height:40px;
+                width:40px;
+                border-radius:40px;
+            }
+            .clr_box button{border:none;}
+            .chtmsg{
+                min-height:25px;
+                background: linear-gradient(60deg, #f79533, #f37055, #ef4e7b, #a166ab, #5073b8, #1098ad, #07b39b, #6fba82);
+                padding:2px;
+                border-radius:45px;
+                margin-top:5px;
+            }
+            .chtcnt{
+                margin-top:5px;
+                background-color:darkgrey;
+                left:5px;
+                border:2px solid white;
+                border-radius:20px;
+                min-width:calc(100% - 10px);
+                min-height:50px;
+                padding:5px;
+                padding-top:10px;
+            }
+            .userlist strong{color:white;}
+            .bookloader{
+                height:200%;
+                width:1000px;
+                z-index:2;
+                position: absolute;
+                top:0px;
+                right:0px;
+                border-radius:10px;
+                border-bottom-left-radius: none;
+                border-bottom-right-radius: none;
+                border:none;
+                box-shadow:0 2px 2px 0 rgba(0,0,0,0.3), 0 0 0 0px rgba(0,0,0,0.08) !important;
+                background-color:black;
+            }
+            .bookloader iframe{
+                height:100%;
+                width:100%;
+                border-radius:10px;
+                border-bottom-left-radius: none;
+                border-bottom-right-radius: none;
+                border:none;
+            }
+            .book_select{
+                height:500px;
+                width:1000px;
+                position: absolute;
+                top:5%;
+                left:calc(70% - 900px);
+                border-radius:10px;
+                z-index:10;
+                box-shadow:0 2px 2px 0 rgba(0,0,0,0.3), 0 0 0 0px rgba(0,0,0,0.08) !important; 
+                background: radial-gradient(at center center, rgb(255, 255, 255) 8%, rgb(51, 64, 77) 100%);
+            }
+            .bk{
+                position: absolute;
+                top:calc(50% - 100px);
+                height:200px;
+                width:100%;
+            }
+            .book_card{
+                position: relative;
+                top:calc(50% - 100px);
+                margin-left:50px;
+                height:200px;
+                border-radius:5px;
+                width:150px;
+                background-color:white;
+                float:left;
+            }
+            #counter{
+               vertical-align: middle;
+               margin-top: 15px;
+               font-size: large;
+                transition:0.5s ease;
+            }
+            #calc{
+                height:350px;
+                width:276px;
+                z-index:10;
+                position:fixed;
+                top:calc(50% - 250px);
+                left:calc(50% - 176px);
+                overflow: hidden;
+                border:none;
+                background-color:white;
+                border-radius: 3px;
+                box-shadow:0 2px 2px 0 rgba(0,0,0,0.3), 0 0 0 0px rgba(0,0,0,0.08) !important; 
+            }
+            #calc iframe{
+                height:350px;
+                width:276px;
+                z-index:10;
+                overflow: hidden;
+                background-color:rgba(51, 51, 51, 0.55);
+                border:none;
+                border-radius: 3px;
+            }
+        </style>
+    </head>
+    <body >
+        <canvas id="canvas" class="whiteboard"  oncontextmenu="document.getElementById('Eraser').click();get('#tip', 'block');return false;"></canvas>
+        <canvas id="page1" class="storeboard"></canvas>
+        <div class="tools_desk" id="tls_desk" onmouseout="hide()" onmouseover="show()">
+            <div class="quick_tlbar">
+                <button style="height:30px !important;" class="quick_btn left glyphicon glyphicon-chevron-left" id="Leftbt"></button>
+                <center>
+                    <button class="quick_btn fa fa-calculator" onclick="toogle('#calc')"></button>
+                    <button class="quick_btn glyphicon glyphicon-camera"></button>
+                    <button class="quick_btn glyphicon glyphicon-file" id="NewPage"></button>
+                    <button class="quick_btn glyphicon glyphicon-trash" id="clear"></button>
+                    <button class="quick_btn fa fa-book" id="book" onclick="toogle('#book_select');"></button>
+                </center>
+                <button style="border:none;background-color:transparent;color:#f25757;margin-right:25px;margin-top:5px;" onclick="end_class()" class="right"><b>END CLASS</b></button>
+                <button style="height:30px !important;" class="quick_btn right glyphicon glyphicon-chevron-right" id="Rightbt"></button>
+            </div>
+            <div class="cm_area">
+                <button class="cm_tls glyphicon glyphicon-comment" onclick="toogle('#chat')"></button>
+                <button class="cm_tls fa fa-address-book-o" onclick="toogle('#usr_box')"></button>
+                <button class="cm_tls glyphicon glyphicon-facetime-video" onclick="toogle('#video')"></button>
+            </div>
+            <div class="tools_area">
+                <button class="tls_btn Rectangle" style="background-image:url('https://uni-tap.github.io/uc/icons/sqr.PNG');background-repeat: no-repeat;"></button>
+                <button class="tls_btn Triangle" style="background-image:url('https://uni-tap.github.io/uc/icons/tri.PNG');background-repeat: no-repeat;"></button>
+                <button class="tls_btn graph" id="graph"></button>
+                <button class="tls_btn Circle" style="background-image:url('https://uni-tap.github.io/uc/icons/circ.PNG');background-repeat: no-repeat;"></button>
+                <button class="tls_btn Line" style="background-image:url('https://uni-tap.github.io/uc/icons/line.PNG');background-repeat: no-repeat;"></button>
+                <button class="tls_btn right_triangle" style="background-image:url('https://uni-tap.github.io/uc/icons/right-tri.PNG');background-repeat: no-repeat;"></button>
+            </div>
+            <div class="main_tools">
+                <button class="tls_btn Pen" style="background-image:url('icons/pnl.PNG');background-repeat: no-repeat;background-size:contain;"></button>
+                <button class="tls_btn Eraser" style="background-image:url('icons/eraser.PNG');background-repeat: no-repeat;background-size:contain;"></button>
+                <button class="tls_btn hLight" style="background-image:url('icons/hlight.PNG');background-repeat: no-repeat;background-size:contain;"></button>
+                <div style="position:absolute;top:0px;left:40%;">
+                    <button style="margin-bottom:5px;background-color:transparent;color:white;border:none;margin-bottom:5px;height:30px;" class="glyphicon glyphicon-edit" id="pen"></button><br />
+                    <button style="margin-bottom:5px;background-color:transparent;color:white;border:none;margin-bottom:5px;height:30px;" class="glyphicon glyphicon-unchecked" id="bg"></button><br />
+                    <button style="margin-bottom:5px;background-color:transparent;color:white;border:none;margin-bottom:5pxheight:30px;;" class="fa fa-paint-brush" id="fill"></button><br />
+                </div>
+                <div class="clr_box">
+            <center>
+                <select id="thickness" class="fixed">
+                 <option value="1" style="color:back;background-image:url(https://uni-tap.github.io/uc/icons/1px.PNG);">1</option>
+                 <option value="2" style="color:back;" selected>2</option>
+                 <option value="3" style="color:back;">3</option>
+                 <option value="4"  style="color:back;">4</option>
+                 <option value="5"  style="color:back;">5</option>
+                 <option value="10" style="color:back;">10</option>
+                 <option value="20" style="color:back;">20</option>
+                 <option value="30" style="color:back;">30</option>
+                 <option value="40" style="color:back;">40</option>
+                 <option value="50" style="color:back;">50</option>
+                </select>
+            </center>
+            <br />
+            <button class="color black" style="background-color: black;"></button>
+            <button class="color white" style="background-color: white;border:0.1px solid black"></button>
+            <button class="color red" style="background-color: red;"></button>
+            <button class="color #ff5722" style="background-color: #ff5722;"></button>
+            <button class="color orange" style="background-color: orange;"></button>
+            <button class="color gold" style="background-color: gold;"></button>
+            <button class="color yellow" style="background-color: yellow;"></button>
+            <button class="color #8bc34a" style="background-color: #8bc34a;"></button>
+            <button class="color lightgreen" style="background-color: lightgreen;"></button>
+            <button class="color darkgreen" style="background-color: darkgreen;"></button>
+            <button class="color teal" style="background-color: teal;"></button>
+            <button class="color #82e0ff" style="background-color: #82e0ff;"></button>
+            <button class="color magenta" style="background-color: magenta;"></button>
+            <button class="color indigo" style="background-color: indigo;"></button>
+            <button class="color violet" style="background-color: violet;"></button>
+            <button class="color purple" style="background-color: purple;"></button>
+            <button class="color lightyellow" style="background-color: lightyellow;"></button>
+            <button class="color #795548" style="background-color: #795548;"></button>
+            <button class="color brown" style="background-color: brown;"></button>
+            <button class="color pink" style="background-color: pink;"></button>
+            <button class="color silver" style="background-color: silver;"></button>
+            <button class="color darkgray" style="background-color: darkgray;"></button>
+            <button class="color gray" style="background-color: gray;" ></button>
+            <button class="color #757575" style="background-color: #757575;"></button>
+            <br />
+            </div>
+            </div>
+        </div>
+        <div style="display:none;" class="bookloader" id="bookloader">
+                <iframe id="book_area"></iframe>
+            </div>
+        <div class="chat_area" id="chat">
+            <div style="height:100%;width:100%;position:absolute;top:0px;left:0px;background-color:rgba(51, 51, 51, 0.55);border:none;border-top-left-radius: 5px;"></div>
+         <div style="overflow-y:auto;">
+         <ul id="chat"></ul>
+         </div>
+         <form action="" id="messageForm">
+            <input type="text" id="message" class="chat_msg">
+            <button class="chat_snd glyphicon glyphicon-send"></button>
+         </form>
+        </div>
+        <div class="vid_box" id="video">
+            <div style="height:100%;width:100%;position:absolute;top:0px;left:0px;background-color:rgba(51, 51, 51, 0.55);border:none;border-top-right-radius: 5px;"></div>
+        <div id="remotesVideos"></div>
+            <video height="100" width="100" id="localVideo"></video>
+        </div>
+        <div class="user_box" style="display:none;" id="usr_box">
+            <div style="height:100%;width:100%;position:absolute;top:0px;left:0px;background-color:rgba(51, 51, 51, 0.55);border:none;border-radius: 5px;"></div>
+          <div id="userbox">
+             <ul id="users"></ul>
+          </div><!--
+            <input type="file" id="filer">-->
+        </div>
+        <div style="display:none;" class="bookloader" id="book_select">
+            <iframe style="height:100%;width:100%;border:none;position:absolute;top:0px;left:0px;" src="http://localhost/load.php?dir=/firebase"></iframe>
+        </div>
+        <div style="position:fixed;top:-1px;left:calc(50% - 100px);width:100px;height:50px;background-color:rgba(51, 51, 51, 0.55);z-index:10;color:#fff;border-bottom-left-radius:5px;border-bottom-right-radius:5px;box-shadow:0 2px 2px 0 rgba(0,0,0,0.3), 0 0 0 0px rgba(0,0,0,0.08) !important;"><b><p onchange="animate()" align=middle id="counter">1/1</p></b></div>
+        <div id="calc" style="display:none;">
+            <button style="position:absolute;top:5px;right:10px;height:20px;width:20px;border-radius:20px;border:none;color:white;background-color:#f25757;text-align:center;" onclick="get('#calc', 'none');">x</button>
+            <iframe src="http://localhost/uc/calc.html"></iframe>
+        </div>
+        <div id="snackbar">Some text some message..</div>
+    </body>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="main.js"></script>
+    <script src="https://uni-tap.github.io/uc/interact.js"></script>
+    <script src="https://uni-tap.github.io/uc/element.js"></script>
+    <script src="https://simplewebrtc.com/latest-v2.js"></script>
+    <script>
+        var socket = io();
+        var api = find('api');
+        var room_id = 'uni-tap_live_classes: Live_Class_Id: '+ api;
+        window.onload = function(){history.pushState({}, null, '');}
+ // OTHER IMPORTANT FUNCTIONS
+        function get(id, condition){
+          document.querySelector(id).style.display = condition;
+      }
+        function find(name){
+          var url = window.location.search;
+          var num = url.search(name);
+          var namel = name.length;
+          var frontlength = namel+num+1; //length of everything before the value
+          var front = url.substring(0, frontlength);
+          url = url.replace(front, "");
+          num = url.search("&");
+
+          if(num>=0) return url.substr(0,num);
+          if(num<0)  return url;
+       }
+       function toast(msg) {
+          var x = document.getElementById("snackbar")
+          x.className = "show";
+          x.innerHTML = msg;
+          setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+        }
+        function hide(){
+         var tools_desk = document.getElementById('tls_desk');
+         setTimeout(function(){
+            tools_desk.style.bottom = '-150px'
+         ,3000});
+        }
+        function show(){
+             var tools_desk = document.getElementById('tls_desk');
+         setTimeout(function(){
+            tools_desk.style.bottom = '-50px'
+         ,3000});
+        }
+        function toogle(obj){
+            var element = document.querySelector(obj);
+            if(element.style.display == 'none'){
+                element.style.display = 'block';
+            }else {
+                element.style.display = 'none';
+            }
+        }
+        function get_elm(obj){
+            var elm = document.querySelector(obj);
+            return elm;
+        }
+        function do_essentials(){
+            //function only for book loader 
+            //get_elm('#tls_desk').style.height = '100%';
+            //get_elm('#tls_desk').onmouseover = '';
+            //get_elm('#tls_desk').onmouseout = '';
+            var input = document.getElementById("filer");
+            var file = input.value.split("\\");
+            var fileName = file[file.length-1];
+            //alert(file);
+            //toogle('#video');
+            //toogle('#chat');
+            toogle_pro('#bookloader');
+           // if(get_elm('#book_area').src == '' || !get_elm('#book_area').src ){
+            //  get_elm('#book_area').src = 'http://localhost/firebase/Chapter1-Matter In Our Surroundings.pdf';
+        //    }else{}
+        }
+        function toogle_pro(obj){
+            var element = document.querySelector(obj);
+            if(element.style.display == 'none'){
+                element.style.display = 'block';
+            }else {
+                element.style.display = 'block';
+            }
+        }
+        function animate(){
+            this.style.fontSize = 'x-large';
+            setTimeout(1000, function(){
+                this.style.fontSize = 'large';
+            });
+        }
+        function open_book(url){
+            do_essentials();
+            get_elm('#book_area').src = url;
+            toogle('.book_select');
+        }
+        function back(){
+             //function only for book loader
+            var desk = get_elm('#tls_desk');
+            desk.style.height = '180px';
+            desk.addEventListener('mouseover', show);
+            desk.addEventListener('mouseout', hide);
+            get_elm('#bookloader').style.display = 'none';
+        }
+        $(function(){
+         var socket = io.connect();
+         var $messageForm = $('#messageForm');
+         var $message = $('#message');
+         var $chat = $('#chat');
+         var $users = $('#users');
+         var name = find('user');
+         name = name.replace(/%20/g, " ");
+         var post = '('+find('post')+')';
+         var username = name +" "+ post;
+         socket.emit('new_user', username, function(data){
+           data = username;
+           toast(username + ' has joined the class.');
+         });
+
+         $messageForm.submit(function(e){
+           e.preventDefault();
+           socket.emit('send message', $message.val());
+           $message.val('');
+         });
+         socket.on('new_user', function(data){
+           toast(data[i] + ' has joined the class.');
+         });
+         socket.on('new message', function(data){
+           $chat.append('<li class="chtcnt"><strong>'+data.user+':</strong> '+data.msg+'</li>')
+         });
+
+         socket.on('get users', function(data){
+           var html = '';
+           for(i = 0;i < data.length;i++){
+             html += '<li class="userlist"><strong>'+data[i]+'</strong></li>';
+             toast(data[i] + ' has joined the class.');
+           }
+           $users.html(html);
+         });
+         socket.on('reload', function(){
+           setTimeout(2000, window.reload(true));
+         });
+       });
+       window.addEventListener('reload', function(){
+         socket.emit('reload');
+       });
+
+       //VIDEO AND AUDIO CHATTING AREA
+
+       var webrtc = new SimpleWebRTC({
+          // the id/element dom element that will hold "our" video
+          localVideoEl: 'localVideo',
+          // the id/element dom element that will hold remote videos
+          remoteVideosEl: 'remotesVideos',
+          // immediately ask for camera access
+          autoRequestMedia: true
+        });
+
+        // we have to wait until it's ready
+        webrtc.on('readyToCall', function () {
+          // you can name it anything
+          webrtc.joinRoom(room_id);
+        });
+
+//ENDING CLASS
+
+socket.on('end_class', onEnd_class);
+
+var e_api = find('api');
+var host = find('hostedby');
+var user = find('user');
+function end_class(){
+/*  window.onbeforeunload =  function() {
+            return "Do you really want to end the class?";
+  }  */
+  socket.emit('end_class', 'end');
+  toast('This Class is now over', 'warn');
+  setTimeout(function(){
+  window.location.replace('http://localhost/end_class.php?api=' +e_api+'&host='+host+'&user='+user)
+  },3050);
+  //window.location.replace('https://uni-tap.github.io/end_class.php?api=' +e_api+'&host='+host+'&user='+user);
+}
+function onEnd_class(data){
+  toast('This Class is now over' , 'warn');
+  setTimeout(function(){
+  window.location.replace('http://localhost/end_class.php?api=' +e_api+'&host='+host+'&user='+user)
+  },3050);
+}
+var box = document.querySelector('#msg_box');
+/*function toast(msg){
+  document.getElementById('msg_p').innerHTML = msg;
+  //remove_toast()
+  setTimeout(function(){
+  box.style.opacity = '0'
+  box.style.display = 'none'
+  },
+  5000
+);;
+}*/
+function remove_toast(){
+    console.log('done');
+}
+    </script>
+</html>
