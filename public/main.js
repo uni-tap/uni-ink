@@ -25,7 +25,7 @@
   var currentcount = 1;
   var count = currentcount;
   var counter = document.getElementById("counter") ;
-
+  var fruits = [];
  // var mPageNotextBox = document.getElementById('textbox');
    //  mPageNotextBox.value = mCurrentPageNo +"\/" + mpageNo ;
   var totalcurrentpagecount = 1;
@@ -81,7 +81,47 @@
     }
   }
 }
-
+ function save() {
+     if(current.canvas == canvas){
+       var dataURL = scanvas.toDataURL();
+     }else if(current.canvas !== 'canvas'){
+       var dataURL = current.canvas.toDataURL();
+     }
+    fruits.push(dataURL);
+    console.log('state_saved');
+     var img_box = document.getElementById('sharing_img');
+         if(!img_box){
+         img_box = document.createElement('img');
+         img_box.setAttribute('src', dataURL);
+         document.body.appendChild(img_box);
+         img_box.setAttribute('id', 'sharing_img');
+         img_box.style.zIndex = '-1';
+         img_box.style.position = 'absolute';
+         img_box.style.top = '-500px';
+         img_box.style.height = '500px';
+         img_box.style.width = '500px';
+         socket.emit('all_data', {
+                img: dataURL
+             });     
+         }else{
+             img_box.setAttribute('src', dataURL);
+             socket.emit('all_data', {
+                img: dataURL
+             });
+         }
+ }
+ socket.on('all_data', ondataEvent);
+    function ondataEvent(data){
+        var img_box = document.getElementById('sharing_img');
+     if(current.canvas == canvas){
+       //var v=document.getElementById("localvideo");
+      scanvas.style.backgroundRepeat = 'no-repeat';
+      scanvas.style.backgroundImage = 'url('+data.img+')';
+     }else if(current.canvas !== 'canvas'){
+       current.canvas.style.backgroundRepeat = 'no-repeat';
+       current.canvas.style.backgroundImage = 'url('+data.img+')';
+     }
+ }
   var drawing = false;
 
   //ADDING EVENT LISTENERS TO THE CANVAS
@@ -93,7 +133,8 @@
   canvas.addEventListener('pointerdown', onMouseDown, false);
   canvas.addEventListener('pointerup', onMouseUp, false);
   canvas.addEventListener('pointermove', throttle(onMouseMove, 10), false);
-
+  canvas.addEventListener('mouseover', save, false);
+  canvas.addEventListener('resize', onResize, false);
   // CHANGING PEN AND BOARD COLOURS WHEN  COLOR BUTTON IS CLICKED AND
   // CHANGING THE TOOL WHEN A TOOL BUTTON IS CLICKED
 
@@ -139,6 +180,7 @@
   socket.on('new_page', onNewPageEvent);
   socket.on('left', onLeftEvent);
   socket.on('right', onRightEvent);
+  socket.on('hlight', onHlightEvent);
   socket.on('color', function(data){
     current.canvas = document.getElementById('page'+previouspagecount);
     main_ctx = current.canvas.getContext('2d');
@@ -483,18 +525,18 @@
         main_ctx.closePath();
 
         //SENDING TO OTHER USERS
-/*
+
         if (!emit) { return; }
         var cw = canvas.width;
         var ch = canvas.height;
 
-        socket.emit('drawing', {
+        socket.emit('hlight', {
           x0: x0 / cw,
           y0: y0 / ch,
           x1: x1 / cw,
           y1: y1 / ch,
           color: color
-        });*/
+        });
       }
   };
   function ClearCanvas(){
@@ -635,6 +677,7 @@ var created = false;
     counter.innerHTML = totalcurrentpagecount + "\/" + totalpagecount ;
     if(!emit){return;}
     socket.emit('new_page', {color: current.bgcolor});
+    save();
 }
 
     function move_left(emit){
@@ -657,6 +700,7 @@ var created = false;
     if(!emit){return;}
     socket.emit('left');
   }
+    save();    
 }
 function move_right(emit){
      var currentpagecount = nextpagecount ;
@@ -677,6 +721,7 @@ function move_right(emit){
     if(!emit){return;}
     socket.emit('right');
   }
+    save();
 }
   function update_data(acontext, gcontext, canvasname){
      gcontext.drawImage(canvasname, 0, 0);
@@ -747,6 +792,13 @@ function move_right(emit){
     var ch = scanvas.height;
     draw.line(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color);
   }
+  function onHlightEvent(data){
+     var cw = canvas.width;
+    var ch = canvas.height;  
+    var cw = scanvas.width;
+    var ch = scanvas.height;
+    draw.hlight(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch);  
+  }
   function onClearEvent(data){
     current.canvas = document.getElementById('page'+previouspagecount);
     main_ctx = current.canvas.getContext('2d');
@@ -786,14 +838,6 @@ function move_right(emit){
    redo.addEventListener('click', function() {
     history.redo(canvas, context, true);
   });
-    function save() {
-     var fruits = [];
-    //document.getElementById("canvasimg").style.border = "2px solid";
-    var dataURL = current.canvas.toDataURL();
-    fruits.push(dataURL);
-        //alert(fruits);
-    //document.getElementById("canvasimg").style.display = "inline";
-}
 // IMAGE UPLOADING SECTION. IT'S TOTALLY DIFFERENT SECTION DO NOT COMBINE IT WITH ANY OTHER FUNCTION 💀 ☠ 👿 😈.
     var element = null;
 function setMousePosition(e) {
