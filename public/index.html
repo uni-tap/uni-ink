@@ -104,26 +104,27 @@
                 right:0px;
                 bottom:0px;
                 padding: 2px;
-                background-color: white;
+                background-color:rgba(51, 51, 51, 0.55);
                 border-top-left-radius: 5px;
                 box-shadow:0 2px 2px 0 rgba(0,0,0,0.3), 0 0 0 0px rgba(0,0,0,0.08) !important;
                 z-index:2;
+                overflow:auto;
             }
             .chat_msg{
-                position:absolute;
+                position:fixed;
                 bottom:3px;
-                left:4px;
+                right:4px;
                 height:41px;
                 border:none;
                 padding:5px;
                 background-color: rgba(255, 255, 255, 0.66);
                 border-radius:3px;
-                width:calc(100% - 60px);
+                width:19%;
             }
             .chat_snd{
-                position:absolute;
-                right:7px;
-                top:337px;
+                position:fixed;
+                right:5px;
+                top:calc(100% - 45px);
                 height:40px;
                 width:40px;
                 border-radius:3px;
@@ -444,7 +445,6 @@
                 <iframe id="book_area"></iframe>
             </div>
         <div class="chat_area" id="chat">
-            <div style="height:100%;width:100%;position:absolute;top:0px;left:0px;background-color:rgba(51, 51, 51, 0.55);border:none;border-top-left-radius: 5px;"></div>
          <div style="overflow-y:auto;">
          <ul id="chat"></ul>
          </div>
@@ -484,7 +484,9 @@
         var socket = io();
         var api = find('api');
         var room_id = 'uni-tap_live_classes: Live_Class_Id: '+ api;
-        window.onload = function(){history.pushState({}, null, '');}
+        var title = find('title');
+             title = title.replace('%20', ' ');
+        window.onload = function(){toast('Welcome to the ' + title + ' 😃 ');    }
  // OTHER IMPORTANT FUNCTIONS
         function get(id, condition){
           document.querySelector(id).style.display = condition;
@@ -653,7 +655,7 @@ function end_class(){
   //window.location.replace('https://uni-tap.github.io/end_class.php?api=' +e_api+'&host='+host+'&user='+user);
 }
 function onEnd_class(data){
-  toast('This Class is now over' , 'warn');
+  toast('This Class is now over 😌');
   setTimeout(function(){
   window.location.replace('http://localhost/end_class.php?api=' +e_api+'&host='+host+'&user='+user)
   },3050);
