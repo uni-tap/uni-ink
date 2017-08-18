@@ -25,11 +25,14 @@
   var currentcount = 1;
   var count = currentcount;
   var counter = document.getElementById("counter") ;
+  var api = find('api');
+  var post  = find('post');
   var fruits = [];
+  var saved = false;
  // var mPageNotextBox = document.getElementById('textbox');
    //  mPageNotextBox.value = mCurrentPageNo +"\/" + mpageNo ;
   var totalcurrentpagecount = 1;
-   var mcurrentpagecount = 1; //totalcurrentpagecount;
+  var mcurrentpagecount = 1; //totalcurrentpagecount;
   var previouspagecount = 1 ; //mcurrentpagecount ;
 
   var nextpagecount = 1 ; //totalcurrentpagecount;
@@ -81,7 +84,24 @@
     }
   }
 }
+   function find(name){
+          var url = window.location.search;
+          var num = url.search(name);
+          var namel = name.length;
+          var frontlength = namel+num+1; //length of everything before the value
+          var front = url.substring(0, frontlength);
+          url = url.replace(front, "");
+          num = url.search("&");
+
+          if(num>=0) return url.substr(0,num);
+          if(num<0)  return url;
+       }
+       window.onload = function(){
+        // save();
+        //socket.emit('canvas_data');
+       }
  function save() {
+   if(saved == false){
      if(current.canvas == canvas){
        var dataURL = scanvas.toDataURL();
      }else if(current.canvas !== 'canvas'){
@@ -102,16 +122,20 @@
          img_box.style.width = '500px';
          socket.emit('all_data', {
                 img: dataURL
-             });     
+             });
          }else{
              img_box.setAttribute('src', dataURL);
              socket.emit('all_data', {
-                img: dataURL
+                img: dataURL,
+                api: api
              });
          }
+       }else{return;}
  }
  socket.on('all_data', ondataEvent);
     function ondataEvent(data){
+      thankyou();
+     if(data.api == api){
         var img_box = document.getElementById('sharing_img');
      if(current.canvas == canvas){
        //var v=document.getElementById("localvideo");
@@ -121,6 +145,10 @@
        current.canvas.style.backgroundRepeat = 'no-repeat';
        current.canvas.style.backgroundImage = 'url('+data.img+')';
      }
+    }else{return;}
+ }
+ function thankyou(){
+   socket.emit('saved');
  }
   var drawing = false;
 
@@ -133,7 +161,7 @@
   canvas.addEventListener('pointerdown', onMouseDown, false);
   canvas.addEventListener('pointerup', onMouseUp, false);
   canvas.addEventListener('pointermove', throttle(onMouseMove, 10), false);
-  canvas.addEventListener('mouseover', save, false);
+  //canvas.addEventListener('mouseover', save, false);
   canvas.addEventListener('resize', onResize, false);
   // CHANGING PEN AND BOARD COLOURS WHEN  COLOR BUTTON IS CLICKED AND
   // CHANGING THE TOOL WHEN A TOOL BUTTON IS CLICKED
@@ -181,11 +209,17 @@
   socket.on('left', onLeftEvent);
   socket.on('right', onRightEvent);
   socket.on('hlight', onHlightEvent);
+  socket.on('saved', function(){
+    saved = true;
+  });
+  socket.on('enable_controls', onControlsEvent);
+  //  socket.on('canvas_data', save);
   socket.on('color', function(data){
     current.canvas = document.getElementById('page'+previouspagecount);
     main_ctx = current.canvas.getContext('2d');
     current.canvas.style.backgroundColor = data.color;
   });
+
   //RESIZING THE CANVAS ACOORDING TO THE BROWSER
 
   window.addEventListener('load', onResize, false);
@@ -225,7 +259,8 @@
           y0: y0 / ch,
           x1: x1 / cw,
           y1: y1 / ch,
-          color: color
+          color: color,
+          api: api
         });
       },
       eraser: function(x0, y0, x1, y1, color, emit){
@@ -248,7 +283,8 @@
           y0: y0 / ch,
           x1: x1 / cw,
           y1: y1 / ch,
-          color: color
+          color: color,
+          api: api
         });
       },
       rect: function(x0, y0, x1, y1, color, fill, emit){ // RECTANGLE TOOL
@@ -289,7 +325,8 @@
          x1: x1 /cw,
          y1: y1 /ch,
          color: color,
-         fill: fill
+         fill: fill,
+          api: api
        });
  },
       circle: function (x0, y0, x1, y1, color, fill, emit){ // CIRCLE TOOL
@@ -327,7 +364,8 @@
          x1: x1 /cw,
          y1: y1 /ch,
          color: color,
-         fill: fill
+         fill: fill,
+         api: api
        });
  },
      line: function (x0, y0, x1, y1, color, emit) { // LINE TOOL
@@ -351,7 +389,8 @@
          y0: y0 /ch,
          x1: x1 /cw,
          y1: y1 /ch,
-         color: color
+         color: color,
+         api: api
        });
      },
      triangle: function(x0, y0, x1, y1, color, fill, emit){
@@ -379,7 +418,8 @@
          x1: x1 / cw,
          y1: y1 / ch,
          color: color,
-         fill: fill
+         fill: fill,
+         api: api
        });
      }
    },
@@ -410,7 +450,8 @@
          x1: x1 / cw,
          y1: y1 / ch,
          color: color,
-         fill: fill
+         fill: fill,
+         api: api
        });
      },
 
@@ -483,7 +524,8 @@
          y0: y0 /ch,
          x1: x1 /cw,
          y1: y1 /ch,
-         color: color
+         color: color,
+         api: api
        });
    },
      Text:function(x0, y0, x1, y1, color, emit){
@@ -535,7 +577,8 @@
           y0: y0 / ch,
           x1: x1 / cw,
           y1: y1 / ch,
-          color: color
+          color: color,
+          api: api
         });
       }
   };
@@ -567,10 +610,11 @@
        history.saveState(scanvas);
        socket.emit('update_data');
      }
-      save();
+      //save();
   }
 
   function onMouseMove(e){
+   if(post == 's'){ return;}else{
     if (!drawing) { return; }
     if (current.tool == 'Pen'){ // IF PEN BUTTUN IS CLICKED
        draw.pen(current.x, current.y, e.clientX, e.clientY, current.color, true);
@@ -600,11 +644,12 @@
     }
     if (current.tool == 'hLight'){ // IF TRIANGLE BUTTON IS CLICKED
         draw.hlight(current.x, current.y, e.clientX,e.clientY, true);
-        current.x = e.clientX;current.y = e.clientY; 
-    }  
+        current.x = e.clientX;current.y = e.clientY;
+    }
     if (current.tool == 'img'){ // IF TRIANGLE BUTTON IS CLICKED
         add_move(current.x, current.y, e.clientX, e.clientY, current.color, current.fillcolor, true);
     }
+   }
 }
   // UPDATING THE PEN AND BOARD COLORS
 
@@ -676,7 +721,7 @@ var created = false;
     main_ctx = context;
     counter.innerHTML = totalcurrentpagecount + "\/" + totalpagecount ;
     if(!emit){return;}
-    socket.emit('new_page', {color: current.bgcolor});
+    socket.emit('new_page', {color: current.bgcolor,api: api});
     save();
 }
 
@@ -698,9 +743,9 @@ var created = false;
     current.canvas = a_area;
     main_ctx = a_area.getContext('2d');
     if(!emit){return;}
-    socket.emit('left');
+    socket.emit('left',{api: api});
   }
-    save();    
+    save();
 }
 function move_right(emit){
      var currentpagecount = nextpagecount ;
@@ -719,7 +764,7 @@ function move_right(emit){
     current.canvas = a_area;
     main_ctx = a_area.getContext('2d');
     if(!emit){return;}
-    socket.emit('right');
+    socket.emit('right',{api: api});
   }
     save();
 }
@@ -751,64 +796,88 @@ function move_right(emit){
     }
   }
   function onDrawingEvent(data){
+   if(data.api == api){
     var cw = canvas.width;
     var ch = canvas.height;
     draw.pen(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color);
+   }else{
+       return;
+   }
   }
   function onEraserEvent(data){
+  if(data.api == api){
     var cw = canvas.width;
     var ch = canvas.height;
     draw.eraser(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color);
+  }else{return;}
   }
   function onRectEvent(data){
+   if(data.api == api){
     var cw = scanvas.width;
     var ch = scanvas.height;
     draw.rect(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color, data.fill);
+   }else{return;}
   }
   function onCircleEvent(data){
+   if(data.api == api){
     var cw = scanvas.width;
     var ch = scanvas.height;
     draw.circle(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color, data.fill);
+   }else{return;}
   }
   function onTriEvent(data){
+   if(data.api == api){
     var cw = scanvas.width;
     var ch = scanvas.height;
     draw.triangle(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color, data.fill);
+   }else{return;}
   }
   function onRtriEvent(data){
+   if(data.api == api){
     var cw = scanvas.width;
     var ch = scanvas.height;
     draw.right_triangle(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color, data.fill);
-    draw.right_triangle(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color, data.fill);
+    //draw.right_triangle(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color, data.fill);
+   }else{return;}
   }
   function onTriEvent(data){
+   if(data.api == api){
     var cw = scanvas.width;
     var ch = scanvas.height;
     draw.triangle(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color, data.fill);
-    draw.triangle(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color, data.fill);
+    //draw.triangle(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color, data.fill);
+   }else{return;}
   }
   function onLineEvent(data){
+  if(data.api == api){
     var cw = scanvas.width;
     var ch = scanvas.height;
     draw.line(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color);
+  }else{return;}
   }
   function onHlightEvent(data){
-     var cw = canvas.width;
-    var ch = canvas.height;  
+   if(data.api == api){
     var cw = scanvas.width;
     var ch = scanvas.height;
-    draw.hlight(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch);  
+    draw.hlight(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch);
+   }else{return;}
   }
   function onClearEvent(data){
+   if(data.api == api){
     current.canvas = document.getElementById('page'+previouspagecount);
     main_ctx = current.canvas.getContext('2d');
     main_ctx.clearRect(0, 0, canvas.width, canvas.height);
+   }else{return;}
   }
   function onLeftEvent(){
+   if(data.api == api){
     move_left();
+   }else{return;}
   }
   function onRightEvent(){
+   if(data.api == api){
     move_right();
+   }else{return;}
   }
   function onUndoEvent(data){
     history.undo(scanvas, scontext, true);
@@ -817,12 +886,27 @@ function move_right(emit){
     history.redo(scanvas, scontext, true);
   }
   function onGraphEvent(data){
+   if(data.api == api){
     var cw = scanvas.width;
     var ch = scanvas.height;
     draw.graph(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color,data.thickness);
+   }else{return;}
   }
   function onNewPageEvent(data){
+    if(data.api == api){
      onNewPageUpdate();
+    }else{return;}
+  }
+  function onControlsEvent(data){
+      post = 'T';
+      var user = find('user');
+      var post = find('post');
+      user = user.replace('%20', ' ');
+      if(data.api == api){
+      if(data.user == user+'('+post+')'){
+      document.getElementById('tls_desk').style.display = 'block';
+      }else{return;}
+      }else{return;}
   }
   function onResize() {
     canvas.width = window.innerWidth;
