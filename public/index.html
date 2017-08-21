@@ -596,6 +596,7 @@
          var username = name +" "+ post;
          socket.emit('new_user', username, function(data){
            data = username;
+           username = '<%= session.getAttribute("decname") %>';
            toast(username + ' has joined the class.');
          });
 
