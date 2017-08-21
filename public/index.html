@@ -484,11 +484,12 @@
         var socket = io();
         var api = find('api');
         var room_id = 'uni-tap_live_classes: Live_Class_Id: '+ api;
+        var hoster = find('hoster');
         var title = find('title');
              title = title.replace('%20', ' ');
                window.onload = function(){
           var stateObj = { foo: "bar" };
-          history.pushState(stateObj, "page 2", "uni-tap_live_class_going_on");
+          history.pushState(stateObj, "page 2", "uni-tap_live_class_going_on. This Class is being Hosted By"+hoster);
           toast('Welcome to the ' + title + ' 😃 ');
           var post_tools = find('post');
           if(post_tools == 's' || post_tools == 'S'){
