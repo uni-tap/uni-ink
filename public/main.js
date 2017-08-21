@@ -586,7 +586,7 @@
       current.canvas = document.getElementById('page'+previouspagecount);
       main_ctx = current.canvas.getContext('2d');
       main_ctx.clearRect(0, 0, canvas.width, canvas.height);
-      socket.emit('clear');
+      socket.emit('clear'{api: api});
   }
 
   // DRAWING THE SELECTED TOOL ON THE BOARD
