@@ -722,7 +722,7 @@ var created = false;
     counter.innerHTML = totalcurrentpagecount + "\/" + totalpagecount ;
     if(!emit){return;}
     socket.emit('new_page', {color: current.bgcolor,api: api});
-    save();
+    //save();
 }
 
     function move_left(emit){
@@ -745,7 +745,7 @@ var created = false;
     if(!emit){return;}
     socket.emit('left',{api: api});
   }
-    save();
+    //save();
 }
 function move_right(emit){
      var currentpagecount = nextpagecount ;
@@ -766,7 +766,7 @@ function move_right(emit){
     if(!emit){return;}
     socket.emit('right',{api: api});
   }
-    save();
+    //save();
 }
   function update_data(acontext, gcontext, canvasname){
      gcontext.drawImage(canvasname, 0, 0);
