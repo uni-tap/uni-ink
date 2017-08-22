@@ -384,13 +384,13 @@
     <body >
         <canvas id="canvas" class="whiteboard"  oncontextmenu="document.getElementById('Eraser').click();get('#tip', 'block');return false;"></canvas>
         <canvas id="page1" class="storeboard"></canvas>
-        <div class="preloader3" id="loader"></div>
+        <div class="preloader3" style="display:none;" id="loader"></div>
         <div class="tools_desk" id="tls_desk" onmouseout="hide()" onmouseover="show()">
             <div class="quick_tlbar">
                 <button style="height:30px !important;" class="quick_btn left glyphicon glyphicon-chevron-left" id="Leftbt"></button>
                 <center>
                     <button class="quick_btn fa fa-calculator" onclick="toogle('#calc')"></button>
-                    <button class="quick_btn glyphicon glyphicon-camera" id="download"></button>
+                    <a class="quick_btn glyphicon glyphicon-camera" id="download"></a>
                     <button class="quick_btn glyphicon glyphicon-file" id="NewPage"></button>
                     <button class="quick_btn glyphicon glyphicon-trash" id="clear"></button>
                     <button class="quick_btn fa fa-book" id="book" onclick="toogle('#book_select');"></button>
