@@ -357,6 +357,28 @@
                 border:none;
                 border-radius: 3px;
             }
+            .preloader3 {
+   width:35px;
+   height:35px;
+   display:inline-block;
+   padding:0px;
+   border-radius:100%;
+   border:2px solid;
+   border-top-color:rgba(0,0,0, 0.65);
+   border-bottom-color:rgba(0,0,0, 0.65);
+   border-left-color:rgba(0,0,0, 0.15);
+   border-right-color:rgba(0,0,0, 0.15);
+   -webkit-animation: preloader3 0.8s ease-in-out infinite alternate;
+   animation: preloader3 0.8s ease-in-out infinite alternate;
+}
+@keyframes preloader3 {
+   from {transform: rotate(0deg);}
+   to {transform: rotate(360deg);}
+}
+@-webkit-keyframes preloader3 {
+   from {-webkit-transform: rotate(0deg);}
+   to {-webkit-transform: rotate(360deg);}
+}
         </style>
     </head>
     <body >
@@ -367,7 +389,7 @@
                 <button style="height:30px !important;" class="quick_btn left glyphicon glyphicon-chevron-left" id="Leftbt"></button>
                 <center>
                     <button class="quick_btn fa fa-calculator" onclick="toogle('#calc')"></button>
-                    <button class="quick_btn glyphicon glyphicon-camera"></button>
+                    <button class="quick_btn glyphicon glyphicon-camera" id="download"></button>
                     <button class="quick_btn glyphicon glyphicon-file" id="NewPage"></button>
                     <button class="quick_btn glyphicon glyphicon-trash" id="clear"></button>
                     <button class="quick_btn fa fa-book" id="book" onclick="toogle('#book_select');"></button>
@@ -387,6 +409,9 @@
                 <button class="tls_btn Circle" style="background-image:url('https://uni-tap.github.io/uc/icons/circ.PNG');background-repeat: no-repeat;"></button>
                 <button class="tls_btn Line" style="background-image:url('https://uni-tap.github.io/uc/icons/line.PNG');background-repeat: no-repeat;"></button>
                 <button class="tls_btn right_triangle" style="background-image:url('https://uni-tap.github.io/uc/icons/right-tri.PNG');background-repeat: no-repeat;"></button>
+            </div>
+            <div class="preloader3" id="loader">
+                
             </div>
             <div class="main_tools">
                 <button class="tls_btn Pen" style="background-image:url('https://uni-tap.github.io/uc/icons/pnl.PNG');background-repeat: no-repeat;background-size:contain;"></button>
