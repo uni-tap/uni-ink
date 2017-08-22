@@ -384,6 +384,7 @@
     <body >
         <canvas id="canvas" class="whiteboard"  oncontextmenu="document.getElementById('Eraser').click();get('#tip', 'block');return false;"></canvas>
         <canvas id="page1" class="storeboard"></canvas>
+        <div class="preloader3" id="loader"></div>
         <div class="tools_desk" id="tls_desk" onmouseout="hide()" onmouseover="show()">
             <div class="quick_tlbar">
                 <button style="height:30px !important;" class="quick_btn left glyphicon glyphicon-chevron-left" id="Leftbt"></button>
@@ -409,9 +410,6 @@
                 <button class="tls_btn Circle" style="background-image:url('https://uni-tap.github.io/uc/icons/circ.PNG');background-repeat: no-repeat;"></button>
                 <button class="tls_btn Line" style="background-image:url('https://uni-tap.github.io/uc/icons/line.PNG');background-repeat: no-repeat;"></button>
                 <button class="tls_btn right_triangle" style="background-image:url('https://uni-tap.github.io/uc/icons/right-tri.PNG');background-repeat: no-repeat;"></button>
-            </div>
-            <div class="preloader3" id="loader">
-                
             </div>
             <div class="main_tools">
                 <button class="tls_btn Pen" style="background-image:url('https://uni-tap.github.io/uc/icons/pnl.PNG');background-repeat: no-repeat;background-size:contain;"></button>
