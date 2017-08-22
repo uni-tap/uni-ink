@@ -588,7 +588,15 @@
       main_ctx.clearRect(0, 0, canvas.width, canvas.height);
       socket.emit('clear',{api: api});
   }
-
+  function download(){
+     var dload_Canvas;	  
+     if(current.canvas = canvas){dload_Canvas = scanvas;}else{dload_Canvas = current.canvas;}	  
+     link.href = dload_Canvas.toDataURL();
+     link.download = 'class_notes.png';	  
+  }
+document.getElementById('download').addEventListener('click', function() {
+    downloadCanvas(this);
+}, false);
   // DRAWING THE SELECTED TOOL ON THE BOARD
 
   function onMouseDown(e){
