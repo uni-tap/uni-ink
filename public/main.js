@@ -153,10 +153,9 @@
   var drawing = false;
 
   //ADDING EVENT LISTENERS TO THE CANVAS
-  if(post == 'S' ||post == 's'){return;}else{
   canvas.addEventListener('mousedown', onMouseDown, false);
   canvas.addEventListener('mouseup', onMouseUp, true);
-  canvas.addEventListener('mouseout', onMouseUp, false);}
+  canvas.addEventListener('mouseout', onMouseUp, false);
   canvas.addEventListener('mousemove', throttle(onMouseMove, 10), false);
   canvas.addEventListener('pointerdown', onMouseDown, false);
   canvas.addEventListener('pointerup', onMouseUp, false);
