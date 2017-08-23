@@ -42,6 +42,7 @@ io.on('connection', function(socket){
   socket.on('color', (data)  => socket.broadcast.emit('color', data));
   socket.on('hlight',(data) => socket.broadcast.emit('hlight', data));    
   socket.on('all_data', (data)  => socket.broadcast.emit('all_data', data));
+  socket.on('pf', (data)  => socket.broadcast.emit('pf', data));
 // IF A USER GETS DISCONNECTED
 
 socket.on('disconnect', function(socket){
