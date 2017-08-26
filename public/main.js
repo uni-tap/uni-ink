@@ -594,7 +594,7 @@
 	 dload_Canvas = current.canvas;	  
          link.href = dload_Canvas.toDataURL();
          link.download = 'class_notes.png';	  			 
-     }else{
+     }else if(!current.canvas = canvas){
      dload_Canvas = current.canvas;	  
      link.href = dload_Canvas.toDataURL();
      link.download = 'class_notes.png';	  
