@@ -589,10 +589,17 @@
   }
   function download(link){
      var dload_Canvas;	  
-     if(current.canvas = canvas){dload_Canvas = scanvas;}else{dload_Canvas = current.canvas;}	  
+     if(current.canvas = canvas){
+	 dload_Canvas = scanvas;
+	 dload_Canvas = current.canvas;	  
+         link.href = dload_Canvas.toDataURL();
+         link.download = 'class_notes.png';	  			 
+     }else{
+     dload_Canvas = current.canvas;	  
      link.href = dload_Canvas.toDataURL();
      link.download = 'class_notes.png';	  
   }
+}	  
 document.getElementById('download').addEventListener('click', function() {
     download(this);
 }, false);
