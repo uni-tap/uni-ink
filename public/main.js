@@ -588,17 +588,17 @@
       socket.emit('clear',{api: api});
   }
   function download(link){
-    /* var dload_Canvas;	  
+    var dload_Canvas = '';	  
      if(current.canvas = canvas){
 	 dload_Canvas = scanvas;
 	 dload_Canvas = current.canvas;	  
          link.href = dload_Canvas.toDataURL();
          link.download = 'class_notes.png';	  			 
-     }else if(!current.canvas = canvas){
+     }else{
      dload_Canvas = current.canvas;	  
      link.href = dload_Canvas.toDataURL();
      link.download = 'class_notes.png';	  
-  }*/
+  }
 }	  
 document.getElementById('download').addEventListener('click', function() {
     download(this);
