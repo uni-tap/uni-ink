@@ -214,9 +214,11 @@
   socket.on('enable_controls', onControlsEvent);
   //  socket.on('canvas_data', save);
   socket.on('color', function(data){
+	  if(data.api == api){
     current.canvas = document.getElementById('page'+previouspagecount);
     main_ctx = current.canvas.getContext('2d');
     current.canvas.style.backgroundColor = data.color;
+	  }else{return;}
   });
 
   //RESIZING THE CANVAS ACOORDING TO THE BROWSER
