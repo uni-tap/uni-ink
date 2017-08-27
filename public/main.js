@@ -628,7 +628,7 @@ document.getElementById('download').addEventListener('click', function() {
   }
 
   function onMouseMove(e){
-   if(post == 's'){ return;}else{
+   if(post == 's' || post == 'S'){ return;}else{
     if (!drawing) { return; }
     if (current.tool == 'Pen'){ // IF PEN BUTTUN IS CLICKED
        draw.pen(current.x, current.y, e.clientX, e.clientY, current.color, true);
