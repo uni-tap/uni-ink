@@ -679,7 +679,7 @@ document.getElementById('download').addEventListener('click', function() {
       current.canvas = document.getElementById('page'+previouspagecount);
       main_ctx = current.canvas.getContext('2d');
       current.canvas.style.backgroundColor = current.bgcolor;
-      socket.emit('color', {color:current.bgcolor});
+      socket.emit('color', {color:current.bgcolor,api:api});
     }
     if(current.type == 'Fill'){
       current.color = 'black';
