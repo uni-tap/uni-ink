@@ -688,7 +688,7 @@ function end_class(){
             return "Do you really want to end the class?";
   }  */
   socket.emit('end_class', 'end');
-  toast('This Class is now over', 'warn');
+  toast('This Class is now over by:'+user, 'warn');
   setTimeout(function(){
   //window.location.replace('http://uni-tap.co/end_class.php?api=' +e_api+'&host='+host+'&user='+user)
       window.location.replace('http://uni-tap.co/index.php');
