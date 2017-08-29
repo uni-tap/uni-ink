@@ -683,6 +683,7 @@ var e_api = find('api');
 var host = find('hostedby');
 var user = find('user');
 function end_class(){
+    if(post == 's' || post == 'S'){ return;}else{
 /*  window.onbeforeunload =  function() {
             return "Do you really want to end the class?";
   }  */
@@ -693,13 +694,16 @@ function end_class(){
       window.location.replace('http://uni-tap.co/index.php');
   },3050);
   //window.location.replace('https://uni-tap.github.io/end_class.php?api=' +e_api+'&host='+host+'&user='+user);
+    }
 }
 function onEnd_class(data){
+    if(post == 's' || post == 'S'){ return;}else{
   toast('This Class is now over 😌');
   setTimeout(function(){
   //window.location.replace('http://uni-tap.co/end_class.php?api=' +e_api+'&host='+host+'&user='+user)
       window.location.replace('http://uni-tap.co/index.php');
   },3050);
+    }
 }
 var box = document.querySelector('#msg_box');
 /*function toast(msg){
