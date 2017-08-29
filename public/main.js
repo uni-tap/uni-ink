@@ -710,6 +710,7 @@ document.getElementById('download').addEventListener('click', function() {
   }
 var created = false;
     function onNewPageUpdate(emit){
+    if(post == 's' || post == 'S'){ return;}else{
     scanvas.style.display = 'block';
     var ncanvas = document.createElement('canvas');
     var context = ncanvas.getContext('2d');
@@ -739,6 +740,7 @@ var created = false;
     if(!emit){return;}
     socket.emit('new_page', {color: current.bgcolor,api: api});
     //save();
+    }
 }
 
     function move_left(emit){
