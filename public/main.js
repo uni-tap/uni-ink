@@ -27,6 +27,7 @@
   var counter = document.getElementById("counter") ;
   var api = find('api');
   var post  = find('post');
+  var user = find('user'); 
   var fruits = [];
   var saved = false;
  // var mPageNotextBox = document.getElementById('textbox');
@@ -261,7 +262,8 @@
           x1: x1 / cw,
           y1: y1 / ch,
           color: color,
-          api: api
+          api: api,
+	  user: user
         });
       },
       eraser: function(x0, y0, x1, y1, color, emit){
@@ -616,7 +618,7 @@ document.getElementById('download').addEventListener('click', function() {
     }
   }
 
-  function onMouseUp(e){
+  function onMouseUp(e){	  
      if(current.canvas == canvas){
        update_data(context, scontext, canvas);
        history.saveState(scanvas);
@@ -818,6 +820,7 @@ function move_right(emit){
     var cw = canvas.width;
     var ch = canvas.height;
     draw.pen(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color);
+    move_cur(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.user);	   
    }else{
        return;
    }
@@ -933,6 +936,13 @@ function move_right(emit){
     scanvas.height  = window.innerHeight;
     current.tool = "Pen";
     }
+  function move_cur(x0,y0,x1,y1,p_user){
+   var cur = document.getElementById('curs');
+       cur.style.position = 'absolute';
+       cur.style.left = x1 + 'px';
+       cur.style.top = y1 + 'px';
+   var cur_t = document.getElementById('crt').innerHTML = p_user ;	  
+  }	
    /* undo.addEventListener('click', function() {
      history.undo(canvas, context, true);
    });
