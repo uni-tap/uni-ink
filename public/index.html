@@ -13,6 +13,9 @@
                 overflow:none;
                 touch-action:none;
             }
+            canvas{
+            cursor: url(https://uni-tap.github.io/uc/icons/brd.png), none;
+            }
             .tools_desk{
                 height:180px;
                 width:60%;
@@ -388,7 +391,7 @@
 }
         </style>
     </head>
-    <body><div id="curs">
+    <body><div id="curs" style="display:none;">
         <p id="crt"></p>
         </div>
         <canvas id="canvas" class="whiteboard"  oncontextmenu="document.getElementById('Eraser').click();get('#tip', 'block');return false;"></canvas>
