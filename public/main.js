@@ -933,13 +933,13 @@ function move_right(emit){
     scanvas.height  = window.innerHeight;
     current.tool = "Pen";
     }
-    undo.addEventListener('click', function() {
+   /* undo.addEventListener('click', function() {
      history.undo(canvas, context, true);
    });
 
    redo.addEventListener('click', function() {
     history.redo(canvas, context, true);
-  });
+  });*/
 // IMAGE UPLOADING SECTION. IT'S TOTALLY DIFFERENT SECTION DO NOT COMBINE IT WITH ANY OTHER FUNCTION 💀 ☠ 👿 😈.
     var element = null;
 function setMousePosition(e) {
