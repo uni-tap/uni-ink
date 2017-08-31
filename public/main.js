@@ -938,7 +938,7 @@ function move_right(emit){
     }
   function move_curc(x0,y0,x1,y1,p_user){
    var cur = document.getElementById('curs');
-       cur.style.display = 'none'; 	  
+       cur.style.display = 'block'; 	  
        cur.style.position = 'absolute';
        cur.style.left = x1 + 'px';
        cur.style.top = y1 + 'px';
