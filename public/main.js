@@ -27,7 +27,7 @@
   var counter = document.getElementById("counter") ;
   var api = find('api');
   var post  = find('post');
-  var user = find('user'); 
+  var user = find('user')+'('+post+')'; 
   var fruits = [];
   var saved = false;
  // var mPageNotextBox = document.getElementById('textbox');
