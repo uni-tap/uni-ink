@@ -627,7 +627,7 @@ document.getElementById('download').addEventListener('click', function() {
        update_data(context, main_ctx, canvas);
        history.saveState(scanvas);
        socket.emit('update_data');
-     }
+     }document.getElementById('curs').style.display = 'none';
       //save();
   }
 
