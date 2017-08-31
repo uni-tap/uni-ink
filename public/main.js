@@ -594,10 +594,12 @@
       }
   };
   function ClearCanvas(){
+      if(post == 'S' || post == 's'){return}else{
       current.canvas = document.getElementById('page'+previouspagecount);
       main_ctx = current.canvas.getContext('2d');
       main_ctx.clearRect(0, 0, canvas.width, canvas.height);
       socket.emit('clear',{api: api});
+      }
   }
   function download(link){
     var dload_Canvas = '';	  
