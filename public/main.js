@@ -287,7 +287,8 @@
           x1: x1 / cw,
           y1: y1 / ch,
           color: color,
-          api: api
+          api: api,
+	 user: user
         });
       },
       rect: function(x0, y0, x1, y1, color, fill, emit){ // RECTANGLE TOOL
@@ -329,7 +330,8 @@
          y1: y1 /ch,
          color: color,
          fill: fill,
-          api: api
+          api: api,
+	 user: user
        });
  },
       circle: function (x0, y0, x1, y1, color, fill, emit){ // CIRCLE TOOL
@@ -368,7 +370,8 @@
          y1: y1 /ch,
          color: color,
          fill: fill,
-         api: api
+         api: api,
+	 user: user
        });
  },
      line: function (x0, y0, x1, y1, color, emit) { // LINE TOOL
@@ -393,7 +396,8 @@
          x1: x1 /cw,
          y1: y1 /ch,
          color: color,
-         api: api
+         api: api,
+	 user: user
        });
      },
      triangle: function(x0, y0, x1, y1, color, fill, emit){
@@ -422,7 +426,8 @@
          y1: y1 / ch,
          color: color,
          fill: fill,
-         api: api
+         api: api,
+	 user: user
        });
      }
    },
@@ -454,7 +459,8 @@
          y1: y1 / ch,
          color: color,
          fill: fill,
-         api: api
+         api: api,
+	 user: user
        });
      },
 
@@ -528,7 +534,8 @@
          x1: x1 /cw,
          y1: y1 /ch,
          color: color,
-         api: api
+         api: api,
+	 user: user
        });
    },
      Text:function(x0, y0, x1, y1, color, emit){
@@ -581,7 +588,8 @@
           x1: x1 / cw,
           y1: y1 / ch,
           color: color,
-          api: api
+          api: api,
+	 user: user	
         });
       }
   };
@@ -830,6 +838,7 @@ function move_right(emit){
     var cw = canvas.width;
     var ch = canvas.height;
     draw.eraser(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color);
+    move_curc(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.user);
   }else{return;}
   }
   function onRectEvent(data){
@@ -837,6 +846,7 @@ function move_right(emit){
     var cw = scanvas.width;
     var ch = scanvas.height;
     draw.rect(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color, data.fill);
+    move_curc(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.user);	   
    }else{return;}
   }
   function onCircleEvent(data){
@@ -844,6 +854,7 @@ function move_right(emit){
     var cw = scanvas.width;
     var ch = scanvas.height;
     draw.circle(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color, data.fill);
+    move_curc(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.user);
    }else{return;}
   }
   function onTriEvent(data){
@@ -851,6 +862,7 @@ function move_right(emit){
     var cw = scanvas.width;
     var ch = scanvas.height;
     draw.triangle(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color, data.fill);
+    move_curc(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.user);
    }else{return;}
   }
   function onRtriEvent(data){
@@ -858,22 +870,17 @@ function move_right(emit){
     var cw = scanvas.width;
     var ch = scanvas.height;
     draw.right_triangle(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color, data.fill);
+    move_curc(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.user);
     //draw.right_triangle(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color, data.fill);
    }else{return;}
   }
-  function onTriEvent(data){
-   if(data.api == api){
-    var cw = scanvas.width;
-    var ch = scanvas.height;
-    draw.triangle(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color, data.fill);
-    //draw.triangle(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color, data.fill);
-   }else{return;}
-  }
+
   function onLineEvent(data){
   if(data.api == api){
     var cw = scanvas.width;
     var ch = scanvas.height;
     draw.line(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color);
+    move_curc(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.user);
   }else{return;}
   }
   function onHlightEvent(data){
