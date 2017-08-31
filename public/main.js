@@ -820,7 +820,7 @@ function move_right(emit){
     var cw = canvas.width;
     var ch = canvas.height;
     draw.pen(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color);
-    move_cur(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.user);	   
+    move_curc(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.user);	   
    }else{
        return;
    }
@@ -936,7 +936,7 @@ function move_right(emit){
     scanvas.height  = window.innerHeight;
     current.tool = "Pen";
     }
-  function move_cur(x0,y0,x1,y1,p_user){
+  function move_curc(x0,y0,x1,y1,p_user){
    var cur = document.getElementById('curs');
        cur.style.position = 'absolute';
        cur.style.left = x1 + 'px';
