@@ -646,7 +646,7 @@
            toast(data[i] + ' has joined the class.');
          });
          socket.on('new message', function(data){
-             if(document.getElementById('chat').style.display == 'none'){toast(data.user+':'+data.msg+"<p style='color:lime;'">REPLY</p>')
+             if(document.getElementById('chat').style.display == 'none'){toast(data.user+':'+data.msg+"<p style='color:lime;'>REPLY</p>")
                  $chat.append('<li class="chtcnt"><strong>'+data.user+':</strong> '+data.msg+'</li>')                                                    
            }else{
            $chat.append('<li class="chtcnt"><strong>'+data.user+':</strong> '+data.msg+'</li>')
