@@ -899,12 +899,12 @@ function move_right(emit){
     main_ctx.clearRect(0, 0, canvas.width, canvas.height);
    }else{return;}
   }
-  function onLeftEvent(){
+  function onLeftEvent(data){
    if(data.api == api){
     move_left();
    }else{return;}
   }
-  function onRightEvent(){
+  function onRightEvent(data){
    if(data.api == api){
     move_right();
    }else{return;}
