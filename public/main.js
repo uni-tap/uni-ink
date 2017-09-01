@@ -951,7 +951,10 @@ function move_right(emit){
        cur.style.position = 'absolute';
        cur.style.left = x1 + 'px';
        cur.style.top = y1 + 'px';
-   var cur_t = document.getElementById('crt').innerHTML = p_user ;	  
+   var cur_t = document.getElementById('crt').innerHTML = p_user ;	
+   setTimeout(2000, function(){
+    cur.style.display = 'none';
+   });	  
   }	
    /* undo.addEventListener('click', function() {
      history.undo(canvas, context, true);
