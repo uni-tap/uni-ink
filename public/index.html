@@ -647,9 +647,9 @@
          });
          socket.on('new message', function(data){
              if(document.getElementById('chat').style.display == 'none'){toast(data.user+':'+data.msg+"<p style='color:lime;'>REPLY</p>")
-                 document.getElementById('chat').appendChild('<li class="chtcnt"><strong>'+data.user+':</strong> '+data.msg+'</li>')                                                    
+                 $chat.append('<li class="chtcnt"><strong>'+data.user+':</strong> '+data.msg+'</li>')                                                    
            }else{
-           document.getElementById('chat').appendChild('<li class="chtcnt"><strong>'+data.user+':</strong> '+data.msg+'</li>')
+           $chat.append('<li class="chtcnt"><strong>'+data.user+':</strong> '+data.msg+'</li>')
              }
          });
 
