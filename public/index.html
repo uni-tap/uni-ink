@@ -391,7 +391,8 @@
 }
         </style>
     </head>
-    <body onload="startTime()"><div id="curs" style="display:none;">
+    <body onload="startTime()">
+        <div id="curs" style="display:none;">
         <p id="crt"></p>
         </div>
         <canvas id="canvas" class="whiteboard"  oncontextmenu="document.getElementById('Eraser').click();get('#tip', 'block');return false;"></canvas>
@@ -400,7 +401,7 @@
         <div class="tools_desk" id="tls_desk" onmouseout="hide()" onmouseover="show()">
             <div class="quick_tlbar">
                 <button style="height:30px !important;" class="quick_btn left glyphicon glyphicon-chevron-left" id="Leftbt"></button>
-                <b><p id="date" style="margin-left:60px;margin-top:5px;color:#fff"></p></b>
+                <b><p id="date" style="margin-left:60px;margin-top:5px;color:#60b4d1;min-width:100px;"></p></b>
                 <center>
                     <button class="quick_btn fa fa-calculator" onclick="toogle('#calc')"></button>
                     <a class="quick_btn glyphicon glyphicon-camera" id="download"></a>
