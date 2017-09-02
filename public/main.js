@@ -1,5 +1,4 @@
 'use strict';
-
 (function() {
   var thickness = 2;
   var socket = io();
@@ -30,15 +29,12 @@
   var user = find('user')+'('+post+')'; 
   var fruits = [];
   var saved = false;
- // var mPageNotextBox = document.getElementById('textbox');
-   //  mPageNotextBox.value = mCurrentPageNo +"\/" + mpageNo ;
   var totalcurrentpagecount = 1;
   var mcurrentpagecount = 1; //totalcurrentpagecount;
   var previouspagecount = 1 ; //mcurrentpagecount ;
 
   var nextpagecount = 1 ; //totalcurrentpagecount;
   var totalpagecount = 1;
-  //counter.innerHTML = totalcurrentpagecount + "\/" + totalpagecount ;
 
   var current = {
     color: 'black',
@@ -152,7 +148,6 @@
    socket.emit('saved');
  }
   var drawing = false;
-
   //ADDING EVENT LISTENERS TO THE CANVAS
   canvas.addEventListener('mousedown', onMouseDown, false);
   canvas.addEventListener('mouseup', onMouseUp, true);
@@ -165,7 +160,6 @@
   canvas.addEventListener('resize', onResize, false);
   // CHANGING PEN AND BOARD COLOURS WHEN  COLOR BUTTON IS CLICKED AND
   // CHANGING THE TOOL WHEN A TOOL BUTTON IS CLICKED
-
   for (var i = 0; i < colors.length; i++){
     colors[i].addEventListener('click', onColorUpdate, false);
   }
@@ -224,13 +218,9 @@
     current.canvas.style.backgroundColor = data.color;
   }else{return;}
   });
-
   //RESIZING THE CANVAS ACOORDING TO THE BROWSER
-
   window.addEventListener('load', onResize, false);
-
   //MAKING RANDOM COLORS FOR RANDOM COLOR PEN
-
   function getRandomColor() {
       var letters = '0123456789ABCDEF';
       var color = '#';
@@ -239,7 +229,6 @@
       }
       return color;
   }
-
  // DRAWING TOOLS
   var created = false;
   var draw = {
@@ -970,49 +959,6 @@ function move_right(emit){
     history.redo(canvas, context, true);
   });*/
 // IMAGE UPLOADING SECTION. IT'S TOTALLY DIFFERENT SECTION DO NOT COMBINE IT WITH ANY OTHER FUNCTION 💀 ☠ 👿 😈.
-    var element = null;
-function setMousePosition(e) {
-    var ev = e || window.event; //Moz || IE
-    if (ev.pageX) { //Moz
-        mouse.x = ev.pageX + window.pageXOffset;
-        mouse.y = ev.pageY + window.pageYOffset;
-    } else if (ev.clientX) { //IE
-        mouse.x = ev.clientX + document.body.scrollLeft;
-        mouse.y = ev.clientY + document.body.scrollTop;
-    }
-}
-var mouse = {
-    x: 0,
-    y: 0,
-    startX: 0,
-    startY: 0
-};
-function add_move(x0, y0, x1, y1, color, fill, emit){
-  if (element !== null) {
-      element.style.width = Math.abs(x1 - x0) + 'px';
-      element.style.height = Math.abs(y1 - y0), + 'px';
-      element.style.left = Math.min(x0,x1) + 'px';
-      element.style.top = Math.min(y0,y1) + 'px';
-  }
-  mouse.startX = current.x;
-  mouse.startY = current.y;
-  element = document.createElement('div');
-  element.style.backgroundImage ="url('http://hyperphysics.phy-astr.gsu.edu/hbase/geoopt/imggo/cvex1.gif')";
-  element.style.backgroundRepeat = 'no-repeat';
-  element.className = 'rectangle resize-drag'
-  element.style.left = current.x + 'px';
-  element.style.top = current.y + 'px';
-  element.style.zIndex = 1000;
-  document.body.appendChild(element);
-  canvas.style.cursor = "crosshair";
-  if (element !== null) {
-       element = null;
-       canvas.style.cursor = "default";
-       console.log("finsihed.");
-       current.tool = 'Pen';
-}
-}
-
 //alert('It is successfull.<br />Lorem ipsum cum sociss bonjur annayang siri cortana life like moto apple bannana.Lorem ipsum cum sociss bonjur annayang siri cortana life like moto apple bannana.Lorem ipsum cum sociss bonjur annayang siri cortana life like moto apple bannana', 'success');
 
 })();
