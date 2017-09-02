@@ -216,7 +216,7 @@
   //  socket.on('canvas_data', save);
   socket.on('color', function(data){
   if(data.api == api){
-    document.getElementById('div').Click();
+    document.getElementById('div').click();
     document.getElementById('div').style.display = 'block';	  
     document.getElementById('div').style.backgroundColor = data.color+' !important';	  
     current.canvas = document.getElementById('page'+previouspagecount);
@@ -691,7 +691,7 @@ document.getElementById('download').addEventListener('click', function() {
     if(current.type == 'Bg'){
       current.bgcolor = e.target.className.split(' ')[1];
       //alert(main_canvas.id);
-      document.getElementById('div').Click();
+      document.getElementById('div').click();
       document.getElementById('div').style.display = 'block';
       document.getElementById('div').style.backgroundColor = current.bgcolor+' !important';	    
       current.canvas = document.getElementById('page'+previouspagecount);
