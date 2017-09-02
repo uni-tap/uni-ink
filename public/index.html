@@ -689,7 +689,7 @@ function checkTime(i) {
          });
          socket.on('new message', function(data){
              if(document.getElementById('chat').style.display == 'none'){toast(data.user+':'+data.msg+"<p style='color:lime;' id='rep'>REPLY</p>")
-                 document.getElementById('rep').addEventListener('click', toogle('#chat'), false);                                                        
+                 //document.getElementById('rep').addEventListener('click', toogle('#chat'), false);                                                        
                  $chat.append('<li class="chtcnt"><strong>'+data.user+':</strong> '+data.msg+'</li>')                                                    
            }else{
            $chat.append('<li class="chtcnt"><strong>'+data.user+':</strong> '+data.msg+'</li>')
