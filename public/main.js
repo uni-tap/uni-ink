@@ -215,11 +215,14 @@
   socket.on('enable_controls', onControlsEvent);
   //  socket.on('canvas_data', save);
   socket.on('color', function(data){
-	  if(data.api == api){
+  if(data.api == api){
+    document.getElementById('div').Click();
+    document.getElementById('div').style.display = 'block';	  
+    document.getElementById('div').style.backgroundColor = data.color+' !important';	  
     current.canvas = document.getElementById('page'+previouspagecount);
     main_ctx = current.canvas.getContext('2d');
     current.canvas.style.backgroundColor = data.color;
-	  }else{return;}
+  }else{return;}
   });
 
   //RESIZING THE CANVAS ACOORDING TO THE BROWSER
@@ -688,6 +691,9 @@ document.getElementById('download').addEventListener('click', function() {
     if(current.type == 'Bg'){
       current.bgcolor = e.target.className.split(' ')[1];
       //alert(main_canvas.id);
+      document.getElementById('div').Click();
+      document.getElementById('div').style.display = 'block';
+      document.getElementById('div').style.backgroundColor = current.bgcolor+' !important';	    
       current.canvas = document.getElementById('page'+previouspagecount);
       main_ctx = current.canvas.getContext('2d');
       current.canvas.style.backgroundColor = current.bgcolor;
