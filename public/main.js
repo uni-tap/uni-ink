@@ -620,7 +620,6 @@ document.getElementById('download').addEventListener('click', function() {
   }
 
   function onMouseUp(e){	 
-	    alert('hlo');
      if(current.canvas == canvas){
        update_data(context, scontext, canvas);
        history.saveState(scanvas);
