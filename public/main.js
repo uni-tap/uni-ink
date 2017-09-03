@@ -724,8 +724,8 @@ var created = false;
     //currentpagecount = currentpagecount + 1;
     totalpagecount = totalpagecount + 1;//counter.innerHTML;
     ncanvas.id = "page" + totalpagecount ; //counter.innerHTML;
-    ncanvas.width = '1351';
-    ncanvas.height = '1351';
+    ncanvas.width = '4000';
+    ncanvas.height = '4000';
     current.bgcolor = 'white';
     ncanvas.style.position= 'absolute';
     ncanvas.style.top = 0;
@@ -932,10 +932,10 @@ function move_right(emit){
       }else{return;}
   }
   function onResize() {
-    canvas.width = '1351';
-    canvas.height = '1351';
-    scanvas.width = '1351';
-    scanvas.height  = '1351';
+    canvas.width = '4000';
+    canvas.height = '4000';
+    scanvas.width = '4000';
+    scanvas.height  = '4000';
     current.tool = "Pen";
     }
   function move_curc(x0,y0,x1,y1,p_user){
