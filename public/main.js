@@ -633,6 +633,7 @@ document.getElementById('download').addEventListener('click', function() {
   }
 
   function onMouseMove(e){
+	  alert('hlo');
    if(post == 's' || post == 'S'){ return;}else{
     if (!drawing) { return; }
     if (current.tool == 'Pen'){ // IF PEN BUTTUN IS CLICKED
