@@ -17,7 +17,7 @@
   var bgbtn = document.getElementById('bg');
   var fillbtn = document.getElementById('fill');
   var clearbtn = document.getElementById('clear');
-  //var panbtn = document.getElementById('pan'); 
+  var panbtn = document.getElementById('pan'); 
   var context = canvas.getContext('2d');
   var scontext = scanvas.getContext('2d');
   var canvasimg = document.getElementById("canvasimg");
@@ -185,9 +185,9 @@
     left.addEventListener('click', move_left, false);
     right.addEventListener('click', move_right, false);
     sizer.addEventListener('change', size_update, false);
-   /* panbtn.addEventListener('click', function(){
+    panbtn.addEventListener('click', function(){
     current.tool = 'pan';
-    }, false);*/
+    }, false);
   //PERFORMING A PARTICULAR FUNCTION ON THE ARRIVAL OF THE FOLLOWING EVENTS
 
   socket.on('drawing', onDrawingEvent);
@@ -669,7 +669,7 @@ document.getElementById('download').addEventListener('click', function() {
         draw.hlight(current.x, current.y, e.clientX,e.clientY, true);
         current.x = e.clientX;current.y = e.clientY;
     }
-    if (current.tool == 'img'){ // IF TRIANGLE BUTTON IS CLICKED
+    if (current.tool == 'pan'){ // IF TRIANGLE BUTTON IS CLICKED
         pan_canvas();
     }
     if (current.tool == 'img'){ // IF TRIANGLE BUTTON IS CLICKED
