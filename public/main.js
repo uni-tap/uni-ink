@@ -17,6 +17,7 @@
   var bgbtn = document.getElementById('bg');
   var fillbtn = document.getElementById('fill');
   var clearbtn = document.getElementById('clear');
+  var panbtn = document.getElementById('pan'); 
   var context = canvas.getContext('2d');
   var scontext = scanvas.getContext('2d');
   var canvasimg = document.getElementById("canvasimg");
@@ -184,7 +185,9 @@
     left.addEventListener('click', move_left, false);
     right.addEventListener('click', move_right, false);
     sizer.addEventListener('change', size_update, false);
-
+    panbtn.addEventListener('click', function(){
+    current.tool = 'pan';
+    }, false);
   //PERFORMING A PARTICULAR FUNCTION ON THE ARRIVAL OF THE FOLLOWING EVENTS
 
   socket.on('drawing', onDrawingEvent);
@@ -667,9 +670,37 @@ document.getElementById('download').addEventListener('click', function() {
         current.x = e.clientX;current.y = e.clientY;
     }
     if (current.tool == 'img'){ // IF TRIANGLE BUTTON IS CLICKED
+        pan_canvas();
+    }
+    if (current.tool == 'img'){ // IF TRIANGLE BUTTON IS CLICKED
         add_move(current.x, current.y, e.clientX, e.clientY, current.color, current.fillcolor, true);
     }
    }
+}
+var global = {
+  scale	: 1,
+  offset	: {
+    x : 0,
+    y : 0,
+  },
+};
+var pan = {
+  start : {
+    x : null,
+    y : null,
+  },
+  offset : {
+    x : 0,
+    y : 0,
+  },
+};	
+function pan_canvas(){
+  pan.start.x = e.clientX;
+  pan.start.y = e.clientY;
+  var offsetX	 = e.clientX - pan.start.x;
+  var offsetY	 = e.clientY - pan.start.y;
+  pan.offset.x = global.offset.x + offsetX;
+  pan.offset.y = global.offset.y + offsetY;
 }
   // UPDATING THE PEN AND BOARD COLORS
 
