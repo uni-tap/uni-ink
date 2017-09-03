@@ -665,9 +665,6 @@ document.getElementById('download').addEventListener('click', function() {
         draw.hlight(current.x, current.y, e.clientX,e.clientY, true);
         current.x = e.clientX;current.y = e.clientY;
     }
-    if (current.tool == 'img'){ // IF TRIANGLE BUTTON IS CLICKED
-        add_move(current.x, current.y, e.clientX, e.clientY, current.color, current.fillcolor, true);
-    }
    }
 }
 
