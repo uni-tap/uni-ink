@@ -17,6 +17,7 @@
   var bgbtn = document.getElementById('bg');
   var fillbtn = document.getElementById('fill');
   var clearbtn = document.getElementById('clear');
+  var zoomer_p = document.getElementById('zoomP');	
   var context = canvas.getContext('2d');
   var scontext = scanvas.getContext('2d');
   var canvasimg = document.getElementById("canvasimg");
@@ -184,6 +185,7 @@
     left.addEventListener('click', move_left, false);
     right.addEventListener('click', move_right, false);
     sizer.addEventListener('change', size_update, false);
+    zoomer_p.addEventListener('click', zoom, false);
   //PERFORMING A PARTICULAR FUNCTION ON THE ARRIVAL OF THE FOLLOWING EVENTS
 
   socket.on('drawing', onDrawingEvent);
@@ -692,6 +694,15 @@ document.getElementById('download').addEventListener('click', function() {
   function size_update(e){
     thickness = sizer.value;
   }
+  function zoom(){
+    var val = 1;	  
+	val += 1;    
+       if(current.canvas == canvas){
+          scanvas.style.transform = 'scale('+val+')';
+     }else if(current.canvas !== 'canvas'){
+          current.canvas.style.transform = 'scale('+val+')';
+     }
+  }	
 var created = false;
     function onNewPageUpdate(emit){
     if(post == 's' || post == 'S'){ return;}else{
