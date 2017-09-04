@@ -994,13 +994,13 @@ function move_right(emit){
     cur.style.display = 'none';
    });	  
   }	
-   /* undo.addEventListener('click', function() {
+  undo.addEventListener('click', function() {
      history.undo(canvas, context, true);
    });
 
    redo.addEventListener('click', function() {
     history.redo(canvas, context, true);
-  });*/
+  });
 // IMAGE UPLOADING SECTION. IT'S TOTALLY DIFFERENT SECTION DO NOT COMBINE IT WITH ANY OTHER FUNCTION 💀 ☠ 👿 😈.
 //alert('It is successfull.<br />Lorem ipsum cum sociss bonjur annayang siri cortana life like moto apple bannana.Lorem ipsum cum sociss bonjur annayang siri cortana life like moto apple bannana.Lorem ipsum cum sociss bonjur annayang siri cortana life like moto apple bannana', 'success');
 
