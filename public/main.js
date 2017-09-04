@@ -696,8 +696,8 @@ document.getElementById('download').addEventListener('click', function() {
   function size_update(e){
     thickness = sizer.value;
   }
-  function zoomP(){
-    var val = 1;	  
+  var val = 1;
+  function zoomP(){  
 	val += 1;    
        if(current.canvas == canvas){
           scanvas.style.transform = 'scale('+val+')';
@@ -705,8 +705,7 @@ document.getElementById('download').addEventListener('click', function() {
           current.canvas.style.transform = 'scale('+val+')';
      }
   }	
-  function zoomN(){
-    var val = 1;	  
+  function zoomN(){	  
 	val -= 1;    
        if(current.canvas == canvas){
           scanvas.style.transform = 'scale('+val+')';
