@@ -17,6 +17,7 @@
   var bgbtn = document.getElementById('bg');
   var fillbtn = document.getElementById('fill');
   var clearbtn = document.getElementById('clear');
+  var panbtn = document.getElementById('pan');	
   var zoomer_p = document.getElementById('zoomP');
   var zoomer_n = document.getElementById('zoomN');
   var context = canvas.getContext('2d');
@@ -149,6 +150,45 @@
  function thankyou(){
    socket.emit('saved');
  }
+var global = {
+	scale	: 1,
+	offset	: {
+		x : 0,
+		y : 0,
+	},
+};
+var pan = {
+	start : {
+		x : null,
+		y : null,
+	},
+	offset : {
+		x : 0,
+		y : 0,
+	},
+};	
+function startPan(e) {
+	canvas.addEventListener("mousemove", trackMouse);
+	canvas.addEventListener("mousemove", draw);
+	pan.start.x = e.clientX;
+	pan.start.y = e.clientY;
+}
+
+function endPan(e) {
+	canvas.removeEventListener("mousemove", trackMouse);
+	canvas.removeEventListener("mousemove", draw);
+	pan.start.x = null;
+	pan.start.y = null;
+	global.offset.x = pan.offset.x;
+	global.offset.y = pan.offset.y;
+}
+
+function trackMouse(e) {
+	var offsetX  = e.clientX - pan.start.x;
+	var offsetY  = e.clientY - pan.start.y;
+	pan.offset.x = global.offset.x + offsetX;
+	pan.offset.y = global.offset.y + offsetY;
+}	
   var drawing = false;
   //ADDING EVENT LISTENERS TO THE CANVAS
   canvas.addEventListener('mousedown', onMouseDown, false);
@@ -645,6 +685,11 @@ document.getElementById('download').addEventListener('click', function() {
     if (current.tool == 'Text'){ // IF TRIANGLE BUTTON IS CLICKED
        draw.Text(current.x, current.y, e.clientX, e.clientY, current.color, current.fillcolor, true);
     }
+    if (current.tool == 'Pan'){ // IF TRIANGLE BUTTON IS CLICKED
+       scanvas.addEventListener("mousedown", startPan);
+       scanvas.addEventListener("mouseleave", endPan);
+       scanvas.addEventListener("mouseup", endPan);
+    }	   
     if (current.tool == 'graph'){ // IF TRIANGLE BUTTON IS CLICKED
         draw.graph(current.x, current.y, e.clientX,e.clientY,current.color,current.thickness, true);
     }
