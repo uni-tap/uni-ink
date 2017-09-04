@@ -686,9 +686,9 @@ document.getElementById('download').addEventListener('click', function() {
        draw.Text(current.x, current.y, e.clientX, e.clientY, current.color, current.fillcolor, true);
     }
     if (current.tool == 'Pan'){ // IF TRIANGLE BUTTON IS CLICKED
-       scanvas.addEventListener("mousedown", startPan);
-       scanvas.addEventListener("mouseleave", endPan);
-       scanvas.addEventListener("mouseup", endPan);
+       canvas.addEventListener("mousedown", startPan);
+       canvas.addEventListener("mouseleave", endPan);
+       canvas.addEventListener("mouseup", endPan);
     }	   
     if (current.tool == 'graph'){ // IF TRIANGLE BUTTON IS CLICKED
         draw.graph(current.x, current.y, e.clientX,e.clientY,current.color,current.thickness, true);
