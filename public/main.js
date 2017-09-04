@@ -534,7 +534,7 @@
        var val = txt.innerHTML;
 	   context.font = "30px Arial";
 	   context.fillText(val, x1, y1);  
-      }
+      
     },
       hlight:function(x0, y0, x1, y1, emit){
         main_ctx.beginPath();
