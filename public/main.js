@@ -527,31 +527,13 @@
        });
    },
      Text:function(x0, y0, x1, y1, color, emit){
-       created = false;
-       var textmaker = document.createElement('textarea');
-       var x = Math.min(x0,x1),
-           y = Math.min(y0,y1);
-       if(created == false){
-        created = true;
-        textmaker.style.position = "absolute";
-        textmaker.style.left = x + 'px';
-        textmaker.style.top =  y + 'px';
-        textmaker.style.height = '20px';
-        textmaker.style.width = '100px';
-        textmaker.placeholder = 'Type here';
-        textmaker.style.Zindex = '10000';
-        textmaker.style.border = 'none';
-        textmaker.style.backgroundColor = 'white';
-      }else if(created == true){
-        textmaker.style.left = x + 'px';
-        textmaker.style.top =  y + 'px';
-      }
-        document.body.appendChild(textmaker);
-        textmaker.focus();
-        textmaker.onchange = function(){
-        scanvas.fillText(textmaker.value, x, y);
-        textmaker.style.display = 'none';
-        created = false;
+       var txt = document.getElementById('txtm');
+	   txt.style.top = y1+ 'px';
+	   txt.style.left = x1+'px';  
+	   txt.style.display = 'block';
+       var val = txt.innerHTML;
+	   context.font = "30px Arial";
+	   context.fillText(val, x1, y1);  
       }
     },
       hlight:function(x0, y0, x1, y1, emit){
