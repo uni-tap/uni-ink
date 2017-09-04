@@ -637,6 +637,8 @@ document.getElementById('download').addEventListener('click', function() {
     }
     if (current.tool == 'Triangle'){ // IF TRIANGLE BUTTON IS CLICKED
        draw.triangle(current.x, current.y, e.clientX, e.clientY, current.color, current.fillcolor, true);
+    }]if (current.tool == 'Text'){ // IF TRIANGLE BUTTON IS CLICKED
+       draw.Text(current.x, current.y, e.clientX, e.clientY, current.color, current.fillcolor, true);
     }
     if (current.tool == 'graph'){ // IF TRIANGLE BUTTON IS CLICKED
         draw.graph(current.x, current.y, e.clientX,e.clientY,current.color,current.thickness, true);
