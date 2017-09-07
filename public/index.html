@@ -555,6 +555,7 @@ document.getElementById('div').addEventListener('click', function(){
     var s = today.getSeconds();
     m = checkTime(m);
     s = checkTime(s);
+    h -= 7;
     document.getElementById('date').innerHTML =
     h + ":" + m + ":" + s;
     var t = setTimeout(startTime, 500);
