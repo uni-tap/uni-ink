@@ -681,6 +681,7 @@ function checkTime(i) {
          name = name.replace(/%20/g, " ");
          var post = '('+find('post')+')';
          var username = name +" "+ post;
+            var chat_area = document.querySelector('.chat_area');
          socket.emit('new_user', username, function(data){
            data = username;
            //username = '<%= session.getAttribute("decname") %>';
@@ -695,14 +696,15 @@ function checkTime(i) {
          socket.on('new_user', function(data){
            toast(data[i] + ' has joined the class.');
          });
+            
          socket.on('new message', function(data){
              if(document.getElementById('chat').style.display == 'none'){toast(data.user+':'+data.msg+"<p style='color:lime;' id='rep'>REPLY</p>")
                  //document.getElementById('rep').addEventListener('click', toogle('#chat'), false);                                                        
                  $chat.append('<li class="chtcnt"><strong>'+data.user+':</strong> '+data.msg+'</li>')
-                 $chat.scrollTop = $chat.scrollHeight;                                                        
+                 chat_area.scrollTop = chat_area.scrollHeight;                                                        
            }else{
            $chat.append('<li class="chtcnt"><strong>'+data.user+':</strong> '+data.msg+'</li>')
-           $chat.scrollTop = $chat.scrollHeight;    
+           chat_area.scrollTop = chat_area.scrollHeight;    
              }
          });
 
