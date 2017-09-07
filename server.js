@@ -43,6 +43,7 @@ io.on('connection', function(socket){
   socket.on('hlight',(data) => socket.broadcast.emit('hlight', data));    
   socket.on('all_data', (data)  => socket.broadcast.emit('all_data', data));
   socket.on('pf', (data)  => socket.broadcast.emit('pf', data));
+  socket.on('chat_msg', (data)  => socket.broadcast.emit('chat_msg', data));
 // IF A USER GETS DISCONNECTED
 
 socket.on('disconnect', function(socket){
