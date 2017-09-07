@@ -704,10 +704,10 @@ function checkTime(i) {
          socket.on('new message', function(data){
              if(document.getElementById('chat').style.display == 'none'){toast(data.user+':'+data.msg+"<p style='color:lime;' id='rep'>REPLY</p>")
                  //document.getElementById('rep').addEventListener('click', toogle('#chat'), false);                                                        
-                 $chat.append('<li class="chtcnt"><strong>'+data.user+':</strong> '+data.msg+'</li>')
+                 $chat.append('<li class="chtcnt" focus><strong>'+data.user+':</strong> '+data.msg+'</li>')
                  $chat.scrollTop = $chat.scrollHeight;                                                        
            }else{
-           $chat.append('<li class="chtcnt"><strong>'+data.user+':</strong> '+data.msg+'</li>')
+           $chat.append('<li class="chtcnt" focus><strong>'+data.user+':</strong> '+data.msg+'</li>')
            $chat.scrollTop = $chat.scrollHeight;    
              }
          });
