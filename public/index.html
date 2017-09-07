@@ -407,6 +407,20 @@
   height: 100%;
   border-radius:00px;
 }
+            .s_msg{
+             color: #263238;
+             background-color: #f4f7f9;
+             padding: 17px 20px;
+             border-radius: 6px;
+             position: relative;   
+            }
+            .r_msg{
+            color: #fff;
+            background-color: #525e66;
+            padding: 17px 20px;
+            border-radius: 6px;
+            position: relative;    
+            }
         </style>
     </head>
     <body onload="startTime()">
@@ -790,5 +804,26 @@ var box = document.querySelector('#msg_box');
 function remove_toast(){
     console.log('done');
 }
+        //NEW CHAT
+        socket.on('chat_msg',function(data){
+         if(data.user != find('user'){   
+         var li = document.createElement('li');
+             li.className = 'r_msg';
+             li.innerHTML = data.user+':'+data.msg; 
+         var chat = document.querySelector('#chat');
+             chat.appendChild(li);
+        }else{return;}
+        });
+        function snd_chat(msg){
+        var li = document.createElement('li');
+             li.className = 's_msg';
+             li.innerHTML = find('user')+':'+msg; 
+         var chat = document.querySelector('#chat');
+             chat.appendChild(li);    
+        socket.emit('chat_msg', {
+         msg: msg,
+         user: find('user')   
+        });
+        }
     </script>
 </html>
