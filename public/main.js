@@ -295,7 +295,8 @@ function trackMouse(e) {
           y1: y1 / ch,
           color: color,
           api: api,
-	  user: user
+	  user: user,
+	  page: totalcurrentpagecount	
         });
       },
       eraser: function(x0, y0, x1, y1, color, emit){
@@ -320,7 +321,8 @@ function trackMouse(e) {
           y1: y1 / ch,
           color: color,
           api: api,
-	 user: user
+	 user: user,
+	 page:	totalcurrentpagecount
         });
       },
       rect: function(x0, y0, x1, y1, color, fill, emit){ // RECTANGLE TOOL
@@ -362,8 +364,9 @@ function trackMouse(e) {
          y1: y1 /ch,
          color: color,
          fill: fill,
-          api: api,
-	 user: user
+         api: api,
+	 user: user,
+	 page: totalcurrentpagecount
        });
  },
       circle: function (x0, y0, x1, y1, color, fill, emit){ // CIRCLE TOOL
@@ -403,7 +406,8 @@ function trackMouse(e) {
          color: color,
          fill: fill,
          api: api,
-	 user: user
+	 user: user,
+	 page: totalcurrentpagecount
        });
  },
      line: function (x0, y0, x1, y1, color, emit) { // LINE TOOL
@@ -429,7 +433,8 @@ function trackMouse(e) {
          y1: y1 /ch,
          color: color,
          api: api,
-	 user: user
+	 user: user,
+	 page: totalcurrentpagecount
        });
      },
      triangle: function(x0, y0, x1, y1, color, fill, emit){
@@ -459,7 +464,8 @@ function trackMouse(e) {
          color: color,
          fill: fill,
          api: api,
-	 user: user
+	 user: user,
+	 page: totalcurrentpagecount
        });
      }
    },
@@ -492,7 +498,8 @@ function trackMouse(e) {
          color: color,
          fill: fill,
          api: api,
-	 user: user
+	 user: user,
+	 page: totalcurrentpagecount
        });
      },
 
@@ -567,7 +574,8 @@ function trackMouse(e) {
          y1: y1 /ch,
          color: color,
          api: api,
-	 user: user
+	 user: user,
+	 page: totalcurrentpagecount
        });
    },
      Text:function(x0, y0, x1, y1, color, emit){
@@ -603,7 +611,8 @@ function trackMouse(e) {
           y1: y1 / ch,
           color: color,
           api: api,
-	 user: user	
+	  user: user,
+	  page: totalcurrentpagecount	
         });
       }
   };
@@ -865,10 +874,12 @@ function move_right(emit){
   }
   function onDrawingEvent(data){
    if(data.api == api){
+   if(data.page = totalcurrentpagecount){	   
     var cw = canvas.width;
     var ch = canvas.height;
     draw.pen(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color);
-    move_curc(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.user);	   
+    move_curc(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.user);	
+   }else if(data.page < totalcurrentpagecount){move_left();}else if(data.page > totalcurrentpagecount){move_right();}else if(data.page > totalpagecount){onNewPageUpdate();}
    }else{
        return;
    }
