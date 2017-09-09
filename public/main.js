@@ -768,8 +768,7 @@ document.getElementById('download').addEventListener('click', function() {
      }
   }	
 var created = false;
-    function onNewPageUpdate(emit){	    
-    //if(post == 's' || post == 'S'){ return;}else{
+    function onNewPageUpdate(emit){
     scanvas.style.display = 'block';
     var ncanvas = document.createElement('canvas');
     var context = ncanvas.getContext('2d');
@@ -789,7 +788,7 @@ var created = false;
     if(scanvas.style.display = 'none'){}else if(scanvas.style.display = 'block'){scanvas.style.display = 'none';}
     if(current.canvas != canvas){
     current.canvas.style.display = 'none';
-    //}
+    }
     totalcurrentpagecount = totalcurrentpagecount + 1;
     previouspagecount = totalcurrentpagecount;
     document.body.appendChild(ncanvas);
@@ -798,8 +797,7 @@ var created = false;
     counter.innerHTML = totalcurrentpagecount + "\/" + totalpagecount ;
     if(!emit){return;}
     socket.emit('new_page', {color: current.bgcolor,api: api});
-    //save();
-    }
+    save();
 }
 
     function move_left(emit){
