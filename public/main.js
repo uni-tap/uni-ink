@@ -797,7 +797,7 @@ var created = false;
     counter.innerHTML = totalcurrentpagecount + "\/" + totalpagecount ;
     if(!emit){return;}
     socket.emit('new_page', {color: current.bgcolor,api: api});
-    save();
+    //save();
 }
 
     function move_left(emit){
