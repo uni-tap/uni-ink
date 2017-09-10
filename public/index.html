@@ -708,7 +708,7 @@ function checkTime(i) {
 
          $messageForm.submit(function(e){
            e.preventDefault();
-           snd_chat($message.val);  
+           snd_chat(document.getElementById('message').value);  
            //socket.emit('send message', $message.val());
            $message.val('');
          });
