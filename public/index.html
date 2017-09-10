@@ -811,21 +811,21 @@ function remove_toast(){
          if(data.user != find('user')){   
          var li = document.createElement('li');
              li.className = 'r_msg';
-             li.innerHTML = data.user+':'+data.msg; 
+             li.innerHTML = data.user+':'+data.chat; 
          var chat = document.querySelector('#chat');
              chat.appendChild(li);
         }else{return;}
         });
-        function snd_chat(msg){
+        function snd_chat(chat){
          var li = document.createElement('li');
              li.className = 's_msg';
          var user = find('user');
-             li.innerHTML = user+':'+msg; 
+             li.innerHTML = user+':'+chat; 
          var chat = document.querySelector('#chat');
              chat.appendChild(li);    
         socket.emit('chat_msg', {
-         msg: msg,
-         user: find('user')   
+         chat: chat,
+         user: user   
         });
         }
     </script>
