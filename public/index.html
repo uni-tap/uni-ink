@@ -708,7 +708,8 @@ function checkTime(i) {
 
          $messageForm.submit(function(e){
            e.preventDefault();
-           socket.emit('send message', $message.val());
+           snd_chat($message.val);  
+           //socket.emit('send message', $message.val());
            $message.val('');
          });
          socket.on('new_user', function(data){
@@ -805,7 +806,7 @@ function remove_toast(){
     console.log('done');
 }
         //NEW CHAT
-        /*
+        
         socket.on('chat_msg',function(data){
          if(data.user != find('user'){   
          var li = document.createElement('li');
@@ -816,7 +817,7 @@ function remove_toast(){
         }else{return;}
         });
         function snd_chat(msg){
-        var li = document.createElement('li');
+         var li = document.createElement('li');
              li.className = 's_msg';
              li.innerHTML = find('user')+':'+msg; 
          var chat = document.querySelector('#chat');
@@ -825,6 +826,6 @@ function remove_toast(){
          msg: msg,
          user: find('user')   
         });
-        }*/
+        }
     </script>
 </html>
