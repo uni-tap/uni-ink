@@ -847,7 +847,8 @@ function remove_toast(){
         }
                     
         socket.on('chat_msg',function(data){
-         if(data.user != find('user')){   
+         if(data.user != find('user')){
+         if(document.getElementById('chat').style.display == 'none'){toast(data.user+':'+data.chat+"<p style='color:lime;' id='rep'>REPLY</p>")    
          var li = document.createElement('li');
              li.className = 'r_msg';
              li.innerHTML = data.user+':'+data.chat; 
