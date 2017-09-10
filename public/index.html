@@ -817,8 +817,9 @@ function remove_toast(){
              li.className = 's_msg';
          var user = find('user');
              li.innerHTML = user+':'+chat; 
-         var chat = document.querySelector('#chat');
-             chat.appendChild(li);    
+         var chat_a = document.querySelector('#chat');
+             chat_a.appendChild(li); 
+         //var chat_msg_t_S = 
         socket.emit('chat_msg', {
          chat: chat,
          user: user   
