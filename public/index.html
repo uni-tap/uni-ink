@@ -808,7 +808,7 @@ function remove_toast(){
         //NEW CHAT
         
         socket.on('chat_msg',function(data){
-         if(data.user != find('user'){   
+         if(data.user != find('user')){   
          var li = document.createElement('li');
              li.className = 'r_msg';
              li.innerHTML = data.user+':'+data.msg; 
