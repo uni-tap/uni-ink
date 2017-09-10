@@ -806,16 +806,6 @@ function remove_toast(){
     console.log('done');
 }
         //NEW CHAT
-            
-        socket.on('chat_msg',function(data){
-         if(data.user != find('user')){   
-         var li = document.createElement('li');
-             li.className = 'r_msg';
-             li.innerHTML = data.user+':'+data.chat; 
-         var chat = document.querySelector('#chat');
-             chat.appendChild(li);
-        }else{return;}
-        });
         function snd_chat(chat){
          var li = document.createElement('li');
              li.className = 's_msg';
@@ -828,5 +818,15 @@ function remove_toast(){
          user: user   
         });
         }
+                    
+        socket.on('chat_msg',function(data){
+         if(data.user != find('user')){   
+         var li = document.createElement('li');
+             li.className = 'r_msg';
+             li.innerHTML = data.user+':'+data.chat; 
+         var chat = document.querySelector('#chat');
+             chat.appendChild(li);
+        }else{return;}
+        });
     </script>
 </html>
