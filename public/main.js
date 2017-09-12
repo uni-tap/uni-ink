@@ -876,7 +876,9 @@ function move_right(emit){
     var ch = canvas.height;
     draw.pen(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color);
     move_curc(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.user);	
-   }else if(data.page < totalcurrentpagecount){move_left();}else if(data.page > totalcurrentpagecount){move_right();}else if(data.page > totalpagecount){onNewPageUpdate();}
+   }//else if(data.page < totalcurrentpagecount){move_left();}else if(data.page > totalcurrentpagecount){move_right();}
+   else //(data.page > totalpagecount)
+   {onNewPageUpdate();}
    }else{
        return;
    }
