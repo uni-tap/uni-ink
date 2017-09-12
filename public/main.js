@@ -138,7 +138,7 @@
      if(current.canvas == canvas){
        scanvas.style.backgroundImage = 'url('+data.url+')'; 
      }else if(current.canvas !== 'canvas'){
-       current.canvas..style.backgroundImage = 'url('+data.url+')'; 
+       current.canvas.style.backgroundImage = 'url('+data.url+')'; 
      }
     }else{return;}
  }
