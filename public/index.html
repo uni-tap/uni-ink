@@ -681,7 +681,7 @@ function checkTime(i) {
           if(post_tools == 's' || post_tools == 'S'){
             //toogle('#tls_desk');
             if(document.getElementById('date').innerHTML > find('s_time')){
-             socket.emit('late', {user: user});
+             socket.emit('late', {user: user,api: api});
             }  
           }
         }
