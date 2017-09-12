@@ -134,21 +134,13 @@
  }
  socket.on('all_data', ondataEvent);
     function ondataEvent(data){
-      thankyou();
      if(data.api == api){
-        var img_box = document.getElementById('sharing_img');
      if(current.canvas == canvas){
-       //var v=document.getElementById("localvideo");
-      scanvas.style.backgroundRepeat = 'no-repeat';
-      scanvas.style.backgroundImage = 'url('+data.img+')';
+       scanvas.style.backgroundImage = 'url('+data.url+')'; 
      }else if(current.canvas !== 'canvas'){
-       current.canvas.style.backgroundRepeat = 'no-repeat';
-       current.canvas.style.backgroundImage = 'url('+data.img+')';
+       current.canvas..style.backgroundImage = 'url('+data.url+')'; 
      }
     }else{return;}
- }
- function thankyou(){
-   socket.emit('saved');
  }
 var global = {
 	scale	: 1,
@@ -258,6 +250,19 @@ function trackMouse(e) {
     current.canvas.style.backgroundColor = data.color;
   }else{return;}
   });
+  socket.on('late', function(){
+   if(data.api == api){	  
+    if(data.user !== find('user')){
+     if(current.canvas == canvas){
+       var dataURL = scanvas.toDataURL();
+       socket.emit('all_data', {url: dataURL, api: api});	     
+     }else if(current.canvas !== 'canvas'){
+       var dataURL = current.canvas.toDataURL();
+       socket.emit('all_data', {url: dataURL, api: api});	     
+     } 
+    }
+   }	   
+  });	
   //RESIZING THE CANVAS ACOORDING TO THE BROWSER
   window.addEventListener('load', onResize, false);
   //MAKING RANDOM COLORS FOR RANDOM COLOR PEN
