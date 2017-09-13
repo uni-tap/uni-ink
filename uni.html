@@ -1,138 +1,32 @@
-<!DOCTYPE html>
 <html>
 <head>
-	<title>WebRTC Example 05 Screen Sharing</title>
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script type="text/javascript" src="//code.deepstreamhub.com/js/latest/deepstream.js"></script>
-	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/simple-peer/8.1.0/simplepeer.min.js"></script>
-    <style>
-        *{
-	margin: 0;
-	padding: 0;
-	list-style-type: none;
-	font: 14px/16px Arial, sans-serif;
-	color: #333;
-}
-
-body{
-	background-color: #fafafa;
-}
-
-#wrapper,
-.wrapper{
-	width: 90%;
-	margin: 20px auto;
-	padding: 20px;
-	box-sizing: border-box;
-	background-color: #fff;
-	border: 1px solid #ccc;
-	overflow: hidden;
-}
-
-.centered{
-	text-align: center;
-}
-
-.output li{
-	margin: 5px;
-	padding: 5px;
-}
-
-.video-wrapper{
-	width: 300px;
-	margin: 20px;
-	height: 225px;
-	background: #000;
-	position: relative;
-	display: inline-block;
-}
-
-.video-wrapper label{
-	position: absolute;
-	z-index: 1;
-	background: #fff;
-	color: #333;
-	border-top-left-radius: 6px;
-	bottom: 0;
-	right: 0;
-	padding: 2px 7px;
-}
-
-.warning{
-	background: #ffdede;
-	border: 1px solid #820808;
-	color: #820808;
-	font-weight: bold;
-	padding: 10px;
-	margin: 10px 0;
-}
-
-button{
-	padding: 10px;
-	cursor: pointer;
-}
-    </style>
+	<title>Screen sharing example</title>
+	<script src="https://code.jquery.com/jquery-1.10.1.min.js "></script>
 </head>
 <body>
-	<div id="wrapper" class="centered">
-		<div id="domain-warning" class="warning">
-			This example will only work on deepstreamhub.com unless you change the domain path in <a href="http://localhost/manifest.json">https://github.com/deepstreamIO/dsh-demo-webrtc-examples/blob/master/05-screen-sharing/chrome-addon/manifest.json</a>
-		</div>
-		<div id="addon-not-found" class="warning">
-			Chrome extension not found. Install it by following the steps in
-			<a href="https://deepstreamhub.com/tutorials/protocols/webrtc-screen-sharing/#install-addon">
-			https://deepstreamhub.com/tutorials/protocols/webrtc-screen-sharing/#install-addon</a>
-		</div>
-		<button id="share-my-screen" disabled>share my screen</button><br />
-		<video id="local" width="640" height="360" autoplay style="background: #000;display: inline-block;margin-top: 20px;"></video>
-	</div>
+	<p align="center"><input type="button" id="share_screen" value="Share screen"/></p>
+	<p align="center"><video id="video" autoplay/></p>
+	<script language="javascript">
+     	navigator.getUserMedia = navigator.webkitGetUserMedia || navigator.getUserMedia;
+     	$('#share_screen').click(function() {
+          	navigator.getUserMedia({
+                   	audio: false,
+                   	video: {
+                       	mandatory: {
+                           	chromeMediaSource: 'screen',
+                           	maxWidth: 1280,
+                           	maxHeight: 720
+                       	},
+                       	optional: []
+                   	}
+               	}, function(stream) {
+                   	document.getElementById('video').src = window.URL.createObjectURL(stream);;
+                   	$('#share_screen').hide();
+               	}, function() {
+                   	alert('Error, my friend. Screen stream is not available. Try in latest Chrome with Screen sharing enabled in about:flags.');
+                 	}
+          	)
+     	})
+	</script>
 </body>
-    <script>
-        $(function(){
-
-	function getScreen( sourceId ) {
-		var constraints = {
-			mandatory: {
-				chromeMediaSource: 'desktop',
-				maxWidth: screen.width > 1920 ? screen.width : 1920,
-				maxHeight: screen.height > 1080 ? screen.height : 1080,
-				chromeMediaSourceId: sourceId
-			},
-			optional: [
-				{ googTemporalLayeredScreencast: true }
-			]
-		};
-		navigator.getUserMedia({video:constraints},
-			stream => {
-				$('video#local').attr( 'src', URL.createObjectURL( stream ) );
-			},
-			error => {
-				console.log( error );
-			}
-		);
-	}
-
-	window.addEventListener("message", function(msg){
-		if( !msg.data ) {
-			return;
-		} else if ( msg.data.sourceId ) {
-			getScreen( msg.data.sourceId );
-		} else if( msg.data.addonInstalled ) {
-			$( '#addon-not-found' ).hide();
-			$( '#share-my-screen' ).removeAttr( 'disabled' );
-		}
-	}, false);
-
-	if( document.location.host !== 'deepstreamhub.com' ) {
-		$( '#domain-warning' ).show();
-	} else {
-		$( '#domain-warning' ).hide();
-		window.postMessage( 'check-addon-installed', '*' )
-	}
-
-	$( '#share-my-screen' ).click(function(){
-		window.postMessage('requestScreenSourceId', '*' );
-	})
-});
-    </script>
 </html>
