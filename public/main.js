@@ -670,7 +670,7 @@ document.getElementById('download').addEventListener('click', function() {
   }
   function onMouseMove(e){
     //move_curc(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.user);		
-   if(post == 's' || post == 'S'){ return;}else{
+   if(post == 's' || post == 'S' || post == 'e_val'){ return;}else{
     if (!drawing) { return; }
     if (current.tool == 'Pen'){ // IF PEN BUTTUN IS CLICKED
        draw.pen(current.x, current.y, e.clientX, e.clientY, current.color, true);
