@@ -803,13 +803,13 @@
   </nav>
   <center>
   <div id="img_up_box" style="display: none;">
-    <input onkeydown="document.getElementById('message').value = '<img src='+this.value+' height=100 width=100 >';" placeholder="Enter the url of the image" style="
+    <input onkeydown="document.getElementById('message').value = '<img style="border:none; src='+this.value+' height=100 width=100 >';" placeholder="Enter the url of the image" style="
     z-index: 20;
 " value="">
     <button onclick="document.getElementById('snd_btn').click();toogle('#img_up_box')" style="margin-top:25px;border:none;">Share Image</button>
   </div>
   <div id="vid_up_box" style="display:none;">
-    <input onkeydown="document.getElementById('message').value = '<iframe src='+this.value+' height=100 width=100 ></iframe>';" placeholder="Enter the url of the video" style="
+    <input onkeydown="document.getElementById('message').value = '<iframe style="border:none;" src='+this.value+' height=100 width=100 ></iframe>';" placeholder="Enter the url of the video" style="
     z-index: 20;
 " value="">
     <button onclick="document.getElementById('snd_btn').click();toogle('#vid_up_box')" style="margin-top:25px;border:none;">Share video</button>
