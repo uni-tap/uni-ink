@@ -605,7 +605,7 @@
     #img_up_box{
     height: 100px;
     position: fixed;
-    right: 20px;
+    right: 200px;
     bottom: 283px;
     width: 250px;
     z-index: 2;
@@ -617,6 +617,23 @@
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.3), 0 0 0 0px rgba(0, 0, 0, 0.08) !important;
     }
     #img_up_box input{
+    padding:5px;
+    }
+    #vid_up_box{
+    height: 100px;
+    position: fixed;
+    right: 200px;
+    bottom: 283px;
+    width: 250px;
+    z-index: 2;
+    margin-top: 650px;
+    margin-left: 600px;
+    background-color: darkgrey;
+    border-radius:5px;
+    padding:10px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.3), 0 0 0 0px rgba(0, 0, 0, 0.08) !important;
+    }
+    #vid_up_box input{
     padding:5px;
     }
   </style>
@@ -732,7 +749,7 @@
       <input type="text" id="message" class="chat_msg">
       <button onclick="img();" class="fa fa-paperclip" style="background-color:transparent;border:none;color:darkgrey;height: 40px;position: fixed;right: 50px;top: calc(100% - 45px);"></button>
       <button onclick="vid();" class="glyphicon glyphicon-facetime-video" style="background-color:transparent;border:none;color:darkgrey;height: 40px;position: fixed;right: 70px;top: calc(100% - 45px);"></button>
-      <button class="chat_snd glyphicon glyphicon-send"></button>
+      <button id="snd_btn" class="chat_snd glyphicon glyphicon-send"></button>
     </form>
   </div>
   <div class="vid_box" id="video">
@@ -775,10 +792,13 @@
     <input onkeydown="document.getElementById('message').value = '<img src='+this.value+' height=100 width=100 >';" placeholder="Enter the url of the image" style="
     z-index: 20;
 " value="">
-    <button onclick="document.getElementById('snd_btn').click();" style="margin-top:100px;border:none;">Send Image</button>
+    <button onclick="document.getElementById('snd_btn').click();" style="margin-top:25px;border:none;">Share Image</button>
   </div>
   <div id="vid_up_box" style="display:none;">
-    <input onchange="document.getElementById('message').value = '<img src='+this.value+' height=100 width=100 >'" placeholder="Enter the url of the image"/>
+    <input onkeydown="document.getElementById('message').value = '<iframe src='+this.value+' height=100 width=100 ></iframe>';" placeholder="Enter the url of the video" style="
+    z-index: 20;
+" value="">
+    <button onclick="document.getElementById('snd_btn').click();" style="margin-top:25px;border:none;">Share video</button>
   </div>
 </center>
 </body>
