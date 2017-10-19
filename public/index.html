@@ -665,7 +665,7 @@ function checkTime(i) {
     if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
     return i;
 }
-        var socket = io();
+        var socket = io('http://localhost:3000');
         var api = find('api');
         var room_id = 'uni-tap_live_classes: Live_Class_Id: '+ api;
         var hoster = find('hostedby');
