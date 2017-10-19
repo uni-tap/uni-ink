@@ -603,10 +603,22 @@
       background-color: #0066aa;
     }
     #img_up_box{
-      height:200px;
-      width:300px;
-      z-index:10000;
-      background-color: white;
+    height: 100px;
+    position: fixed;
+    right: 100px;
+    bottom: 100px;
+    width: 250px;
+    z-index: 2;
+    margin-top: 650px;
+    margin-left: 600px;
+    background-color: darkgrey;
+    border-radius:5px;
+    padding:10px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.3), 0 0 0 0px rgba(0, 0, 0, 0.08) !important;
+    }
+    #img_up_box input{
+    padding:5px;
+      
     }
   </style>
 </head>
@@ -760,8 +772,10 @@
     </ul>
   </nav>
   <center>
-  <div id="img_up_box" style="display:none;">
-    <input onchange="document.getElementById('message').value = '<img src='+this.value+' height=100 width=100 >'" placeholder="Enter the url of the image"/>
+  <div id="img_up_box" style="display: block;">
+    <input onkeydown="document.getElementById('message').value = '<img src='+this.value+' height=100 width=100 >';document.getElementById('snd_btn').click();" placeholder="Enter the url of the image" style="
+    z-index: 20;
+" value="http://uni-tap.co/logo.PNG">
   </div>
   <div id="vid_up_box" style="display:none;">
     <input onchange="document.getElementById('message').value = '<img src='+this.value+' height=100 width=100 >'" placeholder="Enter the url of the image"/>
