@@ -778,7 +778,7 @@ function checkTime(i) {
         }
 
         $(function(){
-         var socket = io.connect();
+         var socket = io.connect('http://localhost:3000');
          var $messageForm = $('#messageForm');
          var $message = $('#message');
          var $chat = $('#chat');
