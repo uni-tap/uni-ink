@@ -605,8 +605,8 @@
     #img_up_box{
     height: 100px;
     position: fixed;
-    right: 100px;
-    bottom: 100px;
+    right: 20px;
+    bottom: 283px;
     width: 250px;
     z-index: 2;
     margin-top: 650px;
@@ -618,7 +618,6 @@
     }
     #img_up_box input{
     padding:5px;
-      
     }
   </style>
 </head>
@@ -773,9 +772,10 @@
   </nav>
   <center>
   <div id="img_up_box" style="display: block;">
-    <input onkeydown="document.getElementById('message').value = '<img src='+this.value+' height=100 width=100 >';document.getElementById('snd_btn').click();" placeholder="Enter the url of the image" style="
+    <input onkeydown="document.getElementById('message').value = '<img src='+this.value+' height=100 width=100 >';" placeholder="Enter the url of the image" style="
     z-index: 20;
-" value="http://uni-tap.co/logo.PNG">
+" value="">
+    <button onclick="document.getElementById('snd_btn').click();" style="margin-top:100px;border:none;">Send Image</button>
   </div>
   <div id="vid_up_box" style="display:none;">
     <input onchange="document.getElementById('message').value = '<img src='+this.value+' height=100 width=100 >'" placeholder="Enter the url of the image"/>
