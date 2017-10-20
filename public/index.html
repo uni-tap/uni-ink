@@ -1130,7 +1130,8 @@
     //var chat_msg_t_S =
     socket.emit('chat_msg', {
       chat: chat,
-      user: user
+      user: user,
+      id: find('id')
     });
   }
 
@@ -1140,13 +1141,13 @@
         toast(data.user + ':' + data.chat + "<p style='color:lime;' id='rep'>REPLY</p>");
         var li = document.createElement('li');
         li.className = 'r_msg';
-        li.innerHTML = '<img src="http://uni-tap.co/nusr/dp.php?id='+find('id')+'" height="50" width="50"><br/>'+data.user + ':' + data.chat;
+        li.innerHTML = '<img src="http://uni-tap.co/nusr/dp.php?id='+data.id+'" height="50" width="50"><br/>'+data.user + ':' + data.chat;
         var chat = document.querySelector('#chat');
         chat.appendChild(li);
       } else {
         var li = document.createElement('li');
         li.className = 'r_msg';
-        li.innerHTML = '<img src="http://uni-tap.co/nusr/dp.php?id='+find('id')+'" height="50" width="50"><br/>'+data.user + ':' + data.chat;
+        li.innerHTML = '<img src="http://uni-tap.co/nusr/dp.php?id='+data.id+'" height="50" width="50"><br/>'+data.user + ':' + data.chat;
         var chat = document.querySelector('#chat');
         chat.appendChild(li);
       }
