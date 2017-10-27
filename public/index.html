@@ -1145,7 +1145,7 @@
 
   socket.on('chat_msg', function(data) {
     if (data.user != find('user')) {
-      if (document.getElementById('chat').style.display == 'none') {
+      if (document.getElementById('chat_ar').style.display == 'none') {
         notifyMe(data.user + ':' + data.chat, "http://uni-tap.co/nusr/dp.php?id=" + data.id);
         var li = document.createElement('li');
         li.className = 'r_msg';
