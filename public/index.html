@@ -1132,7 +1132,7 @@
     var li = document.createElement('li');
     li.className = 's_msg';
     var user = find('user');
-    li.innerHTML = '<img src="http://uni-tap.co/nusr/dp.php?id=' + find('id') + '" height="50" width="50"><br/>You:' + chat;
+    li.innerHTML = '<img onerror="standby()" src="http://uni-tap.co/nusr/dp.php?id=' + find('id') + '" height="50" width="50"><br/>You:' + chat;
     var chat_a = document.querySelector('#chat');
     chat_a.appendChild(li);
     //var chat_msg_t_S =
@@ -1151,13 +1151,13 @@
         notifyMe(data.user + ':' + data.chat, "http://uni-tap.co/nusr/dp.php?id=" + data.id);
         var li = document.createElement('li');
         li.className = 'r_msg';
-        li.innerHTML = '<img src="http://uni-tap.co/nusr/dp.php?id=' + data.id + '" height="50" width="50"><br/>' + data.user + ':' + data.chat;
+        li.innerHTML = '<img onerror="standby()" src="http://uni-tap.co/nusr/dp.php?id=' + data.id + '" height="50" width="50"><br/>' + data.user + ':' + data.chat;
         var chat = document.querySelector('#chat');
         chat.appendChild(li);
       } else {
         var li = document.createElement('li');
         li.className = 'r_msg';
-        li.innerHTML = '<img src="http://uni-tap.co/nusr/dp.php?id=' + data.id + '" height="50" width="50"><br/>' + data.user + ':' + data.chat;
+        li.innerHTML = '<img onerror="standby()" src="http://uni-tap.co/nusr/dp.php?id=' + data.id + '" height="50" width="50"><br/>' + data.user + ':' + data.chat;
         var chat = document.querySelector('#chat');
         chat.appendChild(li);
       }
@@ -1168,6 +1168,9 @@
     reurn;
    }
   });
+  function standby(){
+   this.src = 'https://ssl.gstatic.com/images/branding/product/1x/avatar_circle_blue_512dp.png';
+  }
   // request permission on page load
   document.addEventListener('DOMContentLoaded', function() {
     if (Notification.permission !== "granted")
