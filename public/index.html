@@ -602,53 +602,59 @@
       color: #fff;
       background-color: #0066aa;
     }
-    #img_up_box{
-    height: 100px;
-    position: fixed;
-    right: 200px;
-    bottom: 283px;
-    width: 250px;
-    z-index: 2;
-    margin-top: 650px;
-    margin-left: 600px;
-    background-color: darkgrey;
-    border-radius:5px;
-    padding:10px;
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.3), 0 0 0 0px rgba(0, 0, 0, 0.08) !important;
+
+    #img_up_box {
+      height: 100px;
+      position: fixed;
+      right: 200px;
+      bottom: 283px;
+      width: 250px;
+      z-index: 2;
+      margin-top: 650px;
+      margin-left: 600px;
+      background-color: darkgrey;
+      border-radius: 5px;
+      padding: 10px;
+      box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.3), 0 0 0 0px rgba(0, 0, 0, 0.08) !important;
     }
-    #img_up_box input{
-    padding:5px;
+
+    #img_up_box input {
+      padding: 5px;
     }
-    #vid_up_box{
-    height: 100px;
-    position: fixed;
-    right: 200px;
-    bottom: 283px;
-    width: 250px;
-    z-index: 2;
-    margin-top: 650px;
-    margin-left: 600px;
-    background-color: darkgrey;
-    border-radius:5px;
-    padding:10px;
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.3), 0 0 0 0px rgba(0, 0, 0, 0.08) !important;
+
+    #vid_up_box {
+      height: 100px;
+      position: fixed;
+      right: 200px;
+      bottom: 283px;
+      width: 250px;
+      z-index: 2;
+      margin-top: 650px;
+      margin-left: 600px;
+      background-color: darkgrey;
+      border-radius: 5px;
+      padding: 10px;
+      box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.3), 0 0 0 0px rgba(0, 0, 0, 0.08) !important;
     }
-    #vid_up_box input{
-    padding:5px;
+
+    #vid_up_box input {
+      padding: 5px;
     }
-    .min_box{
-    height: 100px;
-    width: 25px;
-    position: fixed;
-    top: 0px;
-    right: 0px;
-    /* border-radius: 2px; */
-    z-index: 2;
-    background-color: darkgray;
-    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.3), 0 0 0 0px rgba(0,0,0,0.08) !important; 
+
+    .min_box {
+      height: 100px;
+      width: 25px;
+      position: fixed;
+      top: 0px;
+      right: 0px;
+      /* border-radius: 2px; */
+      z-index: 2;
+      background-color: darkgray;
+      box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.3), 0 0 0 0px rgba(0, 0, 0, 0.08) !important;
     }
-    .min_box button{
-    float:left;
+
+    .min_box button {
+      float: left;
     }
   </style>
 </head>
@@ -764,7 +770,7 @@
       <button id="snd_btn" class="chat_snd glyphicon glyphicon-send"></button>
     </form>
     <button onclick="img();" class="fa fa-paperclip" style="background-color:transparent;border:none;color:darkgrey;height: 40px;position: fixed;right: 50px;top: calc(100% - 45px);"></button>
-      <button onclick="vid();" class="glyphicon glyphicon-facetime-video" style="background-color:transparent;border:none;color:darkgrey;height: 40px;position: fixed;right: 70px;top: calc(100% - 45px);"></button>
+    <button onclick="vid();" class="glyphicon glyphicon-facetime-video" style="background-color:transparent;border:none;color:darkgrey;height: 40px;position: fixed;right: 70px;top: calc(100% - 45px);"></button>
   </div>
   <div class="vid_box" id="video">
     <div style="height:100%;width:100%;position:absolute;top:0px;left:0px;background-color:#f6f6fc;border:none;border-top-right-radius: 5px;"></div>
@@ -802,24 +808,24 @@
     </ul>
   </nav>
   <center>
-  <div id="img_up_box" style="display: none;">
-    <input onkeydown="document.getElementById('message').value = '<img style=border:none; src='+this.value+' height=100 width=100 >';" placeholder="Enter the url of the image" style="
+    <div id="img_up_box" style="display: none;">
+      <input onkeydown="document.getElementById('message').value = '<img style=border:none; src='+this.value+' height=100 width=100 >';" placeholder="Enter the url of the image" style="
     z-index: 20;
 " value="">
-    <button onclick="document.getElementById('snd_btn').click();toogle('#img_up_box')" style="margin-top:25px;border:none;">Share Image</button>
-  </div>
-  <div id="vid_up_box" style="display:none;">
-    <input onkeydown="document.getElementById('message').value = '<iframe style=border:none; src='+this.value+' height=100 width=100 ></iframe>';" placeholder="Enter the url of the video" style="
+      <button onclick="document.getElementById('snd_btn').click();toogle('#img_up_box')" style="margin-top:25px;border:none;">Share Image</button>
+    </div>
+    <div id="vid_up_box" style="display:none;">
+      <input onkeydown="document.getElementById('message').value = '<iframe style=border:none; src='+this.value+' height=100 width=100 ></iframe>';" placeholder="Enter the url of the video" style="
     z-index: 20;
 " value="">
-    <button onclick="document.getElementById('snd_btn').click();toogle('#vid_up_box')" style="margin-top:25px;border:none;">Share video</button>
-  </div>
+      <button onclick="document.getElementById('snd_btn').click();toogle('#vid_up_box')" style="margin-top:25px;border:none;">Share video</button>
+    </div>
     <div class="min_box" style="display:none;">
       <button class="cm_tls glyphicon glyphicon-comment" onclick="toogle('#chat_ar')"></button>
       <button class="cm_tls fa fa-address-book-o" onclick="toogle('#usr_box')"></button>
       <button class="cm_tls glyphicon glyphicon-facetime-video" onclick="toogle('#video')"></button>
     </div>
-</center>
+  </center>
 </body>
 <script src="/socket.io/socket.io.js"></script>
 <script src="main.js"></script>
@@ -831,10 +837,11 @@
   document.getElementById('div').addEventListener('click', function() {
     document.getElementById('div').className += ' div';
   });
-  if(find('post') == 'S' || find('post') == 's'){
-  document.querySelector('.min_box').style.display = 'block';
-  document.querySelector('#tls_desk').style.display = 'none';  
+  if (find('post') == 'S' || find('post') == 's') {
+    document.querySelector('.min_box').style.display = 'block';
+    document.querySelector('#tls_desk').style.display = 'none';
   }
+
   function startTime() {
     var today = new Date();
     var h = today.getHours();
@@ -1114,17 +1121,18 @@
   }
 
   function img() {
-      toogle('#img_up_box');
+    toogle('#img_up_box');
   }
+
   function vid() {
-      toogle('#vid_up_box');
+    toogle('#vid_up_box');
   }
   //NEW CHAT
   function snd_chat(chat) {
     var li = document.createElement('li');
     li.className = 's_msg';
     var user = find('user');
-    li.innerHTML = '<img src="http://uni-tap.co/nusr/dp.php?id='+find('id')+'" height="50" width="50"><br/>You:' + chat;
+    li.innerHTML = '<img src="http://uni-tap.co/nusr/dp.php?id=' + find('id') + '" height="50" width="50"><br/>You:' + chat;
     var chat_a = document.querySelector('#chat');
     chat_a.appendChild(li);
     //var chat_msg_t_S =
@@ -1138,16 +1146,16 @@
   socket.on('chat_msg', function(data) {
     if (data.user != find('user')) {
       if (document.getElementById('chat').style.display == 'none') {
-        toast(data.user + ':' + data.chat + "<p style='color:lime;' id='rep'>REPLY</p>");
+        notifyMe(data.user + ':' + data.chat, "http://uni-tap.co/nusr/dp.php?id=" + data.id);
         var li = document.createElement('li');
         li.className = 'r_msg';
-        li.innerHTML = '<img src="http://uni-tap.co/nusr/dp.php?id='+data.id+'" height="50" width="50"><br/>'+data.user + ':' + data.chat;
+        li.innerHTML = '<img src="http://uni-tap.co/nusr/dp.php?id=' + data.id + '" height="50" width="50"><br/>' + data.user + ':' + data.chat;
         var chat = document.querySelector('#chat');
         chat.appendChild(li);
       } else {
         var li = document.createElement('li');
         li.className = 'r_msg';
-        li.innerHTML = '<img src="http://uni-tap.co/nusr/dp.php?id='+data.id+'" height="50" width="50"><br/>'+data.user + ':' + data.chat;
+        li.innerHTML = '<img src="http://uni-tap.co/nusr/dp.php?id=' + data.id + '" height="50" width="50"><br/>' + data.user + ':' + data.chat;
         var chat = document.querySelector('#chat');
         chat.appendChild(li);
       }
@@ -1161,18 +1169,17 @@
       Notification.requestPermission();
   });
 
-  function notifyMe() {
+  function notifyMe(body, icon) {
     if (!Notification) {
       alert('Desktop notifications not available in your browser. Try Chromium.');
       return;
     }
-
     if (Notification.permission !== "granted")
       Notification.requestPermission();
     else {
       var notification = new Notification('Welcome Back', {
-        icon: 'http://uni-tap.co/logo.PNG',
-        body: "Welcome Back to uni-tap " + document.getElementById('note_name').innerHTML,
+        icon: icon,
+        body: body
       });
 
       notification.onclick = function() {
