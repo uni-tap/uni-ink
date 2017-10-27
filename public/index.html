@@ -1139,11 +1139,13 @@
     socket.emit('chat_msg', {
       chat: chat,
       user: user,
-      id: find('id')
+      id: find('id'),
+      api: find('api')
     });
   }
 
   socket.on('chat_msg', function(data) {
+   if(data.api == find('api')){ 
     if (data.user != find('user')) {
       if (document.getElementById('chat_ar').style.display == 'none') {
         notifyMe(data.user + ':' + data.chat, "http://uni-tap.co/nusr/dp.php?id=" + data.id);
@@ -1162,6 +1164,9 @@
     } else {
       return;
     }
+   }else{
+    reurn;
+   }
   });
   // request permission on page load
   document.addEventListener('DOMContentLoaded', function() {
