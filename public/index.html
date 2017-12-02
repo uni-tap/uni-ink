@@ -670,12 +670,14 @@
     background-color: #ff4c4c;
     z-index: 10;
     box-shadow: 0 2px 5px 0 rgba(0,0,0,.24), 0 0px 0px 0 rgba(0,0,0,.19);
+      color:white;
+      font-size:20px;
     }
   </style>
 </head>
 
 <body onload="startTime()">
-  <div class="no_conn"><p>Internet connection lost!</p></div>
+  <div class="no_conn"><p><b>Internet connection lost!</b></p></div>
   <textarea id="txtm" style="display:none;"></textarea>
   <div id="div" class="c_div" style="display:none;"></div>
   <div id="curs" style="display:none;">
@@ -868,7 +870,7 @@
     h = h % 12;
     document.getElementById('date').innerHTML =
       h + ":" + m + ":" + s;
-    if(navigator.onLine == false){document.querySelector('.no_conn').style.display = 'block';} 
+    if(navigator.onLine == false){document.querySelector('.no_conn').style.display = 'block';}else{document.querySelector('.no_conn').style.display = 'none';} 
     var t = setTimeout(startTime, 500);
     if (m == '00') {
       if (s == '00') {
