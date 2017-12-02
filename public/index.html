@@ -657,10 +657,25 @@
       float: left;
     }
     .cht_usr_img{border-radius:50px;}
+    .no_conn{
+    display: none;
+    position: absolute;
+    padding: 5px;
+    padding-left: 27px;
+    top: 25px;
+    left: 660px;
+    height: 100px;
+    width: 200px;
+    border-radius: 5px;
+    background-color: #ff4c4c;
+    z-index: 10;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.24), 0 0px 0px 0 rgba(0,0,0,.19);
+    }
   </style>
 </head>
 
 <body onload="startTime()">
+  <div class="no_conn"><p>Internet connection lost!</p></div>
   <textarea id="txtm" style="display:none;"></textarea>
   <div id="div" class="c_div" style="display:none;"></div>
   <div id="curs" style="display:none;">
@@ -853,6 +868,7 @@
     h = h % 12;
     document.getElementById('date').innerHTML =
       h + ":" + m + ":" + s;
+    if(navigator.onLine == 'false'){document.querySelector('.no_conn').style.display = 'block';} 
     var t = setTimeout(startTime, 500);
     if (m == '00') {
       if (s == '00') {
