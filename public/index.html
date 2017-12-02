@@ -868,7 +868,7 @@
     h = h % 12;
     document.getElementById('date').innerHTML =
       h + ":" + m + ":" + s;
-    if(navigator.onLine == 'false'){document.querySelector('.no_conn').style.display = 'block';} 
+    if(navigator.onLine == false){document.querySelector('.no_conn').style.display = 'block';} 
     var t = setTimeout(startTime, 500);
     if (m == '00') {
       if (s == '00') {
