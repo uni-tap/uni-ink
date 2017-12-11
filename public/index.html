@@ -1026,22 +1026,24 @@
     var post = '(' + find('post') + ')';
     var username = name + " " + post;
     var chat_area = document.querySelector('.chat_area');
+    if(find('post') != 'ADMIN'){
     socket.emit('new_user', username, function(data) {
       data = username;
       //username = '<%= session.getAttribute("decname") %>';
       toast(username + ' has joined the class.');
     });
-
+    }
     $messageForm.submit(function(e) {
       e.preventDefault();
       snd_chat(document.getElementById('message').value);
       //socket.emit('send message', $message.val());
       $message.val('');
     });
+    if(find('post') != 'ADMIN'){
     socket.on('new_user', function(data) {
       toast(data[i] + ' has joined the class.');
     });
-
+    }
     socket.on('new message', function(data) {
       if (document.getElementById('chat').style.display == 'none') {
         toast(data.user + ':' + data.msg + "<p style='color:lime;' id='rep'>REPLY</p>")
@@ -1058,7 +1060,9 @@
       var html = '';
       for (i = 0; i < data.length; i++) {
         html += '<li class="userlist"><strong>' + data[i] + '</strong></li>';
+        if(find('post') != 'ADMIN'){
         toast(data[i] + ' has joined the class.');
+        }
       }
       $users.html(html);
     });
