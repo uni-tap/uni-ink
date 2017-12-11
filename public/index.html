@@ -129,7 +129,7 @@
       right: 0px;
       bottom: 0px;
       padding: 2px;
-      background-color: #f6f7f9;
+      background-color: white;
       border-top-left-radius: 5px;
       box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.3), 0 0 0 0px rgba(0, 0, 0, 0.08) !important;
       z-index: 2;
@@ -675,6 +675,18 @@
     padding: 5px;
     background-color: white;
     }
+    .top_chat_bar{
+    width: 100%;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .20);
+    background-color: #f6f7f9;
+    font-family: 'PT Sans', sans-serif;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #4b4f56;
+    font-size: 12px;
+    line-height: 26px;
+    overflow:hidden;  
+    }
   </style>
 </head>
 
@@ -778,6 +790,8 @@
     <iframe id="book_area"></iframe>
   </div>
   <div class="chat_area" id="chat_ar">
+    <div class="top_chat_bar" style="
+    "><p id="cactn">Chat (<b>15</b>)</p></div>
     <div style="overflow-y:auto;">
       <ul id="chat" style="
     margin-left: 0px !important;
