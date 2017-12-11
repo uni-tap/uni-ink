@@ -138,26 +138,28 @@
 
     .chat_msg {
       position: fixed;
-      bottom: 3px;
-      right: 4px;
-      height: 41px;
-      border: none;
-      padding: 5px;
-      background-color: white;
-      border-radius: 3px;
-      width: 19%;
+    bottom: 30px;
+    right: -5px;
+    height: 25px;
+    border: none;
+    padding: 5px;
+    background-color: white;
+    /* border-radius: 3px; */
+    width: 20%;
+    font-size: 12px;
     }
 
     .chat_snd {
-      position: fixed;
-      right: 5px;
-      top: calc(100% - 45px);
-      height: 40px;
-      width: 40px;
-      border-radius: 3px;
-      background-color: #3f3c3b;
-      color: white;
-      border: none;
+     position: fixed;
+    right: 0px;
+    top: 842px;
+    height: 35px;
+    width: 40px;
+    /* border-radius: 3px; */
+    background-color: white;
+    color: darkgrey;
+    border: none;
+    z-index: 10;
     }
 
     .vid_box {
@@ -661,6 +663,15 @@
       color:white;
       font-size:20px;
     }
+    .feat_tab{
+    height: 30px;
+    width: 20%;
+    position: fixed;
+    bottom: 0px;
+    right: -5px;
+    padding: 5px;
+    background-color: white;
+    }
   </style>
 </head>
 
@@ -769,15 +780,16 @@
     margin-left: 0px !important;
     padding-left: 0px;
     height: 85%;
+    overflow-x: hidden;
 "></ul>
     </div>
     <form action="" id="messageForm">
-      <input type="text" id="message" class="chat_msg">
+      <input autocomplete="off" placeholder="Type a message..." type="text" id="message" class="chat_msg">
       <button id="snd_btn" class="chat_snd glyphicon glyphicon-send"></button>
     </form>
-    <button onclick="img();" class="fa fa-paperclip" style="background-color:transparent;border:none;color:darkgrey;height: 40px;position: fixed;right: 50px;top: calc(100% - 45px);"></button>
-    <button onclick="vid();" class="glyphicon glyphicon-facetime-video" style="background-color:transparent;border:none;color:darkgrey;height: 40px;position: fixed;right: 70px;top: calc(100% - 45px);"></button>
-  </div>
+    <div class="feat_tab">
+      <button onclick="img();" class="fa fa-paperclip" style="background-color:transparent;border:none;color:darkgrey;height: 40px;position: absolute;left: 73px;top: -3px;"></button>
+      <button onclick="vid();" class="glyphicon glyphicon-facetime-video" style="background-color:transparent;border:none;color:darkgrey;height: 40px;position: absolute;right: 53px;top: -3px;"></button></div>  </div>
   <div class="vid_box" id="video">
     <div style="height:100%;width:100%;position:absolute;top:0px;left:0px;background-color:#f6f6fc;border:none;border-top-right-radius: 5px;"></div>
     <div id="remotesVideos"></div>
