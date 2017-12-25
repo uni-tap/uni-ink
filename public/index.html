@@ -952,6 +952,7 @@
       id: find('id'),
       post: find('post')
     });
+    console.log('done_add');
   }
   
   socket.on('add_usr', function(){
@@ -964,6 +965,7 @@
     }else{
       return;
     }
+    console.log('done_add');
   });
   
   function add_to_list(user, id, post){
