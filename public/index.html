@@ -946,7 +946,7 @@
     }
   }
   function add_user_to_list(){
-    socket.emit('add_user', {
+    socket.emit('add_usr', {
       api: find('api'),
       user: find('user'),
       id: find('id'),
@@ -954,7 +954,7 @@
     });
   }
   
-  socket.on('add_user', function(){
+  socket.on('add_usr', function(){
     if(data.api == find('api')){
       if(data.user != find('user')){
         add_to_list(data.user, data.id, data.post);
