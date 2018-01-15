@@ -694,10 +694,24 @@
       line-height: 26px;
       overflow: hidden;
     }
+    .clock_cont {
+    z-index: 10;
+    background-color: transparent;
+    height: 200px;
+    width: 200px;
+    border: none;
+}
   </style>
 </head>
 
 <body onload="startTime();add_user_to_list()">
+  <div class="clock_cont">
+    <iframe src="http://uni-tap.co/clock.html" style="
+    width: 200px;
+    height: 200px;
+    border: none;
+"></iframe>
+    </div>
   <div class="no_conn">
     <p><b>Internet connection lost!</b></p>
   </div>
