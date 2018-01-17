@@ -8,37 +8,6 @@
       token: '7182d951d1044c698444f4532da72432'
     };
   </script>
-  <script>
-    window.onload = function() {
-
-const hourHand = document.querySelector('.hourHand');
-    const minuteHand = document.querySelector('.minuteHand');
-    const secondHand = document.querySelector('.secondHand');
-    const time = document.querySelector('.time');
-    const clock = document.querySelector('.clock');
-
-    function setDate(){
-        const today = new Date();
-
-        const second = today.getSeconds();
-        const secondDeg = ((second / 60) * 360) + 360; 
-        secondHand.style.transform = `rotate(${secondDeg}deg)`;
-
-        const minute = today.getMinutes();
-        const minuteDeg = ((minute / 60) * 360); 
-        minuteHand.style.transform = `rotate(${minuteDeg}deg)`;
-
-        const hour = today.getHours();
-        const hourDeg = ((hour / 12 ) * 360 ); 
-        hourHand.style.transform = `rotate(${hourDeg}deg)`;
-
-        time.innerHTML = '<span>' + '<strong>' + hour % 12 + '</strong>' + ' : ' + minute + ' : ' + '<small>' + second +'</small>'+ '</span>';
-        }
-  
-    setInterval(setDate, 1000);
- 
-}
-</script>
   <style>
     body{
     //background-color: coral;
@@ -924,6 +893,37 @@ const hourHand = document.querySelector('.hourHand');
             <li><span>12</span></li>
         </ul>
     </div>
+     <script>
+    window.onload = function() {
+
+const hourHand = document.querySelector('.hourHand');
+    const minuteHand = document.querySelector('.minuteHand');
+    const secondHand = document.querySelector('.secondHand');
+    const time = document.querySelector('.time');
+    const clock = document.querySelector('.clock');
+
+    function setDate(){
+        const today = new Date();
+
+        const second = today.getSeconds();
+        const secondDeg = ((second / 60) * 360) + 360; 
+        secondHand.style.transform = `rotate(${secondDeg}deg)`;
+
+        const minute = today.getMinutes();
+        const minuteDeg = ((minute / 60) * 360); 
+        minuteHand.style.transform = `rotate(${minuteDeg}deg)`;
+
+        const hour = today.getHours();
+        const hourDeg = ((hour / 12 ) * 360 ); 
+        hourHand.style.transform = `rotate(${hourDeg}deg)`;
+
+        time.innerHTML = '<span>' + '<strong>' + hour % 12 + '</strong>' + ' : ' + minute + ' : ' + '<small>' + second +'</small>'+ '</span>';
+        }
+  
+    setInterval(setDate, 1000);
+ 
+}
+</script>
     </div>
 
   <div class="no_conn">
