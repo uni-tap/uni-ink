@@ -924,9 +924,12 @@
       document.querySelector('.no_conn').style.display = 'none';
     }
     var t = setTimeout(startTime, 500);
-    if (m == '00') {
+    if (m == '16') {
       if (s == '00') {
-       // toogle('#clckcont');
+        toogle('#clckcont');
+        setTimeout(function() {
+             toogle('#clckcont');
+        }, 2000);
         toast(document.getElementById('date').innerHTML);
       }
     }
