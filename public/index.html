@@ -924,13 +924,13 @@
       document.querySelector('.no_conn').style.display = 'none';
     }
     var t = setTimeout(startTime, 500);
-    if (m == '20') {
+    if (m == '00') {
       if (s == '00') {
         toogle('#clckcont');
+        toast(document.getElementById('date').innerHTML);
         setTimeout(function() {
              toogle('#clckcont');
-        }, 6000);
-        toast(document.getElementById('date').innerHTML);
+        }, 3000);
       }
     }
   }
