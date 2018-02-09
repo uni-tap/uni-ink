@@ -1,6 +1,6 @@
 'use strict';
 (function() {
-  var sleep_time = 0;
+  var sleep_timer = 0;
   var thickness = 2;
   var socket = io();
   var canvas = document.getElementsByClassName('whiteboard')[0];
