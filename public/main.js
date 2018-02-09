@@ -1,5 +1,6 @@
 'use strict';
 (function() {
+  var sleep_time = 0;
   var thickness = 2;
   var socket = io();
   var canvas = document.getElementsByClassName('whiteboard')[0];
@@ -86,7 +87,7 @@
       }
     }
   }
-
+setInterval(sleep_timer+1,1000);
   function find(name) {
     var url = window.location.search;
     var num = url.search(name);
@@ -304,7 +305,7 @@
       main_ctx.lineWidth = thickness;
       main_ctx.stroke();
       main_ctx.closePath();
-
+      sleep_timer = 0;
       //SENDING TO OTHER USERS
 
       if (!emit) {
@@ -698,6 +699,7 @@
   // DRAWING THE SELECTED TOOL ON THE BOARD
 
   function onMouseDown(e) {
+    sleep_timer = 0;
     drawing = true;
     current.x = e.clientX;
     current.y = e.clientY;
@@ -705,8 +707,11 @@
       draw.Text(current.x, current.y, e.clientX, e.clientY, current.color, true);
     }
   }
-
+function sleep_time(){
+ setInterval(sleep_timer+1, 1000); 
+}
   function onMouseUp(e) {
+    sleep_time();
     if (current.canvas == canvas) {
       update_data(context, scontext, canvas);
       history.saveState(scanvas);
@@ -964,6 +969,7 @@
   function onDrawingEvent(data) {
     if (data.api == api) {
       if (data.page == totalcurrentpagecount) {
+        sleep_timer = 0;
         var cw = canvas.width;
         var ch = canvas.height;
         draw.pen(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color);
@@ -1151,5 +1157,7 @@
   });
   // IMAGE UPLOADING SECTION. IT'S TOTALLY DIFFERENT SECTION DO NOT COMBINE IT WITH ANY OTHER FUNCTION 💀 ☠ 👿 😈.
   //alert('It is successfull.<br />Lorem ipsum cum sociss bonjur annayang siri cortana life like moto apple bannana.Lorem ipsum cum sociss bonjur annayang siri cortana life like moto apple bannana.Lorem ipsum cum sociss bonjur annayang siri cortana life like moto apple bannana', 'success');
-
+if (sleep_timer == 60){
+ window.location.reload(); 
+}
 })();
