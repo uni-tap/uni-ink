@@ -186,6 +186,36 @@
         }
     </script>
     <script>
+   var socket = io();
+  var api = find('api');
+  var room_id = 'uni-tap_live_classes: Live_Class_Id: ' + api;
+  var hoster = find('hostedby');
+  var title = find('title');
+  var user = find('user');
+  title = title.replace('%20', ' ');
+  window.onload = function() {
+    var stateObj = {
+      foo: "bar"
+    }
+    };
+    $(function() {
+    var socket = io.connect();
+    var $messageForm = $('#messageForm');
+    var $message = $('#message');
+    var $chat = $('#chat');
+    var $users = $('#users');
+    var name = find('user');
+    name = name.replace(/%20/g, " ");
+    var post = '(' + find('post') + ')';
+    var username = name + " " + post;
+    var chat_area = document.querySelector('.chat_area');
+    if (find('post') != 'ADMIN') {
+      socket.emit('new_user', username, function(data) {
+        data = username;
+        //username = '<%= session.getAttribute("decname") %>';
+        toast(username + ' has joined the class.');
+      });
+    }
         var webrtc = new SimpleWebRTC({
     // the id/element dom element that will hold "our" video
     localVideoEl: 'localVideo',
