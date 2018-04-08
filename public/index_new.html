@@ -175,7 +175,19 @@
     </body>
     <script src="main.js"></script>
     <script src="/socket.io/socket.io.js"></script>
-    <script src="https://simplewebrtc.com/latest-v2.js"></script>	
+    <script src="https://simplewebrtc.com/latest-v2.js"></script> 
+    <script>
+	    var socket = io();
+  var api = find('api');
+  var room_id = 'uni-tap_live_classes: Live_Class_Id: ' + api;
+  var hoster = find('hostedby');
+  var title = find('title');
+  var user = find('user');
+  title = title.replace('%20', ' ');
+  window.onload = function() {
+    var stateObj = {
+      foo: "bar"
+    };</script>
     <script>
         function toggle(elem){
             var obj = document.querySelector(elem);
