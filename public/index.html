@@ -206,205 +206,382 @@
 	    });
     </script>
     <script>
+	    <script>
+  document.getElementById('div').addEventListener('click', function() {
+    document.getElementById('div').className += ' div';
+  });
+  if (find('post') == 'S' || find('post') == 's') {
+    document.querySelector('.min_box').style.display = 'block';
+    document.querySelector('#tls_desk').style.display = 'none';
+  }
+  function startTime() {
+    var today = new Date();
+    var h = today.getHours();
+    var m = today.getMinutes();
+    var s = today.getSeconds();
+    m = checkTime(m);
+    s = checkTime(s);
+    h = h % 12;
+    document.getElementById('date').innerHTML =
+      h + ":" + m + ":" + s;
+    if (navigator.onLine == false) {
+      document.querySelector('.no_conn').style.display = 'block';
+    } else {
+      document.querySelector('.no_conn').style.display = 'none';
+    }
+    var t = setTimeout(startTime, 500);
+    if (m == '00') {
+      if (s == '00') {
+        toogle('#clckcont');
+        toast(document.getElementById('date').innerHTML);
+        setTimeout(function() {
+             toogle('#clckcont');
+        }, 3000);
+      }
+    }
+  }
+  function checkTime(i) {
+    if (i < 10) {
+      i = "0" + i
+    }; // add zero in front of numbers < 10
+    return i;
+  }
+  var socket = io();
+  var api = find('api');
+  var room_id = 'uni-tap_live_classes: Live_Class_Id: ' + api;
+  var hoster = find('hostedby');
+  var title = find('title');
+  var user = find('user');
+  title = title.replace('%20', ' ');
+  window.onload = function() {
+    var stateObj = {
+      foo: "bar"
+    };
+    //history.pushState(stateObj, "page 2", "uni-tap_live_class_going_on.->This_Class_Is_Being_Hosted_By:"+hoster);
+    startTime();
+    toast('Welcome to the ' + title + ' 😃 ');
+    var post_tools = find('post');
+    if (post_tools == 's' || post_tools == 'S') {
+      //toogle('#tls_desk');
+      if (document.getElementById('date').innerHTML > find('s_time')) {
+        socket.emit('late', {
+          user: user,
+          api: api
+        });
+      }
+    }
+  }
+  function add_user_to_list(){
+    socket.emit('add_usr', {
+      api: find('api'),
+      user: find('user'),
+      id: find('id'),
+      post: find('post')
+    });
+    console.log('done_add');
+  }
+  
+  socket.on('add_usr', function(){
+    if(data.api == find('api')){
+      if(data.user != find('user')){
+        add_to_list(data.user, data.id, data.post);
+      }else{
+        return;
+      }
+    }else{
+      return;
+    }
+    console.log('done_add');
+  });
+  
+  function add_to_list(user, id, post){
+    var list = document.querySelector('#tot_usr');
+    var item = document.createElement('li');
+        item.innerHTML = '<img src="http://uni-tap.co/nusr/dp.php?id='+data.id+'"'+data.user+' ('+data.post+' )';
+        list.appendChild(item);
+  }
+  // OTHER IMPORTANT FUNCTIONS
+  function get(id, condition) {
+    document.querySelector(id).style.display = condition;
+  }
+  function find(name) {
+    var url = window.location.search;
+    var num = url.search(name);
+    var namel = name.length;
+    var frontlength = namel + num + 1; //length of everything before the value
+    var front = url.substring(0, frontlength);
+    url = url.replace(front, "");
+    num = url.search("&");
+    if (num >= 0) return url.substr(0, num);
+    if (num < 0) return url;
+  }
+  function toast(msg) {
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML = msg;
+    setTimeout(function() {
+      x.className = x.className.replace("show", "");
+    }, 3000);
+  }
+  function hide() {
+    var tools_desk = document.getElementById('tls_desk');
+    setTimeout(function() {
+      tools_desk.style.bottom = '-150px', 3000
+    });
+  }
+  function show() {
+    document.getElementById('video').getElementsByTagName('video')[0].setAttribute('controls', '');
+    var tools_desk = document.getElementById('tls_desk');
+    setTimeout(function() {
+      tools_desk.style.bottom = '-50px', 3000
+    });
+  }
+  function toogle(obj) {
+    var element = document.querySelector(obj);
+    if (element.style.display == 'none') {
+      element.style.display = 'block';
+    } else {
+      element.style.display = 'none';
+    }
+  }
+  function get_elm(obj) {
+    var elm = document.querySelector(obj);
+    return elm;
+  }
+  function do_essentials() {
+    //function only for book loader
+    //get_elm('#tls_desk').style.height = '100%';
+    //get_elm('#tls_desk').onmouseover = '';
+    //get_elm('#tls_desk').onmouseout = '';
+    var input = document.getElementById("filer");
+    var file = input.value.split("\\");
+    var fileName = file[file.length - 1];
+    //alert(file);
+    //toogle('#video');
+    //toogle('#chat');
+    toogle_pro('#bookloader');
+    // if(get_elm('#book_area').src == '' || !get_elm('#book_area').src ){
+    //  get_elm('#book_area').src = 'http://localhost/firebase/Chapter1-Matter In Our Surroundings.pdf';
+    //    }else{}
+  }
+  function toogle_pro(obj) {
+    var element = document.querySelector(obj);
+    if (element.style.display == 'none') {
+      element.style.display = 'block';
+    } else {
+      element.style.display = 'block';
+    }
+  }
+  function animate() {
+    this.style.fontSize = 'x-large';
+    setTimeout(1000, function() {
+      this.style.fontSize = 'large';
+    });
+  }
+  function open_book(url) {
+    do_essentials();
+    get_elm('#book_area').src = url;
+    toogle('.book_select');
+  }
+  function back() {
+    //function only for book loader
+    var desk = get_elm('#tls_desk');
+    desk.style.height = '180px';
+    desk.addEventListener('mouseover', show);
+    desk.addEventListener('mouseout', hide);
+    get_elm('#bookloader').style.display = 'none';
+  }
+  $(function() {
+    var socket = io.connect();
+    var $messageForm = $('#messageForm');
+    var $message = $('#message');
+    var $chat = $('#chat');
+    var $users = $('#users');
+    var name = find('user');
+    name = name.replace(/%20/g, " ");
+    var post = '(' + find('post') + ')';
+    var username = name + " " + post;
+    var chat_area = document.querySelector('.chat_area');
+    if (find('post') != 'ADMIN') {
+      socket.emit('new_user', username, function(data) {
+        data = username;
+        //username = '<%= session.getAttribute("decname") %>';
+        toast(username + ' has joined the class.');
+      });
+    }
+    $messageForm.submit(function(e) {
+      e.preventDefault();
+      snd_chat(document.getElementById('message').value);
+      //socket.emit('send message', $message.val());
+      $message.val('');
+    });
+    if (find('post') != 'ADMIN') {
+      socket.on('new_user', function(data) {
+        toast(data[i] + ' has joined the class.');
+      });
+    }
+    socket.on('new message', function(data) {
+      if (document.getElementById('chat').style.display == 'none') {
+        toast(data.user + ':' + data.msg + "<p style='color:lime;' id='rep'>REPLY</p>")
+        //document.getElementById('rep').addEventListener('click', toogle('#chat'), false);
+        $chat.append('<li class="chtcnt" focus><strong>' + data.user + ':</strong> ' + data.msg + '</li>')
+        $chat.scrollTop = $chat.scrollHeight;
+      } else {
+        $chat.append('<li class="chtcnt" focus><strong>' + data.user + ':</strong> ' + data.msg + '</li>')
+        $chat.scrollTop = $chat.scrollHeight;
+      }
+    });
+    socket.on('get users', function(data) {
+      var html = '';
+      for (i = 0; i < data.length; i++) {
+        html += '<li class="userlist"><strong>' + data[i] + '</strong></li>';
+        if (find('post') != 'ADMIN') {
+          toast(data[i] + ' has joined the class.');
+        }
+      }
+      $users.html(html);
+    });
+    socket.on('reload', function() {
+      setTimeout(2000, window.reload(true));
+    });
+  });
+  window.addEventListener('reload', function() {
+    socket.emit('reload');
+  });
+  //VIDEO AND AUDIO CHATTING AREA
+  var webrtc = new SimpleWebRTC({
+    // the id/element dom element that will hold "our" video
+    localVideoEl: 'localVideo',
+    // the id/element dom element that will hold remote videos
+    remoteVideosEl: 'remotesVideos',
+    // immediately ask for camera access
+    autoRequestMedia: true
+  });
+  // we have to wait until it's ready
+  webrtc.on('readyToCall', function() {
+    // you can name it anything
+    webrtc.joinRoom(room_id);
+  });
+  //ENDING CLASS
+  socket.on('end_class', onEnd_class);
+  var e_api = find('api');
+  var host = find('hostedby');
+  var user = find('user');
+  var post = find('post');
+  function end_class() {
+    if (post == 's' || post == 'S') {
+      return;
+    } else {
+      /*  window.onbeforeunload =  function() {
+                  return "Do you really want to end the class?";
+        }  */
+      socket.emit('end_class', 'end');
+      toast('This Class is now over by:' + user, 'warn');
+      setTimeout(function() {
+        //window.location.replace('http://uni-tap.co/end_class.php?api=' +e_api+'&host='+host+'&user='+user)
+        window.location.replace('http://uni-tap.co/index.php');
+      }, 3050);
+      //window.location.replace('https://uni-tap.github.io/end_class.php?api=' +e_api+'&host='+host+'&user='+user);
+    }
+  }
+  function onEnd_class(data) {
+    if (post == 's' || post == 'S') {
+      return;
+    } else {
+      toast('This Class is now over 😌');
+      setTimeout(function() {
+        //window.location.replace('http://uni-tap.co/end_class.php?api=' +e_api+'&host='+host+'&user='+user)
+        window.location.replace('http://uni-tap.co/index.php');
+      }, 3050);
+    }
+  }
+  var box = document.querySelector('#msg_box');
+  /*function toast(msg){
+    document.getElementById('msg_p').innerHTML = msg;
+    //remove_toast()
+    setTimeout(function(){
+    box.style.opacity = '0'
+    box.style.display = 'none'
+    },
+    5000
+  );;
+  }*/
+  function remove_toast() {
+    console.log('done');
+  }
+  function img() {
+    toogle('#img_up_box');
+  }
+  function vid() {
+    toogle('#vid_up_box');
+  }
+  //NEW CHAT
+  function snd_chat(chat) {
+    var li = document.createElement('li');
+    li.className = 's_msg';
+    var user = find('user');
+    li.innerHTML = chat;
+    var chat_a = document.querySelector('#chat');
+    chat_a.appendChild(li);
+    //var chat_msg_t_S =
+    socket.emit('chat_msg', {
+      chat: chat,
+      user: user,
+      id: find('id'),
+      api: find('api')
+    });
+  }
+  socket.on('chat_msg', function(data) {
+    if (data.api == find('api')) {
+      if (data.user != find('user')) {
+        if (document.getElementById('chat_ar').style.display == 'none') {
+          notifyMe(data.user + ':' + data.chat, "http://uni-tap.co/nusr/dp.php?id=" + data.id);
+          var li = document.createElement('li');
+          li.className = 'r_msg';
+          li.innerHTML = '<img class="cht_usr_img" onerror="standby()" src="http://uni-tap.co/nusr/dp.php?id=' + data.id + '" height="20" width="20"><p style="font-size: 10px;position: absolute;top: -15px;left: 7px;color: #bdb6b6;">' + data.user +
+            '</p>' + data.chat;
+          var chat = document.querySelector('#chat');
+          chat.appendChild(li);
+        } else {
+          var li = document.createElement('li');
+          li.className = 'r_msg';
+          li.innerHTML = '<img class="cht_usr_img" onerror="standby()" src="http://uni-tap.co/nusr/dp.php?id=' + data.id + '" height="20" width="20"><p style="font-size: 10px;position: absolute;top: -15px;left: 7px;color: #bdb6b6;">' + data.user +
+            '</p>' + data.chat;
+          var chat = document.querySelector('#chat');
+          chat.appendChild(li);
+        }
+      } else {
+        return;
+      }
+    } else {
+      reurn;
+    }
+  });
+  function standby() {
+    this.src = 'https://ssl.gstatic.com/images/branding/product/1x/avatar_circle_blue_512dp.png';
+  }
+  // request permission on page load
+  document.addEventListener('DOMContentLoaded', function() {
+    if (Notification.permission !== "granted")
+      Notification.requestPermission();
+  });
+  function notifyMe(body, icon) {
+    if (!Notification) {
+      alert('Desktop notifications not available in your browser. Try Chromium.');
+      return;
+    }
+    if (Notification.permission !== "granted")
+      Notification.requestPermission();
+    else {
+      var notification = new Notification('New Message', {
+        icon: icon,
+        body: body
+      });
+      notification.onclick = function() {
+        //window.open("http://stackoverflow.com/a/13328397/1269037");
+      };
+    }
+  }
+</script>
     </script>
-    <!--<script>
-        var lineOffset = 4;
-var anchrSize = 2;
-
-var mousedown = false;
-var clickedArea = {box: -1, pos:'o'};
-var x1 = -1;
-var y1 = -1;
-var x2 = -1;
-var y2 = -1;
-
-var boxes = [];
-var tmpBox = null;
-
-document.getElementById("canvas").onmousedown = function(e) {
-  mousedown = true;
-  clickedArea = findCurrentArea(e.offsetX, e.offsetY);
-  x1 = e.offsetX;
-  y1 = e.offsetY;
-  x2 = e.offsetX;
-  y2 = e.offsetY;
-  toggle('.canvasContextMenu-hor');    
-};
-document.getElementById("canvas").onmouseup = function(e) {
-	if (clickedArea.box == -1 && tmpBox != null) {
-  	boxes.push(tmpBox);
-  } else if (clickedArea.box != -1) {
-  	var selectedBox = boxes[clickedArea.box];
-    if (selectedBox.x1 > selectedBox.x2) {
-    	var previousX1 = selectedBox.x1;
-      selectedBox.x1 = selectedBox.x2;
-      selectedBox.x2 = previousX1;
-    }
-    if (selectedBox.y1 > selectedBox.y2) {
-    	var previousY1 = selectedBox.y1;
-      selectedBox.y1 = selectedBox.y2;
-      selectedBox.y2 = previousY1;
-    }
-  }
-  clickedArea = {box: -1, pos:'o'};
-  tmpBox = null;
-  mousedown = false;
-  console.log(boxes);
-  toggle('.canvasContextMenu-hor');
-  document.querySelector('.canvasContextMenu-hor').style.top = y2;
-  document.querySelector('.canvasContextMenu-hor').style.left = x2;
-};
-document.getElementById("canvas").onmouseout = function(e) {
-	if (clickedArea.box != -1) {
-  	var selectedBox = boxes[clickedArea.box];
-    if (selectedBox.x1 > selectedBox.x2) {
-    	var previousX1 = selectedBox.x1;
-      selectedBox.x1 = selectedBox.x2;
-      selectedBox.x2 > previousX1;
-    }
-    if (selectedBox.y1 > selectedBox.y2) {
-    	var previousY1 = selectedBox.y1;
-      selectedBox.y1 = selectedBox.y2;
-      selectedBox.y2 > previousY1;
-    }
-  }
-  mousedown = false;
-  clickedArea = {box: -1, pos:'o'};
-  tmpBox = null;
-};
-document.getElementById("canvas").onmousemove = function(e) {
-  if (mousedown && clickedArea.box == -1) {
-    x2 = e.offsetX;
-    y2 = e.offsetY;
-    redraw();
-  } else if (mousedown && clickedArea.box != -1) {
-    x2 = e.offsetX;
-    y2 = e.offsetY;
-    xOffset = x2 - x1;
-    yOffset = y2 - y1;
-    x1 = x2;
-    y1 = y2;
-
-    if (clickedArea.pos == 'i'  ||
-        clickedArea.pos == 'tl' ||
-        clickedArea.pos == 'l'  ||
-        clickedArea.pos == 'bl') {
-      boxes[clickedArea.box].x1 += xOffset;
-    }
-    if (clickedArea.pos == 'i'  ||
-        clickedArea.pos == 'tl' ||
-        clickedArea.pos == 't'  ||
-        clickedArea.pos == 'tr') {
-      boxes[clickedArea.box].y1 += yOffset;
-    }
-    if (clickedArea.pos == 'i'  ||
-        clickedArea.pos == 'tr' ||
-        clickedArea.pos == 'r'  ||
-        clickedArea.pos == 'br') {
-      boxes[clickedArea.box].x2 += xOffset;
-    }
-    if (clickedArea.pos == 'i'  ||
-        clickedArea.pos == 'bl' ||
-        clickedArea.pos == 'b'  ||
-        clickedArea.pos == 'br') {
-      boxes[clickedArea.box].y2 += yOffset;
-    }
-    redraw();
-  }
-}
-
-function redraw() {
-  // canvas.width = canvas.width;
-  var context = document.getElementById("canvas").getContext('2d');
-  context.clearRect(0, 0, 1920, 959);
-  context.beginPath();
-  for (var i = 0; i < boxes.length; i++) {
-    drawBoxOn(boxes[i], context);
-  }
-  if (clickedArea.box == -1) {
-    tmpBox = newBox(x1, y1, x2, y2);
-    if (tmpBox != null) {
-      drawBoxOn(tmpBox, context);
-    }
-  }
-}
-
-function findCurrentArea(x, y) {
-  for (var i = 0; i < boxes.length; i++) {
-    var box = boxes[i];
-    xCenter = box.x1 + (box.x2 - box.x1) / 2;
-    yCenter = box.y1 + (box.y2 - box.y1) / 2;
-    if (box.x1 - lineOffset <  x && x < box.x1 + lineOffset) {
-      if (box.y1 - lineOffset <  y && y < box.y1 + lineOffset) {
-        return {box: i, pos:'tl'};
-      } else if (box.y2 - lineOffset <  y && y < box.y2 + lineOffset) {
-        return {box: i, pos:'bl'};
-      } else if (yCenter - lineOffset <  y && y < yCenter + lineOffset) {
-        return {box: i, pos:'l'};
-      }
-    } else if (box.x2 - lineOffset < x && x < box.x2 + lineOffset) {
-      if (box.y1 - lineOffset <  y && y < box.y1 + lineOffset) {
-        return {box: i, pos:'tr'};
-      } else if (box.y2 - lineOffset <  y && y < box.y2 + lineOffset) {
-        return {box: i, pos:'br'};
-      } else if (yCenter - lineOffset <  y && y < yCenter + lineOffset) {
-        return {box: i, pos:'r'};
-      }
-    } else if (xCenter - lineOffset <  x && x < xCenter + lineOffset) {
-      if (box.y1 - lineOffset <  y && y < box.y1 + lineOffset) {
-        return {box: i, pos:'t'};
-      } else if (box.y2 - lineOffset <  y && y < box.y2 + lineOffset) {
-        return {box: i, pos:'b'};
-      } else if (box.y1 - lineOffset <  y && y < box.y2 + lineOffset) {
-        return {box: i, pos:'i'};
-      }
-    } else if (box.x1 - lineOffset <  x && x < box.x2 + lineOffset) {
-      if (box.y1 - lineOffset <  y && y < box.y2 + lineOffset) {
-        return {box: i, pos:'i'};
-      }
-    }
-  }
-  return {box: -1, pos:'o'};
-}
-
-function newBox(x1, y1, x2, y2) {
-  boxX1 = x1 < x2 ? x1 : x2;
-  boxY1 = y1 < y2 ? y1 : y2;
-  boxX2 = x1 > x2 ? x1 : x2;
-  boxY2 = y1 > y2 ? y1 : y2;
-  if (boxX2 - boxX1 > lineOffset * 2 && boxY2 - boxY1 > lineOffset * 2) {
-    return {x1: boxX1,
-            y1: boxY1,
-            x2: boxX2,
-            y2: boxY2,
-            lineWidth: 1,
-            color: 'DeepSkyBlue'};
-  } else {
-    return null;
-  }
-}
-
-function drawBoxOn(box, context) {
-  xCenter = box.x1 + (box.x2 - box.x1) / 2;
-  yCenter = box.y1 + (box.y2 - box.y1) / 2;
-
-  context.strokeStyle = box.color;
-  context.fillStyle = box.color;
-
-  context.rect(box.x1, box.y1, (box.x2 - box.x1), (box.y2 - box.y1));
-  context.lineWidth = box.lineWidth;
-  context.stroke();
-
-  context.fillRect(box.x1 - anchrSize, box.y1 - anchrSize, 2 * anchrSize, 2 * anchrSize);
-  context.fillRect(box.x1 - anchrSize, yCenter - anchrSize, 2 * anchrSize, 2 * anchrSize);
-  context.fillRect(box.x1 - anchrSize, box.y2 - anchrSize, 2 * anchrSize, 2 * anchrSize);
-  context.fillRect(xCenter - anchrSize, box.y1 - anchrSize, 2 * anchrSize, 2 * anchrSize);
-  context.fillRect(xCenter - anchrSize, yCenter - anchrSize, 2 * anchrSize, 2 * anchrSize);
-  context.fillRect(xCenter - anchrSize, box.y2 - anchrSize, 2 * anchrSize, 2 * anchrSize);
-  context.fillRect(box.x2 - anchrSize, box.y1 - anchrSize, 2 * anchrSize, 2 * anchrSize);
-  context.fillRect(box.x2 - anchrSize, yCenter - anchrSize, 2 * anchrSize, 2 * anchrSize);
-  context.fillRect(box.x2 - anchrSize, box.y2 - anchrSize, 2 * anchrSize, 2 * anchrSize);
-}
-
-    </script>-->
 </html>
