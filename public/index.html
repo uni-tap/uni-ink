@@ -1,1106 +1,204 @@
 <html>
-
-<head>
-  <title>UNI-TAP LIVE CLASS</title>
-  <!-- BEGIN TRACKJS -->
-  <script type="text/javascript">
-    window._trackJs = {
-      token: '7182d951d1044c698444f4532da72432'
-    };
-  </script>
- 
-  <script type="text/javascript" src="https://cdn.trackjs.com/releases/current/tracker.js"></script>
-  <!-- END TRACKJS -->
-  <script src="https://uni-tap.github.io/uc/js/jquery-1.11.2.min.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <style>
-    body {
-      overflow: hidden;
-      touch-action: none;
-    }
-
-    canvas {
-      cursor: url(https://uni-tap.github.io/uc/icons/brd.png), none !important;
-    }
-
-    .tools_desk {
-      height: 180px;
-      width: 60%;
-      margin-left: 20%;
-      padding: 20px;
-      border-radius: 10px;
-      background-color: #3f3c3b;
-      position: fixed;
-      bottom: -50px;
-      z-index: 1000; // background-image: url(icons/tool.jpg);
-      background-repeat: no-repeat;
-      transition: .5s cubic-bezier(0.7, 0.46, 0.22, 1.29);
-    }
-
-    .quick_tlbar {
-      height: 30px;
-      width: calc(100% + 40px);
-      margin-top: -20px;
-      margin-left: -20px;
-      border-radius: 10px;
-      background-color: transparent;
-    }
-
-    .quick_btn {
-      margin-top: 0px !important;
-      padding: 0px !important;
-      height: 100%;
-      width: 30px;
-      color: white;
-      background-color: transparent;
-      border: none;
-    }
-
-    center {
-      height: 30px;
-    }
-
-    .left {
-      position: absolute;
-      left: 20px;
-      top: 0px;
-    }
-
-    .right {
-      position: absolute;
-      right: 20px;
-      top: 0px;
-    }
-
-    .cm_area {
-      height: 100%;
-      width: 60px;
-      background-color: transparent;
-    }
-
-    .cm_tls {
-      height: 25px;
-      width: 70%;
-      background-color: transparent;
-      border: none;
-      color: whitesmoke;
-      margin-top: 5px !important;
-    }
-
-    .tools_area {
-      position: absolute;
-      right: 20px;
-      top: 35px;
-      height: 50%;
-      width: 250px;
-      padding: 10px;
-      padding-left: 17px;
-      background-color: #201f1d;
-      border-radius: 5px;
-      overflow: auto;
-    }
-
-    .main_tools {
-      position: absolute;
-      top: 35px;
-      left: 60px;
-      height: 100%;
-      width: calc(100% - 320px);
-    }
-
-    .tls_btn {
-      height: 40px;
-      width: 40px;
-      border-radius: 3px;
-      background-color: transparent;
-      border: 1px solid transparent;
-      color: white;
-    }
-
-    .main_tools .tls_btn {
-      height: 100%;
-      width: 50px;
-    }
-
-    .chat_area {
-      height: 40%;
-      width: 19.5%;
-      position: fixed;
-      right: 0px;
-      bottom: 0px;
-      padding: 2px;
-      background-color: white;
-      border-top-left-radius: 5px;
-      box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.3), 0 0 0 0px rgba(0, 0, 0, 0.08) !important;
-      z-index: 2;
-      overflow: hidden;
-    }
-
-    .chat_msg {
-      position: fixed;
-      bottom: 30px;
-      right: -5px;
-      height: 25px;
-      border: none;
-      padding: 5px;
-      background-color: white;
-      /* border-radius: 3px; */
-      width: 20%;
-      font-size: 12px;
-      border-top: 1px solid #c9d0da;
-    }
-
-    .cht_msg:focus {
-      outline: none;
-    }
-
-    .chat_snd {
-      position: fixed;
-      right: 0px;
-      top: 842px;
-      height: 35px;
-      width: 40px;
-      /* border-radius: 3px; */
-      background-color: white;
-      color: darkgrey;
-      border: none;
-      z-index: 10;
-    }
-
-    .vid_box {
-      position: fixed;
-      bottom: 0px;
-      left: 0px;
-      height: 40%;
-      width: 19.5%;
-      background-color: rgba(255, 255, 255, 0.4);
-      border-top-right-radius: 5px;
-      box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.3), 0 0 0 0px rgba(0, 0, 0, 0.08) !important;
-      z-index: 2;
-      overflow: auto;
-    }
-
-    #remotesVideos {
-      margin-left: 0px;
-      margin-top: -7px;
-      padding: 20px;
-      position: absolute;
-      top: 10px;
-    }
-
-    #remotesVideos video {
-      height: 100px;
-      width: 100px;
-      margin-left: 2px;
-      margin-top: 30px;
-    }
-
-    #localVideo {
-      border-top-left-radius: 5px;
-      border-top-right-radius: 5px;
-      margin-top: 5px;
-      margin-left: calc(50% - 50px);
-    }
-
-    .user_box {
-      position: fixed;
-      top: 35%;
-      left: calc(50% - 100px);
-      width: 200px;
-      border-radius: 3px;
-      min-height: 100px;
-      background-color: white;
-      color: white !important;
-      box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.3), 0 0 0 0px rgba(0, 0, 0, 0.08) !important;
-      z-index: 2;
-    }
-
-    #snackbar {
-      visibility: hidden;
-      min-width: 250px;
-      margin-left: -125px;
-      background-color: #333;
-      color: #fff;
-      text-align: center;
-      border-radius: 2px;
-      padding: 16px;
-      position: fixed;
-      z-index: 10c;
-      left: 50%;
-      bottom: 150px;
-      font-size: 17px;
-    }
-
-    #snackbar.show {
-      visibility: visible;
-      -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-      animation: fadein 0.5s, fadeout 0.5s 2.5s;
-    }
-
-    @-webkit-keyframes fadein {
-      from {
-        bottom: 0;
-        opacity: 0;
-      }
-      to {
-        bottom: 30px;
-        opacity: 1;
-      }
-    }
-
-    @keyframes fadein {
-      from {
-        bottom: 0;
-        opacity: 0;
-      }
-      to {
-        bottom: 30px;
-        opacity: 1;
-      }
-    }
-
-    @-webkit-keyframes fadeout {
-      from {
-        bottom: 30px;
-        opacity: 1;
-      }
-      to {
-        bottom: 0;
-        opacity: 0;
-      }
-    }
-
-    @keyframes fadeout {
-      from {
-        bottom: 30px;
-        opacity: 1;
-      }
-      to {
-        bottom: 0;
-        opacity: 0;
-      }
-    }
-
-    button {
-      background-size: cover;
-    }
-
-    button:focus {
-      outline: none;
-      box-shadow: inset 0 1px 1px 1px rgba(0, 0, 0, 0.3), 0 0 0 0px rgba(0, 0, 0, 0.08) !important;
-    }
-
-    .whiteboard {
-      height: 100%;
-      width: 100%;
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      top: 0;
-      touch-action: none;
-      cursor: url('https://uni-tap.github.io/uc/icons/pencil (1).png'), default;
-      z-index: 1;
-      background-color: transparent;
-    }
-
-    .storeboard {
-      height: 100%;
-      width: 100%;
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      top: 0;
-      touch-action: none;
-      cursor: pointer;
-      z-index: 0;
-    }
-
-    li {
-      list-style-type: none;
-    }
-
-    .clr_box {
-      position: absolute;
-      right: 20px;
-      top: 0px;
-      height: 50%;
-      width: 50%;
-      padding: 10px;
-      padding-left: 17px;
-      background-color: #201f1d;
-      border-radius: 5px;
-      overflow: auto;
-    }
-
-    .color {
-      border: none;
-      height: 40px;
-      width: 40px;
-      border-radius: 40px;
-    }
-
-    .clr_box button {
-      border: none;
-    }
-
-    .chtmsg {
-      min-height: 25px;
-      background: linear-gradient(60deg, #f79533, #f37055, #ef4e7b, #a166ab, #5073b8, #1098ad, #07b39b, #6fba82);
-      padding: 2px;
-      border-radius: 45px;
-      margin-top: 5px;
-    }
-
-    .chtcnt {
-      margin-top: 5px;
-      background-color: darkgrey;
-      left: 5px;
-      border: 2px solid white;
-      border-radius: 20px;
-      min-width: calc(100% - 10px);
-      min-height: 50px;
-      padding: 5px;
-      padding-top: 10px;
-    }
-
-    .userlist strong {
-      color: black;
-    }
-
-    .bookloader {
-      height: 200%;
-      width: 1000px;
-      z-index: 2;
-      position: absolute;
-      top: 0px;
-      right: 0px;
-      border-radius: 10px;
-      border-bottom-left-radius: none;
-      border-bottom-right-radius: none;
-      border: none;
-      box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.3), 0 0 0 0px rgba(0, 0, 0, 0.08) !important;
-      background-color: black;
-    }
-
-    .bookloader iframe {
-      height: 100%;
-      width: 100%;
-      border-radius: 10px;
-      border-bottom-left-radius: none;
-      border-bottom-right-radius: none;
-      border: none;
-    }
-
-    .book_select {
-      height: 500px;
-      width: 1000px;
-      position: absolute;
-      top: 5%;
-      left: calc(70% - 900px);
-      border-radius: 10px;
-      z-index: 10;
-      box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.3), 0 0 0 0px rgba(0, 0, 0, 0.08) !important;
-      background: radial-gradient(at center center, rgb(255, 255, 255) 8%, rgb(51, 64, 77) 100%);
-    }
-
-    .bk {
-      position: absolute;
-      top: calc(50% - 100px);
-      height: 200px;
-      width: 100%;
-    }
-
-    .book_card {
-      position: relative;
-      top: calc(50% - 100px);
-      margin-left: 50px;
-      height: 200px;
-      border-radius: 5px;
-      width: 150px;
-      background-color: white;
-      float: left;
-    }
-
-    #counter {
-      vertical-align: middle;
-      margin-top: 15px;
-      font-size: large;
-      transition: 0.5s ease;
-    }
-
-    #calc {
-      height: 350px;
-      width: 276px;
-      z-index: 10;
-      position: fixed;
-      top: calc(50% - 250px);
-      left: calc(50% - 176px);
-      overflow: hidden;
-      border: none;
-      background-color: white;
-      border-radius: 3px;
-      box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.3), 0 0 0 0px rgba(0, 0, 0, 0.08) !important;
-    }
-
-    #calc iframe {
-      height: 350px;
-      width: 276px;
-      z-index: 10;
-      overflow: hidden;
-      background-color: rgba(51, 51, 51, 0.55);
-      border: none;
-      border-radius: 3px;
-    }
-
-    .preloader3 {
-      width: 35px;
-      height: 35px;
-      display: inline-block;
-      padding: 0px;
-      border-radius: 100%;
-      border: 2px solid;
-      border-top-color: rgba(0, 0, 0, 0.65);
-      border-bottom-color: rgba(0, 0, 0, 0.65);
-      border-left-color: rgba(0, 0, 0, 0.15);
-      border-right-color: rgba(0, 0, 0, 0.15);
-      -webkit-animation: preloader3 0.8s ease-in-out infinite alternate;
-      animation: preloader3 0.8s ease-in-out infinite alternate;
-    }
-
-    #curs {
-      height: 30px;
-      min-width: 20px;
-      border: 2px solid #37d993;
-      background-color: #37d993;
-      border-radius: 20px;
-      padding: 5px;
-      color: white;
-      box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
-      z-index: 10000;
-      border-top-left-radius: 0px;
-    }
-
-    @keyframes preloader3 {
-      from {
-        transform: rotate(0deg);
-      }
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    @-webkit-keyframes preloader3 {
-      from {
-        -webkit-transform: rotate(0deg);
-      }
-      to {
-        -webkit-transform: rotate(360deg);
-      }
-    }
-
-    .c_div {
-      height: 100px;
-      width: 100px;
-      border-radius: 100px;
-      background-color: yellow;
-      position: absolute;
-      left: 900px;
-      top: 150px;
-      -webkit-transition: width .2s, height .2s;
-      /* For Safari 3.1 to 6.0 */
-      transition: width .2s, height .2s;
-    }
-
-    .div {
-      left: 0px;
-      top: 0px;
-      width: 100%;
-      height: 100%;
-      border-radius: 00px;
-    }
-
-    .r_msg {
-      color: black;
-      background-color: #f1f0f0;
-      padding: 10px 20px;
-      border-radius: 100px;
-      position: relative;
-      border-top-left-radius: 0px;
-      left: 18px;
-      margin-bottom: 10px;
-      margin-top: 25px;
-      width: 110px;
-      font-family: 'PT Sans', sans-serif;
-      font-size: 17px;
-      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-    }
-
-    .s_msg {
-      color: white;
-      background-color: #bd14dc;
-      padding: 10px 20px;
-      border-radius: 100px;
-      position: relative;
-      border-top-right-radius: 0px;
-      margin-left: 50px;
-      width: 110px;
-      margin-bottom: 10px;
-      font-family: 'PT Sans', sans-serif;
-      font-size: 17px;
-      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-    }
-
-    .context-menu {
-      display: none;
-      position: absolute;
-      z-index: 10;
-      padding: 12px 0;
-      width: 240px;
-      background-color: #fff;
-      border: solid 1px #dfdfdf;
-      box-shadow: 1px 1px 2px #cfcfcf;
-    }
-
-    .context-menu--active {
-      display: block;
-    }
-
-    .context-menu__items {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-
-    .context-menu__item {
-      display: block;
-      margin-bottom: 4px;
-    }
-
-    .context-menu__item:last-child {
-      margin-bottom: 0;
-    }
-
-    .context-menu__link {
-      display: block;
-      padding: 4px 12px;
-      color: #0066aa;
-      text-decoration: none;
-    }
-
-    .context-menu__link:hover {
-      color: #fff;
-      background-color: #0066aa;
-    }
-
-    #img_up_box {
-      height: 100px;
-      position: fixed;
-      right: 200px;
-      bottom: 283px;
-      width: 250px;
-      z-index: 2;
-      margin-top: 650px;
-      margin-left: 600px;
-      background-color: darkgrey;
-      border-radius: 5px;
-      padding: 10px;
-      box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.3), 0 0 0 0px rgba(0, 0, 0, 0.08) !important;
-    }
-
-    #img_up_box input {
-      padding: 5px;
-    }
-
-    #vid_up_box {
-      height: 100px;
-      position: fixed;
-      right: 200px;
-      bottom: 283px;
-      width: 250px;
-      z-index: 2;
-      margin-top: 650px;
-      margin-left: 600px;
-      background-color: darkgrey;
-      border-radius: 5px;
-      padding: 10px;
-      box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.3), 0 0 0 0px rgba(0, 0, 0, 0.08) !important;
-    }
-
-    #vid_up_box input {
-      padding: 5px;
-    }
-
-    .min_box {
-      height: 100px;
-      width: 25px;
-      position: fixed;
-      top: 0px;
-      right: 0px;
-      /* border-radius: 2px; */
-      z-index: 2;
-      background-color: darkgray;
-      box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.3), 0 0 0 0px rgba(0, 0, 0, 0.08) !important;
-    }
-
-    .min_box button {
-      float: left;
-    }
-
-    .cht_usr_img {
-      border-radius: 50px;
-      position: relative;
-      top: -30px;
-      left: -38px;
-    }
-
-    .no_conn {
-      display: none;
-      position: absolute;
-      padding: 5px;
-      padding-left: 27px;
-      top: 60px;
-      left: calc(50% - 150px);
-      height: 100px;
-      width: 200px;
-      border-radius: 5px;
-      background-color: #ff4c4c;
-      z-index: 10;
-      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .24), 0 0px 0px 0 rgba(0, 0, 0, .19);
-      color: white;
-      font-size: 20px;
-    }
-
-    .feat_tab {
-      height: 30px;
-      width: 20%;
-      position: fixed;
-      bottom: 0px;
-      right: -5px;
-      padding: 5px;
-      background-color: white;
-    }
-
-    .top_chat_bar {
-      width: 100%;
-      box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .20);
-      background-color: #f6f7f9;
-      font-family: 'PT Sans', sans-serif;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      color: #4b4f56;
-      font-size: 12px;
-      line-height: 26px;
-      overflow: hidden;
-    }
-    .clock_cont {
-    z-index: 10;
-    background-color: transparent;
-    height: 200px;
-    width: 200px;
-    border: none;
-    position: fixed;
-    top: -1px;
-    left: calc(50% - 300px);
-}
-  </style>
-</head>
-
-<body onload="startTime();add_user_to_list()">
-  <div style="display:none;" id="clckcont" class="clock_cont">
-    <iframe style="height: 500px;
-    width: 500px;
-    border: none;" src="https://unitap-ink.herokuapp.com/clock.html"></iframe>
-    </div>
-
-  <div class="no_conn">
-    <p><b>Internet connection lost!</b></p>
-  </div>
-  <textarea id="txtm" style="display:none;"></textarea>
-  <div id="div" class="c_div" style="display:none;"></div>
-  <div id="curs" style="display:none;">
-    <p id="crt"></p>
-  </div>
-  <canvas id="canvas" class="whiteboard" oncontextmenu="return false;"></canvas>
-  <canvas id="page1" class="storeboard"></canvas>
-  <div class="preloader3" style="display:none;" id="loader"></div>
-  <div class="tools_desk" id="tls_desk" onmouseout="hide()" onmouseover="show()">
-    <div class="quick_tlbar">
-      <button style="height:30px !important;" class="quick_btn left glyphicon glyphicon-chevron-left" id="Leftbt"></button>
-      <button style="height:30px !important;margin-left:30px;" class="quick_btn left" id="zoomP"><b>+</b></button>
-      <button style="height:30px !important;margin-left:60px;" class="quick_btn left" id="zoomN"><b>-</b></button>
-      <button style="height:30px !important;margin-left:90px;" class="quick_btn left fa fa-undo" id="undo"><b></b></button>
-      <button style="height:30px !important;margin-left:120px;" class="quick_btn left fa fa-repeat" id="redo"><b></b></button>
-      <center>
-        <button class="quick_btn fa fa-calculator" onclick="toogle('#calc')"></button>
-        <a class="quick_btn glyphicon glyphicon-camera" id="download"></a>
-        <button class="quick_btn glyphicon glyphicon-file" id="NewPage"></button>
-        <button class="quick_btn glyphicon glyphicon-trash" id="clear"></button>
-        <button class="quick_btn fa fa-book" id="book" onclick="toogle('#book_select');"></button>
-      </center>
-      <b><p id="date" class="quick_btn" style="right:105px;margin-top:-25px !important;position:absolute;color:#60b4d1;min-width:100px;"></p></b>
-      <button style="border:none;background-color:transparent;color:#f25757;margin-right:25px;margin-top:5px;" onclick="end_class()" class="right"><b>END CLASS</b></button>
-      <button style="height:30px !important;" class="quick_btn right glyphicon glyphicon-chevron-right" id="Rightbt"></button>
-    </div>
-    <div class="cm_area">
-      <button class="cm_tls glyphicon glyphicon-comment" onclick="toogle('#chat_ar')"></button>
-      <button class="cm_tls fa fa-address-book-o" onclick="toogle('#usr_box')"></button>
-      <button class="cm_tls glyphicon glyphicon-facetime-video" onclick="toogle('#video')"></button>
-    </div>
-    <div class="tools_area">
-      <button class="tls_btn Rectangle" style="background-image:url('https://uni-tap.github.io/uc/icons/sqr.PNG');background-repeat: no-repeat;"></button>
-      <button class="tls_btn Triangle" style="background-image:url('https://uni-tap.github.io/uc/icons/tri.PNG');background-repeat: no-repeat;"></button>
-      <button class="tls_btn graph" id="graph" style="background-image:url('https://uni-tap.github.io/uc/icons/graph.png');background-repeat: no-repeat;"></button>
-      <button class="tls_btn Circle" style="background-image:url('https://uni-tap.github.io/uc/icons/circ.PNG');background-repeat: no-repeat;"></button>
-      <button class="tls_btn Line" style="background-image:url('https://uni-tap.github.io/uc/icons/line.PNG');background-repeat: no-repeat;"></button>
-      <button class="tls_btn Text" style="background-repeat: no-repeat;"><b>T</b></button>
-      <button class="tls_btn Pan" style="background-repeat: no-repeat;"><b>PAN</b></button>
-      <button class="tls_btn right_triangle" style="background-image:url('https://uni-tap.github.io/uc/icons/right-tri.PNG');background-repeat: no-repeat;"></button>
-    </div>
-    <div class="main_tools">
-      <button class="tls_btn Pen" style="background-image:url('https://uni-tap.github.io/uc/icons/pnl.PNG');background-repeat: no-repeat;background-size:contain;"></button>
-      <button class="tls_btn Eraser" style="background-image:url('https://uni-tap.github.io/uc/icons/eraser.PNG');background-repeat: no-repeat;background-size:contain;"></button>
-      <button class="tls_btn hLight" style="background-image:url('https://uni-tap.github.io/uc/icons/hlight.PNG');background-repeat: no-repeat;background-size:contain;"></button>
-      <div style="position:absolute;top:0px;left:40%;">
-        <button style="margin-bottom:5px;background-color:transparent;color:white;border:none;margin-bottom:5px;height:30px;" class="glyphicon glyphicon-edit" id="pen"></button><br />
-        <button style="margin-bottom:5px;background-color:transparent;color:white;border:none;margin-bottom:5px;height:30px;" class="glyphicon glyphicon-unchecked" id="bg"></button><br />
-        <button style="margin-bottom:5px;background-color:transparent;color:white;border:none;margin-bottom:5pxheight:30px;;" class="fa fa-paint-brush" id="fill"></button><br />
-      </div>
-      <div class="clr_box">
-        <center>
-          <select id="thickness" class="fixed">
-                 <option value="1" style="color:back;background-image:url(https://uni-tap.github.io/uc/icons/1px.PNG);">1</option>
-                 <option value="2" style="color:back;" selected>2</option>
-                 <option value="3" style="color:back;">3</option>
-                 <option value="4"  style="color:back;">4</option>
-                 <option value="5"  style="color:back;">5</option>
-                 <option value="10" style="color:back;">10</option>
-                 <option value="20" style="color:back;">20</option>
-                 <option value="30" style="color:back;">30</option>
-                 <option value="40" style="color:back;">40</option>
-                 <option value="50" style="color:back;">50</option>
-                </select>
-        </center>
-        <br />
-        <button class="color black" style="background-color: black;"></button>
-        <button class="color white" style="background-color: white;border:0.1px solid black"></button>
-        <button class="color red" style="background-color: red;"></button>
-        <button class="color #ff5722" style="background-color: #ff5722;"></button>
-        <button class="color orange" style="background-color: orange;"></button>
-        <button class="color gold" style="background-color: gold;"></button>
-        <button class="color yellow" style="background-color: yellow;"></button>
-        <button class="color #8bc34a" style="background-color: #8bc34a;"></button>
-        <button class="color lightgreen" style="background-color: lightgreen;"></button>
-        <button class="color darkgreen" style="background-color: darkgreen;"></button>
-        <button class="color teal" style="background-color: teal;"></button>
-        <button class="color #82e0ff" style="background-color: #82e0ff;"></button>
-        <button class="color magenta" style="background-color: magenta;"></button>
-        <button class="color indigo" style="background-color: indigo;"></button>
-        <button class="color violet" style="background-color: violet;"></button>
-        <button class="color purple" style="background-color: purple;"></button>
-        <button class="color lightyellow" style="background-color: lightyellow;"></button>
-        <button class="color #795548" style="background-color: #795548;"></button>
-        <button class="color brown" style="background-color: brown;"></button>
-        <button class="color pink" style="background-color: pink;"></button>
-        <button class="color silver" style="background-color: silver;"></button>
-        <button class="color darkgray" style="background-color: darkgray;"></button>
-        <button class="color gray" style="background-color: gray;"></button>
-        <button class="color #757575" style="background-color: #757575;"></button>
-        <br />
-      </div>
-    </div>
-  </div>
-  <div style="display:none;" class="bookloader" id="bookloader">
-    <iframe id="book_area"></iframe>
-  </div>
-  <div class="chat_area" id="chat_ar">
-    <div class="top_chat_bar" style="
-    ">
-      <p id="cactn">Chat (<b>15</b>)</p>
-    </div>
-    <div style="overflow-y:auto;">
-      <ul id="chat" style="
-    margin-left: 0px !important;
-    padding-left: 0px;
-    height: 75%;
-    margin-top:10px;
-    overflow-x: hidden;
-"></ul>
-    </div>
-    <form action="" id="messageForm">
-      <input autocomplete="off" placeholder="Type a message..." type="text" id="message" class="chat_msg">
-      <button id="snd_btn" class="chat_snd glyphicon glyphicon-send"></button>
-    </form>
-    <div class="feat_tab">
-      <button onclick="img();" class="fa fa-paperclip" style="background-color:transparent;border:none;color:darkgrey;height: 40px;position: absolute;left: 73px;top: -3px;"></button>
-      <button onclick="vid();" class="glyphicon glyphicon-facetime-video" style="background-color:transparent;border:none;color:darkgrey;height: 40px;position: absolute;right: 53px;top: -3px;"></button></div>
-  </div>
-  <div class="vid_box" id="video">
-    <div style="height:100%;width:100%;position:absolute;top:0px;left:0px;background-color:rgba(255, 255, 255, 0.4);border:none;border-top-right-radius: 5px;"></div>
-    <div id="remotesVideos"></div>
-    <video height="100" width="100" id="localVideo"></video>
-  </div>
-  <div class="user_box" style="display:none;" id="usr_box">
-    <div style="height:100%;width:100%;position:absolute;top:0px;left:0px;background-color:rgba(51, 51, 51, 0.55);border:none;border-radius: 5px;"></div>
-    <div id="userbox">
-      <ul style="display:none;" id="users"></ul>
-      <ul id="tot_usr"></ul>
-    </div>
-    <!--
-            <input type="file" id="filer">-->
-  </div>
-  <div style="display:none;" class="bookloader" id="book_select">
-    <iframe style="height:100%;width:100%;border:none;position:absolute;top:0px;left:0px;" src="http://localhost/load.php?dir=/firebase"></iframe>
-  </div>
-  <div style="position:fixed;top:-1px;left:calc(50% - 100px);width:100px;height:50px;background-color:rgba(51, 51, 51, 0.55);z-index:10;color:#fff;border-bottom-left-radius:5px;border-bottom-right-radius:5px;box-shadow:0 2px 2px 0 rgba(0,0,0,0.3), 0 0 0 0px rgba(0,0,0,0.08) !important;"><b><p onchange="animate()" align=middle id="counter">1/1</p></b></div>
-  <div id="calc" style="display:none;">
-    <button style="position:absolute;top:5px;right:10px;height:20px;width:20px;border-radius:20px;border:none;color:white;background-color:#f25757;text-align:center;" onclick="get('#calc', 'none');">x</button>
-    <iframe src="https://uni-tap.github.io/uc/calc.html"></iframe>
-  </div>
-  <div id="snackbar">Some text some message..</div>
-  <nav id="context-menu" class="context-menu">
-    <ul class="context-menu__items">
-      <li class="context-menu__item">
-        <a href="#" class="context-menu__link" data-action="View"><i class="fa fa-eye"></i> View Task</a>
-      </li>
-      <li class="context-menu__item">
-        <a href="#" class="context-menu__link" data-action="Edit"><i class="fa fa-edit"></i> Edit Task</a>
-      </li>
-      <li class="context-menu__item">
-        <a href="#" class="context-menu__link" data-action="Delete"><i class="fa fa-times"></i> Delete Task</a>
-      </li>
-    </ul>
-  </nav>
-  <center>
-    <div id="img_up_box" style="display: none;">
-      <input onkeydown="document.getElementById('message').value = '<img style=border:none; src='+this.value+' height=100 width=100 >';" placeholder="Enter the url of the image" style="
-    z-index: 20;
-" value="">
-      <button onclick="document.getElementById('snd_btn').click();toogle('#img_up_box')" style="margin-top:25px;border:none;">Share Image</button>
-    </div>
-    <div id="vid_up_box" style="display:none;">
-      <input onkeydown="document.getElementById('message').value = '<iframe style=border:none; src='+this.value+' height=100 width=100 ></iframe>';" placeholder="Enter the url of the video" style="
-    z-index: 20;
-" value="">
-      <button onclick="document.getElementById('snd_btn').click();toogle('#vid_up_box')" style="margin-top:25px;border:none;">Share video</button>
-    </div>
-    <div class="min_box" style="display:none;">
-      <button class="cm_tls glyphicon glyphicon-comment" onclick="toogle('#chat_ar')"></button>
-      <button class="cm_tls fa fa-address-book-o" onclick="toogle('#usr_box')"></button>
-      <button class="cm_tls glyphicon glyphicon-facetime-video" onclick="toogle('#video')"></button>
-    </div>
-  </center>
-</body>
-<script src="/socket.io/socket.io.js"></script>
-<script src="main.js"></script>
-<script src="https://uni-tap.github.io/uc/interact.js"></script>
-<script src="https://uni-tap.github.io/uc/element.js"></script>
-<script src="https://simplewebrtc.com/latest-v2.js"></script>
-<!--<script src="https:uni-tap.github.io/uc/webrtc.js"></script>-->
-<script>
-  document.getElementById('div').addEventListener('click', function() {
-    document.getElementById('div').className += ' div';
-  });
-  if (find('post') == 'S' || find('post') == 's') {
-    document.querySelector('.min_box').style.display = 'block';
-    document.querySelector('#tls_desk').style.display = 'none';
-  }
-
-  function startTime() {
-    var today = new Date();
-    var h = today.getHours();
-    var m = today.getMinutes();
-    var s = today.getSeconds();
-    m = checkTime(m);
-    s = checkTime(s);
-    h = h % 12;
-    document.getElementById('date').innerHTML =
-      h + ":" + m + ":" + s;
-    if (navigator.onLine == false) {
-      document.querySelector('.no_conn').style.display = 'block';
-    } else {
-      document.querySelector('.no_conn').style.display = 'none';
-    }
-    var t = setTimeout(startTime, 500);
-    if (m == '00') {
-      if (s == '00') {
-        toogle('#clckcont');
-        toast(document.getElementById('date').innerHTML);
-        setTimeout(function() {
-             toogle('#clckcont');
-        }, 3000);
-      }
-    }
-  }
-
-  function checkTime(i) {
-    if (i < 10) {
-      i = "0" + i
-    }; // add zero in front of numbers < 10
-    return i;
-  }
-  var socket = io();
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="user-scalable=1.0,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,width=device-width,minimal-ui">
+        <link href="index.css" rel="stylesheet">
+	<script src="https://uni-tap.github.io/uc/js/jquery-1.11.2.min.js"></script>
+    </head>
+    <body>
+        <div class="board-top">
+        <div class="board-top__left">
+            <div class="board-top-left-panel board-panel--transparent board-panel--hidden-top">
+                <div class="svg-button"><svg>&#10094;</svg></div>
+                <div class="board-panel__splitter"></div>
+                <div class="middle-panel board-top-left-panel__title--editable board-top-left-panel__title">Page - 1</div>
+                <div class="board-panel__splitter"></div>
+                <div class="svg-button"><svg>&#10094;</svg></div>
+            </div>
+        <div class="undo-redo board-panel--transparent board-panel--hidden-top">
+            <div class="svg-button" id="undo">
+                <svg viewBox="0 0 24 24" id="img__undo" width="100%" height="100%"><path d="M5 14.5C8.5 8 17.5 8 20 15M9.018 15H4l.018-5" fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path></svg>
+            </div>
+            <div class="board-panel__splitter"></div>
+            <div class="svg-button" id="redo">
+                <svg viewBox="0 0 24 24" id="img__redo" width="100%" height="100%"><path d="M19 14.5C15.5 8 6.5 8 4 15m10.982 0H20l-.018-5" fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path></svg>
+            </div>
+        </div>
+        </div>
+        <div class="board-top__right">
+        <div class="board-top-right-panel board-panel--transparent board-panel--hidden-top">
+            <button class="rtb-button red">End Class</button>
+        </div>
+        </div>    
+        </div>
+        <div class="canvasContextMenu canvasContextMenu-hor" style="display:none;">
+            <div class="cm-items">
+                <div class="icon-box"></div>
+                <div class="icon-box"></div>
+                <div class="icon-box"></div>
+                <div class="icon-box"></div>
+                <div class="icon-box"></div>
+                <div class="icon-box"></div>
+            </div>
+        </div>
+        <div class="tls_nav">
+            <div class="toolbar__item">
+                <div class="toolbar__item__inner">
+                    <svg viewBox="0 0 24 24" id="img__cursor-24" width="100%" height="100%">
+                        <path fill="currentColor" fill-rule="evenodd" d="M7 19l4.394-2.59 1.86 4.661a1 1 0 0 0 1.3.558l.499-.2a1 1 0 0 0 .557-1.3l-1.86-4.66L18.5 14 7 2v17z"></path>
+                    </svg>
+                </div>
+            </div>
+            <div class="board-toolbar__customized-box">
+                <div class="toolbar__item toolbar__item--customized">
+                <div class="toolbar__item__inner Text">
+                    <svg viewBox="0 0 24 24" id="newlayout__text" width="100%" height="100%"><path fill="currentColor" fill-rule="evenodd" d="M3 5a1 1 0 0 0 1 1h6v14a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1V6h6a1 1 0 0 0 0-2H4a1 1 0 0 0-1 1z"></path></svg>
+                </div>
+            </div>
+                <div class="toolbar__item toolbar__item--customized">
+                <div class="toolbar__item__inner">
+                    <svg viewBox="0 0 24 24" id="newlayout__sticker" width="100%" height="100%"><path fill="currentColor" d="M4 4v16h9v-5a2 2 0 0 1 2-2h5V4H4zm0-2h16a2 2 0 0 1 2 2v10.172a2 2 0 0 1-.586 1.414l-5.828 5.828a2 2 0 0 1-1.414.586H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"></path></svg>
+                </div>
+            </div>
+                <div class="toolbar__item toolbar__item--customized" onclick="toggle('.toolbar__panel--shapes')">
+                <div class="toolbar__item__inner Rectangle">
+                    <svg viewBox="0 0 24 24" id="newlayout__shape-square" width="100%" height="100%"><path fill="none" fill-rule="evenodd" stroke="currentColor" stroke-width="2" d="M3 3h18v18H3z"></path></svg>
+                </div>
+            </div>
+                <div class="toolbar__item toolbar__item--customized">
+                <div class="toolbar__item__inner Line">
+                    <svg viewBox="0 0 24 24" id="newlayout__link-arrow" width="100%" height="100%"><path fill="currentColor" d="M14.293 8.293l-11 11a1 1 0 0 0 1.414 1.414l11-11L18 12l3-9-9 3 2.293 2.293z"></path></svg>
+                </div>
+            </div>
+                <div class="toolbar__item toolbar__item--customized" onclick="toggle('.toolbar__panel--draw')">
+                <div class="toolbar__item__inner Pen">
+                    <svg viewBox="0 0 24 24" id="newlayout__pen" width="100%" height="100%"><path fill="currentColor" fill-rule="evenodd" d="M22.086 4.586a2 2 0 0 1 0 2.828L9.914 19.586l-5.43 1.11a1 1 0 0 1-1.18-1.18l1.11-5.43L16.586 1.914a2 2 0 0 1 2.828 0l2.672 2.672zm-7.593 2.25l-8.24 8.24-.687 3.358 3.359-.687 8.24-8.24-2.672-2.671zm1.414-1.414l2.671 2.671L20.672 6 18 3.328l-2.093 2.094z"></path></svg>
+                </div>
+            </div>
+                <div class="toolbar__item toolbar__item--customized">
+                <div class="toolbar__item__inner">
+                    <svg viewBox="0 0 24 24" id="newlayout__comment" width="100%" height="100%"><path fill="currentColor" d="M4 6v12.006L9.828 18 12 20.172 14.172 18h5.822L20 6H4zm0-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-5l-3 3-3-3H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm4 5a1 1 0 1 0 0 2h8a1 1 0 0 0 0-2H8zm0 4a1 1 0 0 0 0 2h8a1 1 0 0 0 0-2H8z"></path></svg>
+                </div>
+            </div>
+                <div class="toolbar__item toolbar__item--customized">
+                <div class="toolbar__item__inner">
+                    <svg viewBox="0 0 24 24" id="newlayout__frames" width="100%" height="100%"><path fill="currentColor" fill-rule="evenodd" d="M6 5h12V3a1 1 0 0 1 2 0v2h2a1 1 0 0 1 0 2h-2v10h2a1 1 0 0 1 0 2h-2v2a1 1 0 0 1-2 0v-2H6v2a1 1 0 0 1-2 0v-2H2a1 1 0 0 1 0-2h2V7H2a1 1 0 1 1 0-2h2V3a1 1 0 1 1 2 0v2zm0 2v10h12V7H6z"></path></svg>
+                </div>
+            </div>
+                <div class="toolbar__item toolbar__item--customized">
+                <div class="toolbar__item__inner">
+                    <svg viewBox="0 0 24 24" id="newlayout__upload" width="100%" height="100%"><path fill="currentColor" d="M11 11.914L9.414 13.5A1 1 0 1 1 8 12.086l4-4 4 4a1 1 0 0 1-1.414 1.414L13 11.914V21.5a1 1 0 0 1-2 0v-9.586zM16 20a1 1 0 0 1 1-1h3V4H4v15h3a1 1 0 0 1 0 2H3a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h18a1 1 0 0 1 1 1v17a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1z"></path></svg>
+                </div>
+            </div>
+            </div>
+            <div class="toolbar__panel toolbar__panel--shapes use-ng-animate" style="top: 16px;display:none;">
+                <div class="toolbar__panel__item Rectangle"> 
+                <svg class="icon"> <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#newlayout__shape-square" ng-attr-xlink:href="{{shapeTool.icon}}"></use> </svg> 
+                </div>
+                <div class="toolbar__panel__item"> 
+                    <svg viewBox="0 0 24 24" id="newlayout__shape-rounded" width="100%" height="100%"><path fill="currentColor" d="M7 4a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm0-2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5z"></path></svg> 
+                </div>
+                <div class="toolbar__panel__item Circle"> 
+                    <svg viewBox="0 0 24 24" id="newlayout__shape-oval" width="100%" height="100%"><circle cx="12" cy="12" r="9" fill="none" fill-rule="evenodd" stroke="currentColor" stroke-width="2"></circle></svg> 
+                </div>
+                <div class="toolbar__panel__item Triangle"> 
+                    <svg viewBox="0 0 24 24" id="newlayout__shape-triangle" width="100%" height="100%"><path fill="currentColor" d="M12 4.922L4.197 19h15.606L12 4.922zm.875-2.58l9.484 17.175A1 1 0 0 1 21.484 21H2.516a1 1 0 0 1-.875-1.483l9.483-17.175a1 1 0 0 1 1.751 0z"></path></svg>
+                </div>
+                <div class="toolbar__panel__item" > 
+                    <svg viewBox="0 0 24 24" id="newlayout__shape-rhombus" width="100%" height="100%"><path fill="currentColor" d="M12 2.617L2.617 12 12 21.383 21.383 12 12 2.617zm.707-2.121l10.797 10.797a1 1 0 0 1 0 1.414L12.707 23.504a1 1 0 0 1-1.414 0L.496 12.707a1 1 0 0 1 0-1.414L11.293.496a1 1 0 0 1 1.414 0z"></path></svg> 
+                </div>
+                <div class="toolbar__panel__item">
+                    <svg viewBox="0 0 24 24" id="newlayout__shape-babble" width="100%" height="100%"><path fill="currentColor" d="M13.073 19l-4.646 3.65A1.5 1.5 0 0 1 6 21.472V19a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5h12a5 5 0 0 1 5 5v7a5 5 0 0 1-5 5h-4.927zM8 20.443L12.381 17H18a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H6a3 3 0 0 0-3 3v7a3 3 0 0 0 3 3h2v3.443z"></path></svg> 
+                </div>
+                <div class="toolbar__panel__item" > 
+                    <svg viewBox="0 0 24 24" id="newlayout__shape-parall" width="100%" height="100%"><path fill="currentColor" d="M6.463 5L2.544 19h14.993l3.919-14H6.463zm-.758-2h17.07a1 1 0 0 1 .962 1.27l-4.479 16a1 1 0 0 1-.963.73H1.225a1 1 0 0 1-.962-1.27l4.479-16A1 1 0 0 1 5.705 3z"></path></svg>
+                </div>
+            </div>
+            <div class="toolbar__panel toolbar__panel--draw" style="display: none;">
+                <div class="draw-tools-box">
+                    <div class="svg-button Pen">
+                        <svg viewBox="0 0 24 24" id="newlayout__pen" width="100%" height="100%"><path fill="currentColor" fill-rule="evenodd" d="M22.086 4.586a2 2 0 0 1 0 2.828L9.914 19.586l-5.43 1.11a1 1 0 0 1-1.18-1.18l1.11-5.43L16.586 1.914a2 2 0 0 1 2.828 0l2.672 2.672zm-7.593 2.25l-8.24 8.24-.687 3.358 3.359-.687 8.24-8.24-2.672-2.671zm1.414-1.414l2.671 2.671L20.672 6 18 3.328l-2.093 2.094z"></path></svg>
+                    </div>
+                <div class="svg-button Eraser">
+                        <svg viewBox="0 0 24 24" id="newlayout__eraser" width="100%" height="100%"><path fill="currentColor" fill-rule="evenodd" d="M18 19a1 1 0 0 1 0 2H5.586l-2.879-2.879a3 3 0 0 1 0-4.242L12.88 3.707a3 3 0 0 1 4.242 0l4.172 4.172a3 3 0 0 1 0 4.242L14.414 19H18zm-1.707-4.707l-5.586-5.586-6.586 6.586a1 1 0 0 0 0 1.414L6.414 19h5.172l4.707-4.707z"></path></svg>
+                    </div>
+                <div class="svg-button draw-tools-box__close" onclick="toggle('.toolbar__panel--draw')">
+                        <svg viewBox="0 0 24 24" id="img__close-24" width="100%" height="100%"><path fill="currentColor" d="M10.586 12l-6.293 6.293a1 1 0 0 0 1.414 1.414L12 13.414l6.293 6.293a1 1 0 0 0 1.414-1.414L13.414 12l6.293-6.293a1 1 0 1 0-1.414-1.414L12 10.586 5.707 4.293a1 1 0 0 0-1.414 1.414L10.586 12z"></path></svg>
+                    </div>
+                </div>
+                <div class="colorPalette">
+                    <div class="btn colorPalette_circle white" style="background-color:white;"></div>
+                    <div class="btn colorPalette_circle yellow" style="background-color:yellow;"></div>
+                    <div class="btn colorPalette_circle #fac710;" style="background-color:#fac710;"></div>
+                    <div class="btn colorPalette_circle rgb(242, 71, 38)" style="background-color:rgb(242, 71, 38);"></div>
+                    <div class="btn colorPalette_circle rgb(230, 230, 230)" style="background-color:rgb(230, 230, 230);"></div>
+                    <div class="btn colorPalette_circle rgb(206, 231, 65)" style="background-color:rgb(206, 231, 65);"></div>
+                    <div class="btn colorPalette_circle rgb(143, 209, 79)" style="background-color:rgb(143, 209, 79);"></div>
+                    <div class="btn colorPalette_circle rgb(218, 0, 99)" style="background-color:rgb(218, 0, 99);"></div>
+                    <div class="btn colorPalette_circle rgb(128, 128, 128)" style="background-color:rgb(128, 128, 128);"></div>
+                    <div class="btn colorPalette_circle rgb(18, 205, 212)" style="background-color:rgb(18, 205, 212);"></div>
+                    <div class="btn colorPalette_circle rgb(12, 167, 137)" style="background-color:rgb(12, 167, 137);"></div>
+                    <div class="btn colorPalette_circle rgb(149, 16, 172)" style="background-color:rgb(149, 16, 172);"></div>
+                    <div class="btn colorPalette_circle rgb(26, 26, 26)" style="background-color:rgb(26, 26, 26);"></div>
+                    <div class="btn colorPalette_circle rgb(45, 155, 240)" style="background-color:rgb(45, 155, 240);"></div>
+                    <div class="btn colorPalette_circle rgb(65, 75, 178)" style="background-color:rgb(65, 75, 178);"></div>
+                    <div class="btn colorPalette_circle rgb(101, 44, 179)" style="background-color:rgb(101, 44, 179);"></div>
+                </div>
+            </div>
+            </div>
+        <div class="bottom-bar board-panel--transparent board-panel--hidden-bottom">
+            <div class="bottom-bar__inner" style="display:flex;">
+                <div class="svg-button">
+                    <svg viewBox="0 0 24 24" id="img__presentation" width="100%" height="100%"><path fill="currentColor" d="M17.667 19L19 23h-2l-1.333-4H8.333L7 23H5l1.333-4H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7V2a1 1 0 0 1 2 0v1h7a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-2.333zM4 5v12h16V5H4zm6 3l4.5 3-4.5 3V8z"></path></svg>
+                </div>
+                <div class="svg-button">
+                    <svg viewBox="0 0 24 24" id="img__chat" width="100%" height="100%"><path fill="currentColor" fill-rule="evenodd" d="M21 15h-5v3a2 2 0 0 1-2 2H3l-3 3V10a2 2 0 0 1 2-2h4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v13l-3-3zM2 10v8h12v-8H2zm6-5v3h6a2 2 0 0 1 2 2v3h6V5H8z"></path></svg>
+                </div>
+                <div class="svg-button">
+                    <svg viewBox="0 0 24 24" id="img__comments-list" width="100%" height="100%"><path fill="currentColor" d="M4 6v12.006L9.828 18 12 20.172 14.172 18h5.822L20 6H4zm0-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-5l-3 3-3-3H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm7 5a1 1 0 0 0 0 2h6a1 1 0 0 0 0-2h-6zm0 4a1 1 0 0 0 0 2h6a1 1 0 0 0 0-2h-6zM7 9a1 1 0 1 0 0 2h1a1 1 0 0 0 0-2H7zm0 4a1 1 0 0 0 0 2h1a1 1 0 0 0 0-2H7z"></path></svg>
+                </div>
+            </div>
+            <div onclick="toggle('.bottom-bar__inner')" class="bottom-bar__toggle svg-button">
+                <svg viewBox="0 0 24 24" id="img__scroll-up" width="100%" height="100%"><path d="M9 17l3-3 3 3m-6-6l3-3 3 3" fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path></svg>
+            </div>
+        </div>
+        <div class="video-chat board-panel--transparent board-panel--hidden-bottom video-chat--pinned video-chat--with-buttons">
+            <div class="video-cont">
+                <div id="localVideo"></div>
+                <div id="remoteVideos"></div>
+            </div>
+            <div class="video-controls"></div>
+        </div>
+        <canvas id="canvas" class="whiteboard" oncontextmenu="return false;" width="1920" height="959"></canvas>
+        <canvas id="page1" class="storeboard" width="1920" height="959"></canvas>
+    </body>
+    <script src="https://unitap-ink.herokuapp.com/main.js"></script>
+    <script src="main.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://simplewebrtc.com/latest-v2.js"></script> 
+    <script>
+        function toggle(elem){
+            var obj = document.querySelector(elem);
+            if(obj.style.display == 'none'){
+              obj.style.display = 'block';
+            }else if(obj.style.display == 'block'){
+              obj.style.display = 'none';
+            }
+        }
+    </script>
+    <script>
+   var socket = io();
   var api = find('api');
   var room_id = 'uni-tap_live_classes: Live_Class_Id: ' + api;
   var hoster = find('hostedby');
   var title = find('title');
   var user = find('user');
-  title = title.replace('%20', ' ');
   window.onload = function() {
     var stateObj = {
       foo: "bar"
+    }
     };
-    //history.pushState(stateObj, "page 2", "uni-tap_live_class_going_on.->This_Class_Is_Being_Hosted_By:"+hoster);
-    startTime();
-    toast('Welcome to the ' + title + ' 😃 ');
-    var post_tools = find('post');
-    if (post_tools == 's' || post_tools == 'S') {
-      //toogle('#tls_desk');
-      if (document.getElementById('date').innerHTML > find('s_time')) {
-        socket.emit('late', {
-          user: user,
-          api: api
-        });
-      }
-    }
-  }
-  function add_user_to_list(){
-    socket.emit('add_usr', {
-      api: find('api'),
-      user: find('user'),
-      id: find('id'),
-      post: find('post')
-    });
-    console.log('done_add');
-  }
-  
-  socket.on('add_usr', function(){
-    if(data.api == find('api')){
-      if(data.user != find('user')){
-        add_to_list(data.user, data.id, data.post);
-      }else{
-        return;
-      }
-    }else{
-      return;
-    }
-    console.log('done_add');
-  });
-  
-  function add_to_list(user, id, post){
-    var list = document.querySelector('#tot_usr');
-    var item = document.createElement('li');
-        item.innerHTML = '<img src="http://uni-tap.co/nusr/dp.php?id='+data.id+'"'+data.user+' ('+data.post+' )';
-        list.appendChild(item);
-  }
-  // OTHER IMPORTANT FUNCTIONS
-
-  function get(id, condition) {
-    document.querySelector(id).style.display = condition;
-  }
-
-  function find(name) {
-    var url = window.location.search;
-    var num = url.search(name);
-    var namel = name.length;
-    var frontlength = namel + num + 1; //length of everything before the value
-    var front = url.substring(0, frontlength);
-    url = url.replace(front, "");
-    num = url.search("&");
-
-    if (num >= 0) return url.substr(0, num);
-    if (num < 0) return url;
-  }
-
-  function toast(msg) {
-    var x = document.getElementById("snackbar")
-    x.className = "show";
-    x.innerHTML = msg;
-    setTimeout(function() {
-      x.className = x.className.replace("show", "");
-    }, 3000);
-  }
-
-  function hide() {
-    var tools_desk = document.getElementById('tls_desk');
-    setTimeout(function() {
-      tools_desk.style.bottom = '-150px', 3000
-    });
-  }
-
-  function show() {
-    document.getElementById('video').getElementsByTagName('video')[0].setAttribute('controls', '');
-    var tools_desk = document.getElementById('tls_desk');
-    setTimeout(function() {
-      tools_desk.style.bottom = '-50px', 3000
-    });
-  }
-
-  function toogle(obj) {
-    var element = document.querySelector(obj);
-    if (element.style.display == 'none') {
-      element.style.display = 'block';
-    } else {
-      element.style.display = 'none';
-    }
-  }
-
-  function get_elm(obj) {
-    var elm = document.querySelector(obj);
-    return elm;
-  }
-
-  function do_essentials() {
-    //function only for book loader
-    //get_elm('#tls_desk').style.height = '100%';
-    //get_elm('#tls_desk').onmouseover = '';
-    //get_elm('#tls_desk').onmouseout = '';
-    var input = document.getElementById("filer");
-    var file = input.value.split("\\");
-    var fileName = file[file.length - 1];
-    //alert(file);
-    //toogle('#video');
-    //toogle('#chat');
-    toogle_pro('#bookloader');
-    // if(get_elm('#book_area').src == '' || !get_elm('#book_area').src ){
-    //  get_elm('#book_area').src = 'http://localhost/firebase/Chapter1-Matter In Our Surroundings.pdf';
-    //    }else{}
-  }
-
-  function toogle_pro(obj) {
-    var element = document.querySelector(obj);
-    if (element.style.display == 'none') {
-      element.style.display = 'block';
-    } else {
-      element.style.display = 'block';
-    }
-  }
-
-  function animate() {
-    this.style.fontSize = 'x-large';
-    setTimeout(1000, function() {
-      this.style.fontSize = 'large';
-    });
-  }
-
-  function open_book(url) {
-    do_essentials();
-    get_elm('#book_area').src = url;
-    toogle('.book_select');
-  }
-
-  function back() {
-    //function only for book loader
-    var desk = get_elm('#tls_desk');
-    desk.style.height = '180px';
-    desk.addEventListener('mouseover', show);
-    desk.addEventListener('mouseout', hide);
-    get_elm('#bookloader').style.display = 'none';
-  }
-
-  $(function() {
+    $(function() {
     var socket = io.connect();
     var $messageForm = $('#messageForm');
     var $message = $('#message');
@@ -1118,50 +216,8 @@
         toast(username + ' has joined the class.');
       });
     }
-    $messageForm.submit(function(e) {
-      e.preventDefault();
-      snd_chat(document.getElementById('message').value);
-      //socket.emit('send message', $message.val());
-      $message.val('');
     });
-    if (find('post') != 'ADMIN') {
-      socket.on('new_user', function(data) {
-        toast(data[i] + ' has joined the class.');
-      });
-    }
-    socket.on('new message', function(data) {
-      if (document.getElementById('chat').style.display == 'none') {
-        toast(data.user + ':' + data.msg + "<p style='color:lime;' id='rep'>REPLY</p>")
-        //document.getElementById('rep').addEventListener('click', toogle('#chat'), false);
-        $chat.append('<li class="chtcnt" focus><strong>' + data.user + ':</strong> ' + data.msg + '</li>')
-        $chat.scrollTop = $chat.scrollHeight;
-      } else {
-        $chat.append('<li class="chtcnt" focus><strong>' + data.user + ':</strong> ' + data.msg + '</li>')
-        $chat.scrollTop = $chat.scrollHeight;
-      }
-    });
-
-    socket.on('get users', function(data) {
-      var html = '';
-      for (i = 0; i < data.length; i++) {
-        html += '<li class="userlist"><strong>' + data[i] + '</strong></li>';
-        if (find('post') != 'ADMIN') {
-          toast(data[i] + ' has joined the class.');
-        }
-      }
-      $users.html(html);
-    });
-    socket.on('reload', function() {
-      setTimeout(2000, window.reload(true));
-    });
-  });
-  window.addEventListener('reload', function() {
-    socket.emit('reload');
-  });
-
-  //VIDEO AND AUDIO CHATTING AREA
-
-  var webrtc = new SimpleWebRTC({
+        var webrtc = new SimpleWebRTC({
     // the id/element dom element that will hold "our" video
     localVideoEl: 'localVideo',
     // the id/element dom element that will hold remote videos
@@ -1175,8 +231,7 @@
     // you can name it anything
     webrtc.joinRoom(room_id);
   });
-
-  //ENDING CLASS
+        //ENDING CLASS
 
   socket.on('end_class', onEnd_class);
 
@@ -1213,101 +268,205 @@
       }, 3050);
     }
   }
-  var box = document.querySelector('#msg_box');
-  /*function toast(msg){
-    document.getElementById('msg_p').innerHTML = msg;
-    //remove_toast()
-    setTimeout(function(){
-    box.style.opacity = '0'
-    box.style.display = 'none'
-    },
-    5000
-  );;
-  }*/
-  function remove_toast() {
-    console.log('done');
-  }
+    </script>
+    <!--<script>
+        var lineOffset = 4;
+var anchrSize = 2;
 
-  function img() {
-    toogle('#img_up_box');
-  }
+var mousedown = false;
+var clickedArea = {box: -1, pos:'o'};
+var x1 = -1;
+var y1 = -1;
+var x2 = -1;
+var y2 = -1;
 
-  function vid() {
-    toogle('#vid_up_box');
-  }
-  //NEW CHAT
-  function snd_chat(chat) {
-    var li = document.createElement('li');
-    li.className = 's_msg';
-    var user = find('user');
-    li.innerHTML = chat;
-    var chat_a = document.querySelector('#chat');
-    chat_a.appendChild(li);
-    //var chat_msg_t_S =
-    socket.emit('chat_msg', {
-      chat: chat,
-      user: user,
-      id: find('id'),
-      api: find('api')
-    });
-  }
+var boxes = [];
+var tmpBox = null;
 
-  socket.on('chat_msg', function(data) {
-    if (data.api == find('api')) {
-      if (data.user != find('user')) {
-        if (document.getElementById('chat_ar').style.display == 'none') {
-          notifyMe(data.user + ':' + data.chat, "http://uni-tap.co/nusr/dp.php?id=" + data.id);
-          var li = document.createElement('li');
-          li.className = 'r_msg';
-          li.innerHTML = '<img class="cht_usr_img" onerror="standby()" src="http://uni-tap.co/nusr/dp.php?id=' + data.id + '" height="20" width="20"><p style="font-size: 10px;position: absolute;top: -15px;left: 7px;color: #bdb6b6;">' + data.user +
-            '</p>' + data.chat;
-          var chat = document.querySelector('#chat');
-          chat.appendChild(li);
-        } else {
-          var li = document.createElement('li');
-          li.className = 'r_msg';
-          li.innerHTML = '<img class="cht_usr_img" onerror="standby()" src="http://uni-tap.co/nusr/dp.php?id=' + data.id + '" height="20" width="20"><p style="font-size: 10px;position: absolute;top: -15px;left: 7px;color: #bdb6b6;">' + data.user +
-            '</p>' + data.chat;
-          var chat = document.querySelector('#chat');
-          chat.appendChild(li);
-        }
-      } else {
-        return;
+document.getElementById("canvas").onmousedown = function(e) {
+  mousedown = true;
+  clickedArea = findCurrentArea(e.offsetX, e.offsetY);
+  x1 = e.offsetX;
+  y1 = e.offsetY;
+  x2 = e.offsetX;
+  y2 = e.offsetY;
+  toggle('.canvasContextMenu-hor');    
+};
+document.getElementById("canvas").onmouseup = function(e) {
+	if (clickedArea.box == -1 && tmpBox != null) {
+  	boxes.push(tmpBox);
+  } else if (clickedArea.box != -1) {
+  	var selectedBox = boxes[clickedArea.box];
+    if (selectedBox.x1 > selectedBox.x2) {
+    	var previousX1 = selectedBox.x1;
+      selectedBox.x1 = selectedBox.x2;
+      selectedBox.x2 = previousX1;
+    }
+    if (selectedBox.y1 > selectedBox.y2) {
+    	var previousY1 = selectedBox.y1;
+      selectedBox.y1 = selectedBox.y2;
+      selectedBox.y2 = previousY1;
+    }
+  }
+  clickedArea = {box: -1, pos:'o'};
+  tmpBox = null;
+  mousedown = false;
+  console.log(boxes);
+  toggle('.canvasContextMenu-hor');
+  document.querySelector('.canvasContextMenu-hor').style.top = y2;
+  document.querySelector('.canvasContextMenu-hor').style.left = x2;
+};
+document.getElementById("canvas").onmouseout = function(e) {
+	if (clickedArea.box != -1) {
+  	var selectedBox = boxes[clickedArea.box];
+    if (selectedBox.x1 > selectedBox.x2) {
+    	var previousX1 = selectedBox.x1;
+      selectedBox.x1 = selectedBox.x2;
+      selectedBox.x2 > previousX1;
+    }
+    if (selectedBox.y1 > selectedBox.y2) {
+    	var previousY1 = selectedBox.y1;
+      selectedBox.y1 = selectedBox.y2;
+      selectedBox.y2 > previousY1;
+    }
+  }
+  mousedown = false;
+  clickedArea = {box: -1, pos:'o'};
+  tmpBox = null;
+};
+document.getElementById("canvas").onmousemove = function(e) {
+  if (mousedown && clickedArea.box == -1) {
+    x2 = e.offsetX;
+    y2 = e.offsetY;
+    redraw();
+  } else if (mousedown && clickedArea.box != -1) {
+    x2 = e.offsetX;
+    y2 = e.offsetY;
+    xOffset = x2 - x1;
+    yOffset = y2 - y1;
+    x1 = x2;
+    y1 = y2;
+
+    if (clickedArea.pos == 'i'  ||
+        clickedArea.pos == 'tl' ||
+        clickedArea.pos == 'l'  ||
+        clickedArea.pos == 'bl') {
+      boxes[clickedArea.box].x1 += xOffset;
+    }
+    if (clickedArea.pos == 'i'  ||
+        clickedArea.pos == 'tl' ||
+        clickedArea.pos == 't'  ||
+        clickedArea.pos == 'tr') {
+      boxes[clickedArea.box].y1 += yOffset;
+    }
+    if (clickedArea.pos == 'i'  ||
+        clickedArea.pos == 'tr' ||
+        clickedArea.pos == 'r'  ||
+        clickedArea.pos == 'br') {
+      boxes[clickedArea.box].x2 += xOffset;
+    }
+    if (clickedArea.pos == 'i'  ||
+        clickedArea.pos == 'bl' ||
+        clickedArea.pos == 'b'  ||
+        clickedArea.pos == 'br') {
+      boxes[clickedArea.box].y2 += yOffset;
+    }
+    redraw();
+  }
+}
+
+function redraw() {
+  // canvas.width = canvas.width;
+  var context = document.getElementById("canvas").getContext('2d');
+  context.clearRect(0, 0, 1920, 959);
+  context.beginPath();
+  for (var i = 0; i < boxes.length; i++) {
+    drawBoxOn(boxes[i], context);
+  }
+  if (clickedArea.box == -1) {
+    tmpBox = newBox(x1, y1, x2, y2);
+    if (tmpBox != null) {
+      drawBoxOn(tmpBox, context);
+    }
+  }
+}
+
+function findCurrentArea(x, y) {
+  for (var i = 0; i < boxes.length; i++) {
+    var box = boxes[i];
+    xCenter = box.x1 + (box.x2 - box.x1) / 2;
+    yCenter = box.y1 + (box.y2 - box.y1) / 2;
+    if (box.x1 - lineOffset <  x && x < box.x1 + lineOffset) {
+      if (box.y1 - lineOffset <  y && y < box.y1 + lineOffset) {
+        return {box: i, pos:'tl'};
+      } else if (box.y2 - lineOffset <  y && y < box.y2 + lineOffset) {
+        return {box: i, pos:'bl'};
+      } else if (yCenter - lineOffset <  y && y < yCenter + lineOffset) {
+        return {box: i, pos:'l'};
       }
-    } else {
-      reurn;
+    } else if (box.x2 - lineOffset < x && x < box.x2 + lineOffset) {
+      if (box.y1 - lineOffset <  y && y < box.y1 + lineOffset) {
+        return {box: i, pos:'tr'};
+      } else if (box.y2 - lineOffset <  y && y < box.y2 + lineOffset) {
+        return {box: i, pos:'br'};
+      } else if (yCenter - lineOffset <  y && y < yCenter + lineOffset) {
+        return {box: i, pos:'r'};
+      }
+    } else if (xCenter - lineOffset <  x && x < xCenter + lineOffset) {
+      if (box.y1 - lineOffset <  y && y < box.y1 + lineOffset) {
+        return {box: i, pos:'t'};
+      } else if (box.y2 - lineOffset <  y && y < box.y2 + lineOffset) {
+        return {box: i, pos:'b'};
+      } else if (box.y1 - lineOffset <  y && y < box.y2 + lineOffset) {
+        return {box: i, pos:'i'};
+      }
+    } else if (box.x1 - lineOffset <  x && x < box.x2 + lineOffset) {
+      if (box.y1 - lineOffset <  y && y < box.y2 + lineOffset) {
+        return {box: i, pos:'i'};
+      }
     }
-  });
-
-  function standby() {
-    this.src = 'https://ssl.gstatic.com/images/branding/product/1x/avatar_circle_blue_512dp.png';
   }
-  // request permission on page load
-  document.addEventListener('DOMContentLoaded', function() {
-    if (Notification.permission !== "granted")
-      Notification.requestPermission();
-  });
+  return {box: -1, pos:'o'};
+}
 
-  function notifyMe(body, icon) {
-    if (!Notification) {
-      alert('Desktop notifications not available in your browser. Try Chromium.');
-      return;
-    }
-    if (Notification.permission !== "granted")
-      Notification.requestPermission();
-    else {
-      var notification = new Notification('New Message', {
-        icon: icon,
-        body: body
-      });
-
-      notification.onclick = function() {
-        //window.open("http://stackoverflow.com/a/13328397/1269037");
-      };
-
-    }
-
+function newBox(x1, y1, x2, y2) {
+  boxX1 = x1 < x2 ? x1 : x2;
+  boxY1 = y1 < y2 ? y1 : y2;
+  boxX2 = x1 > x2 ? x1 : x2;
+  boxY2 = y1 > y2 ? y1 : y2;
+  if (boxX2 - boxX1 > lineOffset * 2 && boxY2 - boxY1 > lineOffset * 2) {
+    return {x1: boxX1,
+            y1: boxY1,
+            x2: boxX2,
+            y2: boxY2,
+            lineWidth: 1,
+            color: 'DeepSkyBlue'};
+  } else {
+    return null;
   }
-</script>
+}
 
+function drawBoxOn(box, context) {
+  xCenter = box.x1 + (box.x2 - box.x1) / 2;
+  yCenter = box.y1 + (box.y2 - box.y1) / 2;
+
+  context.strokeStyle = box.color;
+  context.fillStyle = box.color;
+
+  context.rect(box.x1, box.y1, (box.x2 - box.x1), (box.y2 - box.y1));
+  context.lineWidth = box.lineWidth;
+  context.stroke();
+
+  context.fillRect(box.x1 - anchrSize, box.y1 - anchrSize, 2 * anchrSize, 2 * anchrSize);
+  context.fillRect(box.x1 - anchrSize, yCenter - anchrSize, 2 * anchrSize, 2 * anchrSize);
+  context.fillRect(box.x1 - anchrSize, box.y2 - anchrSize, 2 * anchrSize, 2 * anchrSize);
+  context.fillRect(xCenter - anchrSize, box.y1 - anchrSize, 2 * anchrSize, 2 * anchrSize);
+  context.fillRect(xCenter - anchrSize, yCenter - anchrSize, 2 * anchrSize, 2 * anchrSize);
+  context.fillRect(xCenter - anchrSize, box.y2 - anchrSize, 2 * anchrSize, 2 * anchrSize);
+  context.fillRect(box.x2 - anchrSize, box.y1 - anchrSize, 2 * anchrSize, 2 * anchrSize);
+  context.fillRect(box.x2 - anchrSize, yCenter - anchrSize, 2 * anchrSize, 2 * anchrSize);
+  context.fillRect(box.x2 - anchrSize, box.y2 - anchrSize, 2 * anchrSize, 2 * anchrSize);
+}
+
+    </script>-->
 </html>
