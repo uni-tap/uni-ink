@@ -163,33 +163,18 @@
         </div>
         <div class="video-chat board-panel--transparent board-panel--hidden-bottom video-chat--pinned video-chat--with-buttons">
             <div class="video-cont">
-                <video></video>
-                <video></video>
-                <video></video>
-                <video></video>
+                <div id="localVideo"></div>
+                <div id="remoteVideos"></div>
             </div>
             <div class="video-controls"></div>
         </div>
         <canvas id="canvas" class="whiteboard" oncontextmenu="return false;" width="1920" height="959"></canvas>
         <canvas id="page1" class="storeboard" width="1920" height="959"></canvas>
     </body>
+    <script src="https://unitap-ink.herokuapp.com/main.js"></script>
     <script src="main.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://simplewebrtc.com/latest-v2.js"></script> 
-    <script>
-  var socket = io();
-  var api = find('api');
-  var room_id = 'uni-tap_live_classes: Live_Class_Id: ' + api;
-  var hoster = find('hostedby');
-  var title = find('title');
-  var user = find('user');
-  title = title.replace('%20', ' ');
-  window.onload = function() {
-    var stateObj = {
-      foo: "bar"
-    }
-  };
-   </script>
     <script>
         function toggle(elem){
             var obj = document.querySelector(elem);
@@ -199,6 +184,59 @@
               obj.style.display = 'none';
             }
         }
+    </script>
+    <script>
+        var webrtc = new SimpleWebRTC({
+    // the id/element dom element that will hold "our" video
+    localVideoEl: 'localVideo',
+    // the id/element dom element that will hold remote videos
+    remoteVideosEl: 'remotesVideos',
+    // immediately ask for camera access
+    autoRequestMedia: true
+  });
+
+  // we have to wait until it's ready
+  webrtc.on('readyToCall', function() {
+    // you can name it anything
+    webrtc.joinRoom(room_id);
+  });
+        //ENDING CLASS
+
+  socket.on('end_class', onEnd_class);
+
+  var e_api = find('api');
+  var host = find('hostedby');
+  var user = find('user');
+  var post = find('post');
+
+  function end_class() {
+    if (post == 's' || post == 'S') {
+      return;
+    } else {
+      /*  window.onbeforeunload =  function() {
+                  return "Do you really want to end the class?";
+        }  */
+      socket.emit('end_class', 'end');
+      toast('This Class is now over by:' + user, 'warn');
+      setTimeout(function() {
+        //window.location.replace('http://uni-tap.co/end_class.php?api=' +e_api+'&host='+host+'&user='+user)
+        window.location.replace('http://uni-tap.co/index.php');
+      }, 3050);
+      //window.location.replace('https://uni-tap.github.io/end_class.php?api=' +e_api+'&host='+host+'&user='+user);
+    }
+  }
+
+  function onEnd_class(data) {
+    if (post == 's' || post == 'S') {
+      return;
+    } else {
+      toast('This Class is now over 😌');
+      setTimeout(function() {
+        //window.location.replace('http://uni-tap.co/end_class.php?api=' +e_api+'&host='+host+'&user='+user)
+        window.location.replace('http://uni-tap.co/index.php');
+      }, 3050);
+    }
+  }
     </script>
     <!--<script>
         var lineOffset = 4;
