@@ -185,6 +185,25 @@
               obj.style.display = 'none';
             }
         }
+	    $(function() {
+    var socket = io.connect();
+    var $messageForm = $('#messageForm');
+    var $message = $('#message');
+    var $chat = $('#chat');
+    var $users = $('#users');
+    var name = find('user');
+    name = name.replace(/%20/g, " ");
+    var post = '(' + find('post') + ')';
+    var username = name + " " + post;
+    var chat_area = document.querySelector('.chat_area');
+    if (find('post') != 'ADMIN') {
+      socket.emit('new_user', username, function(data) {
+        data = username;
+        //username = '<%= session.getAttribute("decname") %>';
+        toast(username + ' has joined the class.');
+      });
+    }
+	    });
     </script>
     <script>
     </script>
