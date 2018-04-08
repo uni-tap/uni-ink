@@ -173,7 +173,9 @@
         <canvas id="canvas" class="whiteboard" oncontextmenu="return false;" width="1920" height="959"></canvas>
         <canvas id="page1" class="storeboard" width="1920" height="959"></canvas>
     </body>
-    <script src="https://unitap-ink.herokuapp.com/main.js"></script>
+    <script src="main.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://simplewebrtc.com/latest-v2.js"></script>	
     <script>
         function toggle(elem){
             var obj = document.querySelector(elem);
