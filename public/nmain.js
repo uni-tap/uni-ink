@@ -2,7 +2,7 @@
 (function() {
   var sleep_timer = 0;
   var thickness = 0.3;
-  //var socket = io();
+  var socket = io();
   var canvas = document.getElementsByClassName('whiteboard')[0];
   var scanvas = document.getElementsByClassName('storeboard')[0];
   var colors = document.getElementsByClassName('colorPalette_circle');
