@@ -210,7 +210,7 @@
         <div class="btm_cont draggable">
         <div class="resize-drag video-chat board-panel--transparent board-panel--hidden-bottom video-chat--pinned video-chat--with-buttons" style="display:block;@media only screen and (max-height: 500px){display:none !important;}">
             <div class="video-cont">
-                <div id="localVideo"></div>
+                <div id="localVideo" style="margin-left: 100px;"></div>
                 <div id="remotesVideos"></div>
             </div>
             <div class="video-controls"></div>
@@ -234,7 +234,7 @@
         <span class="sm"><div class="sml" onclick="toggle('.emoji_center')"><img src="https://static.xx.fbcdn.net/images/emoji.php/v9/z88/1/32/1f600.png"></div></span>
         <input onkeypress="return runScript(event)" onkeyup="if(this.value != ''){document.querySelector('.placeholder').style.display='none';}" type="text" class="chat_msg" name="msg" id="msg"/>
         <input id="send" value="" type="button">
-        <label for="msg" class="placeholder" style="display: block;">Type something...</label>
+        <label for="msg" class="placeholder" style="display: block;">Chat service is currently disabled.<!-- Type something... --></label>
         <span class="attachments" onclick="attc_drawer();">+</span>
         <div style="display:none;"class="drawer">
             <div class="dr_btn" id="image_s">Image</div>
