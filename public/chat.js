@@ -96,7 +96,7 @@ emojify.run(null, function(emoji, emojiName){
       chat: msg.value,
       user: 'divg',//localStorage.user,
       id: find('id'),
-      type: type,  
+      type: 'norm',  
       api: find('api')
     });
     msg.value = '';
