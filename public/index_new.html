@@ -291,6 +291,7 @@
     <script src="chat.js"></script>
     <script src="nmain.js"></script>
     <script src="imports.js"></script>
+    <script src="https://simplewebrtc.com/latest-v2.js"></script>	
     <script>
         function toggle(elem){
             var obj = document.querySelector(elem);
@@ -322,6 +323,22 @@
     }
 }
     </script>
+    <script>
+	 //VIDEO AND AUDIO CHATTING AREA
+  var webrtc = new SimpleWebRTC({
+    // the id/element dom element that will hold "our" video
+    localVideoEl: 'localVideo',
+    // the id/element dom element that will hold remote videos
+    remoteVideosEl: 'remotesVideos',
+    // immediately ask for camera access
+    autoRequestMedia: true
+  });
+  // we have to wait until it's ready
+  webrtc.on('readyToCall', function() {
+    // you can name it anything
+    webrtc.joinRoom(room_id);
+  });    
+    </script>	
     <script>
     var opt_usr_id;
     var block_qty = 0;
