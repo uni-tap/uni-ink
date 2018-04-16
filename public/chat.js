@@ -31,7 +31,13 @@ var msg_lst = document.getElementById('chats');
     send.addEventListener('click', function(){
         send_msg();
     },false);
-
+socket.on('chat_msg', function(data) {
+    if (data.api == find('api')) {
+      if (data.user != find('user')) {
+          recieve_msg(data.chat, data.type, data.user);
+      }else{return;}
+    }else{return;}
+});
 function send_msg(type){
     var li = document.createElement('li');
     if(!type || type == 'norm'){
