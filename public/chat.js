@@ -106,7 +106,7 @@ emojify.run(null, function(emoji, emojiName){
     toggle('.placeholder');
     socket.emit('chat_msg', {
       chat: msg.value,
-      user: 'divg',//localStorage.user,
+      user: find('user'),//localStorage.user,
       id: find('id'),
       type: 'norm',  
       api: find('api')
