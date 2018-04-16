@@ -111,6 +111,7 @@ emojify.run(null, function(emoji, emojiName){
       id: find('id'),
       type: 'norm',  
       api: find('api')
+      console.log('snt');  
     });
     msg.value = '';
 }
