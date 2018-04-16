@@ -1379,9 +1379,6 @@ function sleep_time(){
       onNewPageUpdate(true);
   }
 };    
-shortcut.add("Ctrl+N", function() {
-    alert("Ctrl Shift A pressed");
-});
   // IMAGE UPLOADING SECTION. IT'S TOTALLY DIFFERENT SECTION DO NOT COMBINE IT WITH ANY OTHER FUNCTION 💀 ☠ 👿 😈.
   //alert('It is successfull.<br />Lorem ipsum cum sociss bonjur annayang siri cortana life like moto apple bannana.Lorem ipsum cum sociss bonjur annayang siri cortana life like moto apple bannana.Lorem ipsum cum sociss bonjur annayang siri cortana life like moto apple bannana', 'success');
 if (sleep_timer == 60){
