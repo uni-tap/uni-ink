@@ -110,8 +110,7 @@ emojify.run(null, function(emoji, emojiName){
       user: find('user'),//localStorage.user,
       id: find('id'),
       type: 'norm',  
-      api: find('api')
-      console.log('snt');  
+      api: find('api')  
     });
     msg.value = '';
 }
