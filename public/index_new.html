@@ -504,7 +504,8 @@ interact(element)
 		hide('.undo-redo');    
 		document.querySelector('.tls_nav').style.height = '150px';
 		document.querySelector('.board-toolbar__customized-box').style.height = '150px';   
-		document.querySelector('.tls_nav').style.top = '225px';    
+		document.querySelector('.tls_nav').style.top = '225px';
+		document.querySelector('NewPage').removeEventListener('click', onNewPageUpdate, true);    
 	    }
     </script>
 </html>
