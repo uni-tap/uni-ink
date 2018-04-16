@@ -1,3 +1,4 @@
+var socket = io();
 var filters = {
     profanity : function(dat){
          return true
@@ -84,8 +85,15 @@ emojify.run(null, function(emoji, emojiName){
   return span;
 });
     li.focus();
-    msg.value = '';
     toggle('.placeholder');
+    socket.emit('chat_msg', {
+      chat: msg.value,
+      user: 'divg',//localStorage.user,
+      id: find('id'),
+      type: type,  
+      api: find('api')
+    });
+    msg.value = '';
 }
 function recieve_msg(r_msg, type, from){
     var validate = filters.from_blocked(from);
