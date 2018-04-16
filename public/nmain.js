@@ -59,7 +59,9 @@
   var main_ctx = main_canvas.getContext('2d');
 
   //  REDO AND UNDO FUNCTIONS
-
+  if(post == 'S' || post == 's'){
+  document.querySelector('#NewPage').removeEventListener('click', onNewPageUpdate, true);
+  }
   var history = {
     redo_list: [],
     undo_list: [],
