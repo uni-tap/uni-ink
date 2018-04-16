@@ -132,21 +132,21 @@ window.onload = function(){
         img_box.style.top = '-500px';
         img_box.style.height = '500px';
         img_box.style.width = '500px';
-        /*socket.emit('all_data', {
+        socket.emit('all_data', {
           img: dataURL
-        });*/
+        });
       } else {
         img_box.setAttribute('src', dataURL);
-        /*socket.emit('all_data', {
+        socket.emit('all_data', {
           img: dataURL,
           api: api
-        });*/
+        });
       }
     } else {
       return;
     }
   }
-  /*socket.on('all_data', ondataEvent);*/
+  socket.on('all_data', ondataEvent);
 
   function ondataEvent(data) {
     if (data.api == api) {
@@ -266,7 +266,7 @@ window.onload = function(){
         current.tool = '';
     }
   //PERFORMING A PARTICULAR FUNCTION ON THE ARRIVAL OF THE FOLLOWING EVENTS
-/*
+
   socket.on('drawing', onDrawingEvent);
   socket.on('esr', onEraserEvent);
   socket.on('rect', onRectEvent);
@@ -315,7 +315,7 @@ window.onload = function(){
         }
       }
     }
-  });*/
+  });
   //RESIZING THE CANVAS ACOORDING TO THE BROWSER
   window.addEventListener('load', onResize, false);
   //MAKING RANDOM COLORS FOR RANDOM COLOR PEN
@@ -356,7 +356,7 @@ window.onload = function(){
       var cw = canvas.width;
       var ch = canvas.height;
 
-      /*socket.emit('drawing', {
+      socket.emit('drawing', {
         x0: x0 / cw,
         y0: y0 / ch,
         x1: x1 / cw,
@@ -365,7 +365,7 @@ window.onload = function(){
         api: api,
         user: user,
         page: totalcurrentpagecount
-      });*/
+      });
     },
     eraser: function(x0, y0, x1, y1, color, emit) {
       main_ctx.beginPath();
@@ -384,7 +384,7 @@ window.onload = function(){
       var cw = canvas.width;
       var ch = canvas.height;
 
-      /*socket.emit('esr', {
+      socket.emit('esr', {
         x0: x0 / cw,
         y0: y0 / ch,
         x1: x1 / cw,
@@ -393,7 +393,7 @@ window.onload = function(){
         api: api,
         user: user,
         page: totalcurrentpagecount
-      });*/
+      });
     },
     rect: function(x0, y0, x1, y1, color, fill, emit) { // RECTANGLE TOOL
       var x = Math.min(x0, x1),
@@ -430,7 +430,7 @@ window.onload = function(){
       var cw = scanvas.width;
       var ch = scanvas.height;
 
-      /*socket.emit('rect', {
+      socket.emit('rect', {
 
         x0: x0 / cw,
         y0: y0 / ch,
@@ -441,7 +441,7 @@ window.onload = function(){
         api: api,
         user: user,
         page: totalcurrentpagecount
-      });*/
+      });
     },
     circle: function(x0, y0, x1, y1, color, fill, emit) { // CIRCLE TOOL
       var x = Math.min(x1, x0),
@@ -476,7 +476,7 @@ window.onload = function(){
       var cw = canvas.width;
       var ch = canvas.height;
 
-      /*socket.emit('circle', {
+      socket.emit('circle', {
         x0: x0 / cw,
         y0: y0 / ch,
         x1: x1 / cw,
@@ -486,7 +486,7 @@ window.onload = function(){
         api: api,
         user: user,
         page: totalcurrentpagecount
-      });*/
+      });
     },
     line: function(x0, y0, x1, y1, color, emit) { // LINE TOOL
       context.strokeStyle = color;
@@ -506,7 +506,7 @@ window.onload = function(){
       var cw = canvas.width;
       var ch = canvas.height;
 
-      /*socket.emit('line', {
+      socket.emit('line', {
         x0: x0 / cw,
         y0: y0 / ch,
         x1: x1 / cw,
@@ -515,7 +515,7 @@ window.onload = function(){
         api: api,
         user: user,
         page: totalcurrentpagecount
-      });*/
+      });
     },
     triangle: function(x0, y0, x1, y1, color, fill, emit) {
       context.clearRect(0, 0, scanvas.width, scanvas.height);
@@ -540,7 +540,7 @@ window.onload = function(){
         var cw = canvas.width;
         var ch = canvas.height;
 
-        /*socket.emit('tri', {
+        socket.emit('tri', {
           x0: x0 / cw,
           y0: y0 / ch,
           x1: x1 / cw,
@@ -550,7 +550,7 @@ window.onload = function(){
           api: api,
           user: user,
           page: totalcurrentpagecount
-        });*/
+        });
       }
     },
     right_triangle: function(x0, y0, x1, y1, color, fill, emit) {
@@ -578,7 +578,7 @@ window.onload = function(){
       var cw = canvas.width;
       var ch = canvas.height;
 
-      /*socket.emit('rtri', {
+      socket.emit('rtri', {
         x0: x0 / cw,
         y0: y0 / ch,
         x1: x1 / cw,
@@ -588,7 +588,7 @@ window.onload = function(){
         api: api,
         user: user,
         page: totalcurrentpagecount
-      });*/
+      });
     },
 
     graph: function(x0, y0, x1, y1, color, thickness, emit) {
@@ -657,7 +657,7 @@ window.onload = function(){
       var cw = scanvas.width;
       var ch = scanvas.height;
 
-     /* socket.emit('graph', {
+      socket.emit('graph', {
         x0: x0 / cw,
         y0: y0 / ch,
         x1: x1 / cw,
@@ -666,7 +666,7 @@ window.onload = function(){
         api: api,
         user: user,
         page: totalcurrentpagecount
-      });*/
+      });
     },
     Text: function(x0, y0, x1, y1, color, emit) {
       var txt = document.createElement('textarea');
@@ -701,7 +701,7 @@ window.onload = function(){
       var cw = canvas.width;
       var ch = canvas.height;
 
-      /*socket.emit('hlight', {
+      socket.emit('hlight', {
         x0: x0 / cw,
         y0: y0 / ch,
         x1: x1 / cw,
@@ -710,7 +710,7 @@ window.onload = function(){
         api: api,
         user: user,
         page: totalcurrentpagecount
-      });*/
+      });
     },
     comment: function(x0, y0, x1, y1, emit){
         if(limit == 0){
@@ -789,9 +789,9 @@ window.onload = function(){
       main_ctx = current.canvas.getContext('2d');
       main_ctx.clearRect(0, 0, canvas.width, canvas.height);
       //notes = [];    
-     /* socket.emit('clear', {
+      socket.emit('clear', {
         api: api
-      });*/
+      });
     }
   }
 
@@ -840,11 +840,11 @@ function sleep_time(){
     if (current.canvas == canvas) {
       update_data(context, scontext, canvas);
       history.saveState(scanvas);
-      //socket.emit('update_data');
+      socket.emit('update_data');
     } else if (current.canvas !== 'canvas') {
       update_data(context, main_ctx, canvas);
       history.saveState(scanvas);
-      //socket.emit('update_data');
+      socket.emit('update_data');
     }
     //document.getElementById('curs').style.display = 'none';
     //save();
@@ -941,10 +941,10 @@ function sleep_time(){
       for(var i = 0; i < s_cht.length; i++){
           s_cht[i].style.backgroundColor = current.bgcolor;
       }       
-      /*socket.emit('color', {
+      socket.emit('color', {
         color: current.bgcolor,
         api: api
-      });*/
+      });
     }
     if (current.type == 'Fill') {
       current.color = 'black';
@@ -989,9 +989,9 @@ function sleep_time(){
     current.canvas = document.getElementById('page' + previouspagecount);
     main_ctx = current.canvas.getContext('2d');
     current.canvas.style.backgroundColor = current.bgcolor;
-    /*socket.emit('color', {
+    socket.emit('color', {
       color: current.bgcolor
-    });*/
+    });
   }
 
   function onGraphUpdate(e) {
@@ -1053,11 +1053,11 @@ function sleep_time(){
     counter.innerHTML = 'Page - ' + totalcurrentpagecount;
     if (!emit) {
       return;
-    }/*
+    }
     socket.emit('new_page', {
       color: current.bgcolor,
       api: api
-    });*/
+    });
     //save();
   }
 
@@ -1080,10 +1080,10 @@ function sleep_time(){
       main_ctx = a_area.getContext('2d');
       if (!emit) {
         return;
-      }/*
+      }
       socket.emit('left', {
         api: api
-      });*/
+      });
     }
     //save();
   }
@@ -1106,10 +1106,10 @@ function sleep_time(){
       main_ctx = a_area.getContext('2d');
       if (!emit) {
         return;
-      }/*
+      }
       socket.emit('right', {
         api: api
-      });*/
+      });
     }
     //save();
   }
