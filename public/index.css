@@ -1011,3 +1011,11 @@ audio, canvas, progress, video {
     height: 165px !important;
     }
 }
+#remotesVideos{
+position:absolute;
+top:150px;	
+}
+#remotesVideos video {
+    height: 45px;
+    width: 60px;
+}
