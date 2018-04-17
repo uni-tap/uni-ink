@@ -333,11 +333,13 @@
             if (this.readyState == 4 && this.status == 200) {
                 //console.log(this.responseText);
                 if(this.responseText == 1){
+		     console.log(this.responseText);	
                     sessionStorage.api = api;
 		    var nURL = '/?hostedby='+find('hostedby')+'&allowedclasses='+find('allowedclasses')+'&title='+find('title')+'';	
 	            window.history.pushState('UNI-TAP-INK', find('title'), nURL);		
                 }else if(this.responseText == 'no_class'){
-                    alert('This class cannot be verified.');
+                    //alert('This class cannot be verified.');
+		    console.log(this.responseText);	
 		    window.location.replace('http://uni-tap.co/index.php');	
                 }
             }
