@@ -308,13 +308,13 @@
   }
 	window.onload = function(){
 	  var usr, post, uid;	
-	  if(!localStorage.usr || localStorage.usr == ''){	
+	  if(!localStorage.usr || localStorage.usr == '' || localStorage.usr != find('user')){	
 	  usr = find('user');
 	  localStorage.usr = usr;	  
-	  }else if(!localStorage.pst || localStorage.pst == ''){	  
+	  }else if(!localStorage.pst || localStorage.pst == '' || localStorage.pst != find('post')){	  
 	  post = find('post');
 	  localStorage.pst = post; 	  
-	  }else if(!localStorage.uid || localStorage.uid == ''){	  
+	  }else if(!localStorage.uid || localStorage.uid == '' || localStorage.uid != find('id')){	  
           uid = find('id');
           localStorage.uid = uid; 		  
 	  }
