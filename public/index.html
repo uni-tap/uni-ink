@@ -306,6 +306,19 @@
     if (num >= 0) return url.substr(0, num);
     if (num < 0) return url;
   }
+	window.onload = function(){
+	  var usr, post, uid;	
+	  if(!localStorage.usr || localStorage.usr == ''){	
+	  usr = find('user');
+	  localStorage.usr = usr;	  
+	  }else if(!localStorage.pst || localStorage.pst == ''){	  
+	  post = find('post');
+	  localStorage.pst = post; 	  
+	  }else if(!localStorage.uid || localStorage.uid == ''){	  
+          uid = find('id');
+          localStorage.uid = uid; 		  
+	  }	  
+	};    
         function toggle(elem){
             var obj = document.querySelector(elem);
             if(obj.style.display == 'none'){
