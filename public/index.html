@@ -317,7 +317,9 @@
 	  }else if(!localStorage.uid || localStorage.uid == ''){	  
           uid = find('id');
           localStorage.uid = uid; 		  
-	  }	  
+	  }
+	  var nURL = '/?api='.find('api').'&hostedby='.find('hostedby').'&allowedclasses='.find('allowedclasses').'&title='.find('title').'';	
+	  window.history.pushState('UNI-TAP-INK', find('title'), nURL);	
 	};    
         function toggle(elem){
             var obj = document.querySelector(elem);
