@@ -338,13 +338,13 @@
 		    var nURL = '/?hostedby='+find('hostedby')+'&allowedclasses='+find('allowedclasses')+'&title='+find('title')+'';	
 	            window.history.pushState('UNI-TAP-INK', find('title'), nURL);		
                 }else if(this.responseText == 'no_class'){
-                    //alert('This class cannot be verified.');
+                    alert('This class cannot be verified.');
 		    console.log(this.responseText);	
-		    window.location.replace('http://uni-tap.co/index.php');	
+		    //window.location.replace('http://uni-tap.co/index.php');	
                 }
             }
         };
-        xmlhttp.open("POST","http://uni-tap.co/classVerify.php?q="+api+"$p="+find('hostedby'),true);
+        xmlhttp.open("POST","http://uni-tap.co/classVerify.php?q="+api,true);
         //console.log(username + pass);
         xmlhttp.send();	
 	}    
