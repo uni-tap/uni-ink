@@ -338,6 +338,7 @@
 	            window.history.pushState('UNI-TAP-INK', find('title'), nURL);		
                 }else if(this.responseText == 'no_class'){
                     alert('This class cannot be verified.');
+		    window.location.replace('http://uni-tap.co/index.php');	
                 }
             }
         };
