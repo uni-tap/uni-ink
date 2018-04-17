@@ -30,9 +30,9 @@
   var currentcount = 1;
   var count = currentcount;
   var counter = document.getElementById("NewPage");
-  var api = 'UTINK~~'+version+':'+find('api');
-  var post = localStorage.pst;
-  var user = localStorage.usr + '(' + post + ')';
+  var api = 'UTINK~~'+version+':'+sessionStorage.api;
+  var post = sessionStorage.pst;
+  var user = sessionStorage.usr + '(' + post + ')';
   var fruits = [];
   var saved = false;
   var stckynote = document.getElementById('sticky'); 
