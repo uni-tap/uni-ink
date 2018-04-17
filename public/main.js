@@ -1,5 +1,6 @@
 'use strict';
 (function() {
+  var version = '1.3.0';
   var sleep_timer = 0;
   var thickness = 0.3;
   var socket = io();
@@ -29,7 +30,7 @@
   var currentcount = 1;
   var count = currentcount;
   var counter = document.getElementById("NewPage");
-  var api = find('api');
+  var api = 'UTINK~~'+version+':'+find('api');
   var post = find('post');
   var user = find('user') + '(' + post + ')';
   var fruits = [];
