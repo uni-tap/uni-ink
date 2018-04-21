@@ -483,11 +483,26 @@
 		 centerdiv.innerHTML = data.user;    
 	     //}
      });
+     socket.on('get users', function(data){
+	     for (i = 0; i < data.length; i++) {
+	     var newusr = document.createElement('li');
+	     var newusrdpcont = document.createElement('div');		     
+	     var newusrdp = document.createElement('img');
+		 newusrdpcont.className = 'dpCont';
+		 newusrdp.src = 'http://uni-tap.co/nusr/dp.php?id='+data.id;
+	     var centerdiv = document.createElement('center');
+		 newusr.appendChild(newusrdpcont);
+		 newusr.appendChild(centerdiv);
+		 newusrdpcont.appendChild(newusrdp);
+		 document.querySelector('#usersCount').appendChild(newusr);
+		 centerdiv.innerHTML = data[i];    
+	     }
+     });	    
 	    window.onload = function(){
 	    	socket.emit('user_attached', {
 		api: find('api'),
 		user: sessionStorage.usr
-		});
+		});    
 	    };
     </script>
     <script>
