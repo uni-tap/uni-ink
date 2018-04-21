@@ -468,8 +468,8 @@
             
         }
      var socket = io();
-     socket.on('get users', function(data){
-	     for (i = 0; i < data.length; i++) {
+     socket.on('user_attached', function(data){
+	     //for (i = 0; i < data.length; i++) {
 	     var newusr = document.createElement('li');
 	     var newusrdpcont = document.createElement('div');		     
 	     var newusrdp = document.createElement('img');
@@ -480,9 +480,15 @@
 		 newusr.appendChild(centerdiv);
 		 newusrdpcont.appendChild(newusrdp);
 		 document.querySelector('usersCount').appendChild(newusr);
-		 centerdiv.innerHTML = data[i];    
-	     }
-     });	    
+		 centerdiv.innerHTML = data.user;    
+	     //}
+     });
+	    window.onload = function(){
+	    	socket.emit('user_attached', {
+		api: find('api'),
+		user: sessionStorage.usr
+		});
+	    };
     </script>
     <script>
     /*    interact('.dropzone').dropzone({
