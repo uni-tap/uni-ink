@@ -1180,7 +1180,7 @@ function getCookie(cname) {
         sleep_timer = 0;
         var cw = canvas.width;
         var ch = canvas.height;
-        draw.pen(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color, data.thickness);
+        draw.pen(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color, data.thick);
         move_curc(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.user);
       } //else if(data.page < totalcurrentpagecount){move_left();}else if(data.page > totalcurrentpagecount){move_right();}
       else //if(data.page > totalpagecount)
@@ -1207,7 +1207,7 @@ function getCookie(cname) {
     if (data.api == api) {
       var cw = scanvas.width;
       var ch = scanvas.height;
-      draw.rect(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color, data.fill, data.thickness);
+      draw.rect(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color, data.fill, data.thick);
       move_curc(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.user);
     } else {
       return;
@@ -1218,7 +1218,7 @@ function getCookie(cname) {
     if (data.api == api) {
       var cw = scanvas.width;
       var ch = scanvas.height;
-      draw.circle(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color, data.fill, data.thickness);
+      draw.circle(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color, data.fill, data.thick);
       move_curc(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.user);
     } else {
       return;
@@ -1229,7 +1229,7 @@ function getCookie(cname) {
     if (data.api == api) {
       var cw = scanvas.width;
       var ch = scanvas.height;
-      draw.triangle(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color, data.fill, data.thickness);
+      draw.triangle(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color, data.fill, data.thick);
       move_curc(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.user);
     } else {
       return;
@@ -1240,7 +1240,7 @@ function getCookie(cname) {
     if (data.api == api) {
       var cw = scanvas.width;
       var ch = scanvas.height;
-      draw.right_triangle(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color, data.fill, data.thickness);
+      draw.right_triangle(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color, data.fill, data.thick);
       move_curc(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.user);
       //draw.right_triangle(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color, data.fill);
     } else {
@@ -1252,7 +1252,7 @@ function getCookie(cname) {
     if (data.api == api) {
       var cw = scanvas.width;
       var ch = scanvas.height;
-      draw.line(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color, data.thickness);
+      draw.line(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color, data.thick);
       move_curc(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.user);
     } else {
       return;
