@@ -316,7 +316,11 @@
   if ( document.hasFocus() ) {
     console.log("The document has the focus.");
   } else {
+    if(sessionStorage.pst !='T' || sessionStorage.pst !='ADMIN' || sessionStorage.pst !='t' ||){ 	  
     alert("Dont leave class in between");
+  }else{
+    console.log('No focus');
+  }
   }
 }      
 	window.onload = function(){
