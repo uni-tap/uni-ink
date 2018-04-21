@@ -341,7 +341,7 @@ window.onload = function(){
   // DRAWING TOOLS
   var created = false;
   var draw = {
-    pen: function(x0, y0, x1, y1, color, emit) { // PEN TOOL
+    pen: function(x0, y0, x1, y1, color, thickness, emit) { // PEN TOOL
       main_ctx.beginPath();
       main_ctx.lineCap = "round";
       main_ctx.moveTo(x0, y0);
@@ -365,6 +365,7 @@ window.onload = function(){
         x1: x1 / cw,
         y1: y1 / ch,
         color: color,
+        thick: thickness,
         api: api,
         user: user,
         page: totalcurrentpagecount
@@ -398,7 +399,7 @@ window.onload = function(){
         page: totalcurrentpagecount
       });
     },
-    rect: function(x0, y0, x1, y1, color, fill, emit) { // RECTANGLE TOOL
+    rect: function(x0, y0, x1, y1, color, fill, thickness,  emit) { // RECTANGLE TOOL
       var x = Math.min(x0, x1),
         y = Math.min(y0, y1),
         w = Math.abs(x1 - x0),
@@ -441,12 +442,13 @@ window.onload = function(){
         y1: y1 / ch,
         color: color,
         fill: fill,
+        thick: thickness,
         api: api,
         user: user,
         page: totalcurrentpagecount
       });
     },
-    circle: function(x0, y0, x1, y1, color, fill, emit) { // CIRCLE TOOL
+    circle: function(x0, y0, x1, y1, color, fill, thickness,  emit) { // CIRCLE TOOL
       var x = Math.min(x1, x0),
         y = Math.min(y1, y0),
         w = Math.abs(x1 - x0),
@@ -486,12 +488,13 @@ window.onload = function(){
         y1: y1 / ch,
         color: color,
         fill: fill,
+        thick: thickness,
         api: api,
         user: user,
         page: totalcurrentpagecount
       });
     },
-    line: function(x0, y0, x1, y1, color, emit) { // LINE TOOL
+    line: function(x0, y0, x1, y1, color, thickness,  emit) { // LINE TOOL
       context.strokeStyle = color;
       context.lineWidth = thickness;
       context.clearRect(0, 0, scanvas.width, scanvas.height);
@@ -515,6 +518,7 @@ window.onload = function(){
         x1: x1 / cw,
         y1: y1 / ch,
         color: color,
+        thick: thickness,
         api: api,
         user: user,
         page: totalcurrentpagecount
@@ -550,13 +554,14 @@ window.onload = function(){
           y1: y1 / ch,
           color: color,
           fill: fill,
+          thick: thickness,
           api: api,
           user: user,
           page: totalcurrentpagecount
         });
       }
     },
-    right_triangle: function(x0, y0, x1, y1, color, fill, emit) {
+    right_triangle: function(x0, y0, x1, y1, color, fill, thickness,  emit) {
       context.clearRect(0, 0, scanvas.width, scanvas.height);
       context.strokeStyle = color;
       context.lineWidth = thickness;
@@ -588,6 +593,7 @@ window.onload = function(){
         y1: y1 / ch,
         color: color,
         fill: fill,
+        thick: thickness,
         api: api,
         user: user,
         page: totalcurrentpagecount
@@ -862,7 +868,7 @@ function sleep_time(){
         return;
       }
       if (current.tool == 'Pen') { // IF PEN BUTTUN IS CLICKED
-        draw.pen(current.x, current.y, e.clientX, e.clientY, current.color, true);
+        draw.pen(current.x, current.y, e.clientX, e.clientY, current.color, thickness, true);
         current.x = e.clientX;
         current.y = e.clientY;
       }
@@ -872,19 +878,19 @@ function sleep_time(){
         current.y = e.clientY;
       }
       if (current.tool == 'Line') { // IF LINE BUTTON IS CLICKED
-        draw.line(current.x, current.y, e.clientX, e.clientY, current.color, true);
+        draw.line(current.x, current.y, e.clientX, e.clientY, current.color, thickness, true);
       }
       if (current.tool == 'Rectangle') { // IF RECTANGLE BUTTON IS CLICKED
-        draw.rect(current.x, current.y, e.clientX, e.clientY, current.color, current.fillcolor, true);
+        draw.rect(current.x, current.y, e.clientX, e.clientY, current.color, current.fillcolor, thickness, true);
       }
       if (current.tool == 'Circle') { // IF CIRCLE BUTTON IS CLICKED
-        draw.circle(current.x, current.y, e.clientX, e.clientY, current.color, current.fillcolor, true);
+        draw.circle(current.x, current.y, e.clientX, e.clientY, current.color, current.fillcolor, thickness, true);
       }
       if (current.tool == 'right_triangle') { // IF RIGHT TRIANGLE BUTTON IS CLICKED
-        draw.right_triangle(current.x, current.y, e.clientX, e.clientY, current.color, current.fillcolor, true);
+        draw.right_triangle(current.x, current.y, e.clientX, e.clientY, current.color, current.fillcolor, thickness, true);
       }
       if (current.tool == 'Triangle') { // IF TRIANGLE BUTTON IS CLICKED
-        draw.triangle(current.x, current.y, e.clientX, e.clientY, current.color, current.fillcolor, true);
+        draw.triangle(current.x, current.y, e.clientX, e.clientY, current.color, current.fillcolor, thickness, true);
       }
       if (current.tool == 'Text') { // IF TRIANGLE BUTTON IS CLICKED
         draw.Text(current.x, current.y, e.clientX, e.clientY, current.color, current.fillcolor, true);
@@ -1174,7 +1180,7 @@ function getCookie(cname) {
         sleep_timer = 0;
         var cw = canvas.width;
         var ch = canvas.height;
-        draw.pen(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color);
+        draw.pen(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color, data.thickness);
         move_curc(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.user);
       } //else if(data.page < totalcurrentpagecount){move_left();}else if(data.page > totalcurrentpagecount){move_right();}
       else //if(data.page > totalpagecount)
@@ -1201,7 +1207,7 @@ function getCookie(cname) {
     if (data.api == api) {
       var cw = scanvas.width;
       var ch = scanvas.height;
-      draw.rect(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color, data.fill);
+      draw.rect(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color, data.fill, data.thickness);
       move_curc(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.user);
     } else {
       return;
@@ -1212,7 +1218,7 @@ function getCookie(cname) {
     if (data.api == api) {
       var cw = scanvas.width;
       var ch = scanvas.height;
-      draw.circle(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color, data.fill);
+      draw.circle(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color, data.fill, data.thickness);
       move_curc(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.user);
     } else {
       return;
@@ -1223,7 +1229,7 @@ function getCookie(cname) {
     if (data.api == api) {
       var cw = scanvas.width;
       var ch = scanvas.height;
-      draw.triangle(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color, data.fill);
+      draw.triangle(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color, data.fill, data.thickness);
       move_curc(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.user);
     } else {
       return;
@@ -1234,7 +1240,7 @@ function getCookie(cname) {
     if (data.api == api) {
       var cw = scanvas.width;
       var ch = scanvas.height;
-      draw.right_triangle(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color, data.fill);
+      draw.right_triangle(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color, data.fill, data.thickness);
       move_curc(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.user);
       //draw.right_triangle(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color, data.fill);
     } else {
@@ -1246,7 +1252,7 @@ function getCookie(cname) {
     if (data.api == api) {
       var cw = scanvas.width;
       var ch = scanvas.height;
-      draw.line(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color);
+      draw.line(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color, data.thickness);
       move_curc(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.user);
     } else {
       return;
