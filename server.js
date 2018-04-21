@@ -45,7 +45,7 @@ io.on('connection', function(socket){
   socket.on('pf', (data)  => socket.broadcast.emit('pf', data));
   socket.on('late', (data)  => socket.broadcast.emit('late', data));
   socket.on('chat_msg', (data)  => socket.broadcast.emit('chat_msg', data));
-  socket.on('add_usr', (data)  => socket.broadcast.emit('add_usr', data));
+  socket.on('user_attached', (data)  => socket.broadcast.emit('user_attached', data));
 // IF A USER GETS DISCONNECTED
 
 socket.on('disconnect', function(socket){
