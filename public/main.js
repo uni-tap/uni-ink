@@ -736,11 +736,11 @@ window.onload = function(){
         new_comment.style.zIndex = '3';
         new_comment.style.boxShadow = '0 5px 8px rgba(0,0,0,0.15)';
         var cmtDetails = document.createElement('div');
-        //cmtDetails.style.display = 'none';
+        cmtDetails.style.display = 'none';
         cmtDetails.style.height = '100px';
         cmtDetails.style.width = '200px';
         new_comment.addEventListener('click', function(){
-        
+         toggle('#'+cmtDetails.id);
         }, false);    
         new_comment.id = getRandomId();
         cmtDetails.id = getRandomId();
@@ -760,6 +760,14 @@ window.onload = function(){
         }else{return;}
     }  
   };
+  function toggle(elem){
+            var obj = document.querySelector(elem);
+            if(obj.style.display == 'none'){
+              obj.style.display = 'block';
+            }else if(obj.style.display == 'block'){
+              obj.style.display = 'none';
+            }
+        }
  function addClicks(cls, id){
      var cmts = document.getElementsByClassName(cls)
      for(var i = 0; i < cmts.length; i++){
