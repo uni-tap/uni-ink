@@ -736,10 +736,12 @@ window.onload = function(){
         new_comment.style.zIndex = '3';
         new_comment.style.boxShadow = '0 5px 8px rgba(0,0,0,0.15)';
         var cmtDetails = document.createElement('div');
-        cmtDetails.style.display = 'none';
+        //cmtDetails.style.display = 'none';
         cmtDetails.style.height = '100px';
-        cmtDetails.style.widtht = '200px';
-            
+        cmtDetails.style.width = '200px';
+        new_comment.addEventListener('click', function(){
+        
+        }, false);    
         new_comment.id = getRandomId();
         cmtDetails.id = getRandomId();
         
@@ -748,11 +750,9 @@ window.onload = function(){
         
         new_comment.setAttribute('boxId', cmtDetails.id);
         new_comment.className = 'cmnts';
-        addClicks(new_comment.className);
         
         new_comment.appendChild(cmtDetails);
         document.body.appendChild(new_comment);
-          new_comment.click();
         cmmnts.push(new_comment);
         
         console.log(cmmnts);
