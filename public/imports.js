@@ -32,3 +32,7 @@ var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
         return 'error';
     }
 }
+socket.on('youtube_import_uni-tap', function(data){
+url.value = data.src;
+ youTube()  
+});
