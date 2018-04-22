@@ -277,7 +277,7 @@
         <canvas id="canvas" class="whiteboard" oncontextmenu="return false;" width="1920" height="959"></canvas>
         <canvas id="page1" class="storeboard" width="1920" height="959"></canvas>
         <div class="animcolor" id="animcolor" style="display:none;"></div>
-        <div style="display:none;" ondlclick="toggle('.frameLoader');" class="frameLoader board-panel--transparent draggable">
+        <div ondragstart="dragStart(event)" style="display:none;" ondblclick="toggle('.frameLoader');" class="frameLoader board-panel--transparent draggable">
           <iframe id="fileFrame" src="http://uni-tap.co/hdkfh"></iframe>
         </div>
         <div class="frameSRC board-panel--transparent" style="display:none;"><center>
@@ -407,7 +407,22 @@
   webrtc.on('readyToCall', function() {
     // you can name it anything
     webrtc.joinRoom(room_id);
-  });    
+  });  
+  var loadbox = document.querySelector('.frameLoader');w	    
+  function dragStart(e){
+    console.log('dragged');
+    socket.emit('drags',{
+    style: loadbox.style.transform,
+    user: sessionStorage.usr
+  });
+  }   
+socket.on('drags', function(data){
+if(data.user != sessionStorage.usr){ 
+    loadbox.style.transform = data.style;
+    console.log(data.style);
+}
+});
+	    
     </script>	
     <script>
     var opt_usr_id;
