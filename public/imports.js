@@ -1,8 +1,14 @@
 var frame = document.getElementById('fileFrame');
 var url = document.getElementById('frameURL');
 var load = document.getElementById('loadFrameURL');
+var loadbox = document.querySelector('.frameLoader');
 var socket = io();
-    load.addEventListener('click', youTube, false);
+load.addEventListener('click', youTube, false);
+loadbox.addEventListener('dragstart', function(){
+  socket.emit('drags',{
+    style: loadbox.style.transform
+  });
+},false);
 function youTube(){
     var myId = getId(url.value);
     frame.src = 'https://youtube.com/embed/'+myId;
@@ -35,8 +41,14 @@ var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
 }
 socket.on('youtube_import_uni-tap', function(data){
 if(data.user != sessionStorage.usr){ 
-document.querySelector('.frameLoader').style.display = 'block';
+loadbox.style.display = 'block';
 frame.src = 'https://youtube.com/embed/'+data.src;
  //youTube();  
 }else{return;} 
+});
+
+socket.on('drags', function(data){
+if(data.user != sessionStorage.usr){ 
+    loadbox.style.transform = data.style;
+}
 });
