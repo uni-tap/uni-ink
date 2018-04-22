@@ -9,7 +9,7 @@ function youTube(){
   if (SearchTerm.length > 0 && TextSearch.indexOf(SearchTerm) > -1) {
     alert("String Found. Search Complete");
     var text = url.value;
-    var ntxt = text.replace('watch?v=', "embed")  
+    var ntxt = text.replace('embed', "watch?v=")  
     frame.src = ntxt;  
   } else {
     alert("No Data found in Text Area");
