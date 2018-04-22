@@ -105,13 +105,6 @@ emojify.run(null, function(emoji, emojiName){
 });
     li.focus();
     toggle('.placeholder');
-    socket.emit('chat_msg', {
-      chat: msg.value,
-      user: find('user'),//localStorage.user,
-      id: find('id'),
-      type: 'norm',  
-      api: find('api')  
-    });
     msg.value = '';
 }
 function recieve_msg(r_msg, type, from){
