@@ -745,7 +745,7 @@ window.onload = function(){
         cmtDetails.addEventListener('click', function(){
          toggle('#'+cmtDetails.id);
         }, false);   
-        new_comment.className += ' draggable';  
+        new_comment.className += 'draggable';  
         new_comment.id = getRandomId();
         cmtDetails.id = getRandomId();
         cmtDetails.className += 'cmtdetailsbox';
@@ -753,7 +753,7 @@ window.onload = function(){
         console.log(ids);
         
         new_comment.setAttribute('boxId', cmtDetails.id);
-        new_comment.className = 'cmnts';
+        new_comment.className += ' cmnts';
         
         new_comment.appendChild(cmtDetails);
         document.body.appendChild(new_comment);
