@@ -5,6 +5,7 @@ var loadbox = document.querySelector('.frameLoader');
 var socket = io();
 load.addEventListener('click', youTube, false);
 loadbox.addEventListener("dragstart", function(event){
+  console.log('dragged');
   socket.emit('drags',{
     style: loadbox.style.transform,
     user: sessionStorage.usr
