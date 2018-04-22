@@ -742,6 +742,7 @@ window.onload = function(){
         new_comment.addEventListener('click', function(){
          toggle('#'+cmtDetails.id);
         }, false);    
+        new_comment.className += ' draggable';  
         new_comment.id = getRandomId();
         cmtDetails.id = getRandomId();
         cmtDetails.className += 'cmtdetailsbox';
