@@ -3,17 +3,8 @@ var url = document.getElementById('frameURL');
 var load = document.getElementById('loadFrameURL');
     load.addEventListener('click', youTube, false);
 function youTube(){
-     var SearchTerm = 'watch?v=';
-     var TextSearch = url.value;
-
-  if (SearchTerm.length > 0 && TextSearch.indexOf(SearchTerm) > -1) {
-    alert("String Found. Search Complete");
-    var text = url.value;
-    var ntxt = text.replace('embed', "watch?v=")  
-    frame.src = ntxt;  
-  } else {
-    alert("No Data found in Text Area");
-  }
+    var myId = getId(url.value);
+    frame.src = 'https://youtube.com/embed/'+myId;
 }
 function system(){
     
@@ -26,4 +17,14 @@ function dropBox(){
 }
 function oneDrive(){
     
+}
+function getId(resource){
+var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    var match = url.match(regExp);
+
+    if (match && match[2].length == 11) {
+        return match[2];
+    } else {
+        return 'error';
+    }
 }
