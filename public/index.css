@@ -1019,3 +1019,10 @@ top:150px;
     height: 45px;
     width: 60px;
 }
+.cmtdetailsbox{
+	    background-color: white;
+    position: absolute;
+    top: 30px;
+    left: 40px;
+    border-radius: 2px;
+}
