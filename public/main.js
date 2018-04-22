@@ -331,10 +331,10 @@ window.onload = function(){
     return color;
   }
   function getRandomId() {
-    var letters = '0123456789ABCDEF';
+    var letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
     var color = '';
     for (var i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
+      color += letters[Math.floor(Math.random() * 52)];
     }
     return color;
   }    
