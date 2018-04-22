@@ -752,6 +752,7 @@ window.onload = function(){
         
         new_comment.appendChild(cmtDetails);
         document.body.appendChild(new_comment);
+          new_comment.click();
         cmmnts.push(new_comment);
         
         console.log(cmmnts);
