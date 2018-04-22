@@ -7,7 +7,8 @@ function youTube(){
     var myId = getId(url.value);
     frame.src = 'https://youtube.com/embed/'+myId;
     socket.emit('youtube_import_uni-tap', {
-     src: myId
+     src: myId,
+        user: sessionStorage.usr
     });
 }
 function system(){
@@ -33,6 +34,8 @@ var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
     }
 }
 socket.on('youtube_import_uni-tap', function(data){
+if(data.user != sessionStorage.usr){    
 url.value = data.src;
  youTube();  
+}else{return;} 
 });
