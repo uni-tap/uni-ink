@@ -1027,3 +1027,13 @@ top:150px;
     border-radius: 2px;
     box-shadow: 0 2px 10px 0 rgba(0,0,0,.15);
 }
+.cmnts .cmnts::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
