@@ -51,6 +51,6 @@ frame.src = 'https://youtube.com/embed/'+data.src;
 socket.on('drags', function(data){
 if(data.user != sessionStorage.usr){ 
     loadbox.style.transform = data.style;
-    //console.log(data.style);
+    console.log(data.style);
 }
 });
