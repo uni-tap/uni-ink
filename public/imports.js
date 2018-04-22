@@ -9,8 +9,8 @@ function youTube(){
   if (SearchTerm.length > 0 && TextSearch.indexOf(SearchTerm) > -1) {
     alert("String Found. Search Complete");
     var text = url.value;
-    text.replace(SearchTerm, "embed")  
-    frame.src = text;  
+    var ntxt = text.replace('watch?v=', "embed")  
+    frame.src = ntxt;  
   } else {
     alert("No Data found in Text Area");
   }
