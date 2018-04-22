@@ -744,7 +744,7 @@ window.onload = function(){
         }, false);    
         new_comment.id = getRandomId();
         cmtDetails.id = getRandomId();
-        
+        cmtDetails.className += 'cmtdetailsbox';
         ids.push(cmtDetails.id);
         console.log(ids);
         
