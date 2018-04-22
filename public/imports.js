@@ -4,9 +4,10 @@ var load = document.getElementById('loadFrameURL');
 var loadbox = document.querySelector('.frameLoader');
 var socket = io();
 load.addEventListener('click', youTube, false);
-loadbox.addEventListener('dragstart', function(){
+loadbox.addEventListener("dragstart", function(event){
   socket.emit('drags',{
-    style: loadbox.style.transform
+    style: loadbox.style.transform,
+    user: sessionStorage.usr
   });
 },false);
 function youTube(){
@@ -50,5 +51,6 @@ frame.src = 'https://youtube.com/embed/'+data.src;
 socket.on('drags', function(data){
 if(data.user != sessionStorage.usr){ 
     loadbox.style.transform = data.style;
+    //console.log(data.style);
 }
 });
