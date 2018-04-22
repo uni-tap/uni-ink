@@ -1,10 +1,14 @@
 var frame = document.getElementById('fileFrame');
 var url = document.getElementById('frameURL');
 var load = document.getElementById('loadFrameURL');
+var socket = io();
     load.addEventListener('click', youTube, false);
 function youTube(){
     var myId = getId(url.value);
     frame.src = 'https://youtube.com/embed/'+myId;
+    socket.emit('youtube_import_uni-tap', {
+     src: myId
+    });
 }
 function system(){
     
