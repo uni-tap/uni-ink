@@ -20,7 +20,7 @@ function oneDrive(){
 }
 function getId(resource){
 var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-    var match = url.match(regExp);
+    var match = resource.match(regExp);
 
     if (match && match[2].length == 11) {
         return match[2];
