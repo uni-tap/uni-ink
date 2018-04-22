@@ -940,7 +940,7 @@ audio, canvas, progress, video {
     left: 100px;
     height: 200px;
     width: 400px;
-    background-color: #ffffff;
+    //background-color: #ffffff;
     padding: 20px;
 }
 .frameLoader iframe {
