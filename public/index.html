@@ -275,19 +275,7 @@
 </div>
             </div>
         <div class="add_elem" id="add_elem"></div>
-        <canvas id="canvas" class="whiteboard" oncontextmenu="return false;" width="1920" height="959"></canvas>
-        <canvas id="page1" class="storeboard" width="1920" height="959"></canvas>
-        <div class="animcolor" id="animcolor" style="display:none;"></div>
-        <div ondragstart="dragStart(event)" style="display:none;" ondblclick="toggle('.frameLoader');" class="frameLoader board-panel--transparent draggable">
-          <iframe id="fileFrame" src="http://uni-tap.co/hdkfh"></iframe>
-        </div>
-        <div class="frameSRC board-panel--transparent" style="display:none;"><center>
-            <input type="url" id="frameURL" placeholder="Paste the embeding URL of YouTube video.."/>
-            <input type="button" id="loadFrameURL" value="Load" onclick="toggle('.frameLoader');toggle('.frameSRC')" />
-            </center>
-        </div>
-	  <div id="curs" class="curs draggable" style="display: none;"></div>
-	    <div class="wrapper">
+	<div class="wrapper">
     <h1 style="text-align:center">JS calculator.</h1>
     <div class="calc">
       <div class="top">
@@ -367,7 +355,19 @@
 
       </div>
     </div>
-  </div>  
+  </div>      
+        <canvas id="canvas" class="whiteboard" oncontextmenu="return false;" width="1920" height="959"></canvas>
+        <canvas id="page1" class="storeboard" width="1920" height="959"></canvas>
+        <div class="animcolor" id="animcolor" style="display:none;"></div>
+        <div ondragstart="dragStart(event)" style="display:none;" ondblclick="toggle('.frameLoader');" class="frameLoader board-panel--transparent draggable">
+          <iframe id="fileFrame" src="http://uni-tap.co/hdkfh"></iframe>
+        </div>
+        <div class="frameSRC board-panel--transparent" style="display:none;"><center>
+            <input type="url" id="frameURL" placeholder="Paste the embeding URL of YouTube video.."/>
+            <input type="button" id="loadFrameURL" value="Load" onclick="toggle('.frameLoader');toggle('.frameSRC')" />
+            </center>
+        </div>
+	  <div id="curs" class="curs draggable" style="display: none;"></div>
     </body>
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://unitap-ink.herokuapp.com/interact.js"></script>
