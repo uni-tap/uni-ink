@@ -1039,6 +1039,7 @@ top:150px;
 }
 .wrapper {
   width: 100%;
+  z-index:3;
 }
 
 .calc {
