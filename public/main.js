@@ -63,37 +63,7 @@
   if(post == 'S' || post == 's'){
   document.querySelector('#NewPage').removeEventListener('click', onNewPageUpdate, true);
   }
-  var history = {
-    redo_list: [],
-    undo_list: [],
-    saveState: function(canvas, list, keep_redo) {
-      keep_redo = keep_redo || false;
-      if (!keep_redo) {
-        this.redo_list = [];
-      }
-      (list || this.undo_list).push(canvas.toDataURL());
-      console.log('done Saving state');
-    },
-    undo: function(canvas, ctx, emit) {
-      this.restoreState(canvas, ctx, this.undo_list, this.redo_list);
-    },
-    redo: function(canvas, ctx, emit) {
-      this.restoreState(canvas, ctx, this.redo_list, this.undo_list);
-    },
-    restoreState: function(canvas, ctx, pop, push) {
-      if (pop.length) {
-        this.saveState(canvas, push, true);
-        var restore_state = pop.pop();
-        var img = document.createElement('img');
-        img.src = restore_state;
-        document.body.appendChild(img);
-        img.onload = function() {
-          context.clearRect(0, 0, canvas.width, canvas.height);
-          context.drawImage(img, 0, 0, canvas.width, canvas.height, 0, 0, canvas.width, canvas.height);
-        }
-      }
-    }
-  }
+  undo.addEventListener('click', undoLast,false);
 setInterval(sleep_timer+1,1000);
   function find(name) {
     var url = window.location.search;
