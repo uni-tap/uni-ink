@@ -735,16 +735,16 @@ window.onload = function(){
     },
     diamond: function(x0, y0, x1, y1, color, fill, thickness,  emit){
                 context.beginPath();
-                context.moveTo(x, y);
+                context.moveTo(x0, y0);
                 
                 // top left edge
-                context.lineTo(x - width / 2, y + height / 2);
+                context.lineTo(x0 - x1 / 2, y0 + y1 / 2);
                 
                 // bottom left edge
-                context.lineTo(x, y + height);
+                context.lineTo(x0, y0 + y1);
                 
                 // bottom right edge
-                context.lineTo(x + width / 2, y + height / 2);
+                context.lineTo(x0 + x1 / 2, y0 + y1 / 2);
                 
                 // closing the path automatically creates
                 // the top right edge
