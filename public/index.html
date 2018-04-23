@@ -502,14 +502,6 @@ if(data.user != sessionStorage.usr){
 		 centerdiv.innerHTML = data.user;
 	     //}
      });
-     socket.on('chat_msg', function(data) {
-    /*if (data.api == find('api')) {
-      if (data.user != find('user')) {
-          recieve_msg(data.chat, data.type, data.user);
-      }else{return;}
-    }else{return;}*/
-    console.log('msgrec');
-});
      socket.on('get users', function(data){
 	     for (i = 0; i < data.length; i++) {
 	     var newusr = document.createElement('li');
@@ -676,7 +668,7 @@ var msg_lst = document.getElementById('chats');
 socket.on('chat_msg', function(data) {
     //if (data.api == sessionStorage.api) {
       //if (data.user != sessionStorage.usr) {
-          recieve_msg(data.chat, data.type, data.user);
+          //recieve_msg(data.chat, data.type, data.user);
      // }else{return;}
     //}else{return;}
     console.log('msgrec');
