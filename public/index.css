@@ -1187,3 +1187,25 @@ sup {
   color: #eee;
   font-size: 2em;
 }
+#calc {
+      height: 350px;
+      width: 276px;
+      z-index: 10;
+      position: fixed;
+      top: calc(50% - 250px);
+      left: calc(50% - 176px);
+      overflow: hidden;
+      border: none;
+      background-color: white;
+      border-radius: 3px;
+      box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.3), 0 0 0 0px rgba(0, 0, 0, 0.08) !important;
+    }
+    #calc iframe {
+      height: 350px;
+      width: 276px;
+      z-index: 10;
+      overflow: hidden;
+      background-color: rgba(51, 51, 51, 0.55);
+      border: none;
+      border-radius: 3px;
+    }
