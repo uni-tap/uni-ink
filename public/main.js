@@ -834,7 +834,7 @@ window.onload = function(){
     download(this);
   }, false);*/
   // DRAWING THE SELECTED TOOL ON THE BOARD
-
+  var points = [];
   function onMouseDown(e) {
     sleep_timer = 0;
     drawing = true;
@@ -842,6 +842,13 @@ window.onload = function(){
     current.y = e.clientY;
     if (current.tool == 'Text') { // IF TEXT BUTTON IS CLICKED
       draw.Text(current.x, current.y, e.clientX, e.clientY, current.color, true);
+      points.push({
+        x: current.x,
+        y: current.y,
+        size: thickness,
+        color: current.color,
+        mode: "begin"
+    });
     }
     if (current.tool == 'sticker') { // IF sticker BUTTON IS CLICKED
       sticky_note(current.x, current.y);
@@ -868,6 +875,13 @@ function sleep_time(){
       history.saveState(scanvas);
       socket.emit('update_data');
     }
+    points.push({
+        x: e.clientX,
+        y: e.clienY,
+        size: thickness,
+        color: current.color,
+        mode: "end"
+    });
     //document.getElementById('curs').style.display = 'none';
     //save();
   }
@@ -884,6 +898,13 @@ function sleep_time(){
         draw.pen(current.x, current.y, e.clientX, e.clientY, current.color, thickness, true);
         current.x = e.clientX;
         current.y = e.clientY;
+        points.push({
+            x: current.x,
+            y: current.y,
+            size: thickness,
+            color: current.color,
+            mode: "draw"
+        });
       }
       if (current.tool == 'Eraser') { // IF ERASER BUTTON IS CLICKED
         draw.eraser(current.x, current.y, e.clientX, e.clientY, current.ecolor, true);
@@ -923,6 +944,44 @@ function sleep_time(){
       }
     }
   }
+  function redrawAll() {
+
+    if (points.length == 0) {
+        return;
+    }
+
+    scontext.clearRect(0, 0, canvas.width, canvas.height);
+
+    for (var i = 0; i < points.length; i++) {
+
+        var pt = points[i];
+
+        var begin = false;
+
+        if (scontext.lineWidth != pt.size) {
+            scontext.lineWidth = pt.size;
+            begin = true;
+        }
+        if (scontext.strokeStyle != pt.color) {
+            scontext.strokeStyle = pt.color;
+            begin = true;
+        }
+        if (pt.mode == "begin" || begin) {
+            scontext.beginPath();
+            scontext.moveTo(pt.x, pt.y);
+        }
+        scontext.lineTo(pt.x, pt.y);
+        if (pt.mode == "end" || (i == points.length - 1)) {
+            scontext.stroke();
+        }
+    }
+    scontext.stroke();
+}
+
+function undoLast() {
+    points.pop();
+    redrawAll();
+}
   function setCookie(cname,cvalue,exdays) {
     var d = new Date();
     d.setTime(d.getTime() + (exdays*24*60*60*1000));
@@ -1309,7 +1368,7 @@ function getCookie(cname) {
   }
 
   function onUndoEvent(data) {
-    history.undo(scanvas, scontext, true);
+    undoLast();
   }
 
   function onRedoEvent(data) {
