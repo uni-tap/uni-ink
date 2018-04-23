@@ -290,7 +290,7 @@
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://unitap-ink.herokuapp.com/interact.js"></script>
     <script src="https://unitap-ink.herokuapp.com/element.js"></script>
-    <script src="chat.js"></script>
+    <!--<script src="chat.js"></script>-->
     <script src="main.js"></script>
     <script src="imports.js"></script>
     <script src="https://simplewebrtc.com/latest-v2.js"></script>
@@ -674,11 +674,11 @@ var msg_lst = document.getElementById('chats');
         send_msg();
     },false);
 socket.on('chat_msg', function(data) {
-    if (data.api == sessionStorage.api) {
-      if (data.user != sessionStorage.usr) {
+    //if (data.api == sessionStorage.api) {
+      //if (data.user != sessionStorage.usr) {
           recieve_msg(data.chat, data.type, data.user);
-      }else{return;}
-    }else{return;}
+     // }else{return;}
+    //}else{return;}
     console.log('msgrec');
 });
 function send_msg(type){
