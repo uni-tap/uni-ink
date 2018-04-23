@@ -838,11 +838,11 @@ function sleep_time(){
     savedata(); 
     if (current.canvas == canvas) {
       update_data(context, scontext, canvas);
-      history.saveState(scanvas);
+      //history.saveState(scanvas);
       socket.emit('update_data');
     } else if (current.canvas !== 'canvas') {
       update_data(context, main_ctx, canvas);
-      history.saveState(scanvas);
+      //history.saveState(scanvas);
       socket.emit('update_data');
     }
     points.push({
