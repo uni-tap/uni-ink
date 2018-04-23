@@ -44,11 +44,11 @@ var msg_lst = document.getElementById('chats');
         send_msg();
     },false);
 socket.on('chat_msg', function(data) {
-    /*if (data.api == find('api')) {
-      if (data.user != find('user')) {
+    if (data.api == sessionStorage.api) {
+      if (data.user != sessionStorage.usr) {
           recieve_msg(data.chat, data.type, data.user);
       }else{return;}
-    }else{return;}*/
+    }else{return;}
     console.log('msgrec');
 });
 function send_msg(type){
