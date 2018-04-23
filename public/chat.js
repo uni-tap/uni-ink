@@ -106,6 +106,7 @@ emojify.run(null, function(emoji, emojiName){
     li.focus();
     toggle('.placeholder');
     msg.value = '';
+    
 }
 function recieve_msg(r_msg, type, from){
     var validate = filters.from_blocked(from);
