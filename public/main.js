@@ -734,23 +734,22 @@ window.onload = function(){
         }else{return;}
     },
     diamond: function(x0, y0, x1, y1, color, fill, thickness,  emit){
+                context.clearRect(0, 0, scanvas.width, scanvas.height);
+                context.strokeStyle = color;
+                context.lineWidth = thickness;
                 context.beginPath();
+                context.lineCap = "round";
                 context.moveTo(x0, y0);
-                
                 // top left edge
                 context.lineTo(x0 - x1 / 2, y0 + y1 / 2);
-                
                 // bottom left edge
                 context.lineTo(x0, y0 + y1);
-                
                 // bottom right edge
                 context.lineTo(x0 + x1 / 2, y0 + y1 / 2);
-                
                 // closing the path automatically creates
                 // the top right edge
                 context.closePath();
-                
-                context.fillStyle = "green";
+                context.fillStyle = fill;
                 context.fill();
     }
   };
