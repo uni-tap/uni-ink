@@ -734,7 +734,7 @@ window.onload = function(){
         }else{return;}
     },
     diamond: function(x0, y0, x1, y1, color, fill, thickness,  emit){
-                context.clearRect(0, 0, scanvas.width, scanvas.height);
+                //context.clearRect(0, 0, scanvas.width, scanvas.height);
                 context.strokeStyle = color;
                 context.lineWidth = thickness;
                 context.beginPath();
