@@ -750,7 +750,7 @@ window.onload = function(){
                 // the top right edge
                 context.closePath();
                 
-                context.fillStyle = "red";
+                context.fillStyle = "green";
                 context.fill();
     }
   };
