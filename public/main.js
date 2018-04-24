@@ -84,7 +84,51 @@ window.onload = function(){
     };
     console.log('data_loaded');
     img.src = mainDataSave; 
-}
+  
+	  var usr, post, uid;
+	  if(!sessionStorage.usr || sessionStorage.usr == '' || sessionStorage.usr != find('user')){
+	  usr = find('user');
+	  localStorage.usr = usr;
+	  }else if(!sessionStorage.pst || sessionStorage.pst == '' || sessionStorage.pst != find('post')){
+	  post = find('post');
+	  sessionStorage.pst = post;
+	  }else if(!sessionStorage.uid || sessionStorage.uid == '' || sessionStorage.uid != find('id')){
+          uid = find('id');
+          sessionStorage.uid = uid;
+	  }
+	  //var nURL = '/?hostedby='+find('hostedby')+'&allowedclasses='+find('allowedclasses')+'&title='+find('title')+'';
+	  var nURL = '/';
+	  window.history.pushState('UNI-TAP-INK', find('title'), nURL);
+	  verifyClass();
+	};
+	function verifyClass(){
+	 var api = find('api');
+	 if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                //console.log(this.responseText);
+                if(this.responseText == 1){
+		     console.log(this.responseText);
+                    sessionStorage.api = api;
+		    var nURL = '/?hostedby='+find('hostedby')+'&allowedclasses='+find('allowedclasses')+'&title='+find('title')+'';
+	            window.history.pushState('UNI-TAP-INK', find('title'), nURL);
+                }else if(this.responseText == 'no_class'){
+                    alert('This class cannot be verified.');
+		    console.log(this.responseText);
+		    window.location.replace('http://uni-tap.co/index.php');
+                }
+            }
+        };
+        xmlhttp.open("POST","http://uni-tap.co/classVerify.php?q="+api,true);
+        //console.log(username + pass);
+        xmlhttp.send();
+	}
   function save() {
     if (saved == false) {
       if (current.canvas == canvas) {
