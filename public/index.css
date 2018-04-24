@@ -1173,3 +1173,51 @@ top:150px;
 .sub-context-menu-hor.color-scm {
     width: 180px;
 }
+.scm-widget-type .scm-widget-type__item {
+    opacity: .8;
+    width: 40px;
+    height: 40px;
+    box-sizing: border-box;
+}
+.scm-widget-type .cmih-item {
+    width: 40px;
+    height: 40px;
+    color: #000;
+}
+.canvasContextMenu-hor .cm-items .cm-item, .cmih-item {
+    width: 40px;
+    height: 50px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    position: relative;
+}
+.canvasContextMenu-hor .cm-items .cm-item.cmih-font-family .scrollable-list {
+    overflow-y: auto;
+    padding: 10px 15px;
+    width: 200px;
+    max-height: 420px;
+    box-sizing: border-box;
+    -webkit-overflow-scrolling: touch;
+}
+.scrollable .scrollable-list {
+    display: block;
+    position: relative;
+    overflow-y: auto;
+    height: 100%;
+    -webkit-overflow-scrolling: touch;
+}
+.scroll-y-only, [no-prevent-default] {
+    -ms-touch-action: pan-y;
+    touch-action: pan-y;
+}
