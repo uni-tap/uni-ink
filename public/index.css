@@ -1089,3 +1089,87 @@ top:150px;
     cursor: pointer;
     position: relative;
 }
+.canvasContextMenu-hor .cm-items .cmih-widget-type .scm-widget-type {
+    left: -5px;
+}
+.scm-widget-type {
+    left: 50%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+    padding: 10px 0;
+}
+.sub-context-menu-hor.scm-font-size {
+    left: -10px;
+    right: 0;
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    box-sizing: border-box;
+    width: 60px;
+    padding: 5px 15px;
+    color: #000;
+}
+.sub-context-menu-hor.scm-list {
+    padding: 5px 10px;
+}
+.sub-context-menu-hor {
+    position: absolute;
+    border-radius: 2px;
+    background-color: #fff;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+    width: 100%;
+    box-shadow: 0 2px 6px rgba(0,0,0,.25);
+}
+.canvasContextMenu-hor .cm-items .cm-item.cmih-font-family .sub-context-menu-hor {
+    left: 0;
+    padding: 0;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    -webkit-transform: translateX(-15px);
+    transform: translateX(-15px);
+}
+.sub-context-menu-hor.scm-font-family {
+    padding: 0 10px;
+}
+.sub-context-menu-hor.scm-text-bui {
+    padding: 0 10px;
+    width: 160px;
+}
+.sub-context-menu-hor.scm-text-align {
+    padding: 0 10px;
+    width: 120px;
+}
+.sub-context-menu-hor.scm-list-type {
+    padding: 0 10px;
+    width: 80px;
+    left: 100%;
+}
+.sub-context-menu-hor.color-scm {
+    width: 180px;
+}
