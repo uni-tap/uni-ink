@@ -806,12 +806,16 @@ emojify.run(null, function(emoji, emojiName){
 	<script>
 	   var matches = [];
 var searchEles = document.getElementById("remotesVideos").children;
+		setInterval(300, getVideoNames);
+function getVideoNames(){		
 for(var i = 0; i < searchEles.length; i++) {
     if(searchEles[i].tagName == 'VIDEO') {
         if(searchEles[i].id.indexOf('q1_') == 0) {
             matches.push(searchEles[i]);
+	    console.log(matches);	
         }
     }
-}	
+}
+}
 	</script>	
 </html>
