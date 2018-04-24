@@ -806,7 +806,7 @@ emojify.run(null, function(emoji, emojiName){
 	<script>
 	   var matches = [];
 var searchEles = document.getElementById("remotesVideos").children;
-		setInterval(300, getVideoNames);
+		setInterval( getVideoNames, 200 );
 function getVideoNames(){		
 for(var i = 0; i < searchEles.length; i++) {
     if(searchEles[i].tagName == 'VIDEO') {
