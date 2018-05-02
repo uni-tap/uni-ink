@@ -102,9 +102,9 @@ window.onload = function(){
 	  //var nURL = '/?hostedby='+find('hostedby')+'&allowedclasses='+find('allowedclasses')+'&title='+find('title')+'';
 	  var nURL = '/';
 	  window.history.pushState('UNI-TAP-INK', find('title'), nURL);
-	  verifyClass();
+	  //verifyClass();
 	};
-	function verifyClass(){
+	/*function verifyClass(){
 	 var api = find('api');
 	 if (window.XMLHttpRequest) {
             // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -131,7 +131,7 @@ window.onload = function(){
         xmlhttp.open("POST","http://uni-tap.co/classVerify.php?q="+api,true);
         //console.log(username + pass);
         xmlhttp.send();
-	}
+	}*/
   function save() {
     if (saved == false) {
       if (current.canvas == canvas) {
