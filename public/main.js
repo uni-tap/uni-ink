@@ -1,7 +1,7 @@
 'use strict';
 (function() {
   loadPreviousData();	
-  var version = '1.3.0';
+  var version = '1.3.5';
   var sleep_timer = 0;
   var thickness = 0.3;
   var socket = io();
