@@ -1046,13 +1046,13 @@ function getCookie(cname) {
   function savedata(){
       var dataURL = scanvas.toDataURL();
       if(typeof(Storage) !== "undefined") {
-        if (localStorage.canid) {
+        if (localStorage.wdata) {
             setCookie(sessionStorage.api, dataURL, 2);
-            mainDataSave = localStorage.canid;
+            mainDataSave = localStorage.wdata;
         } else {
-            localStorage.canid = dataURL;
+            localStorage.wdata = dataURL;
         }
-          mainDataSave = localStorage.canid;
+          mainDataSave = localStorage.wdata;
           //console.log(localStorage.canid);
       }
   }    
