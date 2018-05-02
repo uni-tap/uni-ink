@@ -1,5 +1,6 @@
 'use strict';
 (function() {
+  loadPreviousData();	
   var version = '1.3.0';
   var sleep_timer = 0;
   var thickness = 0.3;
@@ -77,13 +78,15 @@ setInterval(sleep_timer+1,1000);
     if (num >= 0) return url.substr(0, num);
     if (num < 0) return url;
   }
-window.onload = function(){
-     var img = new Image;;
+	function loadPreviousData(){
+	 var img = new Image;;
       img.onload = function(){   
       main_ctx.drawImage(img, 0,0)
     };
     console.log('data_loaded');
     img.src = mainDataSave; 
+	}
+window.onload = function(){
   
 	  var usr, post, uid;
 	  if(!sessionStorage.usr || sessionStorage.usr == '' || sessionStorage.usr != find('user')){
