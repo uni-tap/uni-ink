@@ -81,7 +81,7 @@ setInterval(sleep_timer+1,1000);
 	function loadPreviousData(){
 	 var img = new Image;;
       img.onload = function(){   
-      main_ctx.drawImage(img, 0,0)
+      scontext.drawImage(img, 0,0)
     };
     console.log('data_loaded');
     img.src = mainDataSave; 
