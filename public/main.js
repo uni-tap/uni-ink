@@ -88,13 +88,16 @@ setInterval(sleep_timer+1,1000);
 	  var chcid = id;
 	      console.log('start');	
 	      var datastr = localStorage.unidata;
+	      console.log(datastr);	
 	      var n = datastr.split(chcid);
+	      console.log(n);	
 	      var img = new Image;
 	      img.onload = function(){
 	      main_ctx.drawImage(img, 0, 0);
 	      console.log('new page data loaded');
 	      img.src = n;	      
-	      }; 	 
+	      };
+		document.body.appendChild(img);
 	}
 window.onload = function(){
       loadPreviousData();
