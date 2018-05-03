@@ -83,6 +83,7 @@ setInterval(sleep_timer+1,1000);
 	 var img = new Image;
          img.onload = function(){   
          scontext.drawImage(img, 0,0)
+	 scanvas.style.backgrounColor = localStorage.unibgclr;	 
          };
          console.log('data_loaded');
          img.src = localStorage.unidata; 
@@ -1015,6 +1016,7 @@ function getCookie(cname) {
             setCookie(sessionStorage.api, dataURL, 2);
 	        console.log('datasaved1');	
 		localStorage.unidata = dataURL;
+		localStorage.unibgclr = current.bgcolor;
             mainDataSave = localStorage.unidata;
         } else {
             localStorage.unidata = dataURL;
