@@ -78,12 +78,23 @@ setInterval(sleep_timer+1,1000);
   }
 	function loadPreviousData(){
 	 var img = new Image;
-      img.onload = function(){   
-      scontext.drawImage(img, 0,0)
-    };
-    console.log('data_loaded');
-    img.src = localStorage.unidata; 
-    }
+         img.onload = function(){   
+         scontext.drawImage(img, 0,0)
+         };
+         console.log('data_loaded');
+         img.src = localStorage.unidata; 
+         }
+	function newpageDataLoad(id){
+	  var chcid = current.canvas.id;
+	      var datastr = localStorage.unidata;
+	      var n = datastr.split("page1 ");
+	      var img = new Image;
+	      img.onload = function(){
+	      main_ctx.drawImage(img, 0, 0);
+	      console.log('new page data loaded');
+	      img.src = n;	      
+	      }; 	 
+	}
 window.onload = function(){
       loadPreviousData();
 	  var usr, post, uid;
@@ -985,8 +996,13 @@ function getCookie(cname) {
     return "";
 }
   function savedata(){
-	  var svcanvas = current.canvas;
-      var dataURL = scanvas.toDataURL();
+      var svcanvas = current.canvas;
+      var dataURL;	  
+      if(current.canvas == 'canvas'){
+	  dataURL = scanvas.toDataURL();
+      }else if(current.canvas != 'canvas'){
+          dataURL = current.canvas.id + '' + svcanvas.toDataURL();
+      }	      
       if(typeof(Storage) !== "undefined") {
         if (localStorage.unidata) {
             setCookie(sessionStorage.api, dataURL, 2);
@@ -1137,7 +1153,8 @@ function getCookie(cname) {
     previouspagecount = totalcurrentpagecount;
     document.body.appendChild(ncanvas);
     current.canvas = ncanvas;
-    main_ctx = context;    
+    main_ctx = context;
+    newpageDataLoad(ncanvas.id);	  
     counter.innerHTML = 'Page - ' + totalcurrentpagecount;
     if (!emit) {
       return;
