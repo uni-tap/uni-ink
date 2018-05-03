@@ -77,9 +77,9 @@ setInterval(sleep_timer+1,1000);
     if (num < 0) return url;
   }
 	function loadPreviousData(){
-	 var datastr = localStorage.unidata;
-	 var n = datastr.split('canvas');
-	 localStorage.unidata = n;	
+	 //var datastr = localStorage.unidata;
+	 //var n = datastr.split('canvas');
+	 //localStorage.unidata = n;	
 	 var img = new Image;
          img.onload = function(){   
          scontext.drawImage(img, 0,0)
@@ -89,18 +89,18 @@ setInterval(sleep_timer+1,1000);
          }
 	function newpageDataLoad(id){
 	  var chcid = id;
-	      console.log('start');	
+	      //console.log('start');	
 	      var datastr = localStorage.unidata;
-	      console.log(datastr);	
+	      //console.log(datastr);	
 	      var n = datastr.split(chcid);
-	      console.log(n);	
+	      //console.log(n);	
 	      var img = new Image;
 	      img.onload = function(){
 	      main_ctx.drawImage(img, 0, 0);
 	      console.log('new page data loaded');
 	      img.src = n;	      
 	      };
-		document.body.appendChild(img);
+		//document.body.appendChild(img);
 	}
 window.onload = function(){
       loadPreviousData();
@@ -1004,12 +1004,12 @@ function getCookie(cname) {
 }
   function savedata(){
       var svcanvas = current.canvas;
-      var dataURL;	  
-      if(current.canvas == 'canvas'){
-	  dataURL = scanvas.toDataURL();
-      }else if(current.canvas != 'canvas'){
-          dataURL = current.canvas.id + '' + svcanvas.toDataURL();
-      }	      
+      //var dataURL;	  
+      //if(current.canvas == 'canvas'){
+	  var dataURL = scanvas.toDataURL();
+      //}else if(current.canvas != 'canvas'){
+          //dataURL = current.canvas.id + '' + svcanvas.toDataURL();
+      //}	      
       if(typeof(Storage) !== "undefined") {
         if (localStorage.unidata) {
             setCookie(sessionStorage.api, dataURL, 2);
