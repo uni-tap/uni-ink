@@ -85,9 +85,9 @@ setInterval(sleep_timer+1,1000);
          img.src = localStorage.unidata; 
          }
 	function newpageDataLoad(id){
-	  var chcid = current.canvas.id;
+	  var chcid = id;
 	      var datastr = localStorage.unidata;
-	      var n = datastr.split("page1 ");
+	      var n = datastr.split(chcid);
 	      var img = new Image;
 	      img.onload = function(){
 	      main_ctx.drawImage(img, 0, 0);
