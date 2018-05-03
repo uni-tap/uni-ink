@@ -988,12 +988,13 @@ function getCookie(cname) {
       var dataURL = scanvas.toDataURL();
       if(typeof(Storage) !== "undefined") {
         if (localStorage.unidata) {
-            //setCookie(sessionStorage.api, dataURL, 2);
+            setCookie(sessionStorage.api, dataURL, 2);
 	        console.log('datasaved1');	
+		localStorage.unidata = dataURL;
             mainDataSave = localStorage.unidata;
         } else {
             localStorage.unidata = dataURL;
-	        console.log('datasaved2');	
+	    console.log('datasaved2');	
         }
           //mainDataSave = localStorage.unidata;
           //console.log(localStorage.canid);
