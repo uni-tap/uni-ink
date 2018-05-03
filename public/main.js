@@ -77,13 +77,13 @@ setInterval(sleep_timer+1,1000);
     if (num < 0) return url;
   }
 	function loadPreviousData(){
-	 var img =document.createElement('img');
+	 var img = new Image;
       img.onload = function(){   
       scontext.drawImage(img, 0,0)
     };
     console.log('data_loaded');
     img.src = localStorage.unidata; 
-    document.body.appendChild(img);	}
+    }
 window.onload = function(){
       loadPreviousData();
 	  var usr, post, uid;
