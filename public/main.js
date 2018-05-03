@@ -45,7 +45,7 @@
   var limit = 0;
   var nextpagecount = 1; //totalcurrentpagecount;
   var totalpagecount = 1;
-  var mainDataSave = localStorage.canid;        
+  var mainDataSave = localStorage.wdata;        
   var current = {
     color: 'black',
     type: 'Pen',
