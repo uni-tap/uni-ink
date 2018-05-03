@@ -1016,12 +1016,17 @@ function getCookie(cname) {
             setCookie(sessionStorage.api, dataURL, 2);
 	        console.log('datasaved1');	
 		localStorage.unidata = dataURL;
-		localStorage.unibgclr = current.bgcolor;
             mainDataSave = localStorage.unidata;
         } else {
             localStorage.unidata = dataURL;
 	    console.log('datasaved2');	
         }
+	 if (localStorage.unibgcolor) {
+	   	 localStorage.unibgclr = current.bgcolor;
+		 current.bgcolor = localStorage.unibgclr;
+	 }else{
+	   localStorage.unibgclr = current.bgcolor;
+	 }
           //mainDataSave = localStorage.unidata;
           //console.log(localStorage.canid);
       }
