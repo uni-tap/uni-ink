@@ -77,12 +77,14 @@ setInterval(sleep_timer+1,1000);
     if (num < 0) return url;
   }
 	function loadPreviousData(){
+	 var datastr = localStorage.unidata;
+	 var n = datastr.split('canvas');	
 	 var img = new Image;
          img.onload = function(){   
          scontext.drawImage(img, 0,0)
          };
          console.log('data_loaded');
-         img.src = localStorage.unidata; 
+         img.src = n; 
          }
 	function newpageDataLoad(id){
 	  var chcid = id;
