@@ -63,7 +63,6 @@
   if(post == 'S' || post == 's'){
   document.querySelector('#NewPage').removeEventListener('click', onNewPageUpdate, true);
   }
-  undo.addEventListener('click', undoLast,false);
 setInterval(sleep_timer+1,1000);
   function find(name) {
     var url = window.location.search;
