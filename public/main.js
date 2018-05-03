@@ -44,7 +44,7 @@
   var limit = 0;
   var nextpagecount = 1; //totalcurrentpagecount;
   var totalpagecount = 1;
-  var mainDataSave = localStorage.wdata;        
+  var mainDataSave = localStorage.unidata;        
   var current = {
     color: 'black',
     type: 'Pen',
@@ -82,10 +82,10 @@ setInterval(sleep_timer+1,1000);
       scontext.drawImage(img, 0,0)
     };
     console.log('data_loaded');
-    img.src = mainDataSave; 
+    img.src = localStorage.unidata; 
 	}
 window.onload = function(){
-  
+      loadPreviousData();
 	  var usr, post, uid;
 	  if(!sessionStorage.usr || sessionStorage.usr == '' || sessionStorage.usr != find('user')){
 	  usr = find('user');
@@ -907,7 +907,7 @@ function sleep_time(){
   }
 
   function onMouseMove(e) {
-    loadPreviousData();		  
+    //loadPreviousData();		  
     //move_curc(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.user);
     if (post == 's' || post == 'S' || post == 'e_val') {
       return;
@@ -987,15 +987,15 @@ function getCookie(cname) {
   function savedata(){
       var dataURL = scanvas.toDataURL();
       if(typeof(Storage) !== "undefined") {
-        if (localStorage.wdata) {
+        if (localStorage.unidata) {
             //setCookie(sessionStorage.api, dataURL, 2);
-	    console.log('datasaved1');	
-            mainDataSave = localStorage.wdata;
+	        console.log('datasaved1');	
+            mainDataSave = localStorage.unidata;
         } else {
-            localStorage.wdata = dataURL;
-	    console.log('datasaved2');	
+            localStorage.unidata = dataURL;
+	        console.log('datasaved2');	
         }
-          mainDataSave = localStorage.wdata;
+          //mainDataSave = localStorage.unidata;
           //console.log(localStorage.canid);
       }
   }    
