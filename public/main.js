@@ -1,6 +1,6 @@
 'use strict';
 (function() {
-  var version = '1.3.5';
+  var version = '1.3.6';
   var sleep_timer = 0;
   var thickness = 0.3;
   var socket = io();
