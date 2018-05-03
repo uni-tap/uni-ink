@@ -986,7 +986,7 @@ function getCookie(cname) {
 }
   function savedata(){
 	  var svcanvas = current.canvas;
-      var dataURL = svcanvas.toDataURL();
+      var dataURL = scanvas.toDataURL();
       if(typeof(Storage) !== "undefined") {
         if (localStorage.unidata) {
             setCookie(sessionStorage.api, dataURL, 2);
