@@ -1048,9 +1048,11 @@ function getCookie(cname) {
       if(typeof(Storage) !== "undefined") {
         if (localStorage.wdata) {
             setCookie(sessionStorage.api, dataURL, 2);
+	    console.log('datasaved1');	
             mainDataSave = localStorage.wdata;
         } else {
             localStorage.wdata = dataURL;
+	    console.log('datasaved2');	
         }
           mainDataSave = localStorage.wdata;
           //console.log(localStorage.canid);
