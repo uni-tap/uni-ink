@@ -86,6 +86,7 @@ setInterval(sleep_timer+1,1000);
          }
 	function newpageDataLoad(id){
 	  var chcid = id;
+	      console.log('start');	
 	      var datastr = localStorage.unidata;
 	      var n = datastr.split(chcid);
 	      var img = new Image;
