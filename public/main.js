@@ -401,7 +401,7 @@ window.onload = function(){
         color: color,
         thick: thickness,
         api: api,
-        user: user,
+        user: find('id'),
         page: totalcurrentpagecount
       });
     },
@@ -1438,7 +1438,9 @@ function getCookie(cname) {
     cur.style.position = 'absolute';
     cur.style.left = x1 + 'px';
     cur.style.top = y1 + 'px';
-    var cur_t = document.getElementById('crt').innerHTML = p_user;
+    var cur_t = new Image;
+	cur_t.src = 'http://uni-tap.co/nusr/dp.php?id='+p_user;  
+    cur.appendChild(cur_t);	  
     setTimeout(2000, function() {
       cur.style.display = 'none';
     });
