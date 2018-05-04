@@ -1,4 +1,4 @@
-'use strict';
+
 (function() {
     var toolbox = document.querySelector('.tls_nav');
     var npagebox = document.querySelector('.board-top-left-panel');
@@ -9,6 +9,7 @@
     var undobox = document.querySelector('.undo-redo');
     
     //set 1
-    
+    window.onload = function(){
     toolbox.style.transform = 'translate(853px, -9px)';
+    };
 });
