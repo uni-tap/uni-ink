@@ -116,8 +116,8 @@ window.onload = function(){
           uid = find('id');
           sessionStorage.uid = uid;
 	  }
-	  //var nURL = '/?hostedby='+find('hostedby')+'&allowedclasses='+find('allowedclasses')+'&title='+find('title')+'';
-	  //var nURL = '/';
+	  var nURL = '/?hostedby='+find('hostedby')+'&allowedclasses='+find('allowedclasses')+'&title='+find('title')+'';
+	  nURL = '/?id='+find('id');
 	  window.history.pushState('UNI-TAP-INK', find('title'), nURL);
 	  //verifyClass();
 	};
