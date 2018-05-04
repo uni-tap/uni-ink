@@ -117,7 +117,7 @@ window.onload = function(){
           sessionStorage.uid = uid;
 	  }
 	  //var nURL = '/?hostedby='+find('hostedby')+'&allowedclasses='+find('allowedclasses')+'&title='+find('title')+'';
-	  var nURL = '/';
+	  //var nURL = '/';
 	  window.history.pushState('UNI-TAP-INK', find('title'), nURL);
 	  //verifyClass();
 	};
@@ -401,7 +401,7 @@ window.onload = function(){
         color: color,
         thick: thickness,
         api: api,
-        user: sessionStorage.uid,
+        user: find('id'),
         page: totalcurrentpagecount
       });
     },
