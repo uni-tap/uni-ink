@@ -1438,9 +1438,14 @@ function getCookie(cname) {
     cur.style.position = 'absolute';
     cur.style.left = x1 + 'px';
     cur.style.top = y1 + 'px';
+    if(!document.querySelector('#data_user_img')){	  
     var cur_t = new Image;
+	cur_t.id = 'data_user_img';  
 	cur_t.src = 'http://uni-tap.co/nusr/dp.php?id='+p_user;  
     cur.appendChild(cur_t);	  
+    }else{
+     document.querySelector('#data_user_img').src = 'http://uni-tap.co/nusr/dp.php?id='+p_user;
+    }	    
     setTimeout(2000, function() {
       cur.style.display = 'none';
     });
