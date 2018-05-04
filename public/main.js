@@ -401,7 +401,7 @@ window.onload = function(){
         color: color,
         thick: thickness,
         api: api,
-        user: find('id'),
+        user: sessionStorage.uid,
         page: totalcurrentpagecount
       });
     },
