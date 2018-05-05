@@ -1435,9 +1435,9 @@ function getCookie(cname) {
     current.tool = "Pen";
   }
   function moveHBar(x0, y0, x1, y1){
-    hbar.style.position = 'absolute';
-    hbar.style.left = x1 + 'px';
-    hbar.style.top = y1 + 'px';
+    //hbar.style.position = 'absolute';
+    //hbar.style.left = x1 + 'px';
+    //hbar.style.top = y1 + 'px';
         //toggle('.canvasContextMenu-hor');
   }
   function move_curc(x0, y0, x1, y1, p_user) {
