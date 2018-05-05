@@ -891,7 +891,7 @@ window.onload = function(){
   var points = [];
   function onMouseDown(e) {
     sleep_timer = 0;
-    toggle(hbar);	  
+    //toggle(hbar);	  
     drawing = true;
     current.x = e.clientX;
     current.y = e.clientY;
@@ -913,7 +913,7 @@ function sleep_time(){
 }
   function onMouseUp(e) {  
     sleep_time();
-    toggle(hbar);
+    toggle('.canvasContextMenu-hor');
     savedata(); 
     if (current.canvas == canvas) {
       update_data(context, scontext, canvas);
