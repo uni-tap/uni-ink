@@ -44,6 +44,7 @@
   var limit = 0;
   var nextpagecount = 1; //totalcurrentpagecount;
   var totalpagecount = 1;
+  var hbar = document.querySelector('.canvasContextMenu-hor');	
   var mainDataSave = localStorage.unidata;        
   var current = {
     color: 'black',
@@ -890,6 +891,7 @@ window.onload = function(){
   var points = [];
   function onMouseDown(e) {
     sleep_timer = 0;
+    toggle(hbar);	  
     drawing = true;
     current.x = e.clientX;
     current.y = e.clientY;
@@ -911,6 +913,7 @@ function sleep_time(){
 }
   function onMouseUp(e) {  
     sleep_time();
+    toggle(hbar);
     savedata(); 
     if (current.canvas == canvas) {
       update_data(context, scontext, canvas);
@@ -938,6 +941,7 @@ function sleep_time(){
         draw.pen(current.x, current.y, e.clientX, e.clientY, current.color, thickness, true);
         current.x = e.clientX;
         current.y = e.clientY;
+	moveHBar(current.x, current.y, e.clientX, e.clientY);      
       }
       if (current.tool == 'Eraser') { // IF ERASER BUTTON IS CLICKED
         draw.eraser(current.x, current.y, e.clientX, e.clientY, current.ecolor, true);
@@ -1431,7 +1435,11 @@ function getCookie(cname) {
     scanvas.height = window.innerHeight;
     current.tool = "Pen";
   }
-
+  function moveHBar(x0, y0, x1, y1){
+    hbar.style.position = 'absolute';
+    hbar.style.left = x1 + 'px';
+    hbar.style.top = y1 + 'px';
+  }
   function move_curc(x0, y0, x1, y1, p_user) {
     var cur = document.getElementById('curs');
     cur.style.display = 'block';
