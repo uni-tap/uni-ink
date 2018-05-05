@@ -941,6 +941,7 @@ function sleep_time(){
         draw.pen(current.x, current.y, e.clientX, e.clientY, current.color, thickness, true);
         current.x = e.clientX;
         current.y = e.clientY;
+	toggle('.canvasContextMenu-hor');      
 	moveHBar(current.x, current.y, e.clientX, e.clientY);      
       }
       if (current.tool == 'Eraser') { // IF ERASER BUTTON IS CLICKED
