@@ -913,7 +913,6 @@ function sleep_time(){
 }
   function onMouseUp(e) {  
     sleep_time();
-    toggle('.canvasContextMenu-hor');
     savedata(); 
     if (current.canvas == canvas) {
       update_data(context, scontext, canvas);
@@ -940,8 +939,7 @@ function sleep_time(){
       if (current.tool == 'Pen') { // IF PEN BUTTUN IS CLICKED
         draw.pen(current.x, current.y, e.clientX, e.clientY, current.color, thickness, true);
         current.x = e.clientX;
-        current.y = e.clientY;
-	toggle('.canvasContextMenu-hor');      
+        current.y = e.clientY;      
 	moveHBar(current.x, current.y, e.clientX, e.clientY);      
       }
       if (current.tool == 'Eraser') { // IF ERASER BUTTON IS CLICKED
@@ -1440,6 +1438,7 @@ function getCookie(cname) {
     hbar.style.position = 'absolute';
     hbar.style.left = x1 + 'px';
     hbar.style.top = y1 + 'px';
+	  toggle('.canvasContextMenu-hor');
   }
   function move_curc(x0, y0, x1, y1, p_user) {
     var cur = document.getElementById('curs');
