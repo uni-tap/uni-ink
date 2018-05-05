@@ -405,7 +405,7 @@ body, button, input, select, textarea {
 .video-chat.video-chat--pinned {
     width: 271px;
     height: 230px;
-    background-color: #fff;
+    //background-color: #fff;
     border-radius: 4px;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,.12);
     //-webkit-transform: translateY(0)!important;
