@@ -53,11 +53,12 @@ socket.on('chat_msg', function(data) {
 });
 function send_msg(type){
     var li = document.createElement('li');
+    var liP = document.createElement('p');
     if(!type || type == 'norm'){
         if(msg.value == ''){return;}
         li.className = 's_msg';
         li.style.backgroundColor = document.getElementById('cht_clr').innerHTML;
-        li.innerHTML = msg.value;
+        liP.innerHTML = msg.value;
     }else if(type == 'img'){
         li.className = 's_msg s_img';
         li.style.backgroundColor = document.getElementById('cht_clr').innerHTML;
@@ -91,6 +92,7 @@ function send_msg(type){
     var info = document.createElement('span');
         info.innerHTML += 'You';
         info_div.appendChild(info);
+        li.appendChild(liP);
         li.appendChild(info_div);
     msg_lst.appendChild(li);
     emojify.run();
@@ -112,9 +114,10 @@ function recieve_msg(r_msg, type, from){
     var validate = filters.from_blocked(from);
     validate;
     var li = document.createElement('li');
+    var liP = document.createElement('p');
     if(!type || type == 'norm'){
         li.className = 'r_msg';
-        li.innerHTML = r_msg;
+        liP.innerHTML = r_msg;
     }else if(type == 'img'){
         li.className = 'r_msg s_img';
         var img_box = document.createElement('img');
@@ -142,6 +145,7 @@ function recieve_msg(r_msg, type, from){
         info.innerHTML += from;
         info_div.appendChild(info);
         li.appendChild(info_div);
+        li.appendChild(liP);
         li.setAttribute('data-usr', from);
     msg_lst.appendChild(li);
     emojify.run();
