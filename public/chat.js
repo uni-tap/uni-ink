@@ -46,10 +46,10 @@ var msg_lst = document.getElementById('chats');
 socket.on('chat_msg', function(data) {
     if (data.api == sessionStorage.api) {
       if (data.user != sessionStorage.usr) {
-          recieve_msg(data.chat, data.type, data.user);
+          console.log('msgrec');
+          //recieve_msg(data.chat, data.type, data.user);
       }else{return;}
     }else{return;}
-    console.log('msgrec');
 });
 function send_msg(type){
     var li = document.createElement('li');
@@ -82,7 +82,7 @@ function send_msg(type){
         li.className = 's_msg s_aemoji';
         li.setAttribute('emo_cont', msg.value);
         li.style.backgroundColor = document.getElementById('cht_clr').innerHTML;
-        animate();  
+        animate();
     }
     var info_div = document.createElement('div');
         info_div.className = 'usr_info';
@@ -107,6 +107,12 @@ emojify.run(null, function(emoji, emojiName){
 });
     li.focus();
     toggle('.placeholder');
+    socket.emit('chat_msg', {
+     chat: msg.value,
+     type: 'norm',
+     user: sessionStorage.usr   
+    });
+    console.log('msg_sent');
     msg.value = '';
     
 }
