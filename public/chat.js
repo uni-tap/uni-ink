@@ -92,6 +92,11 @@ function send_msg(type){
     var info = document.createElement('span');
         info.innerHTML += 'You';
         info_div.appendChild(info);
+        socket.emit('chat_msg', {
+     chat: msg.value,
+     type: 'norm',
+     user: sessionStorage.usr   
+    });
         li.appendChild(liP);
         li.appendChild(info_div);
     msg_lst.appendChild(li);
@@ -107,11 +112,6 @@ emojify.run(null, function(emoji, emojiName){
 });
     li.focus();
     toggle('.placeholder');
-    socket.emit('chat_msg', {
-     chat: msg.value,
-     type: 'norm',
-     user: sessionStorage.usr   
-    });
     console.log('msg_sent');
     msg.value = '';
     
