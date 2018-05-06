@@ -595,6 +595,7 @@ audio, canvas, progress, video {
     justify-content: center;
     align-items: center;
     margin-bottom: 30px;
+	    word-wrap: break-word;
     }
     .s_msg{
             min-height: 40px;
@@ -615,6 +616,7 @@ audio, canvas, progress, video {
     margin-bottom: 30px;
     background-color: #e6e6e6;
     color: black;
+	    word-wrap: break-word;
     }
     .s_img{
         max-height:200px;
