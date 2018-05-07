@@ -547,7 +547,8 @@ window.onload = function(){
       context.clearRect(0, 0, scanvas.width, scanvas.height);
       context.beginPath();
       context.lineCap = "round";
-      context.moveTo(x0, y0)
+      context.moveTo(x0, y0);
+      context.lineJoin = 'round';	    
       context.lineTo(x1, y1);
       context.stroke();
 
