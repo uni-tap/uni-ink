@@ -44,7 +44,7 @@ var msg_lst = document.getElementById('chats');
         send_msg();
     },false);
 socket.on('chat_msg', function(data) {
-    if (data.api == sessionStorage.api) {
+    if (data.api == find('api')) {
       if (data.user != sessionStorage.usr) {
           console.log('msgrec');
           recieve_msg(data.chat, data.type, data.user);
@@ -95,7 +95,8 @@ function send_msg(type){
         socket.emit('chat_msg', {
      chat: msg.value,
      type: 'norm',
-     user: sessionStorage.usr   
+     user: sessionStorage.usr,
+     api: find('api');       
     });
         li.appendChild(liP);
         li.appendChild(info_div);
