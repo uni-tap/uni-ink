@@ -1,4 +1,5 @@
 var socket = io();
+var lastMsg;
 var filters = {
     profanity : function(dat){
          return true
@@ -114,6 +115,7 @@ emojify.run(null, function(emoji, emojiName){
   span.innerHTML = emoji + ' replaced';
   return span;
 });
+    lastMsg = 'us';
     msg.value = '';
     
 }
@@ -162,9 +164,10 @@ emojify.run(document.getElementById('msg'));
 emojify.run(null, function(emoji, emojiName){
   var span = document.createElement('span');
   span.className = 'emoji emoji-'  + emojiName;
-  span.innerHTML = emoji + ' replaced';
-  return span;
+  span.innerHTML = emoji + ' replaced';  
+  return span;  
 });
+    lastMsg = from;
 }   
     function animate(){  
         var emsgs = document.getElementsByClassName('s_aemoji');
