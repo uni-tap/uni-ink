@@ -108,10 +108,17 @@ setInterval(sleep_timer+1,1000);
 window.onload = function(){
       loadPreviousData();
 	  var usr, post, uid;
-	  if(!sessionStorage.usr || sessionStorage.usr == '' || sessionStorage.usr != find('user')){
+	  if(typeof(Storage) !== "undefined") {
+          if (localStorage.usr) {
+	  //if(!sessionStorage.usr || sessionStorage.usr == '' || sessionStorage.usr != find('user')){
 	  usr = find('user');
 	  localStorage.usr = usr;
-	  }else if(!sessionStorage.pst || sessionStorage.pst == '' || sessionStorage.pst != find('post')){
+	  }else{
+	   usr = find('user');	   
+	   localStorage.usr = usr;
+	  }
+	  	  
+	  if(!sessionStorage.pst || sessionStorage.pst == '' || sessionStorage.pst != find('post')){
 	  post = find('post');
 	  sessionStorage.pst = post;
 	  }else if(!sessionStorage.uid || sessionStorage.uid == '' || sessionStorage.uid != find('id')){
@@ -120,6 +127,7 @@ window.onload = function(){
 	  }else if(!sessionStorage.api || sessionStorage.api == '' || sessionStorage.api != find('api')){
           sapi = find('api');
           sessionStorage.api = sapi;
+	  }
 	  }
 	  var nURL = '/?hostedby='+find('hostedby')+'&allowedclasses='+find('allowedclasses')+'&title='+find('title')+'';
 	  nURL = '/?id='+find('id')+'&api='+find('api');
@@ -1010,6 +1018,7 @@ function getCookie(cname) {
     }
     return "";
 }
+	
   function savedata(){
       var svcanvas = current.canvas;
       //var dataURL;	  
