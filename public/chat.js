@@ -45,7 +45,7 @@ var msg_lst = document.getElementById('chats');
     },false);
 socket.on('chat_msg', function(data) {
     if (data.api == find('api')) {
-      if (data.user != localStorage.usr) {
+      if (data.user != find('user')) {
           recieve_msg(data.chat, data.type, data.user);
       }else{return;}
     }else{return;}
