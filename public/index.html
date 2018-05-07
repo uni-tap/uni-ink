@@ -249,7 +249,7 @@
     <ul>
       <li><button onclick="block()">Block</button></li>
       <li><button onclick="report()">Report</button></li>
-      <li><button onclick="hideCHT()">Hide</button></li>
+      <li><button onclick="hide()">Hide</button></li>
     </ul>
 </div>
         <span class="sm"><div class="sml" onclick="toggle('.emoji_center')"><img src="https://static.xx.fbcdn.net/images/emoji.php/v9/z88/1/32/1f600.png"></div></span>
@@ -454,7 +454,7 @@ if(data.user != sessionStorage.usr){
     function report(){
 
     }
-    function hideCHT(){
+    function hide(){
         var elements = document.getElementsByClassName('r_msg');
         for (var i = 0; i < elements.length; i++) {
         if(elements[i].getAttribute('data-usr') == opt_usr_id){
