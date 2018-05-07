@@ -95,7 +95,7 @@ function send_msg(type){
         socket.emit('chat_msg', {
      chat: msg.value,
      type: 'norm',
-     user: sessionStorage.usr,
+     user: find('user'),
      api: find('api')     
     });
         li.appendChild(liP);
