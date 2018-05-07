@@ -442,7 +442,7 @@ window.onload = function(){
         y1: y1 / ch,
         color: color,
         api: api,
-        user: user,
+        user: find('id'),
         page: totalcurrentpagecount
       });
     },
@@ -491,7 +491,7 @@ window.onload = function(){
         fill: fill,
         thick: thickness,
         api: api,
-        user: user,
+        user: find('id'),
         page: totalcurrentpagecount
       });
     },
@@ -537,7 +537,7 @@ window.onload = function(){
         fill: fill,
         thick: thickness,
         api: api,
-        user: user,
+        user: find('id'),
         page: totalcurrentpagecount
       });
     },
@@ -567,7 +567,7 @@ window.onload = function(){
         color: color,
         thick: thickness,
         api: api,
-        user: user,
+        user: find('id'),
         page: totalcurrentpagecount
       });
     },
@@ -603,7 +603,7 @@ window.onload = function(){
           fill: fill,
           thick: thickness,
           api: api,
-          user: user,
+          user: find('id'),
           page: totalcurrentpagecount
         });
       }
@@ -642,7 +642,7 @@ window.onload = function(){
         fill: fill,
         thick: thickness,
         api: api,
-        user: user,
+        user: find('id'),
         page: totalcurrentpagecount
       });
     },
@@ -720,7 +720,7 @@ window.onload = function(){
         y1: y1 / ch,
         color: color,
         api: api,
-        user: user,
+        user: find('id'),
         page: totalcurrentpagecount
       });
     },
@@ -764,7 +764,7 @@ window.onload = function(){
         y1: y1 / ch,
         color: color,
         api: api,
-        user: user,
+        user: find('id'),
         page: totalcurrentpagecount
       });
     },
