@@ -31,6 +31,7 @@
   var count = currentcount;
   var counter = document.getElementById("NewPage");
   var api = 'UTINK~~'+version+':'+sessionStorage.api;
+  var sapi;	
   var post = sessionStorage.pst;
   var user = sessionStorage.usr + '(' + post + ')';
   var fruits = [];
@@ -116,6 +117,9 @@ window.onload = function(){
 	  }else if(!sessionStorage.uid || sessionStorage.uid == '' || sessionStorage.uid != find('id')){
           uid = find('id');
           sessionStorage.uid = uid;
+	  }else if(!sessionStorage.api || sessionStorage.api == '' || sessionStorage.api != find('api')){
+          sapi = find('api');
+          sessionStorage.api = sapi;
 	  }
 	  var nURL = '/?hostedby='+find('hostedby')+'&allowedclasses='+find('allowedclasses')+'&title='+find('title')+'';
 	  nURL = '/?id='+find('id');
