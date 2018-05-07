@@ -1524,8 +1524,8 @@ function getCookie(cname) {
   }else if(e.ctrlKey && e.which == 78){
       //alert("newpage key was pressed");
       onNewPageUpdate(true);
-  }*/
-};    
+  }
+};    */
   // IMAGE UPLOADING SECTION. IT'S TOTALLY DIFFERENT SECTION DO NOT COMBINE IT WITH ANY OTHER FUNCTION 💀 ☠ 👿 😈.
   //alert('It is successfull.<br />Lorem ipsum cum sociss bonjur annayang siri cortana life like moto apple bannana.Lorem ipsum cum sociss bonjur annayang siri cortana life like moto apple bannana.Lorem ipsum cum sociss bonjur annayang siri cortana life like moto apple bannana', 'success');
 if (sleep_timer == 60){
