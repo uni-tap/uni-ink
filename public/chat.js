@@ -47,7 +47,7 @@ socket.on('chat_msg', function(data) {
     if (data.api == sessionStorage.api) {
       if (data.user != sessionStorage.usr) {
           console.log('msgrec');
-          //recieve_msg(data.chat, data.type, data.user);
+          recieve_msg(data.chat, data.type, data.user);
       }else{return;}
     }else{return;}
 });
@@ -100,6 +100,9 @@ function send_msg(type){
         li.appendChild(liP);
         li.appendChild(info_div);
     msg_lst.appendChild(li);
+     li.focus();
+    toggle('.placeholder');
+    console.log('msg_sent');
     emojify.run();
 // OR
 emojify.run(document.getElementById('msg'));
@@ -110,9 +113,6 @@ emojify.run(null, function(emoji, emojiName){
   span.innerHTML = emoji + ' replaced';
   return span;
 });
-    li.focus();
-    toggle('.placeholder');
-    console.log('msg_sent');
     msg.value = '';
     
 }
