@@ -30,7 +30,7 @@
   var currentcount = 1;
   var count = currentcount;
   var counter = document.getElementById("NewPage");
-  var api = 'UTINK~~'+version+':'+sessionStorage.api;
+  var api = 'UTINK~~'+version+':'+find('api');
   var sapi;	
   var post = sessionStorage.pst;
   var user = sessionStorage.usr + '(' + post + ')';
@@ -122,7 +122,7 @@ window.onload = function(){
           sessionStorage.api = sapi;
 	  }
 	  var nURL = '/?hostedby='+find('hostedby')+'&allowedclasses='+find('allowedclasses')+'&title='+find('title')+'';
-	  nURL = '/?id='+find('id');
+	  nURL = '/?id='+find('id')+'&api='+find('api');
 	  window.history.pushState('UNI-TAP-INK', find('title'), nURL);
 	  //verifyClass();
 	};
