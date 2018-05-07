@@ -47,7 +47,7 @@ io.on('connection', function(socket){
   socket.on('chat_msg', (data)  => socket.broadcast.emit('chat_msg', data));
   socket.on('user_attached', (data)  => socket.broadcast.emit('user_attached', data));
   socket.on('youtube_import_uni-tap', (data)  => socket.broadcast.emit('youtube_import_uni-tap', data));
-  socket.on('drags', (data)  => socket.broadcast.emit('drags', data));
+  socket.on('take_attc_users', (data)  => socket.broadcast.emit('take_attc_users', data));
 // IF A USER GETS DISCONNECTED
 
 socket.on('disconnect', function(socket){
