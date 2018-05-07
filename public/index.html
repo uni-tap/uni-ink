@@ -345,7 +345,11 @@
   }
   }
 }
-
+socket.emit('user_attached', {
+	user: find('user'),
+	id: find('id'),
+	api: find('api')
+});
         function toggle(elem){
             var obj = document.querySelector(elem);
             if(obj.style.display == 'none'){
@@ -469,6 +473,8 @@ if(data.user != sessionStorage.usr){
         }
      var socket = io();
      socket.on('user_attached', function(data){
+	     if(data.api == find('api')){
+		if(data.user != find('user')){     
 	     //for (i = 0; i < data.length; i++) {
 	     var newusr = document.createElement('li');
 	     var newusrdpcont = document.createElement('div');
@@ -481,6 +487,8 @@ if(data.user != sessionStorage.usr){
 		 newusrdpcont.appendChild(newusrdp);
 		 document.querySelector('#usersCount').appendChild(newusr);
 		 centerdiv.innerHTML = data.user;
+		}else{return;}
+	     }else{return;}
 	     //}
      });
      socket.on('get users', function(data){
