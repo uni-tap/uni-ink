@@ -618,6 +618,7 @@ audio, canvas, progress, video {
     color: black;
 	    word-wrap: break-word;
     }
+.s_msg .r_msg p{width:100%;}
     .s_img{
         max-height:200px;
         width:120px;
