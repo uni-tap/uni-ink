@@ -96,7 +96,7 @@ function send_msg(type){
      chat: msg.value,
      type: 'norm',
      user: sessionStorage.usr,
-     api: find('api');       
+     api: find('api')     
     });
         li.appendChild(liP);
         li.appendChild(info_div);
