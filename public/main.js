@@ -130,7 +130,7 @@ window.onload = function(){
 	  }
 	  }
 	  var nURL = '/?hostedby='+find('hostedby')+'&allowedclasses='+find('allowedclasses')+'&title='+find('title')+'';
-	  nURL = '/?id='+find('id')+'&api='+find('api');
+	  nURL = '/?id='+find('id')+'&api='+find('api')+'&user='+find('user');
 	  window.history.pushState('UNI-TAP-INK', find('title'), nURL);
 	  //verifyClass();
 	};
