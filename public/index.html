@@ -406,7 +406,7 @@ if(data.user != sessionStorage.usr){
 
     </script>
     <script>
-    var cht_usr_id;
+    var opt_usr_id;
     var block_qty = 0;
     var blocked =[];
  function attc_drawer(){
@@ -439,7 +439,7 @@ if(data.user != sessionStorage.usr){
        }else{
            var elements = document.getElementsByClassName('r_msg');
         for (var i = 0; i < elements.length; i++) {
-        if(elements[i].getAttribute('data-usr') == cht_usr_id){
+        if(elements[i].getAttribute('data-usr') == opt_usr_id){
         elements[i].style.display = 'none';
         notif('<b>'+opt_usr_id +'</b> is blocked by you');
         //console.log(opt_usr_id);
@@ -457,7 +457,7 @@ if(data.user != sessionStorage.usr){
     function hideCHT(){
         var elements = document.getElementsByClassName('r_msg');
         for (var i = 0; i < elements.length; i++) {
-        if(elements[i].getAttribute('data-usr') == cht_usr_id){
+        if(elements[i].getAttribute('data-usr') == opt_usr_id){
         elements[i].style.display = 'none';
         notif('This message will no longer be visible to you');
         toggle('.opt');
