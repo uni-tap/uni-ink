@@ -249,13 +249,13 @@
     <ul>
       <li><button onclick="block()">Block</button></li>
       <li><button onclick="report()">Report</button></li>
-      <li><button onclick="hide()">Hide</button></li>
+      <li><button onclick="hideCHT()">Hide</button></li>
     </ul>
 </div>
         <span class="sm"><div class="sml" onclick="toggle('.emoji_center')"><img src="https://static.xx.fbcdn.net/images/emoji.php/v9/z88/1/32/1f600.png"></div></span>
         <input onkeypress="return runScript(event)" onkeyup="if(this.value != ''){document.querySelector('.placeholder').style.display='none';}" type="text" class="chat_msg" name="msg" id="msg"/>
         <input id="send" value="" type="button">
-        <label for="msg" class="placeholder" style="display: block;">Chat service is currently disabled.<!-- Type something... --></label>
+        <label for="msg" class="placeholder" style="display: block;">Type something...</label>
         <span class="attachments" onclick="attc_drawer();">+</span>
         <div style="display:none;"class="drawer">
             <div class="dr_btn" id="image_s">Image</div>
@@ -406,7 +406,7 @@ if(data.user != sessionStorage.usr){
 
     </script>
     <script>
-    var opt_usr_id;
+    var cht_usr_id;
     var block_qty = 0;
     var blocked =[];
  function attc_drawer(){
@@ -420,7 +420,7 @@ if(data.user != sessionStorage.usr){
  }
     function options(dp, id){
         var opt_box = document.querySelector('.opt');
-            opt_usr_id = id;
+        var cht_usr_id = id;
             opt_box.style.display = 'block';
     }
     function notif(n_msg){
@@ -439,7 +439,7 @@ if(data.user != sessionStorage.usr){
        }else{
            var elements = document.getElementsByClassName('r_msg');
         for (var i = 0; i < elements.length; i++) {
-        if(elements[i].getAttribute('data-usr') == opt_usr_id){
+        if(elements[i].getAttribute('data-usr') == cht_usr_id){
         elements[i].style.display = 'none';
         notif('<b>'+opt_usr_id +'</b> is blocked by you');
         //console.log(opt_usr_id);
@@ -454,10 +454,10 @@ if(data.user != sessionStorage.usr){
     function report(){
 
     }
-    function hide(){
+    function hideCHT(){
         var elements = document.getElementsByClassName('r_msg');
         for (var i = 0; i < elements.length; i++) {
-        if(elements[i].getAttribute('data-usr') == opt_usr_id){
+        if(elements[i].getAttribute('data-usr') == cht_usr_id){
         elements[i].style.display = 'none';
         notif('This message will no longer be visible to you');
         toggle('.opt');
