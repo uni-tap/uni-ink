@@ -333,6 +333,7 @@ window.onload = function(){
   socket.on('left', onLeftEvent);
   socket.on('right', onRightEvent);
   socket.on('hlight', onHlightEvent);
+  socket.on('cmtBox', onCommentEvent);	
   socket.on('saved', function() {
     saved = true;
   });
