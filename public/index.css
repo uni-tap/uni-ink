@@ -13,6 +13,11 @@ body{
     height: 360px;
     top: 200px;
 }
+.cmmtCntrls {
+    height: 40%;
+    width: 100%;
+    margin-top: 5%;
+}
 .toolbar__item {
     color: #000;
     cursor: pointer;
