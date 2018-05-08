@@ -790,6 +790,7 @@ window.onload = function(){
         cmtDetails.style.width = '300px';
 	var cmttarea = document.createElement('textarea');
 	    cmtDetails.appendChild(cmttarea);
+	    cmttarea.setAttribute("placeholder", "Type a message. Use @ to mention.");		
 	var cmtcntrl = 	document.createElement('div');
 	    cmtcntrl.className = "cmmtCntrls";
 	var inp1 = document.createElement('input');
