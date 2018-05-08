@@ -1001,7 +1001,8 @@ audio, canvas, progress, video {
 }
 @media only screen and (max-height: 500px){
     .bottom-bar{
-        transform: translate(287.177px, -294.025px);
+        top:8px !important;
+	left:278px !important;    
      }    
 .chat_body{
     transform: translate(3px, 5.31809px);
