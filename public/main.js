@@ -785,9 +785,13 @@ window.onload = function(){
         new_comment.style.boxShadow = '0 5px 8px rgba(0,0,0,0.15)';
         var cmtDetails = document.createElement('div');
         cmtDetails.style.display = 'none';
-        cmtDetails.style.height = '100px';
-        cmtDetails.style.width = '200px';
-        new_comment.addEventListener('click', function(){
+        cmtDetails.style.height = 'auto';
+	cmtDetails.style.minHeight = '200px';	
+        cmtDetails.style.width = '300px';
+	cmtDetails.append('<textarea max-length="100" type="text" placeholder="Type a message. Use @ to mention." style="width: 300px; height: 100px; border: 1px solid rgb(33, 150, 243); border-radius: 2px; line-height: 19px; margin: 50px 0px 0px;"></textarea>');
+        cmtDetails.append('<div class="cmmtCntrls"><input type="submit" value="Post comment" style="background-color: #2196F3;color: white;padding: 10px;border-radius: 5px;cursor: pointer;"><input type="submit" value="Cancel" style="background-color: #F44336;color: white;padding: 10px;border-radius: 5px;cursor: pointer;float:right;"></div>');
+		
+	new_comment.addEventListener('click', function(){
          toggle('#'+cmtDetails.id);
         }, false); 
         cmtDetails.addEventListener('click', function(){
