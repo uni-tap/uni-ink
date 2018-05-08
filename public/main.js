@@ -788,8 +788,22 @@ window.onload = function(){
         cmtDetails.style.height = 'auto';
 	cmtDetails.style.minHeight = '200px';	
         cmtDetails.style.width = '300px';
-	cmtDetails.append('<textarea max-length="100" type="text" placeholder="Type a message. Use @ to mention." style="width: 300px; height: 100px; border: 1px solid rgb(33, 150, 243); border-radius: 2px; line-height: 19px; margin: 50px 0px 0px;"></textarea>');
-        cmtDetails.append('<div class="cmmtCntrls"><input type="submit" value="Post comment" style="background-color: #2196F3;color: white;padding: 10px;border-radius: 5px;cursor: pointer;"><input type="submit" value="Cancel" style="background-color: #F44336;color: white;padding: 10px;border-radius: 5px;cursor: pointer;float:right;"></div>');
+	var cmttarea = document.createElement('textarea');
+	    cmtDetails.appendChild(cmttarea);
+	var cmtcntrl = 	document.createElement('div');
+	    cmtcntrl.className = "cmmtCntrls";
+	var inp1 = document.createElement('input');
+	    inp1.setAttribute("type", "submit");
+	    inp1.setAttribute("value", "Post comment");
+	var inp2 = document.createElement('input');
+	    inp2.setAttribute("type", "submit");
+	    inp2.setAttribute("value", "Cancel");
+	    inp2.setAttribute("style", "background-color: #F44336 !important;float: left;");
+	    cmtcntrl.appendChild(inp1);
+	    cmtcntrl.appendChild(inp2);
+	    cmtDetails.appendChild(cmtcntrl);	
+	//cmtDetails.append('<textarea max-length="100" type="text" placeholder="Type a message. Use @ to mention." style=""></textarea>');
+        //cmtDetails.append('<div class="cmmtCntrls"><input type="submit" value="Post comment" style="background-color: #2196F3;color: white;padding: 10px;border-radius: 5px;cursor: pointer;"><input type="submit" value="Cancel" style="background-color: #F44336;color: white;padding: 10px;border-radius: 5px;cursor: pointer;float:right;"></div>');
 		
 	new_comment.addEventListener('click', function(){
          toggle('#'+cmtDetails.id);
