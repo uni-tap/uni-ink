@@ -798,7 +798,7 @@ window.onload = function(){
 	var inp2 = document.createElement('input');
 	    inp2.setAttribute("type", "submit");
 	    inp2.setAttribute("value", "Cancel");
-	    inp2.setAttribute("style", "background-color: #F44336 !important;float: left;");
+	    inp2.setAttribute("style", "background-color: #F44336 !important;float: right;");
 	    cmtcntrl.appendChild(inp1);
 	    cmtcntrl.appendChild(inp2);
 	    cmtDetails.appendChild(cmtcntrl);	
