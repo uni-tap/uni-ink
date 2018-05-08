@@ -1314,6 +1314,7 @@ function getCookie(cname) {
   function onCommentEvent(data){
    if (data.api == find('api')) {
 	if(data.by == find('user')){return;}
+	   limit = 0;  
 	   var cw = canvas.width;
            var ch = canvas.height;
 	   draw.comment(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch);
