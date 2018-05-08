@@ -827,7 +827,20 @@ window.onload = function(){
         cmmnts.push(new_comment);
         
         console.log(cmmnts);
-        limit = 1;    
+        limit = 1;
+	if(!emit){return;}
+	var cw = canvas.width;
+        var ch = canvas.height;	
+	socket.emit("cmtBox", {
+	  by: find('user'),
+	  api: find('api'),
+	  id: find('id'),
+	  clr: new_comment.style.backgroundColor,
+	  x0: x0 / cw,
+          y0: y0 / ch,
+          x1: x1 / cw,
+          y1: y1 / ch,	
+	  });	
         }else{return;}
     },
     diamond: function(x0, y0, x1, y1, color, fill, thickness,  emit){
@@ -1296,7 +1309,14 @@ function getCookie(cname) {
       update_data(context, main_ctx, canvas);
     }
   }
-
+  function onCommentEvent(data){
+   if (data.api == api) {
+	if(data.by == find('user')){return;}
+	   var cw = canvas.width;
+           var ch = canvas.height;
+	   draw.comment(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch);
+   }else{return;}
+  }
   function onDrawingEvent(data) {
     if (data.api == api) {
       if (data.page == totalcurrentpagecount) {
