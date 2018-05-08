@@ -1031,8 +1031,8 @@ audio, canvas, progress, video {
         max-height: 130px;
     }
     .video-chat{
-    display:none !important;    
-    top: 186px;
+    display:block;    
+    top: 40%;
     width: 200px !important;
     height: 165px !important;
     }
