@@ -78,6 +78,16 @@ setInterval(sleep_timer+1,1000);
     if (num >= 0) return url.substr(0, num);
     if (num < 0) return url;
   }
+	Element.prototype.remove = function() {
+    this.parentElement.removeChild(this);
+}
+NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
+    for(var i = this.length - 1; i >= 0; i--) {
+        if(this[i] && this[i].parentElement) {
+            this[i].parentElement.removeChild(this[i]);
+        }
+    }
+}
 	function loadPreviousData(){
 	 //var datastr = localStorage.unidata;
 	 //var n = datastr.split('canvas');
