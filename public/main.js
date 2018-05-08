@@ -333,7 +333,7 @@ window.onload = function(){
   socket.on('left', onLeftEvent);
   socket.on('right', onRightEvent);
   socket.on('hlight', onHlightEvent);
-  socket.on('cmtBox', onCommentEvent);	
+  socket.on('cmtBox', function(data){conole.log('cmmt')});	
   socket.on('saved', function() {
     saved = true;
   });
@@ -842,7 +842,8 @@ window.onload = function(){
           x1: x1 / cw,
           y1: y1 / ch,	
 	  });	
-        }else{return;}
+	conole.log('cmmt1')	
+        }else{return;}    
     },
     diamond: function(x0, y0, x1, y1, color, fill, thickness,  emit){
                 //context.clearRect(0, 0, scanvas.width, scanvas.height);
