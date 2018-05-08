@@ -334,7 +334,13 @@ window.onload = function(){
   socket.on('right', onRightEvent);
   socket.on('hlight', onHlightEvent);
   socket.on('cmtBox', function(data){
-   console.log('cmmt222')
+   if (data.api == api) {
+	if(data.by == find('user')){return;}
+	   var cw = canvas.width;
+           var ch = canvas.height;
+	   draw.comment(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch);
+	   console.log('emitter');
+   }else{return;}
   });	
   socket.on('saved', function() {
     saved = true;
