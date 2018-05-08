@@ -333,7 +333,7 @@ window.onload = function(){
   socket.on('left', onLeftEvent);
   socket.on('right', onRightEvent);
   socket.on('hlight', onHlightEvent);
-  socket.on('cmtBox', function(data){conole.log('cmmt')});	
+  socket.on('cmtBox', onCommentEvent);	
   socket.on('saved', function() {
     saved = true;
   });
@@ -842,7 +842,7 @@ window.onload = function(){
           x1: x1 / cw,
           y1: y1 / ch,	
 	  });	
-	conole.log('cmmt1')	
+	//console.log('cmmt1')	
         }else{return;}    
     },
     diamond: function(x0, y0, x1, y1, color, fill, thickness,  emit){
@@ -1317,6 +1317,7 @@ function getCookie(cname) {
 	   var cw = canvas.width;
            var ch = canvas.height;
 	   draw.comment(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch);
+	   console.log('emitter');
    }else{return;}
   }
   function onDrawingEvent(data) {
