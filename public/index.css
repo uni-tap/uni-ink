@@ -18,6 +18,21 @@ body{
     width: 100%;
     margin-top: 5%;
 }
+.cmmtCntrls input[type=submit]{
+   background-color: #2196F3;
+   color: white;
+   padding: 10px;
+   border-radius: 5px;
+   cursor: pointer;
+}
+.cmtdetailsbox textarea{
+  width: 300px;
+  height: 100px;
+  border: 1px solid rgb(33, 150, 243);
+  border-radius: 2px;
+  line-height: 19px; 
+  margin: 50px 0px 0px;
+}
 .toolbar__item {
     color: #000;
     cursor: pointer;
