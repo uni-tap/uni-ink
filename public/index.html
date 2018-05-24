@@ -607,10 +607,10 @@ interact(element)
 
 	    function hideA(elem){
             var obj = document.querySelector(elem);
-            if(obj.style.display == 'none'){
+            if(obj.style.display == 'none !important'){
               obj.style.display = 'block';
             }else if(obj.style.display == 'block' || !obj.style.display){
-              obj.style.display = 'none';
+              obj.style.display = 'none !important';
             }
         }
 	    //validation rule 1
