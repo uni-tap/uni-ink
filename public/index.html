@@ -607,10 +607,10 @@ interact(element)
 
 	    function hideA(elem){
             var obj = document.querySelector(elem);
-            if(obj.style.display == 'none !important'){
+            if(obj.style.display == 'none'){
               obj.style.display = 'block';
             }else if(obj.style.display == 'block' || !obj.style.display){
-              obj.style.display = 'none !important';
+              obj.style.display = 'none';
             }
         }
 	    //validation rule 1
@@ -632,7 +632,7 @@ interact(element)
 	    hideA('.tls_nav');
 	    hideA('.btm_cont');	  
 	    hideA('.board-top');
-	    hideA('.bottom-bar');	   
+	    document.querySelector('.bottom-bar').style.display = "none !important";
 	  }else{var type = "default"}  
     </script>
 
