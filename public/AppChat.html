@@ -60,3 +60,12 @@
         </div>
     </div>
     <p id="cht_clr" style="color:white;font-size:.2px"></p>
+<script>
+              function runScript(e) {
+    if (e.keyCode == 13) {
+        document.getElementById('send').click();
+        document.getElementById('msg').value = '';
+        return false;
+    }
+}
+</script>
