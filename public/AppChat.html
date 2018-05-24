@@ -20,9 +20,8 @@
     </ul>
 </div>
         <span class="sm"><div class="sml" onclick="toggle('.emoji_center')"><img src="https://static.xx.fbcdn.net/images/emoji.php/v9/z88/1/32/1f600.png"></div></span>
-        <input onkeypress="return runScript(event)" onkeyup="if(this.value != ''){document.querySelector('.placeholder').style.display='none';}" type="text" class="chat_msg" name="msg" id="msg"/>
+        <input onkeypress="return runScript(event)" placeholder="Type something..." type="text" class="chat_msg" name="msg" id="msg"/>
         <input id="send" value="" type="button">
-        <label for="msg" class="placeholder" style="display: block;">Type something...</label>
         <span class="attachments" onclick="attc_drawer();">+</span>
         <div style="display:none;"class="drawer">
             <div class="dr_btn" id="image_s">Image</div>
