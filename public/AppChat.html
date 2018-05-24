@@ -61,7 +61,65 @@
  <script src="/socket.io/socket.io.js"></script>
 <script src="chat.js"></script>
 <script>
-              function runScript(e) {
+    var opt_usr_id;
+    var block_qty = 0;
+    var blocked =[];
+ function attc_drawer(){
+     if(document.querySelector('.drawer').style.display == "none"){
+          document.querySelector('.drawer').style.display = "block";
+          document.querySelector('#msg').style.height = "34%";
+     }else if( document.querySelector('.drawer').style.display == "block"){
+          document.querySelector('.drawer').style.display = "none";
+          document.querySelector('#msg').style.height = "100%";
+     }
+ }
+    function options(dp, id){
+        var opt_box = document.querySelector('.opt');
+            opt_usr_id = id;
+            opt_box.style.display = 'block';
+    }
+    function notif(n_msg){
+        document.querySelector('.notif').style.display = 'block';
+        document.querySelector('#msg').style.height = "34%";
+        document.querySelector('#n_msg').innerHTML = n_msg;
+        setTimeout(function(){
+            document.querySelector('.notif').style.display = 'none';
+            document.querySelector('#msg').style.height = "100%";
+            document.querySelector('#n_msg').innerHTML = '';
+        }, 3000);
+    }
+    function block(usr){
+       if(block_qty == 5){
+           notif('You have reached the limit of blocking people.');
+       }else{
+           var elements = document.getElementsByClassName('r_msg');
+        for (var i = 0; i < elements.length; i++) {
+        if(elements[i].getAttribute('data-usr') == opt_usr_id){
+        elements[i].style.display = 'none';
+        notif('<b>'+opt_usr_id +'</b> is blocked by you');
+        //console.log(opt_usr_id);
+        //hide();
+       }
+            }
+           blocked.push(opt_usr_id);
+           block_qty = block_qty + 1;
+           toggle('.opt');
+        }
+    }
+    function report(){
+
+    }
+    function hide(){
+        var elements = document.getElementsByClassName('r_msg');
+        for (var i = 0; i < elements.length; i++) {
+        if(elements[i].getAttribute('data-usr') == opt_usr_id){
+        elements[i].style.display = 'none';
+        notif('This message will no longer be visible to you');
+        toggle('.opt');
+        }
+        }
+    }
+function runScript(e) {
     if (e.keyCode == 13) {
         document.getElementById('send').click();
         document.getElementById('msg').value = '';
