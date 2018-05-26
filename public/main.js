@@ -1386,7 +1386,7 @@ function getCookie(cname) {
     if (data.api == api) {
       var cw = scanvas.width;
       var ch = scanvas.height;
-      draw.triangle(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color, data.fill, data.thick);
+      draw.triangle(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.color, data.fill);
       move_curc(data.x0 * cw, data.y0 * ch, data.x1 * cw, data.y1 * ch, data.user);
     } else {
       return;
