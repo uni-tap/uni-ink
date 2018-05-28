@@ -427,7 +427,7 @@ window.onload = function(){
         api: api,
         user: find('id'),
         page: totalcurrentpagecount
-      });
+      }, find('api'));
     },
     eraser: function(x0, y0, x1, y1, color, emit) {
       main_ctx.beginPath();
