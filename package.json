@@ -9,7 +9,10 @@
   ],
   "dependencies": {
     "express": "4.9.x",
-    "socket.io": "latest"
+    "socket.io": "latest",
+    "getscreenmedia": "latest",
+    "mediastream-gain": "latest",
+    "hark": "latest"
   },
   "scripts": {
     "start": "node index"
