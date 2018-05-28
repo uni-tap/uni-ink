@@ -346,6 +346,7 @@
   }
   }
 }
+	    socket.emit('cRmm', (find('api')));
 socket.emit('user_attached', {
 	user: find('user'),
 	id: find('id'),
@@ -355,6 +356,7 @@ socket.emit('user_attached', {
 	       user: find('user'),
 	       api: find('api') 	    
 	    });
+	    
 	    socket.on('take_attc_users', function(data){
 	      gotten = 1;
 		if(gotten == 1){return;}    
