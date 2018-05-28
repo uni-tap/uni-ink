@@ -24,7 +24,7 @@ io.on('connection', function(socket){
    var room = room;)};*/
   console.log("connected: %s sockets connected", connections.length);
   //socket.on('drawing',(room ,data) => socket.broadcast.to(room).emit('drawing', data));
-  socket.on('drawing',(data) => socket.broadcast.to(data.api).emit('drawing', data));
+  socket.on('drawing',(data, apiId) => socket.broadcast.to(apiId).emit('drawing', data));
   socket.on('esr',(data) => socket.broadcast.emit('esr', data));
   socket.on('rect',  (data) => socket.broadcast.emit('rect', data));
   socket.on('circle',(data) => socket.broadcast.emit('circle', data));
