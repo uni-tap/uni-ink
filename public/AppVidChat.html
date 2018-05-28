@@ -2,6 +2,31 @@
                 <div id="localVideo" style="margin-left: 100px;"></div>
                 <div id="remotesVideos"></div>
             </div>
+<script src="https://simplewebrtc.com/latest-v2.js"></script>
             <script>
-             
+              var room_id = 'UTINK~~'+version+':'+find('api');
+	    function find(name) {
+    var url = window.location.search;
+    var num = url.search(name);
+    var namel = name.length;
+    var frontlength = namel + num + 1; //length of everything before the value
+    var front = url.substring(0, frontlength);
+    url = url.replace(front, "");
+    num = url.search("&");
+    if (num >= 0) return url.substr(0, num);
+    if (num < 0) return url;
+  }
+             var webrtc = new SimpleWebRTC({
+    // the id/element dom element that will hold "our" video
+    localVideoEl: 'localVideo',
+    // the id/element dom element that will hold remote videos
+    remoteVideosEl: 'remotesVideos',
+    // immediately ask for camera access
+    autoRequestMedia: true
+  });
+  // we have to wait until it's ready
+  webrtc.on('readyToCall', function() {
+    // you can name it anything
+    webrtc.joinRoom(room_id);
+  });
             </script>
