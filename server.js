@@ -15,13 +15,16 @@ app.use(express.static(__dirname + '/public'));
 // IF A NEW USER IS CONNECTED
 
 io.on('connection', function(socket){
+  socket.on('cRmm', function(room){
+   socket.join(room);
+  });
   connections.push(socket);/*
   socket.on('room', function(room) {
    socket.join(room);
    var room = room;)};*/
   console.log("connected: %s sockets connected", connections.length);
   //socket.on('drawing',(room ,data) => socket.broadcast.to(room).emit('drawing', data));
-  socket.on('drawing',(data) => socket.broadcast.emit('drawing', data));
+  socket.on('drawing',(data) => socket.broadcast.to(data.api).emit('drawing', data));
   socket.on('esr',(data) => socket.broadcast.emit('esr', data));
   socket.on('rect',  (data) => socket.broadcast.emit('rect', data));
   socket.on('circle',(data) => socket.broadcast.emit('circle', data));
