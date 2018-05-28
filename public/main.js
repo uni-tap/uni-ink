@@ -1332,7 +1332,7 @@ function getCookie(cname) {
    }else{return;}
   }
   function onDrawingEvent(data) {
-    if (data.api == api) {
+    //if (data.api == api) {
       if (data.page == totalcurrentpagecount) {
         sleep_timer = 0;
         var cw = canvas.width;
@@ -1344,9 +1344,9 @@ function getCookie(cname) {
       {
         onNewPageUpdate();
       }
-    } else {
-      return;
-    }
+    //} else {
+      //return;
+    //}
   }
 
   function onEraserEvent(data) {
