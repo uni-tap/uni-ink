@@ -68,7 +68,7 @@ function requestVideo() {
 
 function startRecording() {
   recorder = new MediaRecorder(stream, {
-    mimeType: 'mp4'
+    mimeType: 'video/webm'
   });
   recorder.start();
   stopBtn.removeAttribute('disabled');
