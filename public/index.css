@@ -10,7 +10,7 @@ body{
     transition: height .2s linear,top .2s linear;
     border-radius: 4px;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,.12);
-    height: 360px;
+    height: 395px;
     top: 200px;
 }
 .cmmtCntrls {
