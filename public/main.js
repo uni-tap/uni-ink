@@ -322,7 +322,8 @@ window.onload = function(){
     //document.body.appendChild(img);   
    };   
     function enable_pan(){
-        document.getElementById('add_elem').style.zIndex = '2';
+        //document.getElementById('add_elem').style.zIndex = '2';
+	    canvas.className += "draggable";
         current.tool = '';
     }
   //PERFORMING A PARTICULAR FUNCTION ON THE ARRIVAL OF THE FOLLOWING EVENTS
