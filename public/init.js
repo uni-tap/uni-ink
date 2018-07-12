@@ -1,3 +1,8 @@
+document.querySelector('#Pan').onclick = function(){
+  panmove = true;
+};
+var panmove = false;
+if(panmove){
 var canvas = document.querySelector(".whiteboard"); 
 var movercan = document.querySelector(".storeboard");
 var ctx = canvas.getContext("2d");
@@ -240,3 +245,4 @@ function update(){
     requestAnimationFrame(update);
 }
 update(); // start it happening
+}
