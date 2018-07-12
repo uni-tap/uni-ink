@@ -197,7 +197,7 @@ var displayTransform = {
 }
 // image to show
 var img = new Image();
-img.src = "https://upload.wikimedia.org/wikipedia/commons/e/e5/Fiat_500_in_Emilia-Romagna.jpg"
+img.src = localStorage.unidata;
 // set up font
 ctx.font = "14px verdana";
 ctx.textAlign = "center";
