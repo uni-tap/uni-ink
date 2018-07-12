@@ -210,6 +210,8 @@ function update(){
     // set home transform to clear the screem
     displayTransform.setHome();
     ctx.clearRect(0,0,canvas.width,canvas.height);
+    displayTransform.setTransform();
+        ctx.drawImage(img,0,0);
     // if the image loaded show it
     if(mouse.buttonRaw === 4){ // right click to return to homw
          displayTransform.x = 0;
