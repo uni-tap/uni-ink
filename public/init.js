@@ -216,14 +216,14 @@ function update(){
         ctx.drawImage(img,0,0);
         ctx.fillStyle = "white";
         if(Math.floor(timer/100)%2 === 0){
-            ctx.fillText("Left but to pan",mouse.rx,mouse.ry);
+            //ctx.fillText("Left but to pan",mouse.rx,mouse.ry);
         }else{
-            ctx.fillText("Wheel to zoom",mouse.rx,mouse.ry);
+            //ctx.fillText("Wheel to zoom",mouse.rx,mouse.ry);
         }
     }else{
         // waiting for image to load
         displayTransform.setTransform();
-        ctx.fillText("Loading image...",100,100);
+        //ctx.fillText("Loading image...",100,100);
         
     }
     if(mouse.buttonRaw === 4){ // right click to return to homw
