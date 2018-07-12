@@ -1,9 +1,6 @@
 var panmove = false;
 document.querySelector('#Pan').onclick = function(){
-  panmove = true;
-};
-
-if(panmove){
+  
 var canvas = document.querySelector(".whiteboard"); 
   canvas.classList.remove("draggable");
 var movercan = document.querySelector(".storeboard");
@@ -247,4 +244,5 @@ function update(){
     requestAnimationFrame(update);
 }
 update(); // start it happening
-}
+panmove = true;
+};
