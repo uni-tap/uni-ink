@@ -2,9 +2,11 @@ var panmove = false;
 document.querySelector('#Pan').onclick = function(){
   if(panmove){
     panmove = false;
+    console.log(panmove);
     return;
   }else if(!panmove){
     panmove = true;
+    console.log(panmove);
 var canvas = document.querySelector(".whiteboard"); 
   canvas.classList.remove("draggable");
 var movercan = document.querySelector(".storeboard");
