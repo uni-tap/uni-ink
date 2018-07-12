@@ -4,7 +4,7 @@ document.querySelector('#Pan').onclick = function(){
 var canvas = document.querySelector(".whiteboard"); 
   canvas.classList.remove("draggable");
 var movercan = document.querySelector(".storeboard");
-var ctx = canvas.getContext("2d");
+var ctx = movercan.getContext("2d");
 var mouse = {
     x : 0,
     y : 0,
