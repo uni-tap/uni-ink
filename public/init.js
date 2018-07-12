@@ -196,7 +196,7 @@ var displayTransform = {
     }
 }
 // image to show
-var img;
+var img = new Image();
 // set up font
 ctx.font = "14px verdana";
 ctx.textAlign = "center";
