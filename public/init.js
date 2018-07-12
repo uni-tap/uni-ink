@@ -1,4 +1,5 @@
 var canvas = document.querySelector(".whiteboard"); 
+var movercan = document.querySelector(".storeboard");
 var ctx = canvas.getContext("2d");
 var mouse = {
     x : 0,
@@ -217,9 +218,9 @@ function update(){
         ctx.drawImage(img,0,0);
         ctx.fillStyle = "white";
         if(Math.floor(timer/100)%2 === 0){
-            ctx.fillText("Left but to pan",mouse.rx,mouse.ry);
+            //ctx.fillText("Left but to pan",mouse.rx,mouse.ry);
         }else{
-            ctx.fillText("Wheel to zoom",mouse.rx,mouse.ry);
+            //ctx.fillText("Wheel to zoom",mouse.rx,mouse.ry);
         }
     }else{
         // waiting for image to load
