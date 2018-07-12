@@ -197,6 +197,7 @@ var displayTransform = {
 }
 // image to show
 var img = new Image();
+img.src = "https://upload.wikimedia.org/wikipedia/commons/e/e5/Fiat_500_in_Emilia-Romagna.jpg"
 // set up font
 ctx.font = "14px verdana";
 ctx.textAlign = "center";
@@ -210,9 +211,22 @@ function update(){
     // set home transform to clear the screem
     displayTransform.setHome();
     ctx.clearRect(0,0,canvas.width,canvas.height);
-    displayTransform.setTransform();
-        ctx.drawImage(img,0,0);
     // if the image loaded show it
+    if(img.complete){
+        displayTransform.setTransform();
+        ctx.drawImage(img,0,0);
+        ctx.fillStyle = "white";
+        if(Math.floor(timer/100)%2 === 0){
+            ctx.fillText("Left but to pan",mouse.rx,mouse.ry);
+        }else{
+            ctx.fillText("Wheel to zoom",mouse.rx,mouse.ry);
+        }
+    }else{
+        // waiting for image to load
+        displayTransform.setTransform();
+        ctx.fillText("Loading image...",100,100);
+        
+    }
     if(mouse.buttonRaw === 4){ // right click to return to homw
          displayTransform.x = 0;
          displayTransform.y = 0;
