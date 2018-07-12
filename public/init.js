@@ -1,7 +1,8 @@
+var panmove = false;
 document.querySelector('#Pan').onclick = function(){
   panmove = true;
 };
-var panmove = false;
+
 if(panmove){
 var canvas = document.querySelector(".whiteboard"); 
   canvas.classList.remove("draggable");
