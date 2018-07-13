@@ -1,3 +1,4 @@
+function init(){
 var lineOffset = 4;
 var anchrSize = 2;
 
@@ -191,4 +192,5 @@ function drawBoxOn(box, context) {
   context.fillRect(box.x2 - anchrSize, box.y1 - anchrSize, 2 * anchrSize, 2 * anchrSize);
   context.fillRect(box.x2 - anchrSize, yCenter - anchrSize, 2 * anchrSize, 2 * anchrSize);
   context.fillRect(box.x2 - anchrSize, box.y2 - anchrSize, 2 * anchrSize, 2 * anchrSize);
+}
 }
