@@ -1,4 +1,4 @@
-var canvas = document.querySelector(".whiteboard");
+var canvas = document.querySelector(".storeboard");
 var drawGrid = function(w, h, id) {
     var ctx = canvas.getContext('2d');
     ctx.canvas.width  = w;
