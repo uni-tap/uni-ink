@@ -19,6 +19,7 @@
     
   var mdiv = document.createElement("div");
   mdiv.className = "ctimer";
+  mdiv.innerHTML = "<p id=ctime></p>";
   document.body.appendChild(mdiv);  
 })();
 
@@ -42,13 +43,13 @@ var x = setInterval(function() {
     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
     
     // Output the result in an element with id="demo"
-    document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+    document.getElementById("ctime").innerHTML = days + "d " + hours + "h "
     + minutes + "m " + seconds + "s ";
     
     // If the count down is over, write some text 
     if (distance < 0) {
         clearInterval(x);
-        document.getElementById("demo").innerHTML = "EXPIRED";
+        document.getElementById("ctime").innerHTML = "EXPIRED";
     }
 }, 1000);
 }
