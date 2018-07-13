@@ -11,8 +11,7 @@ NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
 }
 document.querySelector('#Pan').onclick = function(){
   var canvas = document.querySelector('.storeboard');
-  document.querySelector(".whiteboard").style.display = "none";
-    canvas.style.zIndex = "2";
+  
     //document.body.appendChild(canvas);
     //canvas.className += "whiteboard";
   if(panmove){
@@ -23,11 +22,13 @@ document.querySelector('#Pan').onclick = function(){
     return;
   }else if(!panmove){
     panmove = true;
+      document.querySelector(".whiteboard").style.display = "none";
+    canvas.style.zIndex = "2";
     console.log(panmove);
 
   canvas.classList.remove("draggable");    
-var movercan = document.querySelector(".storeboard");
-var ctx = movercan.getContext("2d");
+//var movercan = document.querySelector(".storeboard");
+var ctx = canvas.getContext("2d");
 var mouse = {
     x : 0,
     y : 0,
