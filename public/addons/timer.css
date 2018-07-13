@@ -1,0 +1,10 @@
+.ctimer{
+height:100px;
+width:200px;
+z-index:100;
+background-color:white;
+border-radius:5px;
+position: fixed;
+bottom: 8px;
+left: 35%;
+}
