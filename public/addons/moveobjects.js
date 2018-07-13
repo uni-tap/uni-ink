@@ -103,7 +103,7 @@ canvas.onmousemove = function(e) {
 function redraw() {
   // canvas.width = canvas.width;
   var context = document.querySelector(".storeboard").getContext('2d');
-  context.clearRect(0, 0, 800, 600);
+  context.clearRect(0, 0, canvas.width, canvas.height);
   context.beginPath();
   for (var i = 0; i < boxes.length; i++) {
     drawBoxOn(boxes[i], context);
