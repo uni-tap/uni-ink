@@ -12,13 +12,13 @@ NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
 document.querySelector('#Pan').onclick = function(){
   var canvas = document.querySelector('.storeboard');
   document.querySelector(".whiteboard").style.display = "none";
-    canvas.style.zIndex = "2 !important";
+    canvas.style.zIndex = "2";
     //document.body.appendChild(canvas);
     //canvas.className += "whiteboard";
   if(panmove){
     panmove = false;
     document.querySelector(".whiteboard").style = "";
-      canvas.style.zIndex = "-2 !important";
+      canvas.style.zIndex = "-2";
     console.log(panmove);
     return;
   }else if(!panmove){
