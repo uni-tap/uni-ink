@@ -1,15 +1,27 @@
 var panmove = false;
+Element.prototype.remove = function() {
+    this.parentElement.removeChild(this);
+}
+NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
+    for(var i = this.length - 1; i >= 0; i--) {
+        if(this[i] && this[i].parentElement) {
+            this[i].parentElement.removeChild(this[i]);
+        }
+    }
+}
 document.querySelector('#Pan').onclick = function(){
+  var canvas = document.createElement('canvas');
+    document.body.appendChild(canvas);
+    canvas.className += "whiteboard";
   if(panmove){
     panmove = false;
+    canvas.remove();
     console.log(panmove);
     return;
   }else if(!panmove){
     panmove = true;
     console.log(panmove);
-var canvas = document.createElement('canvas');
-    document.body.appendChild(canvas);
-    canvas.className += "whiteboard";
+
   canvas.classList.remove("draggable");    
 var movercan = document.querySelector(".storeboard");
 var ctx = movercan.getContext("2d");
