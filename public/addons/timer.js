@@ -12,6 +12,7 @@
   var cdiv = document.createElement("div");
   cdiv.className = "svg-button";
   cdiv.innerHTML = "ct";
+  cdiv.addEventListener("click", startCount, false);
   pelm.appendChild(cdiv);  
     
   // Main GUI 
@@ -21,6 +22,7 @@
   document.body.appendChild(mdiv);  
 })();
 
+function startCount(){
 // Set the date we're counting down to
 var countDownDate = new Date("Sep 5, 2018 15:37:25").getTime();
 
@@ -49,4 +51,5 @@ var x = setInterval(function() {
         document.getElementById("demo").innerHTML = "EXPIRED";
     }
 }, 1000);
+}
 
