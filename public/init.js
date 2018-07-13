@@ -1,7 +1,7 @@
-var scr = document.createELement("script");
+var scr = document.createElement("script");
 scr.setAttribute("src", "addons/pan.js");
 
-var scr2 = document.createELement("script");
+var scr2 = document.createElement("script");
 scr2.setAttribute("src", "addons/timer.js");
 
 document.body.appendChild(scr);
