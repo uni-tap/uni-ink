@@ -11,7 +11,7 @@ var y2 = -1;
 var boxes = [];
 var tmpBox = null;
 var canvas = document.querySelector(".whiteboard");
-var context = canvas.getContext("2d");
+
 canvas.onmousedown = function(e) {
   mousedown = true;
   clickedArea = findCurrentArea(e.offsetX, e.offsetY);
@@ -102,7 +102,7 @@ canvas.onmousemove = function(e) {
 
 function redraw() {
   // canvas.width = canvas.width;
-  var context = canvas.getContext('2d');
+  var context = document.querySelector(".storeboard").getContext('2d');
   context.clearRect(0, 0, 800, 600);
   context.beginPath();
   for (var i = 0; i < boxes.length; i++) {
