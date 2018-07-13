@@ -5,7 +5,15 @@
   link.setAttribute("href", "addons/timer.css");
   link.setAttribute("rel", "stylesheet");  
   document.body.appendChild(link);
+  
+    // Main GUI 
     
+  var mdiv = document.createElement("div");
+  mdiv.className = "ctimer";
+  mdiv.innerHTML = "<p id=ctime></p>";
+  mdiv.style.display = "none";
+  document.body.appendChild(mdiv);
+  
   // Initialization button  
     
   var pelm = document.querySelector(".bottom-bar__inner");
@@ -14,17 +22,9 @@
   cdiv.innerHTML = '<svg viewBox="0 0 24 24" id="img__countdown" width="100%" height="100%"><g fill="currentColor" fill-rule="evenodd"><path d="M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-.999-17.95L11 2V1a1 1 0 0 1 2 0v1l-.001.05C18.053 2.55 22 6.813 22 12c0 5.523-4.477 10-10 10S2 17.523 2 12c0-5.186 3.947-9.45 9.001-9.95z"></path><path d="M12.518 10.068l2.457-2.457a1 1 0 0 1 1.414 1.414l-2.457 2.457A2.003 2.003 0 0 1 12 14a2 2 0 1 1 .518-3.932z"></path></g></svg>';
   cdiv.addEventListener("click", function(){ 
       startCount(); 
-      cdiv.style.display = "block";
+      mdiv.style.display = "block";
   }, false);
-  cdiv.style.display = "none";
-  pelm.appendChild(cdiv);  
-    
-  // Main GUI 
-    
-  var mdiv = document.createElement("div");
-  mdiv.className = "ctimer";
-  mdiv.innerHTML = "<p id=ctime></p>";
-  document.body.appendChild(mdiv);  
+  pelm.appendChild(cdiv);    
 })();
 
 function startCount(){
