@@ -10,12 +10,13 @@ NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
     }
 }
 document.querySelector('#Pan').onclick = function(){
-  var canvas = document.createElement('canvas');
-    document.body.appendChild(canvas);
-    canvas.className += "whiteboard";
+  var canvas = document.querySelector('.storeboard');
+  document.querySelector(".whiteboard").style.display = "none";
+    //document.body.appendChild(canvas);
+    //canvas.className += "whiteboard";
   if(panmove){
     panmove = false;
-    canvas.remove();
+    document.querySelector(".whiteboard").style.display = "";
     console.log(panmove);
     return;
   }else if(!panmove){
