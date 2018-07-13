@@ -1,3 +1,26 @@
+(function(){
+  //CSS file  
+    
+  var link = document.createElement("link");
+  link.setAttribute("href", "timer.css");
+  link.setAttribute("rel", "stylesheet");  
+  document.body.appendChild(link);
+    
+  // Initialization button  
+    
+  var pelm = document.querySelector(".bottom-bar__inner");
+  var cdiv = document.createElement("div");
+  cdiv.className = "svg-button";
+  cdiv.innerHTML = "ct";
+  pelm.appendChild(cdiv);  
+    
+  // Main GUI 
+    
+  var mdiv = document.createElement("div");
+  mdiv.className = "ctimer";
+  document.body.appendChild(mdiv);  
+})();
+
 // Set the date we're counting down to
 var countDownDate = new Date("Sep 5, 2018 15:37:25").getTime();
 
