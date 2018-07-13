@@ -2,7 +2,7 @@
   //CSS file  
     
   var link = document.createElement("link");
-  link.setAttribute("href", "timer.css");
+  link.setAttribute("href", "addons/timer.css");
   link.setAttribute("rel", "stylesheet");  
   document.body.appendChild(link);
     
