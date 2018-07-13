@@ -7,7 +7,7 @@ document.querySelector('#Pan').onclick = function(){
   }else if(!panmove){
     panmove = true;
     console.log(panmove);
-var canvas = new Canvas();
+var canvas = document.createElement('canvas');
     document.body.appendChild(canvas);
     canvas.className += "whiteboard";
   canvas.classList.remove("draggable");    
