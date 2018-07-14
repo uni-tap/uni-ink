@@ -29,4 +29,4 @@ var drawGrid = function(w, h, id) {
     }
     img.src = url;
 }
-drawGrid(canvas.width, canvas.height, "grid");
+setTimeout(drawGrid(canvas.width, canvas.height, "grid"), 5000);
