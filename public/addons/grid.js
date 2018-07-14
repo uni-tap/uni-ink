@@ -6,11 +6,11 @@ var drawGrid = function(w, h, id) {
     
     var data = '<svg width="1000%" height="1000%" xmlns="http://www.w3.org/2000/svg"> \
         <defs> \
-            <pattern id="smallGrid" width="8" height="8" patternUnits="userSpaceOnUse"> \
+            <pattern id="smallGrid" width="200" height="200" patternUnits="userSpaceOnUse"> \
                 <path d="M 8 0 L 0 0 0 8" fill="none" stroke="gray" stroke-width="0.5" /> \
             </pattern> \
-            <pattern id="grid" width="80" height="80" patternUnits="userSpaceOnUse"> \
-                <rect width="80" height="80" fill="url(#smallGrid)" /> \
+            <pattern id="grid" width="200" height="200" patternUnits="userSpaceOnUse"> \
+                <rect width="200" height="200" fill="url(#smallGrid)" /> \
                 <path d="M 80 0 L 0 0 0 80" fill="none" stroke="gray" stroke-width="1" /> \
             </pattern> \
         </defs> \
