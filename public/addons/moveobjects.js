@@ -449,6 +449,6 @@ window.init2 = init2;
 // <body onLoad="init2()">
 $(document).ready(function(){
   // Your code here
-  init2();
+  setTimeout(init2(), 5000);
 });
 
