@@ -161,7 +161,7 @@ function addRect(x, y, w, h, fill) {
 // initialize our canvas, add a ghost canvas, set draw loop
 // then add everything we want to intially exist on the canvas
 function init2() {
-  canvas = document.querySelector('.whiteboard');
+  canvas = document.querySelector('.storeboard');
   HEIGHT = canvas.height;
   WIDTH = canvas.width;
   ctx = canvas.getContext('2d');
