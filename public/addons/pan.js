@@ -25,6 +25,8 @@ document.querySelector('#Pan').onclick = function(){
     //canvas.className += "whiteboard";
   if(panmove){
     panmove = false;
+      canvas.classList.remove("whiteboard");
+      canvas.style.diplsay = "none";
       canvas.remove();
       document.querySelector(".storeboard").style.display = "";           
     document.querySelector(".whiteboard").style.display = "";
