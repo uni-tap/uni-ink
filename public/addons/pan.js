@@ -25,13 +25,14 @@ document.querySelector('#Pan').onclick = function(){
     //canvas.className += "whiteboard";
   if(panmove){
     panmove = false;
-    document.querySelector(".whiteboard").style = "";
-      canvas.style.zIndex = "-2";
+      canvas.remove();
+      document.querySelector(".storeboard").style.display = "";           
+    document.querySelector(".whiteboard").style.display = "";
     console.log(panmove);
     return;
   }else if(!panmove){
     panmove = true;
-      document.querySelector(".whiteboard").style.display = "none";
+      //document.querySelector(".whiteboard").style.display = "none";
     canvas.style.zIndex = "2";
     console.log(panmove);
 
