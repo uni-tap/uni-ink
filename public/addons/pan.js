@@ -12,11 +12,13 @@ NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
 document.querySelector('#Pan').onclick = function(){
   var canvas = document.createElement("canvas");
       canvas.className = "whiteboard";
+    var ctx = canvas.getContext("2d");
+     ctx.drawImage(stb ,0 ,0 );
     document.body.appendChild(canvas);
     var stb = document.querySelector(".storeboard");
       document.querySelector(".storeboard").style.display = "none";           
     document.querySelector(".whiteboard").style.display = "none";
-    ctx.drawImage(stb ,0 ,0 );
+   
   
     //document.body.appendChild(canvas);
     //canvas.className += "whiteboard";
@@ -34,7 +36,7 @@ document.querySelector('#Pan').onclick = function(){
 
   canvas.classList.remove("draggable");    
 //var movercan = document.querySelector(".storeboard");
-var ctx = canvas.getContext("2d");
+
 var mouse = {
     x : 0,
     y : 0,
