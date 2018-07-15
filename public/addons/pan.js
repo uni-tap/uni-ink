@@ -12,6 +12,7 @@ NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
 document.querySelector('#Pan').onclick = function(){
   var canvas = document.createElement("canvas");
       canvas.className = "whiteboard";
+    document.body.appendChild(canvas);
     var stb = document.querySelector(".storeboard");
       document.querySelector(".storeboard").style.display = "none";           
     document.querySelector(".whiteboard").style.display = "none";
