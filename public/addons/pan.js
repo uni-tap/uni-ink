@@ -10,7 +10,11 @@ NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
     }
 }
 document.querySelector('#Pan').onclick = function(){
-  var canvas = document.querySelector('.storeboard');
+  var canvas = document.createElement("canvas);
+      canvas.className = "storeboard";
+      document.querySelector(".storeboard").style.display = "none";           
+    document.querySelector(".whiteboard").style.display = "none";
+    ctx.drawImage( document.querySelector(".storeboard"),0 ,0 );
   
     //document.body.appendChild(canvas);
     //canvas.className += "whiteboard";
