@@ -1,0 +1,16 @@
+Arduino         L298N /H
+D10                 7   ENA   motor A
+D9                       IN1
+D8                       IN2
+D7                       IN3
+D6                       IN4
+D5                      12  ENB   motor B
+5v                        5v+12v
+GND                   GND
+----------------------------------------------------------
+Arduino2560            mpu5060
+vcc                                5v
+GND                              GND
+scl                                 scl
+sda                               sda
+int                                 2   pwm
