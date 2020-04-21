@@ -51,8 +51,8 @@
     visibility: visible;
 }
 		    #videoElement {
-	width: 500px;
-	height: 375px;
+	width: 200px;
+	height: 132px;
 	background-color: #666;
 			    z-index:1000;
 }
@@ -63,7 +63,6 @@
     <body oncontextmenu="return false;">
 	    <video autoplay="true" id="videoElement">
 	
-		</video>
         <div class="board-top">
         <div class="board-top__left draggable">
             <div class="board-top-left-panel board-panel--transparent board-panel--hidden-top">
@@ -349,6 +348,9 @@
         <div class="btm_cont draggable">
         <div class="resize-drag video-chat board-panel--transparent board-panel--hidden-bottom video-chat--pinned video-chat--with-buttons" style="display:block;@media only screen and (max-height: 500px){display:none !important;}">
             <div class="video-cont">
+		    <video autoplay="true" id="videoElement">
+	
+	</video>
                 <div id="localVideo" style="margin-left: 100px;"></div>
                 <div id="remotesVideos"></div>
             </div>
