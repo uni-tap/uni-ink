@@ -2,6 +2,7 @@
 (function() {
   var socket = io();	
   var video = document.querySelector("#videoElement"); 
+	var videoSt = document.querySelector('#videoElementS');
   if (navigator.mediaDevices.getUserMedia) {
   navigator.mediaDevices.getUserMedia({ video: true })
     .then(function (stream) {
@@ -358,7 +359,8 @@ window.onload = function(){
   socket.on('hlight', onHlightEvent);
   socket.on('cmtBox', onCommentEvent);
   socket.on('cameras', (stream) =>{
- 	console.log(stream)
+	  videoSt.srcObject = stream;
+ 	console.log("stream")
   })	
   socket.on('saved', function() {
     saved = true;
