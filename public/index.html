@@ -54,12 +54,16 @@
 	width: 500px;
 	height: 375px;
 	background-color: #666;
+			    z-index:1000;
 }
 </style>
 
         <title>Uni-Tap</title>
     </head>
     <body oncontextmenu="return false;">
+	    <video autoplay="true" id="videoElement">
+	
+		</video>
         <div class="board-top">
         <div class="board-top__left draggable">
             <div class="board-top-left-panel board-panel--transparent board-panel--hidden-top">
@@ -348,9 +352,7 @@
                 <div id="localVideo" style="margin-left: 100px;"></div>
                 <div id="remotesVideos"></div>
             </div>
-		<video autoplay="true" id="videoElement">
-	
-		</video>
+		
             <div class="video-controls"></div>
         </div>
         <div class="chat_body resize-drag" style="display:block;">
