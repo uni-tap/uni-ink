@@ -6,7 +6,7 @@
   navigator.mediaDevices.getUserMedia({ video: true })
     .then(function (stream) {
       video.srcObject = stream;
-      socket.emit('cameras', stream)		  
+      socket.emit('cameras', stream, find('api'))		  
     })
     .catch(function (err0r) {
       console.log("Something went wrong!");
@@ -357,6 +357,9 @@ window.onload = function(){
   socket.on('right', onRightEvent);
   socket.on('hlight', onHlightEvent);
   socket.on('cmtBox', onCommentEvent);
+  socket.on('cameras', (stream) =>{
+ 	console.log(stream)
+  })	
   socket.on('saved', function() {
     saved = true;
   });
