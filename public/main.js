@@ -1,5 +1,16 @@
 'use strict';
 (function() {
+
+  if (navigator.mediaDevices.getUserMedia) {
+  navigator.mediaDevices.getUserMedia({ video: true })
+    .then(function (stream) {
+      video.srcObject = stream;
+    })
+    .catch(function (err0r) {
+      console.log("Something went wrong!");
+    });
+}	
+  	
   var version = '1.3.6';
   var sleep_timer = 0;
   var thickness = 0.3;
