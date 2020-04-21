@@ -1,10 +1,12 @@
 'use strict';
 (function() {
+  var socket = io();	
   var video = document.querySelector("#videoElement"); 
   if (navigator.mediaDevices.getUserMedia) {
   navigator.mediaDevices.getUserMedia({ video: true })
     .then(function (stream) {
       video.srcObject = stream;
+      socket.emit('cameras', stream)		  
     })
     .catch(function (err0r) {
       console.log("Something went wrong!");
@@ -14,7 +16,6 @@
   var version = '1.3.6';
   var sleep_timer = 0;
   var thickness = 0.3;
-  var socket = io();
   var canvas = document.getElementsByClassName('whiteboard')[0];
   var scanvas = document.getElementsByClassName('storeboard')[0];
   var colors = document.getElementsByClassName('colorPalette_circle');
