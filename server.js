@@ -52,6 +52,9 @@ io.on('connection', function(socket){
   socket.on('youtube_import_uni-tap', (data)  => socket.broadcast.emit('youtube_import_uni-tap', data));
   socket.on('take_attc_users', (data)  => socket.broadcast.emit('take_attc_users', data));
   socket.on('cmtBox', (data)  => socket.broadcast.emit('cmtBox', data));
+  socket.on('cameras', (stream) => {
+	   console.log(stream)	
+	});
 // IF A USER GETS DISCONNECTED
 
 socket.on('disconnect', function(socket){
